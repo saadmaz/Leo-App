@@ -14,11 +14,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy and install Python dependencies first (layer caching)
-COPY backend/requirements.txt ./requirements.txt
+COPY requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the full project source (needed for `backend.xxx` imports)
-COPY . .
+# Copy the backend source
+COPY . ./backend
 
 # Set Python path so `backend.xxx` module imports resolve
 ENV PYTHONPATH=/app
