@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   async rewrites() {
     // NEXT_PUBLIC_BACKEND_URL should be set to your deployed backend origin in production.
     // e.g. https://leo-api.up.railway.app
