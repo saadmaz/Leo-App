@@ -1,21 +1,21 @@
 """
-Content Operations routes — Phase 2.
+Content Operations routes - Phase 2.
 
 Endpoints:
-  POST /projects/{id}/content-library                 — Save item to library
-  GET  /projects/{id}/content-library                 — List library items (with filters)
-  PATCH /projects/{id}/content-library/{item_id}      — Update status / content
-  DELETE /projects/{id}/content-library/{item_id}     — Delete item
+  POST /projects/{id}/content-library                 - Save item to library
+  GET  /projects/{id}/content-library                 - List library items (with filters)
+  PATCH /projects/{id}/content-library/{item_id}      - Update status / content
+  DELETE /projects/{id}/content-library/{item_id}     - Delete item
 
-  POST /projects/{id}/content/bulk-generate           — Bulk generate (SSE)
-  POST /projects/{id}/content/recycle                 — Recycle content variants
-  POST /projects/{id}/content/transform               — Transform to all platforms
+  POST /projects/{id}/content/bulk-generate           - Bulk generate (SSE)
+  POST /projects/{id}/content/recycle                 - Recycle content variants
+  POST /projects/{id}/content/transform               - Transform to all platforms
 
-  POST /projects/{id}/calendar/generate               — AI calendar generation
-  GET  /projects/{id}/calendar                        — List calendar entries
-  POST /projects/{id}/calendar/entries                — Add entry manually
-  PATCH /projects/{id}/calendar/entries/{entry_id}    — Update entry
-  DELETE /projects/{id}/calendar/entries/{entry_id}   — Delete entry
+  POST /projects/{id}/calendar/generate               - AI calendar generation
+  GET  /projects/{id}/calendar                        - List calendar entries
+  POST /projects/{id}/calendar/entries                - Add entry manually
+  PATCH /projects/{id}/calendar/entries/{entry_id}    - Update entry
+  DELETE /projects/{id}/calendar/entries/{entry_id}   - Delete entry
 """
 
 import asyncio
@@ -367,7 +367,7 @@ async def delete_calendar_entry(
 
 class BulkScheduleBody(BaseModel):
     item_ids: list[str]
-    start_date: str  # YYYY-MM-DD — first date, one post/day
+    start_date: str  # YYYY-MM-DD - first date, one post/day
 
 
 @router.post("/content-library/bulk-schedule")
@@ -478,7 +478,7 @@ async def record_performance(
             memory_data = {
                 "type": "approve",
                 "original": content_preview,
-                "context": f"High performer on {platform} — {er:.1f}% engagement rate",
+                "context": f"High performer on {platform} - {er:.1f}% engagement rate",
                 "platform": platform,
                 "userId": user["uid"],
             }

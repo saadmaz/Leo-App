@@ -1,5 +1,5 @@
 """
-Firebase Admin SDK wrapper — Firestore CRUD for all domain objects.
+Firebase Admin SDK wrapper - Firestore CRUD for all domain objects.
 
 Design notes:
 - All public functions are synchronous. Firestore's Python Admin SDK is
@@ -43,7 +43,7 @@ def initialize() -> None:
     Bootstrap the Firebase Admin SDK and obtain a Firestore client.
 
     Called once from the FastAPI lifespan handler. Safe to call multiple
-    times — subsequent calls are no-ops if the SDK is already initialised.
+    times - subsequent calls are no-ops if the SDK is already initialised.
 
     Credential resolution order:
       1. Service account JSON file on disk (FIREBASE_SERVICE_ACCOUNT_PATH)
@@ -65,7 +65,7 @@ def initialize() -> None:
         cred = credentials.Certificate(sa_path)
         logger.info("Firebase: loaded service account from %s", sa_path)
 
-    # Option 2: individual env vars — useful in container/cloud deployments
+    # Option 2: individual env vars - useful in container/cloud deployments
     # where mounting a file is inconvenient.
     elif settings.FIREBASE_PRIVATE_KEY and settings.FIREBASE_CLIENT_EMAIL:
         cred = credentials.Certificate({
@@ -80,7 +80,7 @@ def initialize() -> None:
 
     if cred is None:
         logger.warning(
-            "Firebase Admin SDK NOT initialised — no valid credentials found. "
+            "Firebase Admin SDK NOT initialised - no valid credentials found. "
             "Drop firebase-service-account.json into backend/ or set "
             "FIREBASE_PRIVATE_KEY + FIREBASE_CLIENT_EMAIL env vars."
         )
@@ -328,7 +328,7 @@ def get_user_by_email(email: str) -> Optional[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Admin — user management
+# Admin - user management
 # ---------------------------------------------------------------------------
 
 def set_super_admin_claim(uid: str) -> None:
@@ -428,7 +428,7 @@ def override_user_limits(uid: str, overrides: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Admin — content moderation
+# Admin - content moderation
 # ---------------------------------------------------------------------------
 
 def flag_content(
@@ -638,7 +638,7 @@ def delete_changelog_entry(entry_id: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Admin — feature flags
+# Admin - feature flags
 # ---------------------------------------------------------------------------
 
 def list_feature_flags() -> list[dict]:
@@ -704,7 +704,7 @@ def remove_feature_flag_user_override(flag_id: str, uid: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Admin — projects
+# Admin - projects
 # ---------------------------------------------------------------------------
 
 def list_all_projects(limit: int = 500) -> list[dict]:
@@ -716,13 +716,13 @@ def list_all_projects(limit: int = 500) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Admin — audit log
+# Admin - audit log
 # ---------------------------------------------------------------------------
 
 def write_audit_log(admin_uid: str, action: str, target_uid: str = "", details: dict | None = None) -> None:
     """
     Persist an admin action to the `adminAuditLogs` collection.
-    Non-fatal — errors are logged but never re-raised so they don't block the action.
+    Non-fatal - errors are logged but never re-raised so they don't block the action.
     """
     try:
         db = get_db()
@@ -750,7 +750,7 @@ def list_audit_logs(limit: int = 200) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Admin — analytics
+# Admin - analytics
 # ---------------------------------------------------------------------------
 
 def get_analytics() -> dict:
@@ -830,7 +830,7 @@ def get_analytics() -> dict:
 def get_platform_stats() -> dict:
     """
     Return aggregate platform statistics for the admin dashboard.
-    Performs multiple Firestore scans — call infrequently (cache if needed).
+    Performs multiple Firestore scans - call infrequently (cache if needed).
     """
     import time as _time
 
@@ -990,7 +990,7 @@ def delete_project(project_id: str) -> None:
     """
     Delete a project document.
 
-    WARNING — Firestore does NOT automatically delete subcollections. This
+    WARNING - Firestore does NOT automatically delete subcollections. This
     deletes the top-level document only; chats and messages become orphaned.
     For production, call delete_project_deep() or run a Cloud Function trigger.
     In development, orphaned data is harmless but clutters the console.
@@ -1006,7 +1006,7 @@ def delete_project(project_id: str) -> None:
 def delete_project_deep(project_id: str) -> None:
     """
     Delete a project AND all its chats (messages within each chat are still
-    orphaned at the messages subcollection level — see NOTE below).
+    orphaned at the messages subcollection level - see NOTE below).
 
     This is a best-effort client-side cascade. For a true atomic delete,
     use a Firebase Cloud Function with the 'delete-user-data' extension or
@@ -1103,7 +1103,7 @@ def rename_chat(project_id: str, chat_id: str, name: str) -> None:
 def delete_chat(project_id: str, chat_id: str) -> None:
     """
     Delete a chat document.
-    Messages inside the chat are orphaned — see delete_project_deep() for
+    Messages inside the chat are orphaned - see delete_project_deep() for
     a full recursive delete strategy.
     """
     db = get_db()
@@ -1241,7 +1241,7 @@ def list_messages(
     Return the most recent `limit` messages for a chat in chronological order.
 
     If `before` is supplied (an ISO 8601 createdAt timestamp), only messages
-    older than that timestamp are returned — used for "Load earlier" pagination.
+    older than that timestamp are returned - used for "Load earlier" pagination.
 
     The query fetches the newest `limit` docs descending, then reverses them
     so callers always receive messages in chronological (oldest-first) order.
@@ -1864,7 +1864,7 @@ def get_review_history(project_id: str, item_id: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Phase 7 — Generated Images
+# Phase 7 - Generated Images
 # ---------------------------------------------------------------------------
 
 def save_generated_image(project_id: str, data: dict) -> dict:
@@ -1904,7 +1904,7 @@ def delete_generated_image(project_id: str, image_id: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Web Search Cache — TTL-based cache for Exa/Tavily results
+# Web Search Cache - TTL-based cache for Exa/Tavily results
 # ---------------------------------------------------------------------------
 
 def get_cached_search(project_id: str, query_hash: str) -> Optional[list]:
@@ -1948,7 +1948,7 @@ def save_search_cache(
 
 
 # ---------------------------------------------------------------------------
-# Search Usage — daily quota tracking per project
+# Search Usage - daily quota tracking per project
 # ---------------------------------------------------------------------------
 
 def get_search_usage(project_id: str, source: str) -> dict:
@@ -1996,7 +1996,7 @@ def increment_search_usage(
 
 
 # ---------------------------------------------------------------------------
-# Monitor Alerts — brand & competitor news monitoring
+# Monitor Alerts - brand & competitor news monitoring
 # ---------------------------------------------------------------------------
 
 def save_monitor_alert(project_id: str, data: dict) -> dict:
@@ -2065,7 +2065,7 @@ def alert_url_exists(project_id: str, url: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Research Reports — async deep research tasks
+# Research Reports - async deep research tasks
 # ---------------------------------------------------------------------------
 
 def save_research_report(project_id: str, data: dict) -> dict:
@@ -2223,7 +2223,7 @@ def delete_post(project_id: str, post_id: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Funnel Strategy Engine — sessions, research cache, saved strategies
+# Funnel Strategy Engine - sessions, research cache, saved strategies
 # ---------------------------------------------------------------------------
 
 def create_strategy_session(project_id: str, data: dict) -> dict:
@@ -2342,7 +2342,7 @@ def list_marketing_strategies(project_id: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Carousel Studio — scrape cache, sessions, carousels
+# Carousel Studio - scrape cache, sessions, carousels
 # ---------------------------------------------------------------------------
 
 def get_brand_scrape_cache(project_id: str) -> Optional[dict]:
@@ -2516,7 +2516,7 @@ def delete_threads_token(uid: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Competitor Deep Research — Reports
+# Competitor Deep Research - Reports
 # ---------------------------------------------------------------------------
 
 def save_competitor_report(project_id: str, report: dict) -> dict:
@@ -2560,7 +2560,7 @@ def list_competitor_reports(project_id: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# Competitor Deep Research — Monitors
+# Competitor Deep Research - Monitors
 # ---------------------------------------------------------------------------
 
 def save_competitor_monitor(project_id: str, monitor: dict) -> dict:
@@ -2627,7 +2627,7 @@ def delete_competitor_monitor(project_id: str, monitor_id: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Competitor Deep Research — Monitor Alerts (per-competitor-monitor subcollection)
+# Competitor Deep Research - Monitor Alerts (per-competitor-monitor subcollection)
 # NOTE: This is DIFFERENT from the brand monitoring alerts (projects/{id}/monitor_alerts).
 #       Renamed to avoid overriding the brand monitoring list_monitor_alerts above.
 # ---------------------------------------------------------------------------
@@ -2661,7 +2661,7 @@ def list_competitor_monitor_alerts(project_id: str, monitor_id: str) -> list[dic
 
 
 # ---------------------------------------------------------------------------
-# Personal Brand — Personal Core
+# Personal Brand - Personal Core
 # ---------------------------------------------------------------------------
 
 def get_personal_core(project_id: str) -> Optional[dict]:
@@ -2748,7 +2748,7 @@ def save_interview_answer(project_id: str, question_key: str, answer: str) -> di
 
 
 # ---------------------------------------------------------------------------
-# Pillar 1 — Strategy & Planning documents
+# Pillar 1 - Strategy & Planning documents
 # ---------------------------------------------------------------------------
 
 def create_pillar1_doc(
@@ -2882,7 +2882,7 @@ def dismiss_risk_alert(project_id: str, doc_id: str, risk_id: str) -> None:
 
 
 # ===========================================================================
-# Pillar 10 — Experiment Log (native Firestore table)
+# Pillar 10 - Experiment Log (native Firestore table)
 # ===========================================================================
 
 def create_experiment(project_id: str, owner_uid: str, data: dict) -> dict:

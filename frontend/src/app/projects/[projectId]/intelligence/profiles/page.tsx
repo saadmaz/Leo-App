@@ -239,7 +239,7 @@ function ProfileCard({
         {isError && (
           <div className="flex items-center gap-2 text-xs text-red-500 bg-red-500/10 rounded-lg px-3 py-2">
             <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-            Classification failed — click refresh to retry
+            Classification failed - click refresh to retry
           </div>
         )}
 
@@ -962,7 +962,7 @@ export default function CompetitorProfilesPage() {
   }
 
   // ---------------------------------------------------------------------------
-  // Deep Dive — navigate to intelligence analysis tab with prefill
+  // Deep Dive - navigate to intelligence analysis tab with prefill
   // ---------------------------------------------------------------------------
   function handleDeepDive(profile: CompetitorProfile) {
     const qs = new URLSearchParams()

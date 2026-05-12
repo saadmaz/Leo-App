@@ -230,7 +230,7 @@ export default function AdBriefPage() {
           {usps.map((usp, i) => (
             <div key={i} className="flex gap-2">
               <input value={usp} onChange={(e) => updateUsp(i, e.target.value)}
-                placeholder={`USP ${i + 1} — e.g. Saves 10 hours/week`}
+                placeholder={`USP ${i + 1} - e.g. Saves 10 hours/week`}
                 className="flex-1 px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
               {usps.length > 1 && (
                 <button onClick={() => removeUsp(i)} className="text-muted-foreground hover:text-destructive transition-colors">
@@ -413,7 +413,7 @@ export default function AdBriefPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Campaign Brief Generator"
-      subtitle="Pillar 4 — Claude"
+      subtitle="Pillar 4 - Claude"
       icon={<FileText className="w-4 h-4" />}
       credits={15}
       steps={store.steps}
@@ -422,7 +422,7 @@ export default function AdBriefPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Generate Brief — 15 credits"
+      submitLabel="Generate Brief - 15 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/paid-ads`}
     />

@@ -348,7 +348,7 @@ export default function EmailABPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Email A/B Analysis"
-      subtitle="Pillar 10 — Loops + Claude"
+      subtitle="Pillar 10 - Loops + Claude"
       icon={<Mail className="w-4 h-4" />}
       credits={10}
       steps={store.steps}
@@ -357,7 +357,7 @@ export default function EmailABPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Analyse Results — 10 credits"
+      submitLabel="Analyse Results - 10 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/experiments`}
     />

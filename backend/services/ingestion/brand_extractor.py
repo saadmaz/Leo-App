@@ -1,5 +1,5 @@
 """
-Brand Core extractor — sends scraped content to Gemini and parses back a
+Brand Core extractor - sends scraped content to Gemini and parses back a
 structured BrandCore JSON object.
 
 Uses the shared Gemini client from llm_service so we maintain a single
@@ -28,30 +28,30 @@ You are a brand intelligence analyst. You will receive raw content scraped from 
 digital presence (website, Instagram captions, bio, etc.) and must extract a structured
 Brand Core profile.
 
-Return ONLY a valid JSON object — no markdown fences, no explanation, nothing else.
+Return ONLY a valid JSON object - no markdown fences, no explanation, nothing else.
 The JSON must match this exact schema:
 
 {
   "tone": {
-    "style": "string — e.g. 'playful', 'authoritative', 'conversational'",
-    "formality": "string — 'informal' | 'semi-formal' | 'formal'",
+    "style": "string - e.g. 'playful', 'authoritative', 'conversational'",
+    "formality": "string - 'informal' | 'semi-formal' | 'formal'",
     "keyPhrases": ["up to 6 recurring phrases or slogans"],
     "avoidedLanguage": ["up to 4 words/phrases the brand avoids or dislikes"]
   },
   "visual": {
-    "primaryColour": "HEX code e.g. #1A73E8 — best guess from content or null",
+    "primaryColour": "HEX code e.g. #1A73E8 - best guess from content or null",
     "secondaryColours": ["up to 4 HEX codes or empty array"],
     "fonts": ["font names detected or empty array"],
-    "imageStyle": "string — e.g. 'clean product photography', 'bold lifestyle', 'minimalist'"
+    "imageStyle": "string - e.g. 'clean product photography', 'bold lifestyle', 'minimalist'"
   },
   "themes": ["up to 8 recurring content themes or topics"],
-  "tagline": "string — the brand's primary tagline or null",
+  "tagline": "string - the brand's primary tagline or null",
   "messaging": {
-    "valueProp": "string — core value proposition in one sentence",
+    "valueProp": "string - core value proposition in one sentence",
     "keyClaims": ["up to 5 key brand claims or benefits"]
   },
   "audience": {
-    "demographics": "string — age range, gender, income, location if detectable",
+    "demographics": "string - age range, gender, income, location if detectable",
     "interests": ["up to 6 interest or lifestyle categories"]
   },
   "competitors": ["up to 5 competitor brand names if mentioned or inferable"]
@@ -60,7 +60,7 @@ The JSON must match this exact schema:
 Rules:
 - If a field cannot be determined from the content, use null for strings and [] for arrays.
 - Infer colours from hex codes mentioned, CSS colour names, or explicit mentions.
-- Extract real phrases verbatim from captions/copy — do not invent.
+- Extract real phrases verbatim from captions/copy - do not invent.
 - Be concise: value propositions should be 1 sentence, themes should be 2-4 words each.
 """
 
@@ -222,7 +222,7 @@ def _build_combined_content(scraped_data: list[dict]) -> str:
             sections.append(header)
 
         elif src_type == "web_enrichment":
-            # Content from Exa findSimilar + get_contents — competitor/similar brand data
+            # Content from Exa findSimilar + get_contents - competitor/similar brand data
             header = f"=== WEB ENRICHMENT (Similar Brand): {source.get('url', '')} ===\n"
             if source.get("title"):
                 header += f"Title: {source['title']}\n"
@@ -232,7 +232,7 @@ def _build_combined_content(scraped_data: list[dict]) -> str:
             sections.append(header)
 
         else:
-            logger.debug("Brand extractor: unknown source type %r — skipping", src_type)
+            logger.debug("Brand extractor: unknown source type %r - skipping", src_type)
 
     return "\n\n".join(sections)
 
@@ -247,7 +247,7 @@ def _parse_json(raw: str) -> dict:
 
     Claude occasionally wraps the JSON in ```json ... ``` even when instructed
     not to. This handles that gracefully. On parse failure, a minimal valid
-    Brand Core skeleton is returned so the ingestion pipeline doesn't crash —
+    Brand Core skeleton is returned so the ingestion pipeline doesn't crash -
     the calling pipeline logs this as an error and the UI shows whatever
     partial data was extracted.
     """
@@ -259,7 +259,7 @@ def _parse_json(raw: str) -> dict:
         return json.loads(clean.strip())
     except json.JSONDecodeError as exc:
         logger.error(
-            "Brand extractor: JSON parse failed — %s\nRaw response (first 500 chars): %s",
+            "Brand extractor: JSON parse failed - %s\nRaw response (first 500 chars): %s",
             exc, raw[:500]
         )
         # Return a minimal skeleton so the pipeline can continue and save

@@ -1,15 +1,15 @@
 """
-Pillar 8 — PR & Communications request schemas.
+Pillar 8 - PR & Communications request schemas.
 
 Features:
-  1. Press Release Writing     — Claude API
-  2. Media List Building       — Hunter.io + Apify
-  3. Pitch Email Generation    — Claude + Hunter
-  4. Coverage Monitoring       — SerpAPI + Apify
-  5. Crisis Communications     — Claude API
-  6. Award Submissions         — Firecrawl + Claude
-  7. Analyst Relations         — Firecrawl + Claude
-  8. Partnership Comms         — Claude API
+  1. Press Release Writing     - Claude API
+  2. Media List Building       - Hunter.io + Apify
+  3. Pitch Email Generation    - Claude + Hunter
+  4. Coverage Monitoring       - SerpAPI + Apify
+  5. Crisis Communications     - Claude API
+  6. Award Submissions         - Firecrawl + Claude
+  7. Analyst Relations         - Firecrawl + Claude
+  8. Partnership Comms         - Claude API
 """
 from __future__ import annotations
 
@@ -25,11 +25,11 @@ class PressReleaseRequest(BaseModel):
     news_type: str = Field(..., description="e.g. 'product_launch', 'funding', 'partnership', 'milestone', 'executive_hire', 'award'")
     headline_topic: str = Field(..., description="The core announcement in one sentence")
     company_name: str = Field(..., description="Company name for the release")
-    key_facts: List[str] = Field(..., description="Bullet facts to include — numbers, dates, names")
+    key_facts: List[str] = Field(..., description="Bullet facts to include - numbers, dates, names")
     quote_name: Optional[str] = Field(None, description="Name of the person being quoted")
     quote_title: Optional[str] = Field(None, description="Their title")
     quote_hint: Optional[str] = Field(None, description="What the quote should convey (Claude will draft it)")
-    target_audience: Optional[str] = Field(None, description="Who will read this — tech press, trade media, investors…")
+    target_audience: Optional[str] = Field(None, description="Who will read this - tech press, trade media, investors…")
     embargo_date: Optional[str] = Field(None, description="Embargo date/time if applicable")
     boilerplate: Optional[str] = Field(None, description="Standard company boilerplate (About section). Claude will write one if omitted.")
     tone: str = Field("professional", description="professional | conversational | bold")
@@ -40,9 +40,9 @@ class PressReleaseRequest(BaseModel):
 # ---------------------------------------------------------------------------
 
 class MediaListRequest(BaseModel):
-    industry: str = Field(..., description="Target industry or beat — e.g. 'B2B SaaS', 'fintech', 'climate tech'")
-    news_angle: str = Field(..., description="What the story is about — used to find relevant journalists")
-    geography: Optional[str] = Field(None, description="Target geography — e.g. 'US', 'UK', 'global'")
+    industry: str = Field(..., description="Target industry or beat - e.g. 'B2B SaaS', 'fintech', 'climate tech'")
+    news_angle: str = Field(..., description="What the story is about - used to find relevant journalists")
+    geography: Optional[str] = Field(None, description="Target geography - e.g. 'US', 'UK', 'global'")
     publication_types: List[str] = Field(
         default_factory=lambda: ["tech press", "trade publications", "business media"],
         description="Types of publications to target",
@@ -58,9 +58,9 @@ class MediaListRequest(BaseModel):
 class PitchEmailRequest(BaseModel):
     journalist_name: str = Field(..., description="Journalist's full name")
     journalist_outlet: str = Field(..., description="Their publication or outlet")
-    journalist_beat: Optional[str] = Field(None, description="What they cover — inferred from outlet if omitted")
-    recent_article: Optional[str] = Field(None, description="A recent article title/URL they wrote — used to personalise")
-    pitch_angle: str = Field(..., description="Your story angle — what makes this newsworthy for them")
+    journalist_beat: Optional[str] = Field(None, description="What they cover - inferred from outlet if omitted")
+    recent_article: Optional[str] = Field(None, description="A recent article title/URL they wrote - used to personalise")
+    pitch_angle: str = Field(..., description="Your story angle - what makes this newsworthy for them")
     company_name: str = Field(..., description="Your company")
     news_hook: str = Field(..., description="The specific news hook or announcement")
     key_stats: Optional[List[str]] = Field(None, description="Compelling data points to include")
@@ -87,7 +87,7 @@ class CoverageMonitoringRequest(BaseModel):
 
 class CrisisCommsRequest(BaseModel):
     crisis_type: str = Field(..., description="e.g. 'data_breach', 'product_recall', 'executive_misconduct', 'negative_press', 'social_backlash', 'regulatory_action'")
-    crisis_summary: str = Field(..., description="What happened — be factual and concise")
+    crisis_summary: str = Field(..., description="What happened - be factual and concise")
     severity: str = Field("medium", description="low | medium | high | critical")
     affected_stakeholders: List[str] = Field(
         default_factory=lambda: ["customers", "media", "employees"],
@@ -107,7 +107,7 @@ class CrisisCommsRequest(BaseModel):
 
 class AwardSubmissionRequest(BaseModel):
     award_name: str = Field(..., description="Name of the award or programme")
-    award_url: Optional[str] = Field(None, description="URL of the award page — Firecrawl will read submission criteria")
+    award_url: Optional[str] = Field(None, description="URL of the award page - Firecrawl will read submission criteria")
     award_category: Optional[str] = Field(None, description="Specific category being entered")
     company_name: str = Field(..., description="Company name")
     submission_angle: str = Field(..., description="The achievement or story you're entering for")
@@ -126,7 +126,7 @@ class AnalystRelationsRequest(BaseModel):
     briefing_purpose: str = Field("introductory_briefing", description="introductory_briefing | product_update | inquiry_response | market_positioning")
     company_name: str = Field(..., description="Company name")
     product_name: str = Field(..., description="Product or solution being briefed")
-    analyst_coverage_url: Optional[str] = Field(None, description="URL to their recent research/report — Firecrawl will read it")
+    analyst_coverage_url: Optional[str] = Field(None, description="URL to their recent research/report - Firecrawl will read it")
     company_differentiation: List[str] = Field(..., description="Key differentiators vs. competitors")
     target_use_cases: List[str] = Field(..., description="Primary use cases or market segments")
     traction_metrics: Optional[List[str]] = Field(None, description="Customer, revenue, or growth metrics you can share")

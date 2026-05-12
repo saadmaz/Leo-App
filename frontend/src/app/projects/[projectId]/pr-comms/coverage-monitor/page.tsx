@@ -124,7 +124,7 @@ export default function CoverageMonitorPage() {
         <div className="space-y-2">
           {keywords.map((k, i) => (
             <div key={i} className="flex gap-2">
-              <input value={k} onChange={(e) => updateKeyword(i, e.target.value)} placeholder={`Keyword ${i + 1} — e.g. product name, CEO name`}
+              <input value={k} onChange={(e) => updateKeyword(i, e.target.value)} placeholder={`Keyword ${i + 1} - e.g. product name, CEO name`}
                 className="flex-1 px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
               {keywords.length > 1 && <button onClick={() => removeKeyword(i)} className="text-muted-foreground hover:text-destructive"><X className="w-4 h-4" /></button>}
             </div>
@@ -168,7 +168,7 @@ export default function CoverageMonitorPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-sm">{result.brand_name} — {result.days_back} day coverage</h2>
+        <h2 className="font-semibold text-sm">{result.brand_name} - {result.days_back} day coverage</h2>
         <span className="text-xs text-muted-foreground">{result.total_raw_mentions} raw mentions</span>
       </div>
 
@@ -255,7 +255,7 @@ export default function CoverageMonitorPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Coverage Monitoring"
-      subtitle="Pillar 8 — SerpAPI + Apify + Claude"
+      subtitle="Pillar 8 - SerpAPI + Apify + Claude"
       icon={<Eye className="w-4 h-4" />}
       credits={15}
       steps={store.steps}
@@ -264,7 +264,7 @@ export default function CoverageMonitorPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Monitor Coverage — 15 credits"
+      submitLabel="Monitor Coverage - 15 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

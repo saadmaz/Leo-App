@@ -1,5 +1,5 @@
 """
-Brand ingestion route — streams real-time progress over SSE while the
+Brand ingestion route - streams real-time progress over SSE while the
 pipeline scrapes and analyses brand content.
 
 Flow:
@@ -109,7 +109,7 @@ async def ingest_brand(
     def _pick_handle(request_val: Optional[str], project_key: str) -> Optional[str]:
         stored = project.get(project_key, "")
         if stored:
-            # stored value may be a full URL — extract the handle
+            # stored value may be a full URL - extract the handle
             stored = stored.rstrip("/").split("/")[-1].lstrip("@")
         return request_val or stored or None
 

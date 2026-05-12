@@ -1,7 +1,7 @@
 """
 Unit tests for backend.services.firebase_service
 
-Firestore is fully mocked — no live database connection is required.
+Firestore is fully mocked - no live database connection is required.
 Tests focus on:
   - Data contracts (what gets written to Firestore)
   - Correctness of Python-side sorting/filtering
@@ -15,7 +15,7 @@ from backend.services import firebase_service
 
 
 # ---------------------------------------------------------------------------
-# Fixtures — mock Firestore client
+# Fixtures - mock Firestore client
 # ---------------------------------------------------------------------------
 
 def _make_doc(doc_id: str, data: dict) -> MagicMock:
@@ -93,7 +93,7 @@ class TestSaveMessage:
 
 
 # ---------------------------------------------------------------------------
-# list_projects — Python-side sorting
+# list_projects - Python-side sorting
 # ---------------------------------------------------------------------------
 
 class TestListProjects:
@@ -123,12 +123,12 @@ class TestListProjects:
              .stream.return_value) = docs
 
         result = firebase_service.list_projects("uid1")
-        # "Undated" sorts as "" which is less than any date string — ends up last.
+        # "Undated" sorts as "" which is less than any date string - ends up last.
         assert result[-1]["name"] == "Undated"
 
 
 # ---------------------------------------------------------------------------
-# list_messages — sorting
+# list_messages - sorting
 # ---------------------------------------------------------------------------
 
 class TestListMessages:
@@ -152,7 +152,7 @@ class TestListMessages:
 
 
 # ---------------------------------------------------------------------------
-# upsert_user — idempotency
+# upsert_user - idempotency
 # ---------------------------------------------------------------------------
 
 class TestUpsertUser:
@@ -165,7 +165,7 @@ class TestUpsertUser:
 
         firebase_service.upsert_user("uid1", "user@example.com", "Alice")
 
-        # .set() should NOT have been called — user already exists.
+        # .set() should NOT have been called - user already exists.
         mock_db.collection.return_value.document.return_value.set.assert_not_called()
 
     def test_creates_new_user_if_not_exists(self, mock_db):

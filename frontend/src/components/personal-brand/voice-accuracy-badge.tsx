@@ -31,7 +31,7 @@ export function VoiceAccuracyBadge({ projectId, score, generatedContent }: Voice
     try {
       await api.persona.updateCore(projectId, {})
     } catch {
-      // Non-critical — silently ignore
+      // Non-critical - silently ignore
     }
   }
 

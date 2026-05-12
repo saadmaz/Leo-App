@@ -1,5 +1,5 @@
 """
-Funnel Strategy Engine — core service.
+Funnel Strategy Engine - core service.
 
 Responsibilities:
   - Intent detection: is this message asking for a marketing strategy?
@@ -26,7 +26,7 @@ from backend.services import firebase_service
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Intent detection — does this message want a marketing strategy?
+# Intent detection - does this message want a marketing strategy?
 # ---------------------------------------------------------------------------
 
 _STRATEGY_PATTERNS = [
@@ -79,12 +79,12 @@ FUNNEL_TYPES = {
     "retention": {
         "label": "Retention",
         "emoji": "🔁",
-        "description": "Post-Purchase — Loyalty & LTV",
+        "description": "Post-Purchase - Loyalty & LTV",
         "questions": [0, 1, 2, 3, 5],
     },
 }
 
-# Q0 is the funnel selector — handled separately by the UI widget.
+# Q0 is the funnel selector - handled separately by the UI widget.
 # Q1–Q6 are the intake questions (0-indexed here as indices 0–5).
 QUESTIONS = [
     {
@@ -101,15 +101,15 @@ QUESTIONS = [
     },
     {
         "index": 1,
-        "text": "Who is your target customer? Describe them — age, location, what they care about, and what problem they have.",
+        "text": "Who is your target customer? Describe them - age, location, what they care about, and what problem they have.",
         "placeholder": "e.g. 25–40 year old small business owners in the UAE who struggle with social media",
     },
     {
         "index": 2,
         "text": "What's your budget for this campaign?",
-        "placeholder": "e.g. $500/month, or no budget — organic only",
+        "placeholder": "e.g. $500/month, or no budget - organic only",
         "options": [
-            "No budget — organic only",
+            "No budget - organic only",
             "Under $500/month",
             "$500–2,000/month",
             "$2,000–5,000/month",
@@ -191,7 +191,7 @@ async def _fetch_google_trends(keyword: str, region: str = "US") -> dict:
     Returns parsed insight dict, or empty dict on failure.
     """
     if not settings.SERPAPI_API_KEY:
-        logger.warning("SERPAPI_API_KEY not set — skipping Google Trends fetch")
+        logger.warning("SERPAPI_API_KEY not set - skipping Google Trends fetch")
         return {}
 
     import httpx
@@ -280,12 +280,12 @@ async def _scrape_competitor_social(competitor_name: str) -> dict:
     Returns a lightweight insight dict.
     """
     if not settings.APIFY_API_KEY:
-        logger.warning("APIFY_API_KEY not set — skipping competitor scrape")
+        logger.warning("APIFY_API_KEY not set - skipping competitor scrape")
         return {}
 
     import httpx
 
-    # Use Instagram scraper as primary — it's fastest and most signal-rich
+    # Use Instagram scraper as primary - it's fastest and most signal-rich
     actor_id = "apify~instagram-profile-scraper"
     run_url = f"https://api.apify.com/v2/acts/{actor_id}/run-sync-get-dataset-items"
     params = {"token": settings.APIFY_API_KEY, "timeout": 45}
@@ -351,7 +351,7 @@ async def _firecrawl_benchmark_urls(urls: list[str]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Main research orchestrator — yields SSE progress events
+# Main research orchestrator - yields SSE progress events
 # ---------------------------------------------------------------------------
 
 async def run_research(
@@ -447,13 +447,13 @@ async def run_research(
         )
         yield _sse({"type": "research_step", "step": "competitor_scrape", "label": "Competitor profiles analysed", "status": "done"})
     else:
-        yield _sse({"type": "research_step", "step": "competitor_scrape", "label": "No competitors named — skipping scrape", "status": "skipped"})
+        yield _sse({"type": "research_step", "step": "competitor_scrape", "label": "No competitors named - skipping scrape", "status": "skipped"})
 
     # ── Step 4: Brand Core cross-reference ───────────────────────────────────
     yield _sse({"type": "research_step", "step": "brand_core", "label": "Cross-referencing with your Brand Core...", "status": "running"})
-    # Brand core is already in memory — just confirm it's loaded
+    # Brand core is already in memory - just confirm it's loaded
     has_brand_core = bool(brand_core)
-    yield _sse({"type": "research_step", "step": "brand_core", "label": "Brand Core loaded" if has_brand_core else "No Brand Core — strategy will be generalised", "status": "done"})
+    yield _sse({"type": "research_step", "step": "brand_core", "label": "Brand Core loaded" if has_brand_core else "No Brand Core - strategy will be generalised", "status": "done"})
 
     # ── Mark session as ready to generate ────────────────────────────────────
     firebase_service.update_strategy_session(project_id, session["id"], {"status": "generating"})
@@ -461,7 +461,7 @@ async def run_research(
 
 
 # ---------------------------------------------------------------------------
-# Strategy generation — yields SSE token stream
+# Strategy generation - yields SSE token stream
 # ---------------------------------------------------------------------------
 
 _STRATEGY_SYSTEM_PROMPT = """\
@@ -506,9 +506,9 @@ Be direct. Name platforms, content types, and tactics explicitly.
 
 RULES:
 1. Every recommendation must reference a specific research finding (trends data, competitor gap, or benchmark).
-2. All content suggestions must match the brand's tone and voice from the Brand Core — never generic.
+2. All content suggestions must match the brand's tone and voice from the Brand Core - never generic.
 3. Call out competitor gaps explicitly with competitor names where available.
-4. Give budget breakdowns in actual amounts or percentages — no vague guidance.
+4. Give budget breakdowns in actual amounts or percentages - no vague guidance.
 5. The LEO's Recommendation section must be opinionated: say what to do first, second, third.
 6. Add a SEASONALITY WARNING section if the trends data shows a peak within 8 weeks.
 7. Add a PLATFORM MISMATCH ALERT if the user's chosen platform conflicts with their audience age/demographics.
@@ -632,9 +632,9 @@ async def generate_strategy(
     Stream a full marketing strategy as SSE token deltas.
 
     Yields:
-        {"type": "delta", "content": "..."}  — streamed text chunks
-        {"type": "strategy_saved", "strategy_id": "..."}  — after saving
-        {"type": "error", "message": "..."}  — on failure
+        {"type": "delta", "content": "..."}  - streamed text chunks
+        {"type": "strategy_saved", "strategy_id": "..."}  - after saving
+        {"type": "error", "message": "..."}  - on failure
         data: [DONE]
     """
 
@@ -682,7 +682,7 @@ async def generate_strategy(
     funnel_type = session.get("funnel_type", "full")
     from datetime import datetime
     month_label = datetime.utcnow().strftime("%B %Y")
-    title = f"{FUNNEL_TYPES.get(funnel_type, {}).get('label', 'Full Funnel')} Strategy — {month_label}"
+    title = f"{FUNNEL_TYPES.get(funnel_type, {}).get('label', 'Full Funnel')} Strategy - {month_label}"
 
     # Save strategy to Firestore
     strategy = firebase_service.save_marketing_strategy(project_id, {
@@ -757,7 +757,7 @@ async def refine_strategy(
     system = (
         "You are LEO, a CMO-level marketing strategist. "
         "You previously generated the strategy below for this brand. "
-        "The user has a follow-up request — answer it concisely, referencing the existing strategy. "
+        "The user has a follow-up request - answer it concisely, referencing the existing strategy. "
         "If they want a specific section revised, output just that revised section in full."
     )
 

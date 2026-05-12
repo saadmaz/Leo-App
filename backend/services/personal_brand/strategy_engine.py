@@ -29,7 +29,7 @@ def _sse(event_type: str, data: dict) -> str:
 
 _STRATEGY_SYSTEM = """
 You are a personal branding strategist who creates precise, actionable brand strategies.
-Return ONLY a valid JSON object — no markdown, no code fences, no commentary.
+Return ONLY a valid JSON object - no markdown, no code fences, no commentary.
 """.strip()
 
 _STRATEGY_PROMPT = """
@@ -55,17 +55,17 @@ Return a JSON object with this exact structure:
   "contentStrategy": [
     {{
       "pillar": "string",
-      "angle": "string — specific differentiating angle",
+      "angle": "string - specific differentiating angle",
       "formats": ["string"],
       "frequency": "string",
-      "sampleTopics": ["string — 3 specific post ideas"]
+      "sampleTopics": ["string - 3 specific post ideas"]
     }}
   ],
   "roadmap": {{
     "month1to3": {{
       "focus": "string",
-      "metrics": ["string — specific, measurable"],
-      "experiments": ["string — content experiments to run"],
+      "metrics": ["string - specific, measurable"],
+      "experiments": ["string - content experiments to run"],
       "milestones": ["string"]
     }},
     "month4to6": {{
@@ -81,8 +81,8 @@ Return a JSON object with this exact structure:
       "milestones": ["string"]
     }}
   }},
-  "quickWins": ["string — 3 actions to take in the first 2 weeks"],
-  "differentiationStatement": "string — how this person stands out from others in their niche"
+  "quickWins": ["string - 3 actions to take in the first 2 weeks"],
+  "differentiationStatement": "string - how this person stands out from others in their niche"
 }}
 """
 
@@ -170,7 +170,7 @@ async def generate_strategy(project_id: str, personal_core: dict) -> AsyncIterat
 
 _NICHE_SYSTEM = """
 You are a competitive intelligence analyst specialising in personal brand niches.
-Return ONLY a valid JSON object — no markdown, no code fences, no commentary.
+Return ONLY a valid JSON object - no markdown, no code fences, no commentary.
 """.strip()
 
 _NICHE_ANALYSIS_PROMPT = """
@@ -188,23 +188,23 @@ Return this JSON:
     {{
       "name": "string",
       "platform": "string",
-      "followers": "string — estimate e.g. '120K'",
+      "followers": "string - estimate e.g. '120K'",
       "topicFocus": "string",
       "postingFrequency": "string",
       "whatTheyDoWell": "string",
       "contentGapTheyLeave": "string"
     }}
   ],
-  "saturatedTopics": ["string — topics everyone covers"],
+  "saturatedTopics": ["string - topics everyone covers"],
   "contentGaps": [
     {{
-      "gap": "string — underserved angle",
-      "opportunity": "string — how this person can own it",
+      "gap": "string - underserved angle",
+      "opportunity": "string - how this person can own it",
       "urgency": "high|medium|low"
     }}
   ],
-  "differentiationOpportunities": ["string — 3 specific ways to stand out"],
-  "recommendedNicheAngle": "string — the single best positioning angle based on gaps"
+  "differentiationOpportunities": ["string - 3 specific ways to stand out"],
+  "recommendedNicheAngle": "string - the single best positioning angle based on gaps"
 }}
 """
 
@@ -325,7 +325,7 @@ async def _serpapi_search(keywords: list[str], admired_voices: list[str]) -> str
         return "\n---\n".join(all_results) if all_results else _mock_search_results(keywords)
 
     except Exception as e:
-        logger.warning("SerpAPI search failed: %s — using fallback", e)
+        logger.warning("SerpAPI search failed: %s - using fallback", e)
         return _mock_search_results(keywords)
 
 

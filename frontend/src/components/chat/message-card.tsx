@@ -167,7 +167,7 @@ export function MessageCard({ message, isLast, onRegenerate, projectId }: Messag
                       : <InlineCode {...props}>{children}</InlineCode>
                   },
 
-                  // Paragraphs — generous bottom margin, no top margin
+                  // Paragraphs - generous bottom margin, no top margin
                   p({ children }) {
                     return (
                       <p className="mb-4 last:mb-0 leading-[1.8] text-[14.5px] text-foreground">
@@ -208,7 +208,7 @@ export function MessageCard({ message, isLast, onRegenerate, projectId }: Messag
                     )
                   },
 
-                  // Headings — clear hierarchy with generous spacing
+                  // Headings - clear hierarchy with generous spacing
                   h1({ children }) {
                     return (
                       <h1 className="text-[20px] font-bold mb-3 mt-7 first:mt-0 text-foreground tracking-tight leading-tight">
@@ -260,7 +260,7 @@ export function MessageCard({ message, isLast, onRegenerate, projectId }: Messag
                     return <hr className="my-6 border-border/40" />
                   },
 
-                  // Tables — scrollable, clean borders, no text cramming
+                  // Tables - scrollable, clean borders, no text cramming
                   table({ children }) {
                     return (
                       <div className="my-5 w-full overflow-x-auto rounded-xl border border-border/70 shadow-sm">

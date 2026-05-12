@@ -1,5 +1,5 @@
 """
-Messaging Resonance Testing — Meta Ads API (optional live fetch) + Claude.
+Messaging Resonance Testing - Meta Ads API (optional live fetch) + Claude.
 
 User runs small paid tests on Meta, then LEO reads results and identifies
 which message angle resonated most with the audience.
@@ -24,9 +24,9 @@ _MAX_BRAND = 500
 SYSTEM = """\
 You are a paid media strategist and messaging expert. You analyse A/B test results
 from Meta Ads (and similar platforms) to identify which message angles resonate most
-with the target audience — and explain WHY in terms of psychology and audience fit.
+with the target audience - and explain WHY in terms of psychology and audience fit.
 
-Return ONLY a valid JSON object — no markdown fences.
+Return ONLY a valid JSON object - no markdown fences.
 
 Schema:
 {
@@ -69,7 +69,7 @@ Rules:
 - Calculate derived metrics (CTR, CPC, CPA) if not provided.
 - Confidence is HIGH only if one variant is clearly dominant across multiple metrics.
 - Confidence is LOW if results are inconclusive or sample sizes are small.
-- Message learnings must be transferable — not just 'this ad was better'.
+- Message learnings must be transferable - not just 'this ad was better'.
 - Always recommend a follow-up test to deepen the learning.
 """
 
@@ -110,7 +110,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Messaging Resonance — {body.test_name}"
+    title = f"Messaging Resonance - {body.test_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "messaging_resonance", owner_uid, title)
     doc_id = doc["id"]
 
@@ -125,7 +125,7 @@ async def generate(
         live_data = await _fetch_meta_campaign_insights(
             body.meta_ad_account_id or "", body.meta_campaign_id
         )
-        label = f"Fetched {len(live_data)} ad-level results" if live_data else "Meta API returned no data — using provided results"
+        label = f"Fetched {len(live_data)} ad-level results" if live_data else "Meta API returned no data - using provided results"
         yield _sse({"type": "research_step", "step": "meta", "label": label, "status": "done"})
     else:
         yield _sse({"type": "research_step", "step": "meta", "label": "Using provided results", "status": "done"})

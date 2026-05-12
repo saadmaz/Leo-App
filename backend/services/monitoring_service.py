@@ -1,11 +1,11 @@
 """
-Brand monitoring service — real-time brand mention and competitor news tracking.
+Brand monitoring service - real-time brand mention and competitor news tracking.
 
 Searches for brand name + competitor mentions across the web using
 Tavily (news) and Exa (semantic news index) in parallel.
 
 Deduplicates by URL, classifies sentiment with a fast keyword heuristic
-(no LLM call per alert — keeps costs near zero), and persists new alerts
+(no LLM call per alert - keeps costs near zero), and persists new alerts
 to Firestore under projects/{id}/monitor_alerts.
 
 Usage:
@@ -21,7 +21,7 @@ from backend.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Simple keyword-based sentiment heuristic — cheap and fast
+# Simple keyword-based sentiment heuristic - cheap and fast
 _POSITIVE_WORDS = frozenset([
     "launch", "award", "win", "growth", "record", "partnership", "expand",
     "funding", "raised", "success", "innovation", "leader", "milestone",

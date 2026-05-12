@@ -192,7 +192,7 @@ export default function TeamPage() {
 
       <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 max-w-2xl mx-auto w-full space-y-6">
 
-        {/* Invite form — admin only */}
+        {/* Invite form - admin only */}
         {isAdmin && (
           <div className="bg-card border border-border rounded-lg p-4">
             <div className="flex items-center gap-2 mb-3">

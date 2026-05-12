@@ -427,12 +427,12 @@ export default function AnalyticsPage() {
                           {row.status}
                         </span>
                       </td>
-                      <td className="px-4 py-2 text-right tabular-nums">{row.impressions > 0 ? row.impressions.toLocaleString() : '—'}</td>
-                      <td className="px-4 py-2 text-right tabular-nums">{row.clicks > 0 ? row.clicks.toLocaleString() : '—'}</td>
+                      <td className="px-4 py-2 text-right tabular-nums">{row.impressions > 0 ? row.impressions.toLocaleString() : '-'}</td>
+                      <td className="px-4 py-2 text-right tabular-nums">{row.clicks > 0 ? row.clicks.toLocaleString() : '-'}</td>
                       <td className="px-4 py-2 text-right tabular-nums">
                         {row.engagement > 0 ? (
                           <span className="font-semibold text-primary">{row.engagement}</span>
-                        ) : '—'}
+                        ) : '-'}
                       </td>
                     </tr>
                   ))}

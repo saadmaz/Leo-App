@@ -20,7 +20,7 @@ const FEATURES = [
     key: 'visual-brief',
     icon: <ImageIcon className="w-5 h-5" />,
     title: 'Visual Brief',
-    description: 'Create a detailed creative brief for designers — colour palette, layout, Midjourney prompt included.',
+    description: 'Create a detailed creative brief for designers - colour palette, layout, Midjourney prompt included.',
     path: 'visual-brief',
     credits: 5,
     tag: 'Claude',
@@ -38,7 +38,7 @@ const FEATURES = [
     key: 'podcast',
     icon: <Mic className="w-5 h-5" />,
     title: 'Podcast Show Notes',
-    description: 'Upload an audio URL or paste a transcript — get show notes, timestamps, quotes, and a LinkedIn post.',
+    description: 'Upload an audio URL or paste a transcript - get show notes, timestamps, quotes, and a LinkedIn post.',
     path: 'podcast',
     credits: 20,
     tag: 'Whisper + Claude',
@@ -47,7 +47,7 @@ const FEATURES = [
     key: 'quality',
     icon: <CheckCircle className="w-5 h-5" />,
     title: 'Content Quality Score',
-    description: 'Score content across 6 dimensions — clarity, brand voice, engagement, SEO, platform fit, and CTA.',
+    description: 'Score content across 6 dimensions - clarity, brand voice, engagement, SEO, platform fit, and CTA.',
     path: 'quality',
     credits: 10,
     tag: 'Claude',
@@ -74,7 +74,7 @@ const FEATURES = [
     key: 'gap',
     icon: <Search className="w-5 h-5" />,
     title: 'Content Gap Analysis',
-    description: 'Discover keywords your competitors rank for that you don\'t — with content angle suggestions.',
+    description: 'Discover keywords your competitors rank for that you don\'t - with content angle suggestions.',
     path: 'gap',
     credits: 40,
     tag: 'DataForSEO + Claude',
@@ -92,7 +92,7 @@ export default function ContentHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">Content Studio</h1>
-          <p className="text-xs text-muted-foreground">Pillar 2 — Content Creation & Management</p>
+          <p className="text-xs text-muted-foreground">Pillar 2 - Content Creation & Management</p>
         </div>
       </div>
 

@@ -112,7 +112,7 @@ export function ChangelogModal({ open, onClose }: ChangelogModalProps) {
                   {/* Title */}
                   <p className="text-sm font-semibold mb-1">{entry.title}</p>
 
-                  {/* Body — render HTML safely as text, or use dangerouslySetInnerHTML for rich content */}
+                  {/* Body - render HTML safely as text, or use dangerouslySetInnerHTML for rich content */}
                   <div
                     className="text-xs text-muted-foreground leading-relaxed prose prose-sm dark:prose-invert max-w-none"
                     dangerouslySetInnerHTML={{ __html: entry.body }}

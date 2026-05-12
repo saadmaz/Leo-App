@@ -1,5 +1,5 @@
 """
-Funnel Strategy Engine — API routes.
+Funnel Strategy Engine - API routes.
 
 POST /projects/{project_id}/strategy/start
     Detect intent, create session, return first question.
@@ -223,7 +223,7 @@ async def start_strategy(
         "owner_uid": user["uid"],
     })
 
-    # The very first "question" is the funnel selector — the frontend renders
+    # The very first "question" is the funnel selector - the frontend renders
     # this as a special widget, but we include a text fallback too.
     return {
         "session_id": session["id"],
@@ -272,7 +272,7 @@ async def answer_question(
         session["funnel_type"] = funnel_type
         answer_count = 0
     else:
-        # Regular intake question — store with key q{index}
+        # Regular intake question - store with key q{index}
         key = f"q{body.question_index}"
         intake[key] = body.answer
         firebase_service.update_strategy_session(project_id, session_id, {
@@ -291,7 +291,7 @@ async def answer_question(
             "status": "research_ready",
             "next_question": None,
             "message": (
-                "Got it. Give me a moment — I'm going to research your industry, "
+                "Got it. Give me a moment - I'm going to research your industry, "
                 "check what's trending, and look at what's working for similar brands."
             ),
         }
@@ -428,7 +428,7 @@ async def refine_strategy(
 
 
 # ===========================================================================
-# Pillar 1 — Strategy & Planning features
+# Pillar 1 - Strategy & Planning features
 # ===========================================================================
 
 # ---------------------------------------------------------------------------
@@ -747,7 +747,7 @@ async def dismiss_risk_alert(project_id: str, doc_id: str, risk_id: str, user: C
 
 
 # ===========================================================================
-# Pillar 2 — Content Creation & Management
+# Pillar 2 - Content Creation & Management
 # ===========================================================================
 
 def _p2_stream(service_fn, project, body, project_id, uid):
@@ -917,7 +917,7 @@ async def list_content_gaps(project_id: str, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 3 — SEO & Organic Search
+# Pillar 3 - SEO & Organic Search
 # ===========================================================================
 
 def _p3_stream(service_fn, project, body, project_id, uid):
@@ -1049,7 +1049,7 @@ async def list_technical_audits(project_id: str, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 4 — Paid Advertising
+# Pillar 4 - Paid Advertising
 # ===========================================================================
 
 def _p4_stream(service_fn, project, body, project_id, uid):
@@ -1143,7 +1143,7 @@ async def list_attribution_reports(project_id: str, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 5 — Email Marketing & CRM
+# Pillar 5 - Email Marketing & CRM
 # ===========================================================================
 
 def _p5_stream(service_fn, project, body, project_id, uid):
@@ -1294,7 +1294,7 @@ async def list_winloss_reports(project_id: str, user: CurrentUser):
 
 
 # ---------------------------------------------------------------------------
-# ZeroBounce — Email Validation (utility endpoint, no credit cost)
+# ZeroBounce - Email Validation (utility endpoint, no credit cost)
 # ---------------------------------------------------------------------------
 
 @router.post("/pillar5/list-hygiene/validate")
@@ -1319,7 +1319,7 @@ async def validate_emails(project_id: str, body: dict, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 6 — Social Media (gap features)
+# Pillar 6 - Social Media (gap features)
 # Already built: Scheduling, Listening, Trends, Hashtags, Analytics, Ad Creative
 # New here: Community Management, Social Proof Harvesting, Employee Advocacy
 # ===========================================================================
@@ -1396,7 +1396,7 @@ async def list_employee_advocacy_sessions(project_id: str, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 7 — Analytics & Reporting
+# Pillar 7 - Analytics & Reporting
 # Already built: Weekly Digest, Research Reports, Content Analytics, Competitive Intel
 # New here: Unified Dashboard, Cohort Analysis, Funnel Analysis, Anomaly Detection,
 #           Forecasting, CAC+LTV, Board-Ready Reporting
@@ -1522,7 +1522,7 @@ async def list_board_reports(project_id: str, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 8 — PR & Communications
+# Pillar 8 - PR & Communications
 # Features: Press Release, Media List, Pitch Email, Coverage Monitoring,
 #           Crisis Comms, Award Submissions, Analyst Relations, Partnership Comms
 # ===========================================================================
@@ -1694,7 +1694,7 @@ async def list_partnership_comms(project_id: str, user: CurrentUser):
 
 
 # ===========================================================================
-# Pillar 10 — Experimentation & Optimisation
+# Pillar 10 - Experimentation & Optimisation
 # Features: A/B Test Design, Landing Page CRO, Messaging Resonance,
 #           Email A/B Testing, Experiment Log (CRUD), Learning Propagation
 # ===========================================================================
@@ -1790,7 +1790,7 @@ async def list_email_ab_tests(project_id: str, user: CurrentUser):
 
 
 # ---------------------------------------------------------------------------
-# Experiment Log — CRUD (no SSE, no credits)
+# Experiment Log - CRUD (no SSE, no credits)
 # ---------------------------------------------------------------------------
 
 @router.post("/pillar10/experiment-log")
@@ -1830,7 +1830,7 @@ async def get_experiment(project_id: str, experiment_id: str, user: CurrentUser)
 
 @router.patch("/pillar10/experiment-log/{experiment_id}")
 async def update_experiment(project_id: str, experiment_id: str, body: ExperimentLogUpdate, user: CurrentUser):
-    """Update an experiment — results, winner, learnings, status."""
+    """Update an experiment - results, winner, learnings, status."""
     get_project_as_member(project_id, user["uid"])
     updates = {k: v for k, v in body.model_dump().items() if v is not None}
     await asyncio.to_thread(firebase_service.update_experiment, project_id, experiment_id, updates)

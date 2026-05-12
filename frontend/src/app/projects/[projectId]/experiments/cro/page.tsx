@@ -129,7 +129,7 @@ export default function LandingPageCROPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Page Description (if no URL) *</label>
         <textarea value={pageDescription} onChange={(e) => setPageDescription(e.target.value)} rows={2}
-          placeholder="Describe the page — product, value prop, current messaging, key sections"
+          placeholder="Describe the page - product, value prop, current messaging, key sections"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
 
@@ -206,7 +206,7 @@ export default function LandingPageCROPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-sm">CRO Variants — {result.conversion_goal}</h2>
+        <h2 className="font-semibold text-sm">CRO Variants - {result.conversion_goal}</h2>
         {result.expected_lift_range && (
           <span className="text-xs text-green-600 dark:text-green-400 font-medium">{result.expected_lift_range}</span>
         )}
@@ -282,7 +282,7 @@ export default function LandingPageCROPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Landing Page CRO"
-      subtitle="Pillar 10 — Firecrawl + Claude"
+      subtitle="Pillar 10 - Firecrawl + Claude"
       icon={<Globe className="w-4 h-4" />}
       credits={15}
       steps={store.steps}
@@ -291,7 +291,7 @@ export default function LandingPageCROPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Generate CRO Variants — 15 credits"
+      submitLabel="Generate CRO Variants - 15 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/experiments`}
     />

@@ -1,5 +1,5 @@
 """
-Market Sizing service — SerpAPI (×3 queries) + Firecrawl + Claude TAM/SAM/SOM.
+Market Sizing service - SerpAPI (×3 queries) + Firecrawl + Claude TAM/SAM/SOM.
 
 Runs three targeted searches (total addressable market, serviceable market,
 obtainable market), scrapes a key source, then synthesises a structured
@@ -63,13 +63,13 @@ _SYSTEM_PROMPT = """\
 You are LEO, a market intelligence analyst. You have just gathered live market research.
 Produce a structured TAM/SAM/SOM analysis for the given market.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "market_description": "...",
   "geography": "...",
   "tam": {
     "value": "$X billion",
-    "methodology": "Top-down — total global spend on X category per industry report Y",
+    "methodology": "Top-down - total global spend on X category per industry report Y",
     "sources": ["Source 1", "Source 2"],
     "cagr": "X% annually through 2030",
     "key_drivers": ["Driver 1", "Driver 2"]
@@ -83,21 +83,21 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
   "som": {
     "value": "$X million",
     "year_1_target": "$X million",
-    "methodology": "Bottom-up — based on sales capacity, current brand reach, and conversion benchmarks",
+    "methodology": "Bottom-up - based on sales capacity, current brand reach, and conversion benchmarks",
     "market_share_pct": "X%",
     "assumptions": ["Assumption 1"]
   },
-  "key_trends": ["Trend 1 — implication for brand", "Trend 2 — implication for brand"],
-  "competitive_density": "Low / Medium / High — explanation",
+  "key_trends": ["Trend 1 - implication for brand", "Trend 2 - implication for brand"],
+  "competitive_density": "Low / Medium / High - explanation",
   "go_to_market_implications": ["Implication 1", "Implication 2"],
-  "confidence": "High / Medium / Low — explanation of data quality"
+  "confidence": "High / Medium / Low - explanation of data quality"
 }
 
 RULES:
-1. All values must be grounded in the research data provided — no fabrication.
+1. All values must be grounded in the research data provided - no fabrication.
 2. Where data is incomplete, state assumptions clearly in the assumptions field.
 3. Sources must reference actual snippets from the research, not made-up reports.
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -113,7 +113,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         brand_name = project.get("name", "the brand")
 
-        title = f"Market Sizing — {body.market_description[:50]}"
+        title = f"Market Sizing - {body.market_description[:50]}"
         doc = firebase_service.create_pillar1_doc(project_id, "market_sizing", owner_uid, title)
         doc_id = doc["id"]
 
@@ -133,7 +133,7 @@ async def generate(
             urls = [r.get("link", "") for r in results[:2] if r.get("link")]
             all_snippets.extend(snippets)
             all_urls.extend(urls)
-            yield _sse({"type": "research_step", "step": "serp_research", "label": f"Query {i} — {len(results)} results found", "status": "done"})
+            yield _sse({"type": "research_step", "step": "serp_research", "label": f"Query {i} - {len(results)} results found", "status": "done"})
 
         # ── Step 4: Firecrawl top URL ────────────────────────────────────────
         scraped = ""

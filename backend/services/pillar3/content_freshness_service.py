@@ -1,5 +1,5 @@
 """
-Content Freshness Management — DataForSEO rank check + Claude recommendations.
+Content Freshness Management - DataForSEO rank check + Claude recommendations.
 
 Checks current ranking position for a URL+keyword pair, then Claude assesses
 freshness signals and recommends whether/how to refresh the content.
@@ -75,7 +75,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"Freshness Check — {body.url[:60]}"
+        title = f"Freshness Check - {body.url[:60]}"
         doc = firebase_service.create_pillar1_doc(project_id, "content_freshness", owner_uid, title)
         doc_id = doc["id"]
 
@@ -96,11 +96,11 @@ async def generate(
             except Exception as exc:
                 logger.warning("DataForSEO rank check failed: %s", exc)
                 yield _sse({"type": "research_step", "step": "rank_check",
-                            "label": "Rank check unavailable — heuristic analysis", "status": "skipped"})
+                            "label": "Rank check unavailable - heuristic analysis", "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "rank_check",
-                        "label": "DataForSEO not configured — heuristic freshness analysis", "status": "skipped"})
+                        "label": "DataForSEO not configured - heuristic freshness analysis", "status": "skipped"})
 
         # ── Step 2: Claude freshness analysis ─────────────────────────────────
         yield _sse({"type": "research_step", "step": "freshness_analysis",
@@ -114,7 +114,7 @@ async def generate(
         system_prompt = """\
 You are LEO, a content freshness and SEO maintenance expert. Assess the content's freshness signals and produce a refresh action plan.
 
-OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a valid JSON object (no markdown fences):
 {
   "url": "https://...",
   "keyword": "target keyword",
@@ -130,7 +130,7 @@ OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
   ],
   "last_modified": "Unknown or estimated date",
   "recommended_updates": [
-    "Specific update 1 — e.g. 'Add 2024 statistics from [source type]'",
+    "Specific update 1 - e.g. 'Add 2024 statistics from [source type]'",
     "Specific update 2"
   ],
   "update_priority": "low | medium | high",
@@ -143,8 +143,8 @@ OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
 Rules:
 - freshness_score: 0-100 (100 = perfectly fresh, 0 = severely stale).
 - update_priority: critical/high if ranking is declining or competitors outrank; low if stable.
-- recommended_updates must be specific and actionable — not generic advice.
-- Return ONLY valid JSON — no prose, no markdown.
+- recommended_updates must be specific and actionable - not generic advice.
+- Return ONLY valid JSON - no prose, no markdown.
 """
 
         brand_ctx = f"Brand: {brand_name}\n"
@@ -157,7 +157,7 @@ URL to assess: {body.url}
 Target keyword: "{body.keyword}"
 {rank_ctx}
 
-{"No live ranking data available — infer freshness signals from URL structure, keyword competition, and industry patterns." if not use_dfs else ""}
+{"No live ranking data available - infer freshness signals from URL structure, keyword competition, and industry patterns." if not use_dfs else ""}
 
 Assess content freshness and produce a refresh action plan.
 """

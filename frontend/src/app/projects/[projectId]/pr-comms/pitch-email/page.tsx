@@ -141,14 +141,14 @@ export default function PitchEmailPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Recent Article (personalisation)</label>
         <input value={recentArticle} onChange={(e) => setRecentArticle(e.target.value)}
-          placeholder="e.g. 'Why Enterprise AI Is Still Broken' — TechCrunch, March 2026"
+          placeholder="e.g. 'Why Enterprise AI Is Still Broken' - TechCrunch, March 2026"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
       </div>
 
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">News Hook *</label>
         <input value={newsHook} onChange={(e) => setNewsHook(e.target.value)}
-          placeholder="e.g. Acme Corp raises $12M Series A — launching in 3 weeks"
+          placeholder="e.g. Acme Corp raises $12M Series A - launching in 3 weeks"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
       </div>
 
@@ -171,7 +171,7 @@ export default function PitchEmailPage() {
         <div className="space-y-2">
           {keyStats.map((s, i) => (
             <div key={i} className="flex gap-2">
-              <input value={s} onChange={(e) => updateStat(i, e.target.value)} placeholder={`Stat ${i + 1} — e.g. 40% cost reduction`}
+              <input value={s} onChange={(e) => updateStat(i, e.target.value)} placeholder={`Stat ${i + 1} - e.g. 40% cost reduction`}
                 className="flex-1 px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
               {keyStats.length > 1 && <button onClick={() => removeStat(i)} className="text-muted-foreground hover:text-destructive"><X className="w-4 h-4" /></button>}
             </div>
@@ -269,7 +269,7 @@ export default function PitchEmailPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Pitch Email Generator"
-      subtitle="Pillar 8 — Claude"
+      subtitle="Pillar 8 - Claude"
       icon={<Mail className="w-4 h-4" />}
       credits={10}
       steps={store.steps}
@@ -278,7 +278,7 @@ export default function PitchEmailPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Generate Pitch Email — 10 credits"
+      submitLabel="Generate Pitch Email - 10 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

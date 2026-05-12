@@ -1,5 +1,5 @@
 """
-Carousel Studio — Brand Scraping Pipeline
+Carousel Studio - Brand Scraping Pipeline
 
 Runs silently in the background before intake questions are shown.
 Yields SSE-compatible event dicts that the carousel route streams to the client.
@@ -11,11 +11,11 @@ Event shapes:
   { "type": "error", "message": "..." }
 
 Steps:
-  1. Brandfetch — logos, colours
-  2. Brand.dev  — typography roles, full palette
-  3. Firecrawl  — homepage + about text
-  4. Claude     — tone analysis
-  5. Apify      — Instagram last 12 posts (content type + aesthetic)
+  1. Brandfetch - logos, colours
+  2. Brand.dev  - typography roles, full palette
+  3. Firecrawl  - homepage + about text
+  4. Claude     - tone analysis
+  5. Apify      - Instagram last 12 posts (content type + aesthetic)
 """
 
 from __future__ import annotations
@@ -181,7 +181,7 @@ async def run(
     instagram_url: Optional[str] = None,
 ) -> AsyncIterator[dict]:
     """
-    Async generator — yields step events then a final done event with brand_profile.
+    Async generator - yields step events then a final done event with brand_profile.
     """
     domain = _domain_from_url(website_url)
     brand_profile: dict = {
@@ -231,7 +231,7 @@ async def run(
             if fmts:
                 brand_profile["logo_url"] = fmts[0].get("src", "")
 
-    # ── Logo.dev fallback — if Brandfetch returned nothing ──────────────────
+    # ── Logo.dev fallback - if Brandfetch returned nothing ──────────────────
     if not brand_profile.get("logo_url") and settings.LOGO_DEV_API_KEY:
         brand_profile["logo_url"] = (
             f"https://img.logo.dev/{domain}"

@@ -212,6 +212,6 @@ export default function TechnicalSeoPage() {
     <SSEFeaturePage projectId={projectId} title="Technical SEO Monitor" subtitle="DataForSEO + Claude"
       icon={<Wrench className="w-4 h-4" />} credits={20} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Run Technical Audit — 20 credits" canSubmit={!!url.trim()} />
+      onSubmit={generate} submitLabel="Run Technical Audit - 20 credits" canSubmit={!!url.trim()} />
   )
 }

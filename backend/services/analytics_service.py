@@ -1,5 +1,5 @@
 """
-Analytics service — Phase 7.
+Analytics service - Phase 7.
 
 Provides content performance tracking, trend analysis, activity feed,
 and AI-powered performance summaries.
@@ -250,7 +250,7 @@ async def log_activity(
         }
         db.collection("projects").document(project_id).collection("activity").add(event)
     except Exception:
-        pass  # Non-critical — never fail the main operation
+        pass  # Non-critical - never fail the main operation
 
 
 # ---------------------------------------------------------------------------

@@ -20,7 +20,7 @@ const STEPS = [
   {
     icon: <MessageSquare className="w-4 h-4" />,
     title: 'Start creating',
-    description: 'Ask for captions, ad copy, campaign briefs, or content calendars — all on-brand.',
+    description: 'Ask for captions, ad copy, campaign briefs, or content calendars - all on-brand.',
   },
 ]
 

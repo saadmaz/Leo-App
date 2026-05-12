@@ -203,7 +203,7 @@ export default function DeepSearchPage() {
           {/* Done banner */}
           {doneEvent && (
             <div className="p-3 rounded-lg bg-primary/5 border border-primary/20 text-sm text-muted-foreground">
-              Search complete — results saved to history.
+              Search complete - results saved to history.
             </div>
           )}
 

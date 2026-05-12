@@ -2,8 +2,8 @@
 AI Content Planner routes.
 
 Endpoints:
-  POST /projects/{id}/planner/generate  — Generate a multi-week content plan
-  POST /projects/{id}/planner/apply     — Apply planned posts to the content calendar
+  POST /projects/{id}/planner/generate  - Generate a multi-week content plan
+  POST /projects/{id}/planner/apply     - Apply planned posts to the content calendar
 """
 from __future__ import annotations
 

@@ -1,1 +1,1 @@
-# Pillar 10 — Experimentation & Optimisation services
+# Pillar 10 - Experimentation & Optimisation services

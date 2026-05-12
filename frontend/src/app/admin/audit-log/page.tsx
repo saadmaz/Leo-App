@@ -115,7 +115,7 @@ function AuditRow({ entry }: { entry: AuditLogEntry }) {
         hour: '2-digit',
         minute: '2-digit',
       })
-    : '—'
+    : '-'
 
   const detailText = formatDetails(entry.action, entry.details)
 
@@ -136,7 +136,7 @@ function AuditRow({ entry }: { entry: AuditLogEntry }) {
 
       {/* Target UID */}
       <span className="text-xs font-mono text-muted-foreground truncate" title={entry.targetUid}>
-        {entry.targetUid ? `${entry.targetUid.slice(0, 16)}…` : '—'}
+        {entry.targetUid ? `${entry.targetUid.slice(0, 16)}…` : '-'}
       </span>
 
       {/* Timestamp */}
@@ -146,14 +146,14 @@ function AuditRow({ entry }: { entry: AuditLogEntry }) {
 }
 
 function formatDetails(action: string, details: Record<string, unknown>): string {
-  if (!details || Object.keys(details).length === 0) return '—'
+  if (!details || Object.keys(details).length === 0) return '-'
 
   switch (action) {
     case 'change_tier':
       return `${details.from} → ${details.to}`
     case 'override_limits': {
       const ov = details.overrides as Record<string, number> | undefined
-      if (!ov) return '—'
+      if (!ov) return '-'
       return Object.entries(ov)
         .map(([k, v]) => `${k}: ${v}`)
         .join(', ')

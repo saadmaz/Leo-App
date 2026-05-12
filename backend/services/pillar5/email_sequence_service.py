@@ -1,5 +1,5 @@
 """
-Email Sequence Builder — Claude writes the full sequence, Loops.so stores/sends it.
+Email Sequence Builder - Claude writes the full sequence, Loops.so stores/sends it.
 
 Produces:
   - Per-email: subject line, preview text, full HTML-ready body, send delay, trigger condition
@@ -26,7 +26,7 @@ SYSTEM = """\
 You are an expert email marketing strategist and copywriter. You write high-converting \
 email sequences that feel personal, not salesy.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -38,10 +38,10 @@ Schema:
   "emails": [
     {
       "email_number": number,
-      "send_delay": "string (e.g. 'Immediately', 'Day 2', 'Day 5 — 10am recipient time')",
+      "send_delay": "string (e.g. 'Immediately', 'Day 2', 'Day 5 - 10am recipient time')",
       "trigger_condition": "string (e.g. 'On signup', 'If previous email not opened')",
       "subject_line": "string",
-      "preview_text": "string (≤90 chars — shows after subject in inbox)",
+      "preview_text": "string (≤90 chars - shows after subject in inbox)",
       "body_text": "string (full plain-text email body, ~150-300 words)",
       "cta_text": "string",
       "cta_url_placeholder": "string (e.g. '{{dashboard_url}}')",
@@ -60,7 +60,7 @@ Rules:
 - body_text must be complete, send-ready prose (not placeholders like [INSERT CONTENT]).
 - Use {{first_name}}, {{company}}, {{product_name}} tokens where natural.
 - send_delay must be concrete (Day N, not 'a few days').
-- Vary angles across emails — never repeat the same hook twice.
+- Vary angles across emails - never repeat the same hook twice.
 - The final email should be a win-back or 'last chance' if goal is re-engagement,
   or a testimonial/case study if goal is nurture.
 """
@@ -81,7 +81,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Email Sequence — {body.sequence_name}"
+    title = f"Email Sequence - {body.sequence_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "email_sequence", owner_uid, title)
     doc_id = doc["id"]
 
@@ -126,7 +126,7 @@ async def generate(
         for email in payload.get("emails", []):
             try:
                 res = await loops_client.create_campaign(
-                    name=f"{body.sequence_name} — Email {email['email_number']}",
+                    name=f"{body.sequence_name} - Email {email['email_number']}",
                     subject=email.get("subject_line", ""),
                     html_body=f"<p>{email.get('body_text', '').replace(chr(10), '<br>')}</p>",
                 )

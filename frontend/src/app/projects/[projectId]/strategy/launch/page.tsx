@@ -76,7 +76,7 @@ export default function LaunchPage() {
 
   const resultNode = result ? (
     <div className="space-y-4">
-      <h2 className="font-semibold text-sm">Launch Plan — {result.product_name}</h2>
+      <h2 className="font-semibold text-sm">Launch Plan - {result.product_name}</h2>
       {result.phases?.map((phase, i) => (
         <div key={i} className="p-4 rounded-xl border border-border bg-card space-y-2">
           <div className="flex items-center justify-between">
@@ -99,7 +99,7 @@ export default function LaunchPage() {
     <SSEFeaturePage projectId={projectId} title="Launch Planning" subtitle="Claude"
       icon={<Rocket className="w-4 h-4" />} credits={20} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Launch Plan — 20 credits"
+      onSubmit={generate} submitLabel="Generate Launch Plan - 20 credits"
       canSubmit={!!productName.trim() && !!launchDate && channels.length > 0} />
   )
 }

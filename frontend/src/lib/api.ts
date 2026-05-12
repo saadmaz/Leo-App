@@ -1,5 +1,5 @@
 /**
- * API client — thin wrapper around fetch for all backend communication.
+ * API client - thin wrapper around fetch for all backend communication.
  *
  * Design principles:
  *  - All requests are authenticated via Firebase ID tokens (injected by authHeaders()).
@@ -115,7 +115,7 @@ export type IntelligenceStreamEvent =
 
 async function authHeaders(): Promise<HeadersInit> {
   // Wait for Firebase to restore the persisted auth session before reading
-  // currentUser — without this, requests made on initial page load race against
+  // currentUser - without this, requests made on initial page load race against
   // auth initialisation and arrive with no token, causing 401s.
   await auth.authStateReady()
   const user = auth.currentUser
@@ -235,7 +235,7 @@ async function readSSEStream<TEvent>(
           const event = JSON.parse(raw) as TEvent
           onEvent(event)
         } catch {
-          // Malformed JSON — skip the line. The backend logs these.
+          // Malformed JSON - skip the line. The backend logs these.
         }
       }
     }
@@ -243,7 +243,7 @@ async function readSSEStream<TEvent>(
     reader.releaseLock()
   }
 
-  // Stream closed without an explicit [DONE] — treat as completion.
+  // Stream closed without an explicit [DONE] - treat as completion.
   onDone()
 }
 
@@ -434,7 +434,7 @@ export const api = {
         signal,
       })
     } catch (err) {
-      // AbortError is expected when signal.abort() is called — don't surface it as an error.
+      // AbortError is expected when signal.abort() is called - don't surface it as an error.
       if (err instanceof DOMException && err.name === 'AbortError') return
       callbacks.onError(String(err))
       return
@@ -724,7 +724,7 @@ export const api = {
   health: (signal?: AbortSignal) => get<{ status: string }>('/health', signal),
 
   // -------------------------------------------------------------------------
-  // Intelligence — Phase 1
+  // Intelligence - Phase 1
   // -------------------------------------------------------------------------
   intelligence: {
     get: (projectId: string, signal?: AbortSignal) =>
@@ -754,7 +754,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Competitor Profiles — 5-Dimension Classification
+  // Competitor Profiles - 5-Dimension Classification
   // -------------------------------------------------------------------------
   competitorProfiles: {
     list: (projectId: string, signal?: AbortSignal) =>
@@ -1333,7 +1333,7 @@ export const api = {
     }
   },
 
-  // Reports — Phase 10
+  // Reports - Phase 10
   reports: {
     getDigest: (projectId: string) =>
       get<WeeklyDigest>(`/projects/${projectId}/reports/digest`),
@@ -2071,7 +2071,7 @@ export const api = {
         signal,
       ),
 
-    /** Opinion extractor — phase 1 returns questions, phase 2 returns the post (SSE). */
+    /** Opinion extractor - phase 1 returns questions, phase 2 returns the post (SSE). */
     streamOpinion: (
       projectId: string,
       body: { take: string; platform: ContentPlatform; answers?: string[] },
@@ -2145,7 +2145,7 @@ export const api = {
         signal,
       ),
 
-    /** Mark a generated output as approved — saves to voice profile for calibration. */
+    /** Mark a generated output as approved - saves to voice profile for calibration. */
     approveOutput: (
       projectId: string,
       body: { content: string; platform: ContentPlatform; editedByUser?: boolean },
@@ -2274,14 +2274,14 @@ export const api = {
   },
 
   // ---------------------------------------------------------------------------
-  // Pillar 1 — Strategy & Planning
+  // Pillar 1 - Strategy & Planning
   // ---------------------------------------------------------------------------
   pillar1: {
     /** List saved documents of a given type ('icp' | 'gtm' | 'okr' | etc.) */
     listDocs: (projectId: string, docType?: string): Promise<{ docs: Pillar1Doc[] }> =>
       get(`/projects/${projectId}/strategy/pillar1/${docType ?? 'icp'}/list`),
 
-    /** Generate ICP segments — SSE stream */
+    /** Generate ICP segments - SSE stream */
     streamICP: (
       projectId: string,
       body: ICPGenerateBody,
@@ -2296,7 +2296,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate GTM strategy — SSE stream */
+    /** Generate GTM strategy - SSE stream */
     streamGTM: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2311,11 +2311,11 @@ export const api = {
         signal,
       ),
 
-    /** Generate OKRs — returns JSON directly (non-streaming) */
+    /** Generate OKRs - returns JSON directly (non-streaming) */
     generateOKR: (projectId: string, body: Record<string, unknown>): Promise<Pillar1Doc> =>
       post(`/projects/${projectId}/strategy/pillar1/okr/generate`, body),
 
-    /** Generate budget model — SSE stream */
+    /** Generate budget model - SSE stream */
     streamBudget: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2330,7 +2330,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate personas — SSE stream */
+    /** Generate personas - SSE stream */
     streamPersonas: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2345,7 +2345,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate market sizing (TAM/SAM/SOM) — SSE stream */
+    /** Generate market sizing (TAM/SAM/SOM) - SSE stream */
     streamMarketSize: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2364,7 +2364,7 @@ export const api = {
     startPositioning: (projectId: string, body: Record<string, unknown>): Promise<{ doc_id: string; stage: number; stage_label: string }> =>
       post(`/projects/${projectId}/strategy/pillar1/positioning/start`, body),
 
-    /** Send a message in a Positioning Workshop session — SSE stream */
+    /** Send a message in a Positioning Workshop session - SSE stream */
     streamPositioningMessage: (
       projectId: string,
       docId: string,
@@ -2384,7 +2384,7 @@ export const api = {
     getPositioningSession: (projectId: string, docId: string): Promise<{ doc: Pillar1Doc; messages: Pillar1Message[] }> =>
       get(`/projects/${projectId}/strategy/pillar1/positioning/${docId}`),
 
-    /** Generate competitive positioning map — SSE stream */
+    /** Generate competitive positioning map - SSE stream */
     streamCompMap: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2399,7 +2399,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate launch plan — SSE stream */
+    /** Generate launch plan - SSE stream */
     streamLaunch: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2414,7 +2414,7 @@ export const api = {
         signal,
       ),
 
-    /** Run risk scan — SSE stream */
+    /** Run risk scan - SSE stream */
     streamRiskScan: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2439,14 +2439,14 @@ export const api = {
   },
 
   // ---------------------------------------------------------------------------
-  // Pillar 2 — Content Creation & Management
+  // Pillar 2 - Content Creation & Management
   // ---------------------------------------------------------------------------
   pillar2: {
     /** List saved Pillar 2 documents */
     listDocs: (projectId: string, docType: string): Promise<{ docs: Pillar1Doc[] }> =>
       get(`/projects/${projectId}/strategy/pillar2/${docType}/list`),
 
-    /** Generate headline A/B variants — SSE stream */
+    /** Generate headline A/B variants - SSE stream */
     streamHeadlines: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2461,7 +2461,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate visual brief — SSE stream */
+    /** Generate visual brief - SSE stream */
     streamVisualBrief: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2476,7 +2476,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate video script — SSE stream */
+    /** Generate video script - SSE stream */
     streamVideoScript: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2491,7 +2491,7 @@ export const api = {
         signal,
       ),
 
-    /** Process podcast audio/transcript — SSE stream */
+    /** Process podcast audio/transcript - SSE stream */
     streamPodcast: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2506,7 +2506,7 @@ export const api = {
         signal,
       ),
 
-    /** Score content quality — SSE stream */
+    /** Score content quality - SSE stream */
     streamQualityScore: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2521,7 +2521,7 @@ export const api = {
         signal,
       ),
 
-    /** Translate and adapt content — SSE stream */
+    /** Translate and adapt content - SSE stream */
     streamTranslate: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2536,7 +2536,7 @@ export const api = {
         signal,
       ),
 
-    /** Generate case study — SSE stream */
+    /** Generate case study - SSE stream */
     streamCaseStudy: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2551,7 +2551,7 @@ export const api = {
         signal,
       ),
 
-    /** Analyse content gaps — SSE stream */
+    /** Analyse content gaps - SSE stream */
     streamContentGap: (
       projectId: string,
       body: Record<string, unknown>,
@@ -2568,7 +2568,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Pillar 3 — SEO & Organic Search
+  // Pillar 3 - SEO & Organic Search
   // -------------------------------------------------------------------------
   pillar3: {
     streamKeywordResearch: (
@@ -2657,7 +2657,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Pillar 4 — Paid Advertising
+  // Pillar 4 - Paid Advertising
   // -------------------------------------------------------------------------
   pillar4: {
     streamAdBrief: (
@@ -2718,7 +2718,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Pillar 5 — Email Marketing & CRM
+  // Pillar 5 - Email Marketing & CRM
   // -------------------------------------------------------------------------
   pillar5: {
     streamEmailSequence: (projectId: string, body: unknown, callbacks: Pillar1StreamCallbacks, signal?: AbortSignal) =>
@@ -2747,7 +2747,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Pillar 6 — Social Media (gap features)
+  // Pillar 6 - Social Media (gap features)
   // -------------------------------------------------------------------------
   pillar6: {
     streamCommunityManagement: (projectId: string, body: unknown, callbacks: Pillar1StreamCallbacks, signal?: AbortSignal) =>
@@ -2761,7 +2761,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Pillar 7 — Analytics & Reporting
+  // Pillar 7 - Analytics & Reporting
   // -------------------------------------------------------------------------
   pillar7: {
     streamUnifiedDashboard: (projectId: string, body: unknown, callbacks: Pillar1StreamCallbacks, signal?: AbortSignal) =>
@@ -2787,7 +2787,7 @@ export const api = {
   },
 
   // -------------------------------------------------------------------------
-  // Pillar 8 — PR & Communications
+  // Pillar 8 - PR & Communications
   // -------------------------------------------------------------------------
   pillar8: {
     streamPressRelease: (projectId: string, body: unknown, callbacks: Pillar1StreamCallbacks, signal?: AbortSignal) =>
@@ -2831,7 +2831,7 @@ export const api = {
     streamLearningPropagation: (projectId: string, body: unknown, callbacks: Pillar1StreamCallbacks, signal?: AbortSignal) =>
       streamPost<Pillar1SSEEvent>(`/projects/${projectId}/strategy/pillar10/learning-propagation/generate`, body, makePillar1Handler(callbacks), () => callbacks.onDone?.(), signal),
 
-    // Experiment Log — REST (no SSE)
+    // Experiment Log - REST (no SSE)
     listExperiments: (projectId: string) =>
       get<unknown[]>(`/projects/${projectId}/strategy/pillar10/experiment-log`),
 

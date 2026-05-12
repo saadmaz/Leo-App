@@ -6,7 +6,7 @@ import { Check, ChevronDown, ChevronUp, Globe, Loader2, Minus, Search } from 'lu
 import type { ResearchSearch, ResearchStep } from '@/types'
 
 // ---------------------------------------------------------------------------
-// Helper — derive a display hostname from a URL or query string
+// Helper - derive a display hostname from a URL or query string
 // ---------------------------------------------------------------------------
 
 function toHostname(urlOrQuery: string): string {
@@ -48,7 +48,7 @@ function SearchCard({ search, index }: SearchCardProps) {
       transition={{ delay: index * 0.08 }}
       className="rounded-xl border border-border/60 bg-card overflow-hidden"
     >
-      {/* Header row — always visible */}
+      {/* Header row - always visible */}
       <button
         onClick={() => hasResults && setOpen((v) => !v)}
         className="w-full flex items-center gap-2.5 px-3.5 py-2.5 text-left hover:bg-muted/30 transition-colors"

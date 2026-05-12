@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
 const AUDIENCE_SEGMENTS = [
   { id: 'website_visitors', label: 'Website Visitors', desc: 'Visited site but didn\'t convert' },
   { id: 'cart_abandoners', label: 'Cart Abandoners', desc: 'Added to cart, didn\'t purchase' },
-  { id: 'past_buyers', label: 'Past Buyers', desc: 'Previous customers — upsell / loyalty' },
+  { id: 'past_buyers', label: 'Past Buyers', desc: 'Previous customers - upsell / loyalty' },
   { id: 'video_viewers', label: 'Video Viewers', desc: 'Watched 25%+ of a brand video' },
   { id: 'lead_nurture', label: 'Lead Nurture', desc: 'Leads who haven\'t converted yet' },
 ]
@@ -368,7 +368,7 @@ export default function RetargetingPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Retargeting Sequence Builder"
-      subtitle="Pillar 4 — Claude"
+      subtitle="Pillar 4 - Claude"
       icon={<RefreshCw className="w-4 h-4" />}
       credits={20}
       steps={store.steps}
@@ -377,7 +377,7 @@ export default function RetargetingPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Build Sequence — 20 credits"
+      submitLabel="Build Sequence - 20 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/paid-ads`}
     />

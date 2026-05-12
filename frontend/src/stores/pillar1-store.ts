@@ -1,5 +1,5 @@
 /**
- * Zustand store for Pillar 1 — Strategy & Planning features.
+ * Zustand store for Pillar 1 - Strategy & Planning features.
  * Separate from app-store to keep bundle impact minimal.
  */
 

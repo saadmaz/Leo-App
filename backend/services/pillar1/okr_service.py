@@ -1,5 +1,5 @@
 """
-Quarterly OKR Drafting service — pure Claude, no external APIs.
+Quarterly OKR Drafting service - pure Claude, no external APIs.
 
 Generates structured OKRs (Objectives + Key Results) for a given quarter
 based on company goals, Brand Core context, and optional team focus.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, an expert OKR coach and strategic planning advisor.
 Your task is to draft quarterly OKRs that are ambitious, measurable, and aligned with the brand's voice and goals.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences) in this exact shape:
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences) in this exact shape:
 {
   "quarter": "Q3 2026",
   "objectives": [
@@ -52,7 +52,7 @@ RULES:
 2. Key results must be measurable (numbers, percentages, or clear milestones).
 3. Objectives must be ambitious but achievable in one quarter.
 4. Align with the brand's tone and audience from Brand Core.
-5. Return ONLY valid JSON — no prose, no markdown.
+5. Return ONLY valid JSON - no prose, no markdown.
 """
 
 
@@ -63,7 +63,7 @@ async def generate(
     owner_uid: str,
 ) -> dict:
     """
-    Generate OKRs synchronously (fast — pure LLM, no external calls).
+    Generate OKRs synchronously (fast - pure LLM, no external calls).
     Returns the saved Firestore document dict.
     """
     brand_core = project.get("brandCore") or {}
@@ -112,7 +112,7 @@ Draft {body.num_objectives} OKRs for {body.quarter}. Each objective must have 3 
         payload = {"raw": raw, "parse_error": True}
 
     # Save to Firestore
-    title = f"OKRs — {body.quarter}"
+    title = f"OKRs - {body.quarter}"
     doc = firebase_service.create_pillar1_doc(project_id, "okr", owner_uid, title)
     firebase_service.update_pillar1_doc(project_id, doc["id"], {
         "status": "complete",

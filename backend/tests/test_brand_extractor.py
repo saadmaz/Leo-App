@@ -125,7 +125,7 @@ class TestBuildCombinedContent:
 
 
 # ---------------------------------------------------------------------------
-# extract_brand_core (integration — mocked Anthropic client)
+# extract_brand_core (integration - mocked Anthropic client)
 # ---------------------------------------------------------------------------
 
 VALID_BRAND_CORE_JSON = json.dumps({

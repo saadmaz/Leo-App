@@ -53,7 +53,7 @@ router = APIRouter(prefix="/projects", tags=["personal-brand"])
 
 
 # ---------------------------------------------------------------------------
-# Guard helper — ensures project is a personal brand project
+# Guard helper - ensures project is a personal brand project
 # ---------------------------------------------------------------------------
 
 def _assert_personal(project: dict) -> None:
@@ -65,7 +65,7 @@ def _assert_personal(project: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Personal Core — init / get / update
+# Personal Core - init / get / update
 # ---------------------------------------------------------------------------
 
 @router.post("/{project_id}/persona/core/init", status_code=status.HTTP_201_CREATED)
@@ -120,7 +120,7 @@ async def update_personal_core(project_id: str, body: PersonalCoreUpdate, user: 
 
 
 # ---------------------------------------------------------------------------
-# Interview — questions
+# Interview - questions
 # ---------------------------------------------------------------------------
 
 @router.get("/{project_id}/persona/interview/questions")
@@ -160,7 +160,7 @@ async def get_next_question(project_id: str, user: CurrentUser):
 
 
 # ---------------------------------------------------------------------------
-# Interview — save answer
+# Interview - save answer
 # ---------------------------------------------------------------------------
 
 @router.post("/{project_id}/persona/interview/answer")
@@ -199,7 +199,7 @@ async def save_interview_answer(project_id: str, body: InterviewAnswerRequest, u
 
 
 # ---------------------------------------------------------------------------
-# Interview — extract (SSE)
+# Interview - extract (SSE)
 # ---------------------------------------------------------------------------
 
 @router.post("/{project_id}/persona/interview/extract")
@@ -509,7 +509,7 @@ async def story_to_post(project_id: str, body: StoryToPostRequest, user: Current
 @router.post("/{project_id}/persona/content/opinion")
 async def opinion_extractor(project_id: str, body: OpinionRequest, user: CurrentUser):
     """
-    Opinion extractor — two-phase SSE flow.
+    Opinion extractor - two-phase SSE flow.
     Phase 1 (answers=null): returns 3 probing questions.
     Phase 2 (answers provided): returns the full opinion post.
     """
@@ -745,7 +745,7 @@ async def check_reputation(project_id: str, user: CurrentUser):
 
 
 # ---------------------------------------------------------------------------
-# Publishing — Ayrshare
+# Publishing - Ayrshare
 # ---------------------------------------------------------------------------
 
 @router.get("/{project_id}/persona/publishing/profile")

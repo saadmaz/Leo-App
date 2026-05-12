@@ -1,5 +1,5 @@
 """
-Ad Copy Generator — Claude-powered multi-platform, multi-variant.
+Ad Copy Generator - Claude-powered multi-platform, multi-variant.
 
 Produces platform-specific ad copy variants with:
 - Correct character limits per platform
@@ -7,12 +7,12 @@ Produces platform-specific ad copy variants with:
 - A/B testing rationale for each variant
 
 Supported platforms:
-  google_search   — RSA: headlines ≤30 chars (×15), descriptions ≤90 chars (×4)
-  google_display  — Short headline ≤30, long headline ≤90, description ≤90
-  meta_feed       — Primary ≤125 chars, headline ≤40 chars, description ≤30 chars
-  meta_stories    — Primary ≤125 chars, headline ≤40 chars
-  tiktok          — Ad text ≤100 chars
-  linkedin        — Headline ≤70 chars, body ≤600 chars, description ≤100 chars
+  google_search   - RSA: headlines ≤30 chars (×15), descriptions ≤90 chars (×4)
+  google_display  - Short headline ≤30, long headline ≤90, description ≤90
+  meta_feed       - Primary ≤125 chars, headline ≤40 chars, description ≤30 chars
+  meta_stories    - Primary ≤125 chars, headline ≤40 chars
+  tiktok          - Ad text ≤100 chars
+  linkedin        - Headline ≤70 chars, body ≤600 chars, description ≤100 chars
 """
 from __future__ import annotations
 
@@ -67,9 +67,9 @@ _ANGLES = ["problem_aware", "solution_aware", "social_proof", "urgency", "aspira
 
 SYSTEM_PROMPT = """\
 You are a world-class direct-response copywriter specialising in paid advertising. \
-Your copy converts — it is clear, specific, and action-driven.
+Your copy converts - it is clear, specific, and action-driven.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -108,7 +108,7 @@ async def generate(
         return
 
     platform_label = body.platform.replace("_", " ").title()
-    title = f"Ad Copy — {platform_label} · {body.product_name}"
+    title = f"Ad Copy - {platform_label} · {body.product_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "ad_copy", owner_uid, title)
     doc_id = doc["id"]
 

@@ -1,5 +1,5 @@
 """
-Request ID middleware — stamps every HTTP request with a unique ID and
+Request ID middleware - stamps every HTTP request with a unique ID and
 propagates it through all log lines for that request.
 
 How it works:
@@ -12,7 +12,7 @@ How it works:
   4. The ID is echoed back in the response as X-Request-ID so the client
      can correlate its own logs.
 
-Usage — add to main.py:
+Usage - add to main.py:
     from backend.middleware.request_id import RequestIdMiddleware, RequestIdFilter
 
     logging.getLogger().addFilter(RequestIdFilter())
@@ -31,7 +31,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
 
-# Module-level ContextVar — holds the request ID for the current async task.
+# Module-level ContextVar - holds the request ID for the current async task.
 # Defaults to '-' so log lines outside a request context are still valid.
 _request_id_var: ContextVar[str] = ContextVar("request_id", default="-")
 
@@ -78,7 +78,7 @@ class RequestIdFilter(logging.Filter):
     produced during a request include the request ID.
 
     Example log format string:
-        "%(asctime)s [%(request_id)s] %(levelname)s %(name)s — %(message)s"
+        "%(asctime)s [%(request_id)s] %(levelname)s %(name)s - %(message)s"
     """
 
     def filter(self, record: logging.LogRecord) -> bool:

@@ -1,5 +1,5 @@
 """
-A/B Test Design — pure Claude.
+A/B Test Design - pure Claude.
 
 Input:  what to test, goal, traffic, current conversion rate, desired effect size.
 Output: hypothesis, variants, sample size calculation, success metrics, run checklist.
@@ -24,7 +24,7 @@ SYSTEM = """\
 You are a conversion optimisation and experimentation expert. You design rigorous,
 statistically sound A/B tests that marketers can actually run.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -49,13 +49,13 @@ Schema:
   },
   "primary_metric": "string",
   "secondary_metrics": ["string"],
-  "guardrail_metrics": ["string (metrics that must not worsen — e.g. unsubscribe rate)"],
+  "guardrail_metrics": ["string (metrics that must not worsen - e.g. unsubscribe rate)"],
   "success_criteria": "string (exact condition that declares a winner)",
   "pre_test_checklist": ["string"],
   "implementation_notes": "string (how to set up in common platforms like VWO, Optimizely, Google Optimize alternative)",
   "common_pitfalls": ["string"],
   "expected_duration": "string",
-  "statistical_approach": "string (frequentist | bayesian — and why)"
+  "statistical_approach": "string (frequentist | bayesian - and why)"
 }
 
 Sample size formula reference (frequentist, two-tailed):
@@ -107,7 +107,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"A/B Test — {body.what_to_test[:60]}"
+    title = f"A/B Test - {body.what_to_test[:60]}"
     doc = firebase_service.create_pillar1_doc(project_id, "ab_test_design", owner_uid, title)
     doc_id = doc["id"]
 

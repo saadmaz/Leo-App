@@ -27,7 +27,7 @@ const FEATURES = [
     key: 'on-page',
     icon: <FileSearch className="w-5 h-5" />,
     title: 'On-Page SEO Audit',
-    description: 'Full page audit — title, meta, content score, internal links, structured data issues, and fixes.',
+    description: 'Full page audit - title, meta, content score, internal links, structured data issues, and fixes.',
     path: 'on-page',
     credits: 15,
     tag: 'DataForSEO + Claude',
@@ -36,7 +36,7 @@ const FEATURES = [
     key: 'featured-snippet',
     icon: <Star className="w-5 h-5" />,
     title: 'Featured Snippet Optimizer',
-    description: 'Win position zero — detect existing snippets, get Claude-optimised content to claim them.',
+    description: 'Win position zero - detect existing snippets, get Claude-optimised content to claim them.',
     path: 'featured-snippet',
     credits: 10,
     tag: 'DataForSEO + Claude',
@@ -54,7 +54,7 @@ const FEATURES = [
     key: 'technical',
     icon: <Wrench className="w-5 h-5" />,
     title: 'Technical SEO Monitor',
-    description: 'Deep technical audit — Core Web Vitals, crawlability, structured data, canonicals, and mobile.',
+    description: 'Deep technical audit - Core Web Vitals, crawlability, structured data, canonicals, and mobile.',
     path: 'technical',
     credits: 20,
     tag: 'DataForSEO + Claude',
@@ -71,7 +71,7 @@ export default function SeoProHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">SEO &amp; Organic Search</h1>
-          <p className="text-xs text-muted-foreground">Pillar 3 — DataForSEO + Claude</p>
+          <p className="text-xs text-muted-foreground">Pillar 3 - DataForSEO + Claude</p>
         </div>
       </div>
 

@@ -163,7 +163,7 @@ export default function FunnelAnalysisPage() {
 
       {result.biggest_leak && (
         <div className="p-4 rounded-xl border border-red-200/50 bg-red-50/50 dark:bg-red-900/10 dark:border-red-900/30">
-          <p className="text-xs font-semibold text-red-600 dark:text-red-400 mb-1">Biggest Leak — {result.biggest_leak.step}</p>
+          <p className="text-xs font-semibold text-red-600 dark:text-red-400 mb-1">Biggest Leak - {result.biggest_leak.step}</p>
           <p className="text-xs"><span className="font-medium">{result.biggest_leak.users_lost?.toLocaleString()} users lost.</span> {result.biggest_leak.root_cause}</p>
           <p className="text-[10px] text-primary mt-1 font-medium">Fix: {result.biggest_leak.priority_fix}</p>
         </div>
@@ -231,10 +231,10 @@ export default function FunnelAnalysisPage() {
   const canSubmit = !!funnelName.trim() && steps.filter((s) => s.users).length >= 2
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Funnel Conversion Analysis" subtitle="Pillar 7 — Claude"
+    <SSEFeaturePage projectId={projectId} title="Funnel Conversion Analysis" subtitle="Pillar 7 - Claude"
       icon={<TrendingUp className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Funnel — 15 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Analyse Funnel - 15 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/analytics-pro`} />
   )
 }

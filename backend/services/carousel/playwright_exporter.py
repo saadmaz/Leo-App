@@ -1,12 +1,12 @@
 """
-Carousel Studio — Playwright PNG Exporter
+Carousel Studio - Playwright PNG Exporter
 
 Renders each slide as an individual PNG at Instagram export dimensions.
 Always uses 420px layout width with device_scale_factor = 1080/420 to reach
 1080px output width. Only the viewport height changes per format.
 
 CRITICAL:
-  - HTML is written via Python Path.write_text() — NEVER via shell scripts
+  - HTML is written via Python Path.write_text() - NEVER via shell scripts
   - Wait 3000ms after page load (Google Fonts need time)
   - Hide .ig-header .ig-dots .ig-actions .ig-caption before screenshotting
   - Set track.style.transition='none' before each slide screenshot
@@ -55,7 +55,7 @@ async def export_slides(
 
     view_w, view_h = FORMAT_DIMS.get(carousel_format, (420, 525))
 
-    # Write HTML to a temp file (never use shell scripts — $ signs corrupt content)
+    # Write HTML to a temp file (never use shell scripts - $ signs corrupt content)
     tmp_dir = Path(tempfile.mkdtemp(prefix="carousel_"))
     html_path = tmp_dir / "carousel.html"
     html_path.write_text(html_content, encoding="utf-8")

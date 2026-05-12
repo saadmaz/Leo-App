@@ -84,7 +84,7 @@ export default function HeadlinePage() {
 
   const resultNode = result ? (
     <div className="space-y-3">
-      <h2 className="font-semibold text-sm">{result.variants?.length} Headline Variants — {result.platform}</h2>
+      <h2 className="font-semibold text-sm">{result.variants?.length} Headline Variants - {result.platform}</h2>
       {result.variants?.map((v, i) => (
         <div key={i} className="p-4 rounded-xl border border-border bg-card space-y-2">
           <div className="flex items-start justify-between gap-2">
@@ -109,6 +109,6 @@ export default function HeadlinePage() {
     <SSEFeaturePage projectId={projectId} title="Headline A/B Variants" subtitle="Claude copywriting"
       icon={<Type className="w-4 h-4" />} credits={5} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel={`Generate ${count} Variants — 5 credits`} canSubmit={!!topic.trim()} />
+      onSubmit={generate} submitLabel={`Generate ${count} Variants - 5 credits`} canSubmit={!!topic.trim()} />
   )
 }

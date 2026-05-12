@@ -1,4 +1,4 @@
-"""Programmatic SEO — Claude SSE streaming."""
+"""Programmatic SEO - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -16,24 +16,24 @@ def _sse(data: dict) -> str:
 _SYSTEM = """\
 You are LEO, an expert in programmatic SEO and large-scale content strategy.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "template_type": "location_service",
   "seed_keyword": "...",
   "scale_potential": "Estimated number of pages this template could generate",
   "page_template": {
     "url_pattern": "/[variable]/[seed-keyword-slug]",
-    "title_tag_pattern": "[Variable] [Keyword] — [Brand] | [Benefit]",
+    "title_tag_pattern": "[Variable] [Keyword] - [Brand] | [Benefit]",
     "meta_description_pattern": "Template meta description with [Variable] placeholders",
     "h1_pattern": "H1 template",
     "intro_paragraph_pattern": "Template intro with [Variable] fill-ins",
-    "key_sections": ["Section 1 name — what it covers", "Section 2 name"]
+    "key_sections": ["Section 1 name - what it covers", "Section 2 name"]
   },
   "example_pages": [
     {
       "variable": "Healthcare",
       "url": "/healthcare/crm-software",
-      "title_tag": "CRM Software for Healthcare — Brand",
+      "title_tag": "CRM Software for Healthcare - Brand",
       "h1": "CRM Software for Healthcare Teams",
       "intro": "Full intro paragraph for this specific page",
       "unique_content": "What unique content this page should have beyond the template"
@@ -50,7 +50,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 async def generate(project: dict, body: ProgrammaticSeoRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
-        doc = firebase_service.create_pillar1_doc(project_id, "programmatic_seo", owner_uid, f"Programmatic SEO — {body.seed_keyword}")
+        doc = firebase_service.create_pillar1_doc(project_id, "programmatic_seo", owner_uid, f"Programmatic SEO - {body.seed_keyword}")
         doc_id = doc["id"]
 
         yield _sse({"type": "research_step", "step": "template_design", "label": "Designing page template…", "status": "running"})

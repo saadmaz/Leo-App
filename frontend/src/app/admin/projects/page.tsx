@@ -145,7 +145,7 @@ function ProjectRow({
     ? new Date(project.createdAt).toLocaleDateString('en-US', {
         month: 'short', day: 'numeric', year: 'numeric',
       })
-    : '—'
+    : '-'
 
   return (
     <div className="grid grid-cols-[1fr_160px_100px_110px_80px] gap-4 px-4 py-3 items-center hover:bg-muted/30 transition-colors">

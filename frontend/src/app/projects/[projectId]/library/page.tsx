@@ -175,7 +175,7 @@ export default function LibraryPage() {
       setScores((prev) => ({ ...prev, ...newScores }))
       toast.success('Content scored')
     } catch {
-      toast.error('Scoring failed — Brand Core required')
+      toast.error('Scoring failed - Brand Core required')
     } finally {
       setScoring(false)
     }
@@ -190,7 +190,7 @@ export default function LibraryPage() {
       const result = await api.drift.check(params.projectId, content)
       setDriftResult(result)
     } catch {
-      toast.error('Drift check failed — Brand Core required')
+      toast.error('Drift check failed - Brand Core required')
     } finally {
       setDriftChecking(false)
     }
@@ -212,7 +212,7 @@ export default function LibraryPage() {
         <BackButton />
         <Library className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Content Library</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         <div className="ml-auto flex items-center gap-2">
           {selectedIds.size > 0 && (
             <>

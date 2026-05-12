@@ -158,7 +158,7 @@ export default function AdminUserDetailPage() {
     ? new Date(user.createdAt).toLocaleDateString('en-US', {
         month: 'long', day: 'numeric', year: 'numeric',
       })
-    : '—'
+    : '-'
 
   const periodEnd = user.billing.currentPeriodEnd
     ? new Date(user.billing.currentPeriodEnd * 1000).toLocaleDateString('en-US', {
@@ -238,7 +238,7 @@ export default function AdminUserDetailPage() {
           <UsageStat
             icon={<Zap className="w-4 h-4" />}
             label="Credits"
-            value={user.credits?.balance != null ? user.credits.balance.toLocaleString() : '—'}
+            value={user.credits?.balance != null ? user.credits.balance.toLocaleString() : '-'}
           />
           <UsageStat
             icon={<MessageSquare className="w-4 h-4" />}
@@ -248,7 +248,7 @@ export default function AdminUserDetailPage() {
           <UsageStat
             icon={<FolderOpen className="w-4 h-4" />}
             label="Projects"
-            value={user.projectCount ?? '—'}
+            value={user.projectCount ?? '-'}
           />
           <UsageStat
             icon={<CreditCard className="w-4 h-4" />}

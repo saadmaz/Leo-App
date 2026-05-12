@@ -1,4 +1,4 @@
-"""Firecrawl client — scrapes a URL and returns clean markdown + metadata."""
+"""Firecrawl client - scrapes a URL and returns clean markdown + metadata."""
 
 import logging
 from typing import Optional
@@ -14,9 +14,9 @@ async def scrape_url(url: str, api_key: str) -> dict:
     Scrape a URL with Firecrawl.
 
     Returns a dict with:
-        markdown   — full page content as markdown
-        metadata   — title, description, og fields, etc.
-        raw_html   — (omitted to keep payload small)
+        markdown   - full page content as markdown
+        metadata   - title, description, og fields, etc.
+        raw_html   - (omitted to keep payload small)
     """
     async with httpx.AsyncClient(timeout=60) as client:
         resp = await client.post(

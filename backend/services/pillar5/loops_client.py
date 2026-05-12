@@ -1,5 +1,5 @@
 """
-Loops.so API client — thin async wrapper around the REST API.
+Loops.so API client - thin async wrapper around the REST API.
 
 Docs: https://loops.so/docs/api-reference
 
@@ -84,7 +84,7 @@ async def create_campaign(
     """
     Create a draft campaign in Loops.
     Note: Loops campaigns API is in beta; final send still requires manual review
-    in the Loops dashboard — so we create it as a draft only.
+    in the Loops dashboard - so we create it as a draft only.
     """
     payload: dict = {
         "name": name,
@@ -104,4 +104,4 @@ async def create_campaign(
             return resp.json()
         except httpx.HTTPStatusError as exc:
             logger.warning("Loops campaign creation failed (may need Pro plan): %s", exc)
-            return {"error": str(exc), "note": "Campaign draft saved in LEO only — push manually in Loops dashboard"}
+            return {"error": str(exc), "note": "Campaign draft saved in LEO only - push manually in Loops dashboard"}

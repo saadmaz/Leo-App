@@ -1,5 +1,5 @@
 """
-Posts CRUD routes — ClickUp/Slack-style posts for project teams.
+Posts CRUD routes - ClickUp/Slack-style posts for project teams.
 
 Posts are scoped to a project and accessible to any project member.
 Creating and editing requires editor+ role; deletion requires the author or admin.

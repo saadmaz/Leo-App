@@ -145,7 +145,7 @@ export interface OptimisticMessage {
   role: MessageRole
   content: string
   pending?: boolean
-  createdAt?: string  // ISO timestamp — used as pagination cursor for "Load earlier"
+  createdAt?: string  // ISO timestamp - used as pagination cursor for "Load earlier"
 }
 
 // ---------------------------------------------------------------------------
@@ -497,7 +497,7 @@ export interface CompetitiveStrategy {
 }
 
 // ---------------------------------------------------------------------------
-// Competitor Profiles — 5-Dimension Classification
+// Competitor Profiles - 5-Dimension Classification
 // ---------------------------------------------------------------------------
 
 export type GeographicScope = 'Local' | 'Regional' | 'National' | 'Global'
@@ -514,27 +514,27 @@ export interface CompetitorProfile {
   website: string
   status: ProfileStatus
 
-  // Dimension 1 — Geographic Scope
+  // Dimension 1 - Geographic Scope
   geographic_scope?: GeographicScope
   geographic_locations?: string[]
   geographic_evidence?: string
 
-  // Dimension 2 — Size & Revenue
+  // Dimension 2 - Size & Revenue
   size_tier?: SizeTier
   employee_count?: string
   revenue_range?: string
   size_evidence?: string
 
-  // Dimension 3 — Directness
+  // Dimension 3 - Directness
   directness?: Directness
   directness_reason?: string
   overlap_score?: OverlapScore
 
-  // Dimension 4 — Market Position
+  // Dimension 4 - Market Position
   market_position?: MarketPosition
   market_position_signals?: string[]
 
-  // Dimension 5 — Customer Segment
+  // Dimension 5 - Customer Segment
   customer_segment_tags?: string[]
   segment_evidence?: string
 
@@ -646,11 +646,11 @@ export interface TransformResult {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 3 — Analytics & Performance
+// Phase 3 - Analytics & Performance
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
-// Phase 4 — Publishing Queue, Hashtags, Insights
+// Phase 4 - Publishing Queue, Hashtags, Insights
 // ---------------------------------------------------------------------------
 
 export interface PublishQueueEntry {
@@ -696,7 +696,7 @@ export interface ProjectInsight {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 5 — SEO Studio, Email Studio, Brand Style Guide
+// Phase 5 - SEO Studio, Email Studio, Brand Style Guide
 // ---------------------------------------------------------------------------
 
 export interface BlogPostMeta {
@@ -750,7 +750,7 @@ export interface StyleGuide {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 6 — Templates + Approval Workflow
+// Phase 6 - Templates + Approval Workflow
 // ---------------------------------------------------------------------------
 
 export interface ContentTemplate {
@@ -778,7 +778,7 @@ export interface ReviewHistoryEntry {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 7 — Image Studio + AI Content Planner
+// Phase 7 - Image Studio + AI Content Planner
 // ---------------------------------------------------------------------------
 
 export interface GeneratedImage {
@@ -842,7 +842,7 @@ export interface ProjectAnalytics {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 8 — Analytics & Activity Feed
+// Phase 8 - Analytics & Activity Feed
 // ---------------------------------------------------------------------------
 
 export interface ContentMetrics {
@@ -912,7 +912,7 @@ export interface ActivityEvent {
 }
 
 // ---------------------------------------------------------------------------
-// Phase 10 — Reports & Content Scoring
+// Phase 10 - Reports & Content Scoring
 // ---------------------------------------------------------------------------
 
 export interface WeeklyDigest {
@@ -929,7 +929,7 @@ export interface ContentScoreResult {
 }
 
 // ---------------------------------------------------------------------------
-// Exa + Tavily — Monitoring, Research, SEO, Discovery
+// Exa + Tavily - Monitoring, Research, SEO, Discovery
 // ---------------------------------------------------------------------------
 
 export type AlertSentiment = 'positive' | 'negative' | 'neutral'
@@ -1344,7 +1344,7 @@ export type CarouselExportEvent =
   | { type: 'error'; message: string }
 
 // ---------------------------------------------------------------------------
-// Competitor Deep Research — 7-Layer Intelligence Engine
+// Competitor Deep Research - 7-Layer Intelligence Engine
 // ---------------------------------------------------------------------------
 
 export interface CompetitorInput {
@@ -1700,7 +1700,7 @@ export interface AyrsharePostResult {
 }
 
 // ---------------------------------------------------------------------------
-// Pillar 1 — Strategy & Planning
+// Pillar 1 - Strategy & Planning
 // ---------------------------------------------------------------------------
 
 export interface ProgressStep {
@@ -1933,7 +1933,7 @@ export interface ICPGenerateBody {
 }
 
 // ===========================================================================
-// Pillar 2 — Content Creation & Management
+// Pillar 2 - Content Creation & Management
 // ===========================================================================
 
 export interface HeadlineVariant {
@@ -2091,7 +2091,7 @@ export interface ContentGapPayload {
 }
 
 // ---------------------------------------------------------------------------
-// Pillar 3 — SEO & Organic Search
+// Pillar 3 - SEO & Organic Search
 // ---------------------------------------------------------------------------
 
 export interface KeywordIdea {

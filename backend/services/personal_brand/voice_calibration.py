@@ -29,7 +29,7 @@ def _sse(event_type: str, data: dict) -> str:
 
 _CALIBRATION_SYSTEM = """
 You are a voice analysis expert. Analyse writing samples and extract precise voice
-characteristics. Return ONLY a valid JSON object — no markdown, no code fences.
+characteristics. Return ONLY a valid JSON object - no markdown, no code fences.
 """.strip()
 
 _CALIBRATION_PROMPT = """
@@ -102,7 +102,7 @@ async def add_samples_and_calibrate(
                 f"Approved output {i + 1}:\n{t[:400]}"
                 for i, t in enumerate(approved_texts[-10:])
             )
-            approved_section = f"\nAPPROVED CONTENT (posts the user kept or edited — high-signal voice data):\n{combined}"
+            approved_section = f"\nAPPROVED CONTENT (posts the user kept or edited - high-signal voice data):\n{combined}"
 
         prompt = _CALIBRATION_PROMPT.format(
             samples_text=samples_text[:8000],
@@ -199,7 +199,7 @@ async def recalibrate_from_outputs(project_id: str) -> AsyncIterator[str]:
         )
 
         approved_section = (
-            f"\nNote: {len(approved_texts)} of these are posts the user approved or edited — treat them as the highest-signal voice examples."
+            f"\nNote: {len(approved_texts)} of these are posts the user approved or edited - treat them as the highest-signal voice examples."
         )
 
         prompt = _CALIBRATION_PROMPT.format(

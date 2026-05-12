@@ -1,13 +1,13 @@
 """
-Analytics routes — Phase 7.
+Analytics routes - Phase 7.
 
 Endpoints:
-  POST /projects/{id}/analytics/{item_id}/metrics  — Log performance metrics
-  GET  /projects/{id}/analytics/overview           — Aggregate stats
-  GET  /projects/{id}/analytics/content            — Per-content performance table
-  GET  /projects/{id}/analytics/trends             — Time-series trend data
-  GET  /projects/{id}/analytics/activity           — Activity feed
-  GET  /projects/{id}/analytics/ai-summary         — AI performance analysis
+  POST /projects/{id}/analytics/{item_id}/metrics  - Log performance metrics
+  GET  /projects/{id}/analytics/overview           - Aggregate stats
+  GET  /projects/{id}/analytics/content            - Per-content performance table
+  GET  /projects/{id}/analytics/trends             - Time-series trend data
+  GET  /projects/{id}/analytics/activity           - Activity feed
+  GET  /projects/{id}/analytics/ai-summary         - AI performance analysis
 """
 
 import logging

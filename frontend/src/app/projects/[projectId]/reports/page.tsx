@@ -155,7 +155,7 @@ function ResearchReportsTab({ projectId }: { projectId: string }) {
     try {
       await api.research.start(projectId, topic.trim(), reportType)
       setTopic('')
-      toast.success('Research started — results will appear below when ready')
+      toast.success('Research started - results will appear below when ready')
       await loadList()
     } catch (err) {
       toast.error(String(err))
@@ -342,7 +342,7 @@ function ResearchReportsTab({ projectId }: { projectId: string }) {
                 {(report.status === 'pending' || report.status === 'processing') && (
                   <div className="border-t border-border/50 px-4 py-3 flex items-center gap-2 text-xs text-muted-foreground">
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    Researching and synthesising sources — this takes 1-3 minutes…
+                    Researching and synthesising sources - this takes 1-3 minutes…
                   </div>
                 )}
               </div>
@@ -491,7 +491,7 @@ export default function ReportsPage() {
                     <MiniStat label="Total Content"  value={ov.total_content}          icon={<FileText className="w-3.5 h-3.5" />} />
                     <MiniStat label="Posted"         value={ov.total_posted}           icon={<Upload className="w-3.5 h-3.5" />} />
                     <MiniStat label="Avg Engagement" value={ov.avg_engagement}         icon={<TrendingUp className="w-3.5 h-3.5" />} />
-                    <MiniStat label="Best Platform"  value={ov.best_platform || '—'}   icon={<BarChart2 className="w-3.5 h-3.5" />} />
+                    <MiniStat label="Best Platform"  value={ov.best_platform || '-'}   icon={<BarChart2 className="w-3.5 h-3.5" />} />
                   </div>
                 )}
 

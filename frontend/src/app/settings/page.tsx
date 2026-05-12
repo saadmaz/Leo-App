@@ -75,7 +75,7 @@ export default function SettingsPage() {
       if (code === 'auth/wrong-password' || code === 'auth/invalid-credential') {
         toast.error('Incorrect password')
       } else {
-        toast.error('Failed to delete account — please try again')
+        toast.error('Failed to delete account - please try again')
       }
     } finally {
       setDeleting(false)
@@ -131,7 +131,7 @@ export default function SettingsPage() {
 
               <div className="space-y-1">
                 <label className="text-sm font-medium">Email</label>
-                <p className="text-sm text-muted-foreground">{user?.email ?? '—'}</p>
+                <p className="text-sm text-muted-foreground">{user?.email ?? '-'}</p>
               </div>
             </div>
           </section>

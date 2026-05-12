@@ -1,5 +1,5 @@
 """
-Chat streaming route — POST a user message and receive an SSE stream of
+Chat streaming route - POST a user message and receive an SSE stream of
 Claude's response deltas.
 
 SSE event format (each line):
@@ -63,7 +63,7 @@ async def send_message(
     # Persist user message before streaming so it's saved even if stream fails.
     saved_msg = firebase_service.save_message(project_id, chat_id, "user", body.content)
 
-    # Run moderation check as a non-blocking background task — never delays the stream.
+    # Run moderation check as a non-blocking background task - never delays the stream.
     import asyncio
     user_profile = firebase_service.get_user(user["uid"]) or {}
     asyncio.create_task(

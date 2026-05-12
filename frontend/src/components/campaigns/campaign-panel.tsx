@@ -477,7 +477,7 @@ function CampaignDetail({ campaign, projectId, onBack, onDelete, onSaved }: {
 }
 
 // ---------------------------------------------------------------------------
-// Content pack view — with inline editing + save to library
+// Content pack view - with inline editing + save to library
 // ---------------------------------------------------------------------------
 
 function ContentPackView({
@@ -585,7 +585,7 @@ function EditableBlock({
       isEdited ? 'border-primary/50' : 'border-border',
     )}>
       {children}
-      {/* Action buttons — visible on hover */}
+      {/* Action buttons - visible on hover */}
       <div className="absolute top-2.5 right-2.5 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={onSaveToLibrary}

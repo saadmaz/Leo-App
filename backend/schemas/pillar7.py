@@ -1,5 +1,5 @@
 """
-Pillar 7 — Analytics & Reporting request schemas.
+Pillar 7 - Analytics & Reporting request schemas.
 
 Already-built features NOT duplicated here:
   - Weekly Brand Health Report → reports.py
@@ -70,7 +70,7 @@ class CohortAnalysisRequest(BaseModel):
     )
     business_context: Optional[str] = Field(
         None, max_length=400,
-        description="e.g. 'We launched a new onboarding flow in February — check if it moved week2 retention'",
+        description="e.g. 'We launched a new onboarding flow in February - check if it moved week2 retention'",
     )
 
 
@@ -93,7 +93,7 @@ class FunnelAnalysisRequest(BaseModel):
     time_period: str = Field("last 30 days", description="Label for the time period")
     industry_benchmark: Optional[str] = Field(
         None,
-        description="e.g. 'SaaS free-to-paid typically 3-5%' — Claude will compare against this",
+        description="e.g. 'SaaS free-to-paid typically 3-5%' - Claude will compare against this",
     )
     goal_conversion_event: str = Field(
         "paid subscription",
@@ -162,7 +162,7 @@ class AcquisitionChannel(BaseModel):
 class CacLtvRequest(BaseModel):
     product_name: str = Field(..., min_length=1, max_length=120)
     time_period: str = Field("last 90 days", description="Label for the reporting period")
-    # Revenue inputs (manual — Stripe auto-pull if STRIPE_SECRET_KEY set)
+    # Revenue inputs (manual - Stripe auto-pull if STRIPE_SECRET_KEY set)
     total_revenue: Optional[float] = Field(None, description="Total revenue in the period")
     new_customers: Optional[int] = Field(None, description="Total new customers in the period")
     churned_customers: Optional[int] = Field(None, ge=0)

@@ -9,7 +9,7 @@ const FEATURES = [
     key: 'community',
     icon: <MessageSquare className="w-5 h-5" />,
     title: 'Community Management',
-    description: 'Fetch comments from Ayrshare or paste them manually — Claude drafts brand-aligned replies with priority triage, escalation flags, and follow-up actions.',
+    description: 'Fetch comments from Ayrshare or paste them manually - Claude drafts brand-aligned replies with priority triage, escalation flags, and follow-up actions.',
     path: 'community',
     credits: 10,
     tag: 'Claude + Ayrshare',
@@ -27,7 +27,7 @@ const FEATURES = [
     key: 'employee-advocacy',
     icon: <Users className="w-5 h-5" />,
     title: 'Employee Advocacy',
-    description: 'Generate pre-approved posts in authentic employee voice — first-person, platform-specific, weaving in brand key messages without sounding corporate.',
+    description: 'Generate pre-approved posts in authentic employee voice - first-person, platform-specific, weaving in brand key messages without sounding corporate.',
     path: 'employee-advocacy',
     credits: 10,
     tag: 'Claude + Ayrshare',
@@ -53,7 +53,7 @@ export default function SocialHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">Social Media</h1>
-          <p className="text-xs text-muted-foreground">Pillar 6 — Claude · Ayrshare · Tavily</p>
+          <p className="text-xs text-muted-foreground">Pillar 6 - Claude · Ayrshare · Tavily</p>
         </div>
       </div>
 
@@ -88,7 +88,7 @@ export default function SocialHubPage() {
             </div>
           </div>
 
-          {/* Already built — pointer list */}
+          {/* Already built - pointer list */}
           <div>
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Already Built in LEO</p>
             <div className="rounded-xl border border-border bg-card divide-y divide-border">

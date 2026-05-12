@@ -308,7 +308,7 @@ export function Sidebar() {
             >
               <PanelLeft className="w-3.5 h-3.5" />
             </button>
-            {/* Close button — mobile only */}
+            {/* Close button - mobile only */}
             <button
               onClick={() => setSidebarOpen(false)}
               className="p-1.5 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors md:hidden"
@@ -360,11 +360,11 @@ export function Sidebar() {
             New brand
           </button>
 
-          {/* Project-scoped nav groups — only visible when a project is active */}
+          {/* Project-scoped nav groups - only visible when a project is active */}
           {activeProject && (
             <div className="mt-1 border-t border-border/50 pt-1">
 
-              {/* Personal Brand section — only for personal brand projects */}
+              {/* Personal Brand section - only for personal brand projects */}
               {activeProject.projectType === 'personal' && (
                 <>
                   <NavGroup label="Personal Brand" storageKey="nav_personal_brand">
@@ -537,7 +537,7 @@ export function Sidebar() {
             <span>Settings</span>
           </button>
 
-          {/* My Account — user avatar + name */}
+          {/* My Account - user avatar + name */}
           <button
             onClick={() => setAccountOpen(true)}
             className="flex items-center gap-2.5 w-full px-2 py-2 rounded-md hover:bg-muted transition-colors group"
@@ -568,7 +568,7 @@ export function Sidebar() {
 }
 
 // ---------------------------------------------------------------------------
-// NavGroup — collapsible section with localStorage persistence
+// NavGroup - collapsible section with localStorage persistence
 // ---------------------------------------------------------------------------
 
 function NavGroup({ label, storageKey, children }: {
@@ -623,7 +623,7 @@ function NavItem({ icon, label, onClick }: {
 }
 
 // ---------------------------------------------------------------------------
-// Sidebar toggle — works for both mobile (open) and desktop (uncollapse)
+// Sidebar toggle - works for both mobile (open) and desktop (uncollapse)
 // ---------------------------------------------------------------------------
 
 export function SidebarToggle({ className }: { className?: string }) {

@@ -149,7 +149,7 @@ export default function CommunityManagementPage() {
       <div className="p-3 rounded-lg border border-border bg-muted/20">
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Ayrshare Post IDs (optional)</label>
         <textarea value={ayrshareIds} onChange={(e) => setAyrshareIds(e.target.value)} rows={2}
-          placeholder="One post ID per line — Claude pulls live comments via Ayrshare API"
+          placeholder="One post ID per line - Claude pulls live comments via Ayrshare API"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none font-mono" />
         <p className="text-[10px] text-muted-foreground mt-1">Requires AYRSHARE_API_KEY + connected Ayrshare profile</p>
       </div>
@@ -286,10 +286,10 @@ export default function CommunityManagementPage() {
   const canSubmit = comments.some((c) => c.text.trim()) || ayrshareIds.trim().length > 0
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Community Management" subtitle="Pillar 6 — Claude + Ayrshare"
+    <SSEFeaturePage projectId={projectId} title="Community Management" subtitle="Pillar 6 - Claude + Ayrshare"
       icon={<MessageSquare className="w-4 h-4" />} credits={10} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Draft Replies — 10 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Draft Replies - 10 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/social`} />
   )
 }

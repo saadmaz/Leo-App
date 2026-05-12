@@ -98,7 +98,7 @@ export default function SubjectLinesPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Email Topic *</label>
         <textarea value={topic} onChange={(e) => setTopic(e.target.value)} rows={2}
-          placeholder="e.g. Announcing our new AI-powered reporting dashboard — for existing customers"
+          placeholder="e.g. Announcing our new AI-powered reporting dashboard - for existing customers"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
       <div>
@@ -218,10 +218,10 @@ export default function SubjectLinesPage() {
   ) : null
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Subject Line Optimiser" subtitle="Pillar 5 — Claude"
+    <SSEFeaturePage projectId={projectId} title="Subject Line Optimiser" subtitle="Pillar 5 - Claude"
       icon={<Sparkles className="w-4 h-4" />} credits={5} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Optimise Subject Lines — 5 credits" canSubmit={!!topic.trim() && !!audience.trim()}
+      onSubmit={generate} submitLabel="Optimise Subject Lines - 5 credits" canSubmit={!!topic.trim() && !!audience.trim()}
       backPath={`/projects/${projectId}/email-crm`} />
   )
 }

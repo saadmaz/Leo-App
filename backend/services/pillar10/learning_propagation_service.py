@@ -1,5 +1,5 @@
 """
-Learning Propagation — Claude reads concluded experiments from the Experiment Log
+Learning Propagation - Claude reads concluded experiments from the Experiment Log
 and generates a synthesised learning report with a prioritised action plan for
 applying insights across other content and campaigns.
 """
@@ -20,16 +20,16 @@ _MAX_BRAND = 500
 
 SYSTEM = """\
 You are an experimentation programme manager. You synthesise learnings from multiple
-A/B tests and experiments into a coherent, actionable knowledge base — then prescribe
+A/B tests and experiments into a coherent, actionable knowledge base - then prescribe
 exactly how those learnings should be applied across other channels and content.
 
-Return ONLY a valid JSON object — no markdown fences.
+Return ONLY a valid JSON object - no markdown fences.
 
 Schema:
 {
   "experiments_analysed": number,
   "programme_health": "strong | developing | early_stage",
-  "programme_summary": "string (overall state of the experimentation programme — 3-4 sentences)",
+  "programme_summary": "string (overall state of the experimentation programme - 3-4 sentences)",
   "top_learnings": [
     {
       "learning": "string (the insight)",
@@ -49,8 +49,8 @@ Schema:
       "effort": "low | medium | high"
     }
   ],
-  "quick_wins": ["string (changes to make this week — low effort, high impact)"],
-  "contradictions_flagged": ["string (experiments that gave conflicting signals — needs investigation)"],
+  "quick_wins": ["string (changes to make this week - low effort, high impact)"],
+  "contradictions_flagged": ["string (experiments that gave conflicting signals - needs investigation)"],
   "knowledge_gaps": ["string (what you haven't tested yet that you should)"],
   "next_experiments_recommended": [
     {
@@ -64,9 +64,9 @@ Schema:
 
 Rules:
 - Only propagate learnings with at least medium confidence.
-- propagation_plan must be specific — not 'improve copy' but 'change headline from X to Y approach'.
+- propagation_plan must be specific - not 'improve copy' but 'change headline from X to Y approach'.
 - quick_wins must be immediately actionable without design resources.
-- contradictions_flagged is critical — never paper over conflicting results.
+- contradictions_flagged is critical - never paper over conflicting results.
 - north_star_insight should be memorable and strategy-defining.
 """
 

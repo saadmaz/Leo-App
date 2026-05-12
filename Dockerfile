@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# LEO Backend — Production Dockerfile
+# LEO Backend - Production Dockerfile
 # Base: Python 3.12 slim for a small image footprint.
 # ---------------------------------------------------------------------------
 
@@ -27,6 +27,6 @@ ENV PYTHONPATH=/app
 EXPOSE 8000
 
 # Start the server.
-# Railway (and Cloud Run) inject a PORT env var — we must bind to it.
+# Railway (and Cloud Run) inject a PORT env var - we must bind to it.
 # Shell form is required to expand $PORT at runtime.
 CMD ["python", "start.py"]

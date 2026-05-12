@@ -1,4 +1,4 @@
-"""Bid Strategy Optimization — Claude SSE streaming."""
+"""Bid Strategy Optimization - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,7 +14,7 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, a performance marketing specialist expert in bidding strategy across Google, Meta, LinkedIn, and TikTok.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "diagnosis": "Assessment of the current bidding situation",
   "recommended_strategy": {
@@ -47,7 +47,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 
 async def generate(project: dict, body: BidStrategyRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
-        doc = firebase_service.create_pillar1_doc(project_id, "bid_strategy", owner_uid, f"Bid Strategy — {body.campaign_name}")
+        doc = firebase_service.create_pillar1_doc(project_id, "bid_strategy", owner_uid, f"Bid Strategy - {body.campaign_name}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "analysing", "label": "Analysing campaign performance…", "status": "running"})
         user_prompt = f"""Campaign: {body.campaign_name}\nPlatform: {body.platform}\nObjective: {body.objective}\nCurrent strategy: {body.current_bid_strategy or 'Not specified'}\nCurrent metrics: {body.current_metrics or 'Not provided'}\nTarget CPA: {body.target_cpa or 'Not set'}\nTarget ROAS: {body.target_roas or 'Not set'}\nMonthly budget: ${body.monthly_budget or 'Not specified'}\nCampaign maturity: {body.campaign_maturity}\n\nProvide a complete bid strategy optimisation plan."""

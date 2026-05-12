@@ -1,5 +1,5 @@
 """
-Tool dispatcher — executes Claude tool_use calls for the chat agent.
+Tool dispatcher - executes Claude tool_use calls for the chat agent.
 
 When Claude returns a tool_use block, the stream route calls dispatch_tool()
 with the tool name and inputs. This module routes to the correct
@@ -21,7 +21,7 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Tool definitions — injected into every stream_chat_with_tools call
+# Tool definitions - injected into every stream_chat_with_tools call
 # ---------------------------------------------------------------------------
 
 SEARCH_TOOLS = [
@@ -200,7 +200,7 @@ async def dispatch_tool(
 ) -> str:
     """
     Execute a Claude tool call and return the result as a string.
-    Never raises — returns an error string on failure so the conversation continues.
+    Never raises - returns an error string on failure so the conversation continues.
     """
     try:
         if tool_name == "web_search":
@@ -359,7 +359,7 @@ async def _handle_research(inputs: dict, project_id: Optional[str]) -> str:
         if citations:
             text += "\nSOURCES:\n"
             for i, c in enumerate(citations[:5], 1):
-                text += f"{i}. {c.get('title', 'Source')} — {c.get('url', '')}\n"
+                text += f"{i}. {c.get('title', 'Source')} - {c.get('url', '')}\n"
         return text
     except Exception:
         pass

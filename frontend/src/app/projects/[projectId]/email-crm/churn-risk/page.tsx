@@ -287,10 +287,10 @@ export default function ChurnRiskPage() {
   ) : null
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Churn Risk Detection" subtitle="Pillar 5 — Claude"
+    <SSEFeaturePage projectId={projectId} title="Churn Risk Detection" subtitle="Pillar 5 - Claude"
       icon={<AlertTriangle className="w-4 h-4" />} credits={20} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Churn Risk — 20 credits"
+      onSubmit={generate} submitLabel="Analyse Churn Risk - 20 credits"
       canSubmit={!!productName.trim() && contacts.some(c => c.contact_id.trim())}
       backPath={`/projects/${projectId}/email-crm`} />
   )

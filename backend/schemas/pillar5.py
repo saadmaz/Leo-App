@@ -1,5 +1,5 @@
 """
-Pillar 5 — Email Marketing & CRM request schemas.
+Pillar 5 - Email Marketing & CRM request schemas.
 """
 from __future__ import annotations
 
@@ -158,7 +158,7 @@ class WinLossRequest(BaseModel):
 class BehavioralTriggerRequest(BaseModel):
     product_name: str = Field(..., min_length=1, max_length=120)
     trigger_event: str = Field(..., description="e.g. 'visited pricing page', 'opened email 3x without clicking', 'went inactive for 30 days', 'trial day 7'")
-    audience_context: str = Field(..., min_length=10, max_length=300, description="Who triggers this — segment, lifecycle stage, product usage")
+    audience_context: str = Field(..., min_length=10, max_length=300, description="Who triggers this - segment, lifecycle stage, product usage")
     email_platform: str = Field("generic", description="loops | hubspot | mailchimp | klaviyo | generic")
     sequence_length: int = Field(3, ge=1, le=7, description="Number of emails in the sequence")
     conversion_goal: str = Field(..., description="What action should the recipient take: upgrade, book demo, re-engage, etc.")
@@ -212,7 +212,7 @@ class DeliverabilityRequest(BaseModel):
 class CrmEnrichmentRequest(BaseModel):
     crm_platform: str = Field(..., description="hubspot | salesforce | pipedrive | attio | generic")
     record_type: str = Field("contact", description="contact | company | deal")
-    sample_records: list[dict] = Field(..., min_length=1, max_length=20, description="Sample CRM records with known fields — Claude will identify what's missing and suggest enrichment")
+    sample_records: list[dict] = Field(..., min_length=1, max_length=20, description="Sample CRM records with known fields - Claude will identify what's missing and suggest enrichment")
     enrichment_goals: list[str] = Field(
         default_factory=lambda: ["company_size", "industry", "tech_stack", "funding_status", "decision_maker_title"],
         description="Data fields to enrich",

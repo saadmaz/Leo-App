@@ -1,8 +1,8 @@
 """
-Employee Advocacy — Claude generates pre-approved shareable posts in authentic employee voice.
+Employee Advocacy - Claude generates pre-approved shareable posts in authentic employee voice.
 
 Employees sharing content on their personal accounts generates 8x more engagement than
-brand channels. This service writes posts that feel genuinely personal — not corporate.
+brand channels. This service writes posts that feel genuinely personal - not corporate.
 
 Flow:
 1. Load brand context + voice
@@ -42,13 +42,13 @@ PLATFORM_LIMITS: dict[str, int] = {
 
 SYSTEM = """\
 You are a ghostwriter who specialises in employee advocacy content. You write posts \
-that sound genuinely human — first-person, specific, a little vulnerable. They should \
+that sound genuinely human - first-person, specific, a little vulnerable. They should \
 NOT sound like press releases, product announcements, or marketing copy.
 
 The goal: employees share these on their personal accounts and their networks engage \
 because the posts are authentic and useful, not because they are promotional.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -60,7 +60,7 @@ Schema:
       "posts": [
         {
           "post_number": number,
-          "text": "string (the full post — do NOT exceed the platform character limit)",
+          "text": "string (the full post - do NOT exceed the platform character limit)",
           "hook": "string (the opening line or hook)",
           "angle": "string (personal_story | lesson_learned | behind_scenes | hot_take | question | win | tip)",
           "estimated_engagement": "high | medium | low",
@@ -72,8 +72,8 @@ Schema:
     }
   ],
   "key_message_weaving": "string (how you embedded the key messages without making it feel promotional)",
-  "dos": ["string (what to do when sharing — e.g. 'Add a personal anecdote in the first comment')"],
-  "donts": ["string (what to avoid — e.g. \"Don't share if you're also posting a promo the same day\")"],
+  "dos": ["string (what to do when sharing - e.g. 'Add a personal anecdote in the first comment')"],
+  "donts": ["string (what to avoid - e.g. \"Don't share if you're also posting a promo the same day\")"],
   "ab_variants": [
     {
       "platform": "string",
@@ -85,12 +85,12 @@ Schema:
 
 Rules:
 - NEVER start a post with the brand name or product name.
-- Use 'I' language — first person singular only.
+- Use 'I' language - first person singular only.
 - Include specific numbers or outcomes where possible (even hypothetical ranges).
-- Each post must be a DIFFERENT angle — no repetition.
+- Each post must be a DIFFERENT angle - no repetition.
 - Do not include phrases from avoid_phrases if provided.
 - LinkedIn posts may be longer (up to 1500 chars) with line breaks for readability.
-- Twitter/X posts must be concise — hook + insight + optional CTA, max 280 chars.
+- Twitter/X posts must be concise - hook + insight + optional CTA, max 280 chars.
 - Hashtags: max 3 for LinkedIn, max 2 for Twitter, up to 8 for Instagram/TikTok.
 """
 
@@ -138,7 +138,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Employee Advocacy — {body.topic[:60]}"
+    title = f"Employee Advocacy - {body.topic[:60]}"
     doc = firebase_service.create_pillar1_doc(project_id, "employee_advocacy", owner_uid, title)
     doc_id = doc["id"]
 

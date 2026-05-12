@@ -1,5 +1,5 @@
 """
-Headline A/B Variants — Claude, SSE streaming.
+Headline A/B Variants - Claude, SSE streaming.
 
 Generates N platform-optimised headline variants with angle rationale
 for a given topic, article, or content piece.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a world-class copywriter and conversion strategist.
 Generate headline A/B test variants that are distinct in angle and psychology.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "platform": "LinkedIn",
   "topic": "...",
@@ -44,10 +44,10 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 }
 
 RULES:
-1. Each variant MUST use a different angle — no two variants can use the same angle.
+1. Each variant MUST use a different angle - no two variants can use the same angle.
 2. Tailor length and style to the specified platform.
-3. Avoid clickbait — every headline must deliver on its promise.
-4. Return ONLY valid JSON — no prose, no markdown fences.
+3. Avoid clickbait - every headline must deliver on its promise.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -64,7 +64,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         tone = brand_core.get("tone") or {}
 
-        title = f"Headlines — {body.topic[:50]}"
+        title = f"Headlines - {body.topic[:50]}"
         doc = firebase_service.create_pillar1_doc(project_id, "headline", owner_uid, title)
         doc_id = doc["id"]
 

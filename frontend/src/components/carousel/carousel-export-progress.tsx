@@ -44,7 +44,7 @@ export function CarouselExportProgress({
           )}
           {!zipUrl && (
             <p className="text-xs text-muted-foreground">
-              Slides exported. R2 storage not configured — files are saved locally on the server.
+              Slides exported. R2 storage not configured - files are saved locally on the server.
             </p>
           )}
         </div>

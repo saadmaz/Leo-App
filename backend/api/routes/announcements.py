@@ -1,12 +1,12 @@
 """
-Public announcement and changelog routes — no auth required.
+Public announcement and changelog routes - no auth required.
 
 These are consumed by the main app (not the admin portal) to show banners
 and the What's New feed to logged-in users.
 
 Endpoints:
-  GET /announcements/active   — active, non-expired banners (any user)
-  GET /changelog              — recent changelog entries
+  GET /announcements/active   - active, non-expired banners (any user)
+  GET /changelog              - recent changelog entries
 """
 
 from fastapi import APIRouter, Query

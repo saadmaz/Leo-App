@@ -1,5 +1,5 @@
 """
-Unified Dashboard — aggregate GA4 + Meta Ads + Ayrshare analytics into one view.
+Unified Dashboard - aggregate GA4 + Meta Ads + Ayrshare analytics into one view.
 
 Flow:
 1. Pull GA4 channel data (if configured)
@@ -29,7 +29,7 @@ SYSTEM = """\
 You are a senior growth analyst. You interpret cross-channel marketing data and \
 produce a unified executive narrative that a non-technical CMO can act on immediately.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -107,7 +107,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Unified Dashboard — last {body.date_range_days} days"
+    title = f"Unified Dashboard - last {body.date_range_days} days"
     doc = firebase_service.create_pillar1_doc(project_id, "unified_dashboard", owner_uid, title)
     doc_id = doc["id"]
 
@@ -132,7 +132,7 @@ async def generate(
         yield _sse({"type": "research_step", "step": "ga4",
                     "label": f"GA4: {len(rows)} channels", "status": "done"})
     else:
-        yield _sse({"type": "research_step", "step": "ga4", "label": "GA4 not configured — skipped", "status": "done"})
+        yield _sse({"type": "research_step", "step": "ga4", "label": "GA4 not configured - skipped", "status": "done"})
 
     # Meta Ads
     if body.include_meta and settings.META_ACCESS_TOKEN and body.meta_ad_account_id:

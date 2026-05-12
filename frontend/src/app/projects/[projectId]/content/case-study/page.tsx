@@ -138,6 +138,6 @@ export default function CaseStudyPage() {
     <SSEFeaturePage projectId={projectId} title="Case Study Production" subtitle="Claude narrative writing"
       icon={<BookOpen className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Case Study — 15 credits" canSubmit={canSubmit} />
+      onSubmit={generate} submitLabel="Generate Case Study - 15 credits" canSubmit={canSubmit} />
   )
 }

@@ -1,5 +1,5 @@
 """
-Pillar 3 — SEO & Organic Search request schemas.
+Pillar 3 - SEO & Organic Search request schemas.
 """
 from __future__ import annotations
 

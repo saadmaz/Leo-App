@@ -76,7 +76,7 @@ async def update_brand_core(
     existing: dict = project.get("brandCore") or {}
     updates = body.model_dump(exclude_none=True)
 
-    # Shallow merge — replaces top-level sections that were provided.
+    # Shallow merge - replaces top-level sections that were provided.
     merged = {**existing, **updates}
     firebase_service.update_project(project_id, {"brandCore": merged})
     return {"brandCore": merged}

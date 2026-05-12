@@ -1,5 +1,5 @@
 """
-Pitch Email Generation — Claude writes a personalised journalist pitch.
+Pitch Email Generation - Claude writes a personalised journalist pitch.
 
 Input:  journalist details, pitch angle, news hook.
 Output: subject line variants + pitch email body with personalisation.
@@ -21,30 +21,30 @@ _MAX_BRAND = 500
 
 SYSTEM = """\
 You are a PR professional who has placed hundreds of stories in top-tier media. \
-You write pitch emails that journalists actually respond to — personalised, punchy, \
+You write pitch emails that journalists actually respond to - personalised, punchy, \
 respectful of their time, with a clear news hook.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
   "subject_lines": [
     {"line": "string", "rationale": "string (why this subject line works)"}
   ],
-  "pitch_email": "string (the full email body — plain text, no HTML, max 200 words)",
-  "follow_up_template": "string (brief follow-up to send 5 days later if no reply — max 80 words)",
+  "pitch_email": "string (the full email body - plain text, no HTML, max 200 words)",
+  "follow_up_template": "string (brief follow-up to send 5 days later if no reply - max 80 words)",
   "personalisation_used": "string (what journalist-specific detail was woven in)",
-  "angle_fit_score": number (1-10 — how well the angle fits this journalist's beat),
+  "angle_fit_score": number (1-10 - how well the angle fits this journalist's beat),
   "angle_fit_rationale": "string",
   "tips": ["string"]
 }
 
 Rules:
-- Subject lines: 3 options — direct, curiosity-driven, data-led. All under 60 chars.
+- Subject lines: 3 options - direct, curiosity-driven, data-led. All under 60 chars.
 - Email body: opens with personalisation → hook → news → why them → CTA (call/email).
 - Never start with 'I hope this finds you well' or similar.
 - CTA is a specific ask: 'Would you have 15 minutes for a call next week?' or similar.
-- Keep the pitch email under 200 words — journalists are busy.
+- Keep the pitch email under 200 words - journalists are busy.
 - If exclusive_offer is true, lead with 'I'd like to offer you an exclusive on…'
 """
 
@@ -64,7 +64,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Pitch — {body.journalist_name} @ {body.journalist_outlet}"
+    title = f"Pitch - {body.journalist_name} @ {body.journalist_outlet}"
     doc = firebase_service.create_pillar1_doc(project_id, "pitch_email", owner_uid, title)
     doc_id = doc["id"]
 

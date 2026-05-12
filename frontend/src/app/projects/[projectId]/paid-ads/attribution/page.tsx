@@ -163,7 +163,7 @@ export default function AttributionPage() {
       <div className="p-3 rounded-lg bg-primary/5 border border-primary/20 flex items-start gap-2">
         <Info className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
         <p className="text-[10px] text-muted-foreground">
-          <span className="font-medium text-foreground">GA4 connected?</span> If you&apos;ve set GA4_PROPERTY_ID + GA4_SERVICE_ACCOUNT_KEY in your .env, data will be pulled automatically — leave the table empty.
+          <span className="font-medium text-foreground">GA4 connected?</span> If you&apos;ve set GA4_PROPERTY_ID + GA4_SERVICE_ACCOUNT_KEY in your .env, data will be pulled automatically - leave the table empty.
           Otherwise, enter channel metrics manually below.
         </p>
       </div>
@@ -252,7 +252,7 @@ export default function AttributionPage() {
   )
 
   function fmt(n: number, prefix = '') {
-    if (!n && n !== 0) return '—'
+    if (!n && n !== 0) return '-'
     return `${prefix}${n.toLocaleString(undefined, { maximumFractionDigits: 2 })}`
   }
 
@@ -260,7 +260,7 @@ export default function AttributionPage() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-semibold text-sm">Attribution Analysis — {result.analysis_period}</h2>
+          <h2 className="font-semibold text-sm">Attribution Analysis - {result.analysis_period}</h2>
           <p className="text-xs text-muted-foreground">{result.conversion_goal} · Source: {result.data_source}</p>
         </div>
       </div>
@@ -271,7 +271,7 @@ export default function AttributionPage() {
           { label: 'Total Conversions', value: fmt(result.total_conversions) },
           { label: 'Total Revenue', value: fmt(result.total_revenue, '$') },
           { label: 'Total Cost', value: fmt(result.total_cost, '$') },
-          { label: 'Overall ROAS', value: result.overall_roas ? `${result.overall_roas.toFixed(2)}x` : '—' },
+          { label: 'Overall ROAS', value: result.overall_roas ? `${result.overall_roas.toFixed(2)}x` : '-' },
         ].map((s) => (
           <div key={s.label} className="p-3 rounded-xl border border-border bg-card text-center">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wide">{s.label}</p>
@@ -292,9 +292,9 @@ export default function AttributionPage() {
             <div key={i} className="border-t border-border">
               <div className="px-3 py-2.5 grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_auto] gap-2 items-start">
                 <p className="text-xs font-medium">{ch.channel}</p>
-                <p className="text-xs font-mono">{ch.conversion_rate_pct?.toFixed(1) ?? '—'}%</p>
-                <p className="text-xs font-mono">{ch.roas ? `${ch.roas.toFixed(2)}x` : '—'}</p>
-                <p className="text-xs font-mono">{ch.cpa ? `$${ch.cpa.toFixed(2)}` : '—'}</p>
+                <p className="text-xs font-mono">{ch.conversion_rate_pct?.toFixed(1) ?? '-'}%</p>
+                <p className="text-xs font-mono">{ch.roas ? `${ch.roas.toFixed(2)}x` : '-'}</p>
+                <p className="text-xs font-mono">{ch.cpa ? `$${ch.cpa.toFixed(2)}` : '-'}</p>
                 <div className="flex items-center gap-1">
                   <div className="w-12 h-1 bg-muted rounded-full overflow-hidden">
                     <div className="h-full bg-primary rounded-full" style={{ width: `${Math.min(ch.attributed_share_pct, 100)}%` }} />
@@ -382,7 +382,7 @@ export default function AttributionPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Cross-Channel Attribution"
-      subtitle="Pillar 4 — GA4 + Claude"
+      subtitle="Pillar 4 - GA4 + Claude"
       icon={<BarChart2 className="w-4 h-4" />}
       credits={20}
       steps={store.steps}
@@ -391,7 +391,7 @@ export default function AttributionPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Analyse Attribution — 20 credits"
+      submitLabel="Analyse Attribution - 20 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/paid-ads`}
     />

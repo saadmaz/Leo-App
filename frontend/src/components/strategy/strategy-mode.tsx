@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * StrategyMode — the full in-chat strategy session orchestrator.
+ * StrategyMode - the full in-chat strategy session orchestrator.
  *
  * Renders into the chat message list based on the current strategySession
  * state from the Zustand store. Each phase renders a different widget:
@@ -55,7 +55,7 @@ export function StrategyMode({ projectId, onFollowUp, onLeoMessage }: StrategyMo
     )
   }
 
-  // ── Phase: intake with question — show QuestionCard with dropdown options ─
+  // ── Phase: intake with question - show QuestionCard with dropdown options ─
   if (strategySession.status === 'intake' && strategySession.funnelType && strategySession.currentQuestion) {
     return (
       <LeoMessageWrapper>
@@ -160,7 +160,7 @@ export function StrategyMode({ projectId, onFollowUp, onLeoMessage }: StrategyMo
         })
       }
     } catch {
-      onLeoMessage?.('Something went wrong — please try again.')
+      onLeoMessage?.('Something went wrong - please try again.')
     }
   }
 
@@ -186,7 +186,7 @@ export function StrategyMode({ projectId, onFollowUp, onLeoMessage }: StrategyMo
         onLeoMessage?.(`**Question 1 of ${res.total_questions ?? 6}**\n\n${res.next_question.text}`)
       }
     } catch {
-      // non-critical — user can retry
+      // non-critical - user can retry
     }
   }
 }
@@ -227,7 +227,7 @@ export async function runStrategyResearchAndGenerate(
       }
     },
     () => {
-      // research done — move to generating
+      // research done - move to generating
       updateStrategySession({ status: 'generating', streamedMarkdown: '' })
       runGenerate()
     },
@@ -246,7 +246,7 @@ export async function runStrategyResearchAndGenerate(
         updateStrategySession({ streamedMarkdown: md })
       },
       (strategyId) => {
-        // Strategy saved — fetch it and move to complete
+        // Strategy saved - fetch it and move to complete
         api.strategy.list(projectId).then((res) => {
           const saved = res.strategies.find((s) => s.id === strategyId)
           if (saved) {

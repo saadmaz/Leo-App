@@ -84,6 +84,6 @@ export default function GTMPage() {
     <SSEFeaturePage projectId={projectId} title="GTM Strategy" subtitle="SerpAPI + Firecrawl + Claude"
       icon={<TrendingUp className="w-4 h-4" />} credits={35} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate GTM Strategy — 35 credits" canSubmit={!!productName.trim()} />
+      onSubmit={generate} submitLabel="Generate GTM Strategy - 35 credits" canSubmit={!!productName.trim()} />
   )
 }

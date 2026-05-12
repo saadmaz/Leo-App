@@ -1,5 +1,5 @@
 """
-Send Time Optimiser — Claude analyses audience patterns and recommends optimal send windows.
+Send Time Optimiser - Claude analyses audience patterns and recommends optimal send windows.
 
 Works in two modes:
   1. Data-driven: user provides historical open data → Claude finds patterns + recommends
@@ -23,7 +23,7 @@ SYSTEM = """\
 You are a data-driven email deliverability and engagement specialist. You use audience \
 psychology, industry benchmarks, and engagement data to recommend the best send times.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -50,7 +50,7 @@ Schema:
   "time_of_day_analysis": [
     {"time_block": "string (e.g. '6–9 AM')", "relative_open_rate": "high|above_avg|average|below_avg|low", "notes": "string"}
   ],
-  "data_insights": ["string (only if historical data provided — key patterns found)"],
+  "data_insights": ["string (only if historical data provided - key patterns found)"],
   "personalisation_tip": "string (how to use per-contact send time in Loops/other platforms)",
   "frequency_recommendation": "string (how often to send this email type)",
   "ab_test_suggestion": "string (how to A/B test send time)"
@@ -73,7 +73,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Send Time — {body.email_type.replace('_', ' ').title()} · {body.timezone_focus}"
+    title = f"Send Time - {body.email_type.replace('_', ' ').title()} · {body.timezone_focus}"
     doc = firebase_service.create_pillar1_doc(project_id, "send_time", owner_uid, title)
     doc_id = doc["id"]
 

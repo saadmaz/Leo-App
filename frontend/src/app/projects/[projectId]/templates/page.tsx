@@ -74,7 +74,7 @@ export default function TemplatesPage() {
         <BackButton />
         <LayoutTemplate className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Content Templates</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         <div className="ml-auto flex items-center gap-2">
           <span className="text-xs text-muted-foreground">{filtered.length} templates</span>
           <button
@@ -247,7 +247,7 @@ function TemplateCard({ template, onEdit, onDelete }: {
 }
 
 // ---------------------------------------------------------------------------
-// TemplateModal — create or edit
+// TemplateModal - create or edit
 // ---------------------------------------------------------------------------
 
 function TemplateModal({ projectId, template, onClose, onSaved }: {
@@ -351,10 +351,10 @@ function TemplateModal({ projectId, template, onClose, onSaved }: {
 
           <div>
             <label className="block text-xs font-medium mb-1">
-              Template Body * <span className="text-muted-foreground font-normal">— use {'{placeholder}'} for variable fields</span>
+              Template Body * <span className="text-muted-foreground font-normal">- use {'{placeholder}'} for variable fields</span>
             </label>
             <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={6}
-              placeholder={`e.g. 🚀 Introducing {product_name} — the {benefit}.\n\n{value_prop}\n\n{cta}\n\n#brand #launch`}
+              placeholder={`e.g. 🚀 Introducing {product_name} - the {benefit}.\n\n{value_prop}\n\n{cta}\n\n#brand #launch`}
               className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary resize-none font-mono" />
           </div>
 

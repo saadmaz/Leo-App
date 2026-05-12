@@ -1,10 +1,10 @@
 """
 SEO & content gap analysis routes.
 
-POST /projects/{id}/seo/content-gaps        — analyse competitor content gaps
-POST /projects/{id}/seo/content-topics      — generate content topic list
-POST /projects/{id}/intelligence/discover-competitors — auto-discover competitors
-POST /projects/{id}/influencers/discover    — discover relevant influencers
+POST /projects/{id}/seo/content-gaps        - analyse competitor content gaps
+POST /projects/{id}/seo/content-topics      - generate content topic list
+POST /projects/{id}/intelligence/discover-competitors - auto-discover competitors
+POST /projects/{id}/influencers/discover    - discover relevant influencers
 """
 
 import asyncio

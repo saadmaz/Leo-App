@@ -104,7 +104,7 @@ export default function ImagesPage() {
       ])
       setResults([r1.url, r2.url, r3.url])
     } catch {
-      toast.error('Image generation failed — check that GEMINI_API_KEY is configured')
+      toast.error('Image generation failed - check that GEMINI_API_KEY is configured')
     } finally {
       setGeneratingImage(false)
     }
@@ -164,7 +164,7 @@ export default function ImagesPage() {
         <BackButton />
         <ImageIcon className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Image Studio</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         <div className="ml-auto flex items-center gap-1">
           {(['generate', 'gallery'] as const).map((t) => (
             <button
@@ -331,7 +331,7 @@ export default function ImagesPage() {
 
             {results.length > 0 && !generatingImage && (
               <div className="space-y-2">
-                <p className="text-xs text-muted-foreground font-medium">3 variants generated — save the ones you like</p>
+                <p className="text-xs text-muted-foreground font-medium">3 variants generated - save the ones you like</p>
                 <div className="grid grid-cols-3 gap-3">
                   {results.map((url, i) => (
                     <div key={i} className="flex flex-col gap-2">

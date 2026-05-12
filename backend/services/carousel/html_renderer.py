@@ -1,10 +1,10 @@
 """
-Carousel Studio — HTML Renderer
+Carousel Studio - HTML Renderer
 
 Takes structured slide_data JSON + colour_system + fonts and returns
 a complete carousel HTML string with an Instagram-frame UI wrapper.
 
-All styles are inline — no external CSS files — required for Playwright reliability.
+All styles are inline - no external CSS files - required for Playwright reliability.
 """
 
 from __future__ import annotations

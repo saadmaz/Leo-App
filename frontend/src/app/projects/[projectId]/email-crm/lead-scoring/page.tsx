@@ -334,10 +334,10 @@ export default function LeadScoringPage() {
   const canSubmit = !!productName.trim() && !!icp.trim() && leads.some((l) => l.contact_id.trim())
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Lead Scoring" subtitle="Pillar 5 — Claude + HubSpot"
+    <SSEFeaturePage projectId={projectId} title="Lead Scoring" subtitle="Pillar 5 - Claude + HubSpot"
       icon={<Star className="w-4 h-4" />} credits={20} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Score Leads — 20 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Score Leads - 20 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/email-crm`} />
   )
 }

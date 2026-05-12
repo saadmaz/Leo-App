@@ -1,4 +1,4 @@
-"""Content Repurposing Engine — Claude SSE streaming."""
+"""Content Repurposing Engine - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -16,7 +16,7 @@ def _sse(data: dict) -> str:
 _SYSTEM = """\
 You are LEO, a content strategist expert at repurposing long-form content into high-performing derivative assets.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "source_summary": "One-sentence summary of the source content",
   "core_insight": "The single most powerful insight that will anchor all repurposed content",
@@ -45,7 +45,7 @@ async def generate(project: dict, body: RepurposeRequest, project_id: str, owner
         tone = (brand_core.get("tone") or {}).get("style", "professional")
 
         formats_str = ", ".join(body.target_formats)
-        doc = firebase_service.create_pillar1_doc(project_id, "repurpose", owner_uid, f"Repurpose — {body.source_type.replace('_',' ')}")
+        doc = firebase_service.create_pillar1_doc(project_id, "repurpose", owner_uid, f"Repurpose - {body.source_type.replace('_',' ')}")
         doc_id = doc["id"]
 
         yield _sse({"type": "research_step", "step": "analysing", "label": "Analysing source content…", "status": "running"})

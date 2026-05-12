@@ -1,5 +1,5 @@
 """
-Stripe integration — checkout sessions, customer portal, webhook handling.
+Stripe integration - checkout sessions, customer portal, webhook handling.
 
 All public functions are synchronous (Stripe SDK is sync). Wrap with
 asyncio.to_thread() if you need them inside async route handlers.

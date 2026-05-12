@@ -1,5 +1,5 @@
 """
-Pydantic schemas for the Personal Branding Module — Personal Core and related objects.
+Pydantic schemas for the Personal Branding Module - Personal Core and related objects.
 """
 
 from pydantic import BaseModel

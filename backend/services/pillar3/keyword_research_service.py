@@ -1,5 +1,5 @@
 """
-Keyword Research Engine — DataForSEO keyword_ideas/live + Claude interpretation.
+Keyword Research Engine - DataForSEO keyword_ideas/live + Claude interpretation.
 
 Degrades gracefully to Claude-only if DataForSEO is not configured.
 """
@@ -60,7 +60,7 @@ async def generate(
         messaging = brand_core.get("messaging") or {}
 
         seed_str = ", ".join(body.seed_keywords)
-        title = f"Keyword Research — {seed_str[:60]}"
+        title = f"Keyword Research - {seed_str[:60]}"
         doc = firebase_service.create_pillar1_doc(project_id, "keyword_research", owner_uid, title)
         doc_id = doc["id"]
 
@@ -79,11 +79,11 @@ async def generate(
             except Exception as exc:
                 logger.warning("DataForSEO keyword ideas failed: %s", exc)
                 yield _sse({"type": "research_step", "step": "dfs_keywords",
-                            "label": "DataForSEO unavailable — Claude-only analysis", "status": "skipped"})
+                            "label": "DataForSEO unavailable - Claude-only analysis", "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "dfs_keywords",
-                        "label": "DataForSEO not configured — Claude-only research", "status": "skipped"})
+                        "label": "DataForSEO not configured - Claude-only research", "status": "skipped"})
 
         # ── Step 2: Claude interpretation ────────────────────────────────────
         yield _sse({"type": "research_step", "step": "claude_analysis",
@@ -102,7 +102,7 @@ async def generate(
         system_prompt = """\
 You are LEO, an expert SEO strategist. Analyse the provided keyword data and produce a strategic keyword research report.
 
-OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a valid JSON object (no markdown fences):
 {
   "seed_keywords": ["keyword1"],
   "location": "United States",
@@ -129,9 +129,9 @@ OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
 RULES:
 1. Include max 20 keywords in the keywords array, ordered by priority (best opportunity first).
 2. Intent must be one of: Informational, Navigational, Transactional, Commercial.
-3. content_idea must be a specific, usable title — not generic advice.
+3. content_idea must be a specific, usable title - not generic advice.
 4. difficulty: 0-100 scale (0=easy, 100=impossible).
-5. Return ONLY valid JSON — no prose, no markdown.
+5. Return ONLY valid JSON - no prose, no markdown.
 """
 
         brand_ctx = f"Brand: {brand_name}\n"
@@ -144,7 +144,7 @@ RULES:
         user_prompt = f"""\
 {brand_ctx}
 
-{kw_data_str if kw_data_str else "No DataForSEO data available — generate keyword ideas based on brand context, seed keywords, and SEO best practices."}
+{kw_data_str if kw_data_str else "No DataForSEO data available - generate keyword ideas based on brand context, seed keywords, and SEO best practices."}
 
 Produce a comprehensive keyword strategy report.
 """

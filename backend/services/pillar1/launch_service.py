@@ -1,5 +1,5 @@
 """
-Launch Planning service — pure Claude, SSE streaming.
+Launch Planning service - pure Claude, SSE streaming.
 
 Generates a week-by-week launch plan (pre-launch, launch week, post-launch)
 for a product or campaign, aligned with the brand's channels and voice.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a launch strategist and campaign architect.
 Your task is to produce a detailed, week-by-week launch plan.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "product_name": "...",
   "launch_date": "YYYY-MM-DD",
@@ -52,9 +52,9 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 RULES:
 1. Always include 3 phases: Pre-Launch, Launch Week, Post-Launch.
 2. Content calendar entries must reference specific channels passed in the request.
-3. Copy hooks must match the brand's tone exactly — never generic.
+3. Copy hooks must match the brand's tone exactly - never generic.
 4. Risk flags must be specific (dates, platform algorithm changes, competitor activity).
-5. Return ONLY valid JSON — no prose, no markdown fences.
+5. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -81,7 +81,7 @@ async def generate(
             brand_ctx += f"Target audience: {audience['demographics']}\n"
 
         # Create doc
-        title = f"Launch Plan — {body.product_name} ({body.launch_date})"
+        title = f"Launch Plan - {body.product_name} ({body.launch_date})"
         doc = firebase_service.create_pillar1_doc(project_id, "launch", owner_uid, title)
         doc_id = doc["id"]
 

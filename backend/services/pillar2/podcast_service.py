@@ -1,5 +1,5 @@
 """
-Podcast Show Notes — OpenAI Whisper (transcription) + Claude (show notes), SSE streaming.
+Podcast Show Notes - OpenAI Whisper (transcription) + Claude (show notes), SSE streaming.
 
 Accepts either a public audio URL (transcribed via Whisper) or a raw transcript string.
 Generates structured show notes: summary, key points, timestamps, quotes, description, tags.
@@ -29,7 +29,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a podcast producer and show notes writer.
 Transform a transcript into polished, SEO-friendly show notes.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "episode_title": "The title of the episode",
   "summary": "2-3 sentence executive summary of the episode",
@@ -52,16 +52,16 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 }
 
 RULES:
-1. Timestamps must be real — only include ones that appear in the transcript.
+1. Timestamps must be real - only include ones that appear in the transcript.
 2. Quotes must be verbatim from the transcript.
-3. Return ONLY valid JSON — no prose, no markdown fences.
+3. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
 async def _transcribe_audio(audio_url: str) -> str:
     """Download audio and transcribe using OpenAI Whisper API."""
     if not settings.OPENAI_API_KEY:
-        raise ValueError("OPENAI_API_KEY not configured — cannot transcribe audio")
+        raise ValueError("OPENAI_API_KEY not configured - cannot transcribe audio")
 
     async with httpx.AsyncClient(timeout=120.0) as client:
         # Download the audio file
@@ -97,7 +97,7 @@ async def generate(
         brand_name = project.get("name", "the brand")
 
         ep_title = body.episode_title or "Podcast Episode"
-        title = f"Show Notes — {ep_title[:50]}"
+        title = f"Show Notes - {ep_title[:50]}"
         doc = firebase_service.create_pillar1_doc(project_id, "podcast", owner_uid, title)
         doc_id = doc["id"]
 
@@ -115,7 +115,7 @@ async def generate(
             except Exception as exc:
                 yield _sse({"type": "research_step", "step": "whisper_transcription",
                             "label": f"Transcription failed: {exc}", "status": "skipped"})
-                transcript = f"[Transcription unavailable — {exc}]"
+                transcript = f"[Transcription unavailable - {exc}]"
         else:
             yield _sse({"type": "research_step", "step": "whisper_transcription",
                         "label": "Using provided transcript", "status": "skipped"})

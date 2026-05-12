@@ -66,7 +66,7 @@ export default function ContentGapPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-sm">Content Gap Report — {result.domain}</h2>
+        <h2 className="font-semibold text-sm">Content Gap Report - {result.domain}</h2>
         <div className="flex gap-2 text-xs">
           {result.dataforseo_used && <span className="bg-blue-500/10 text-blue-600 px-2 py-0.5 rounded-full">DataForSEO</span>}
           <span className="bg-muted text-muted-foreground px-2 py-0.5 rounded-full">{result.keywords_analysed} keywords</span>
@@ -126,6 +126,6 @@ export default function ContentGapPage() {
     <SSEFeaturePage projectId={projectId} title="Content Gap Analysis" subtitle="DataForSEO + Claude"
       icon={<Search className="w-4 h-4" />} credits={40} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Gaps — 40 credits" canSubmit={!!domain.trim()} />
+      onSubmit={generate} submitLabel="Analyse Gaps - 40 credits" canSubmit={!!domain.trim()} />
   )
 }

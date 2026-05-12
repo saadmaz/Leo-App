@@ -88,6 +88,6 @@ export default function PersonasPage() {
     <SSEFeaturePage projectId={projectId} title="Persona Generation" subtitle="Apollo.io + Claude"
       icon={<UserCircle className="w-4 h-4" />} credits={25} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Personas — 25 credits" canSubmit={segments.trim().length > 0} />
+      onSubmit={generate} submitLabel="Generate Personas - 25 credits" canSubmit={segments.trim().length > 0} />
   )
 }

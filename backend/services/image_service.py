@@ -1,5 +1,5 @@
 """
-Image generation service — wraps Google Imagen 3 via the google-genai SDK.
+Image generation service - wraps Google Imagen 3 via the google-genai SDK.
 
 Returns a data URL (data:image/png;base64,...) so the image can be rendered
 directly by the browser without requiring separate cloud storage.

@@ -1,11 +1,11 @@
 """
-Billing routes — Stripe checkout, portal, webhooks, and usage summary.
+Billing routes - Stripe checkout, portal, webhooks, and usage summary.
 
 Endpoints:
-  GET  /billing/status          — current plan + usage for the logged-in user
-  POST /billing/checkout        — create Stripe Checkout session
-  POST /billing/portal          — create Stripe Customer Portal session
-  POST /billing/webhook         — Stripe webhook receiver (no auth)
+  GET  /billing/status          - current plan + usage for the logged-in user
+  POST /billing/checkout        - create Stripe Checkout session
+  POST /billing/portal          - create Stripe Customer Portal session
+  POST /billing/webhook         - Stripe webhook receiver (no auth)
 """
 from __future__ import annotations
 
@@ -111,7 +111,7 @@ async def stripe_webhook(request: Request, stripe_signature: str = Header(None))
         logger.warning("Stripe webhook: invalid signature")
         raise HTTPException(status_code=400, detail="Invalid webhook signature.")
     except RuntimeError as exc:
-        # STRIPE_WEBHOOK_SECRET not configured — log but don't crash
+        # STRIPE_WEBHOOK_SECRET not configured - log but don't crash
         logger.warning("Stripe webhook not verified: %s", exc)
         # In development, parse the event without verification
         import json

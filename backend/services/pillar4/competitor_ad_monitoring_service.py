@@ -1,4 +1,4 @@
-"""Competitor Ad Monitoring — Claude SSE streaming."""
+"""Competitor Ad Monitoring - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,7 +14,7 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, a competitive intelligence specialist focused on paid advertising.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "monitoring_summary": "Overall competitive landscape in paid advertising",
   "competitor_profiles": [
@@ -52,7 +52,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 async def generate(project: dict, body: CompetitorAdMonitoringRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
-        doc = firebase_service.create_pillar1_doc(project_id, "competitor_ad_monitoring", owner_uid, f"Competitor Ads — {', '.join(body.competitors[:3])}")
+        doc = firebase_service.create_pillar1_doc(project_id, "competitor_ad_monitoring", owner_uid, f"Competitor Ads - {', '.join(body.competitors[:3])}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "monitoring", "label": f"Analysing ads from {len(body.competitors)} competitors…", "status": "running"})
         user_prompt = f"""Brand: {brand_name}\nProduct category: {body.your_product_category}\nCompetitors: {', '.join(body.competitors)}\nPlatforms: {', '.join(body.platforms)}\nAlert on: {', '.join(body.alert_on)}\n\nAnalyse competitor advertising strategies and surface actionable intelligence."""

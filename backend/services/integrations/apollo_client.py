@@ -1,5 +1,5 @@
 """
-Apollo.io REST API client for Pillar 1 — ICP Builder & Persona Generation.
+Apollo.io REST API client for Pillar 1 - ICP Builder & Persona Generation.
 
 Uses Apollo v1 API (https://api.apollo.io/v1).
 All functions return empty results on failure so SSE streams stay alive.
@@ -34,7 +34,7 @@ async def search_companies(
     Returns list of company dicts (name, domain, industry, employee_count, etc.)
     """
     if not api_key:
-        logger.warning("APOLLO_API_KEY not set — skipping company search")
+        logger.warning("APOLLO_API_KEY not set - skipping company search")
         return []
 
     payload: dict = {
@@ -76,7 +76,7 @@ async def search_people(
     Returns list of person dicts (name, title, email, seniority, etc.)
     """
     if not api_key:
-        logger.warning("APOLLO_API_KEY not set — skipping people search")
+        logger.warning("APOLLO_API_KEY not set - skipping people search")
         return []
 
     payload: dict = {
@@ -106,10 +106,10 @@ async def search_people(
 
 async def enrich_company(domain: str, api_key: str) -> dict:
     """
-    Enrich a company by domain — returns funding, revenue, employee count, industry, etc.
+    Enrich a company by domain - returns funding, revenue, employee count, industry, etc.
     """
     if not api_key:
-        logger.warning("APOLLO_API_KEY not set — skipping company enrichment")
+        logger.warning("APOLLO_API_KEY not set - skipping company enrichment")
         return {}
 
     try:
@@ -129,10 +129,10 @@ async def enrich_company(domain: str, api_key: str) -> dict:
 
 async def enrich_person(email: str, api_key: str, organization_name: Optional[str] = None) -> dict:
     """
-    Enrich a person by email — returns title, seniority, department, social links.
+    Enrich a person by email - returns title, seniority, department, social links.
     """
     if not api_key:
-        logger.warning("APOLLO_API_KEY not set — skipping person enrichment")
+        logger.warning("APOLLO_API_KEY not set - skipping person enrichment")
         return {}
 
     payload: dict = {"api_key": api_key, "email": email, "reveal_personal_emails": False}

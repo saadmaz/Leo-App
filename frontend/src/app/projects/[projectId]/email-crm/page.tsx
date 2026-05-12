@@ -9,7 +9,7 @@ const FEATURES = [
     key: 'email-sequence',
     icon: <Mail className="w-5 h-5" />,
     title: 'Email Sequence Builder',
-    description: 'Write complete multi-email sequences — onboarding, nurture, re-engagement, or upsell. Optionally push directly to Loops.so.',
+    description: 'Write complete multi-email sequences - onboarding, nurture, re-engagement, or upsell. Optionally push directly to Loops.so.',
     path: 'email-sequence',
     credits: 15,
     tag: 'Claude + Loops',
@@ -27,7 +27,7 @@ const FEATURES = [
     key: 'send-time',
     icon: <Clock className="w-5 h-5" />,
     title: 'Send Time Optimiser',
-    description: 'Recommend the best day and time window to send — using your historical open data or industry benchmarks for your audience.',
+    description: 'Recommend the best day and time window to send - using your historical open data or industry benchmarks for your audience.',
     path: 'send-time',
     credits: 5,
     tag: 'Claude',
@@ -36,7 +36,7 @@ const FEATURES = [
     key: 'newsletter',
     icon: <Newspaper className="w-5 h-5" />,
     title: 'Newsletter Production',
-    description: 'Write a full newsletter edition with intro, main story, quick hits, tip of the week, and CTA — HTML-ready, with Loops push option.',
+    description: 'Write a full newsletter edition with intro, main story, quick hits, tip of the week, and CTA - HTML-ready, with Loops push option.',
     path: 'newsletter',
     credits: 15,
     tag: 'Claude + Loops',
@@ -63,7 +63,7 @@ const FEATURES = [
     key: 'win-loss',
     icon: <TrendingUp className="w-5 h-5" />,
     title: 'Win/Loss Analysis',
-    description: 'Paste deal outcomes, reasons, and competitor intel — Claude finds patterns, builds an objection playbook, and surfaces product gaps.',
+    description: 'Paste deal outcomes, reasons, and competitor intel - Claude finds patterns, builds an objection playbook, and surfaces product gaps.',
     path: 'win-loss',
     credits: 15,
     tag: 'Claude',
@@ -80,7 +80,7 @@ export default function EmailCrmHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">Email Marketing &amp; CRM</h1>
-          <p className="text-xs text-muted-foreground">Pillar 5 — Claude · Loops · HubSpot · ZeroBounce</p>
+          <p className="text-xs text-muted-foreground">Pillar 5 - Claude · Loops · HubSpot · ZeroBounce</p>
         </div>
       </div>
 

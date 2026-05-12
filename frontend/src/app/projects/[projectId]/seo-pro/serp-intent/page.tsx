@@ -165,6 +165,6 @@ export default function SerpIntentPage() {
     <SSEFeaturePage projectId={projectId} title="SERP Intent Mapping" subtitle="DataForSEO + Claude"
       icon={<TrendingUp className="w-4 h-4" />} credits={10} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Map Intent — 10 credits" canSubmit={!!keyword.trim()} />
+      onSubmit={generate} submitLabel="Map Intent - 10 credits" canSubmit={!!keyword.trim()} />
   )
 }

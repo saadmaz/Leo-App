@@ -238,10 +238,10 @@ export default function SendTimePage() {
   ) : null
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Send Time Optimiser" subtitle="Pillar 5 — Claude"
+    <SSEFeaturePage projectId={projectId} title="Send Time Optimiser" subtitle="Pillar 5 - Claude"
       icon={<Clock className="w-4 h-4" />} credits={5} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Send Times — 5 credits" canSubmit={!!audience.trim()}
+      onSubmit={generate} submitLabel="Analyse Send Times - 5 credits" canSubmit={!!audience.trim()}
       backPath={`/projects/${projectId}/email-crm`} />
   )
 }

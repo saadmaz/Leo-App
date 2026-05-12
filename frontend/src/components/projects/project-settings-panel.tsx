@@ -321,14 +321,14 @@ export function ProjectSettingsPanel() {
               <section className="space-y-3">
                 <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Connected Accounts</h3>
                 <div className="rounded-xl border border-border p-4 flex items-center gap-3">
-                  {/* Threads logo — simple T icon */}
+                  {/* Threads logo - simple T icon */}
                   <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center shrink-0">
                     <span className="text-white text-xs font-bold">T</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium">Threads</p>
                     {threadsConnected && threadsUsername
-                      ? <p className="text-[11px] text-muted-foreground">Connected — user {threadsUsername}</p>
+                      ? <p className="text-[11px] text-muted-foreground">Connected - user {threadsUsername}</p>
                       : <p className="text-[11px] text-muted-foreground">Publish posts directly to Threads</p>
                     }
                   </div>

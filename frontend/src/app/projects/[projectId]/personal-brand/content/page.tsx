@@ -203,7 +203,7 @@ function PublishPanel({ projectId, content }: { projectId: string; content: stri
         setSelected([data.connectedPlatforms[0].platform])
       }
     } catch {
-      // ignore — user may not have connected platforms yet
+      // ignore - user may not have connected platforms yet
     }
   }, [projectId, platforms.length])
 
@@ -511,11 +511,11 @@ function StoryMode({ projectId }: { projectId: string }) {
           <textarea
             value={story}
             onChange={(e) => setStory(e.target.value)}
-            placeholder="e.g. Last week a client called to say we lost the deal. They went with a cheaper option. I was frustrated at first — then I realised it was the best thing that could have happened..."
+            placeholder="e.g. Last week a client called to say we lost the deal. They went with a cheaper option. I was frustrated at first - then I realised it was the best thing that could have happened..."
             rows={5}
             className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-ring resize-none"
           />
-          <p className="text-[11px] text-muted-foreground mt-1">Don&apos;t clean it up — LEO structures it. Just write what happened.</p>
+          <p className="text-[11px] text-muted-foreground mt-1">Don&apos;t clean it up - LEO structures it. Just write what happened.</p>
         </div>
         <button
           onClick={handleGenerate}
@@ -715,7 +715,7 @@ function BioMode({ projectId }: { projectId: string }) {
     <div className="space-y-4">
       <div className="space-y-2">
         <p className="text-sm text-muted-foreground">
-          LEO writes your LinkedIn headline and about section, Instagram bio, X bio, and TikTok bio — all from your Personal Core positioning.
+          LEO writes your LinkedIn headline and about section, Instagram bio, X bio, and TikTok bio - all from your Personal Core positioning.
         </p>
         <button
           onClick={handleGenerate}
@@ -923,7 +923,7 @@ function ArticleMode({ projectId }: { projectId: string }) {
           <textarea
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
-            placeholder="e.g. Why most founders mistake hiring speed for hiring quality — and how I fixed it"
+            placeholder="e.g. Why most founders mistake hiring speed for hiring quality - and how I fixed it"
             rows={2}
             className="w-full rounded-xl border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-ring resize-none"
           />
@@ -1058,7 +1058,7 @@ export default function PersonalBrandContentPage() {
       {/* Header */}
       <div className="shrink-0 border-b border-border px-6 py-4">
         <h1 className="text-lg font-bold text-foreground">Content Engine</h1>
-        <p className="text-sm text-muted-foreground mt-0.5">Create content in your voice — not generic AI output.</p>
+        <p className="text-sm text-muted-foreground mt-0.5">Create content in your voice - not generic AI output.</p>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-6">

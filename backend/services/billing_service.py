@@ -2,7 +2,7 @@
 Usage tracking and plan enforcement.
 
 Reads usage counters from Firestore and compares them against plan limits
-defined in stripe_service.PLANS.  All functions are synchronous — wrap with
+defined in stripe_service.PLANS.  All functions are synchronous - wrap with
 asyncio.to_thread() where needed.
 """
 from __future__ import annotations
@@ -66,7 +66,7 @@ def assert_can_send_message(uid: str) -> None:
     reset_at = billing.get("messagesResetAt")
 
     if reset_at is None:
-        # Free user never went through Stripe — bootstrap a 30-day reset window.
+        # Free user never went through Stripe - bootstrap a 30-day reset window.
         next_reset = int(time.time()) + 30 * 24 * 3600
         try:
             firebase_service.update_user_billing(uid, {"messagesResetAt": next_reset})
@@ -79,7 +79,7 @@ def assert_can_send_message(uid: str) -> None:
                 firebase_service.reset_messages_used(uid)
                 billing["messagesUsed"] = 0
         except (ValueError, TypeError):
-            # Legacy ISO string stored by old upsert_user — migrate to Unix timestamp.
+            # Legacy ISO string stored by old upsert_user - migrate to Unix timestamp.
             logger.info("Migrating messagesResetAt ISO→Unix for %s", uid)
             next_reset = int(time.time()) + 30 * 24 * 3600
             try:
@@ -112,7 +112,7 @@ def increment_message_count(uid: str) -> None:
     try:
         firebase_service.increment_messages_used(uid)
     except Exception as exc:
-        # Non-fatal — log and continue so the actual message isn't lost.
+        # Non-fatal - log and continue so the actual message isn't lost.
         logger.warning("Failed to increment message count for %s: %s", uid, exc)
 
 
@@ -183,7 +183,7 @@ def assert_can_generate_campaign(uid: str, project_id: str) -> None:
 def get_usage_summary(uid: str) -> dict:
     """
     Return the user's current usage and limits as a single dict.
-    Safe to call frequently — only reads Firestore once.
+    Safe to call frequently - only reads Firestore once.
     """
     user = firebase_service.get_user(uid) or {}
     plan = user.get("tier", "free")

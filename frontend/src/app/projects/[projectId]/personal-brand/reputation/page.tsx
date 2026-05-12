@@ -215,7 +215,7 @@ export default function ReputationPage() {
       setError(null)
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e)
-      // 404 means no check run yet — not an error, just empty state
+      // 404 means no check run yet - not an error, just empty state
       if (!msg.includes('404') && !msg.includes('No reputation')) {
         setError(msg)
       }

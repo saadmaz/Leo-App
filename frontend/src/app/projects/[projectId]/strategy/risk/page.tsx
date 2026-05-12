@@ -97,6 +97,6 @@ export default function RiskPage() {
     <SSEFeaturePage projectId={projectId} title="Risk Flagging" subtitle="Monitoring + SerpAPI + Claude"
       icon={<Shield className="w-4 h-4" />} credits={30} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Run Risk Scan — 30 credits" canSubmit={true} />
+      onSubmit={generate} submitLabel="Run Risk Scan - 30 credits" canSubmit={true} />
   )
 }

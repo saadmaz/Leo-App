@@ -123,7 +123,7 @@ export default function TranslatePage() {
     <SSEFeaturePage projectId={projectId} title="Multilingual Adaptation" subtitle="DeepL + Claude"
       icon={<Globe className="w-4 h-4" />} credits={credits} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel={`Translate to ${targetLangs.length} language${targetLangs.length !== 1 ? 's' : ''} — ${credits} credits`}
+      onSubmit={generate} submitLabel={`Translate to ${targetLangs.length} language${targetLangs.length !== 1 ? 's' : ''} - ${credits} credits`}
       canSubmit={!!content.trim() && targetLangs.length > 0} />
   )
 }

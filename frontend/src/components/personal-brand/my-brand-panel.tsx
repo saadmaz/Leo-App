@@ -308,14 +308,14 @@ function VoiceSection({
           {showImprove && (
             <div className="space-y-3 pt-1">
               <p className="text-[11px] text-muted-foreground leading-relaxed">
-                Paste 3 pieces of writing that sound most like you — posts, emails, messages, anything. LEO analyses them to sharpen your voice profile.
+                Paste 3 pieces of writing that sound most like you - posts, emails, messages, anything. LEO analyses them to sharpen your voice profile.
               </p>
               {samples.map((s, i) => (
                 <textarea
                   key={i}
                   value={s}
                   onChange={(e) => { const n = [...samples]; n[i] = e.target.value; setSamples(n) }}
-                  placeholder={`Sample ${i + 1} — paste your writing here`}
+                  placeholder={`Sample ${i + 1} - paste your writing here`}
                   rows={3}
                   className="w-full rounded-xl border border-input bg-background px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-ring resize-none"
                 />

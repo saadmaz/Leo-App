@@ -1,4 +1,4 @@
-"""Budget Pacing — Claude SSE streaming."""
+"""Budget Pacing - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,7 +14,7 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, a paid media budget optimization specialist.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "pacing_summary": "Overall pacing health (on_track | underspending | overspending | at_risk)",
   "campaigns": [
@@ -55,7 +55,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 
 async def generate(project: dict, body: BudgetPacingRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
-        doc = firebase_service.create_pillar1_doc(project_id, "budget_pacing", owner_uid, f"Budget Pacing — {body.pacing_period.title()}")
+        doc = firebase_service.create_pillar1_doc(project_id, "budget_pacing", owner_uid, f"Budget Pacing - {body.pacing_period.title()}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "analysing", "label": "Analysing budget pacing…", "status": "running"})
         user_prompt = f"""Pacing period: {body.pacing_period}\nOptimization goal: {body.optimization_goal}\nReallocation threshold: {body.reallocation_threshold_pct}%\n\nCampaign data:\n{json.dumps(body.campaigns, indent=2)}\n\nAnalyse pacing and recommend reallocation."""

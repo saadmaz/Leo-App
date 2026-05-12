@@ -1,5 +1,5 @@
 """
-Analyst Relations — Firecrawl reads analyst research, Claude prepares the briefing.
+Analyst Relations - Firecrawl reads analyst research, Claude prepares the briefing.
 
 Input:  analyst firm, product, differentiators, optional research URL.
 Output: briefing document, positioning narrative, likely questions & answers.
@@ -27,14 +27,14 @@ You are an analyst relations strategist who has prepared companies for briefings
 Gartner, Forrester, IDC, and other top analyst firms. You know what analysts care about: \
 market data, differentiation proof points, customer evidence, and roadmap clarity.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
   "briefing_title": "string",
   "briefing_purpose": "string (1 sentence)",
-  "analyst_context": "string (what this firm/analyst typically focuses on — inferred from firm name and coverage URL if available)",
-  "executive_summary": "string (the 60-second pitch — what you do, for whom, and why it matters in this analyst's context)",
+  "analyst_context": "string (what this firm/analyst typically focuses on - inferred from firm name and coverage URL if available)",
+  "executive_summary": "string (the 60-second pitch - what you do, for whom, and why it matters in this analyst's context)",
   "positioning_narrative": "string (400-600 word narrative: market context → problem → your solution → differentiation → traction → roadmap)",
   "key_messages": [
     {"message": "string", "proof_point": "string", "evidence_type": "data|customer|award|analyst_citation"}
@@ -60,8 +60,8 @@ Schema:
 
 Rules:
 - Analyst questions section must anticipate the 6-8 hardest questions they will ask.
-- Positioning narrative must be readable as a standalone document — analysts may share it.
-- Competitive positioning must be honest — analysts know when you're spinning.
+- Positioning narrative must be readable as a standalone document - analysts may share it.
+- Competitive positioning must be honest - analysts know when you're spinning.
 - Key messages must each have a specific proof point, not a claim.
 - trap_to_avoid in Q&A warns about common mistakes when answering that question.
 """
@@ -104,7 +104,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Analyst Briefing — {body.analyst_firm}" + (f" · {body.analyst_name}" if body.analyst_name else "")
+    title = f"Analyst Briefing - {body.analyst_firm}" + (f" · {body.analyst_name}" if body.analyst_name else "")
     doc = firebase_service.create_pillar1_doc(project_id, "analyst_relations", owner_uid, title)
     doc_id = doc["id"]
 
@@ -120,9 +120,9 @@ async def generate(
         if analyst_research_text:
             yield _sse({"type": "research_step", "step": "research", "label": "Analyst research loaded", "status": "done"})
         else:
-            yield _sse({"type": "research_step", "step": "research", "label": "Could not read research URL — proceeding without it", "status": "done"})
+            yield _sse({"type": "research_step", "step": "research", "label": "Could not read research URL - proceeding without it", "status": "done"})
     else:
-        yield _sse({"type": "research_step", "step": "research", "label": "No research URL — using firm knowledge", "status": "done"})
+        yield _sse({"type": "research_step", "step": "research", "label": "No research URL - using firm knowledge", "status": "done"})
 
     yield _sse({"type": "research_step", "step": "briefing", "label": "Preparing briefing document…", "status": "running"})
 

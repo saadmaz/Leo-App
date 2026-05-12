@@ -329,7 +329,7 @@ export default function AnalystRelationsPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Analyst Relations"
-      subtitle="Pillar 8 — Firecrawl + Claude"
+      subtitle="Pillar 8 - Firecrawl + Claude"
       icon={<BarChart2 className="w-4 h-4" />}
       credits={20}
       steps={store.steps}
@@ -338,7 +338,7 @@ export default function AnalystRelationsPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Prepare Analyst Briefing — 20 credits"
+      submitLabel="Prepare Analyst Briefing - 20 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

@@ -1,5 +1,5 @@
 """
-Pillar 6 — Social Media request schemas (gap features only).
+Pillar 6 - Social Media request schemas (gap features only).
 
 Already-built features that are NOT here:
   - Multi-Platform Scheduling   → personal_brand/ayrshare_service.py
@@ -34,7 +34,7 @@ class CommunityManagementRequest(BaseModel):
         "warm, helpful, and on-brand",
         description="Tone for drafted replies (e.g. 'professional', 'playful', 'empathetic')",
     )
-    # Ayrshare pull (optional — requires AYRSHARE_API_KEY + project profile)
+    # Ayrshare pull (optional - requires AYRSHARE_API_KEY + project profile)
     ayrshare_post_ids: Optional[List[str]] = Field(
         None,
         description="Ayrshare post IDs to pull live comments from via the API",
@@ -63,7 +63,7 @@ class SocialProofRequest(BaseModel):
         ...,
         min_length=1,
         max_length=10,
-        description="Search terms — product name, brand handles, slogans, campaign tags",
+        description="Search terms - product name, brand handles, slogans, campaign tags",
     )
     platforms: List[str] = Field(
         default_factory=lambda: ["twitter", "instagram", "linkedin"],

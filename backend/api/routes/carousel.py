@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Carousel Studio — API Routes
+Carousel Studio - API Routes
 
 POST /projects/{project_id}/carousel/scrape-brand    (SSE)
 POST /projects/{project_id}/carousel/session
@@ -70,19 +70,19 @@ INTAKE_QUESTIONS = {
         "index": 2,
         "text": "Which format do you want?",
         "options": [
-            {"value": "portrait",  "label": "📱 Portrait 4:5",    "description": "1080×1350px — max feed space (Recommended)"},
-            {"value": "square",    "label": "⬛ Square 1:1",       "description": "1080×1080px — clean, balanced"},
-            {"value": "landscape", "label": "🖥️ Landscape 1.91:1", "description": "1080×566px — wide visuals"},
-            {"value": "stories",   "label": "📲 Stories 9:16",     "description": "1080×1920px — full screen"},
+            {"value": "portrait",  "label": "📱 Portrait 4:5",    "description": "1080×1350px - max feed space (Recommended)"},
+            {"value": "square",    "label": "⬛ Square 1:1",       "description": "1080×1080px - clean, balanced"},
+            {"value": "landscape", "label": "🖥️ Landscape 1.91:1", "description": "1080×566px - wide visuals"},
+            {"value": "stories",   "label": "📲 Stories 9:16",     "description": "1080×1920px - full screen"},
         ],
     },
     3: {
         "index": 3,
         "text": "How many slides?",
         "options": [
-            {"value": "5",      "label": "5 slides",  "description": "Quick hit — high retention"},
-            {"value": "7",      "label": "7 slides",  "description": "Sweet spot — best save rate"},
-            {"value": "10",     "label": "10 slides", "description": "Deep dive — educational content"},
+            {"value": "5",      "label": "5 slides",  "description": "Quick hit - high retention"},
+            {"value": "7",      "label": "7 slides",  "description": "Sweet spot - best save rate"},
+            {"value": "10",     "label": "10 slides", "description": "Deep dive - educational content"},
             {"value": "custom", "label": "Custom",    "description": "Tell me how many you want"},
         ],
     },
@@ -99,7 +99,7 @@ INTAKE_QUESTIONS = {
     },
     5: {
         "index": 5,
-        "text": "Last one — what's the carousel about?",
+        "text": "Last one - what's the carousel about?",
         "type": "free_text",
         "placeholder": (
             "Give me a topic, URL, brief, or paste your content. "
@@ -240,7 +240,7 @@ async def submit_intake(
     if not session:
         raise HTTPException(status_code=404, detail="Session not found.")
 
-    # question=0 is a special init call — just return Q1
+    # question=0 is a special init call - just return Q1
     if body.question == 0:
         return {
             "session_id": body.session_id,
@@ -371,7 +371,7 @@ async def generate_carousel(
             slides = result.get("slides", [])
             heading_font = result.get("heading_font", brand_profile.get("heading_font", "Plus Jakarta Sans"))
             body_font = result.get("body_font", brand_profile.get("body_font", "Plus Jakarta Sans"))
-            title = result.get("title", f"Carousel — {topic[:40]}")
+            title = result.get("title", f"Carousel - {topic[:40]}")
 
             # Derive colour system
             primary = brand_profile.get("primary_color", "#6366f1")
@@ -591,7 +591,7 @@ async def list_carousels(
     """Return all carousels for a project, newest first."""
     get_project_as_member(project_id, user["uid"])
     carousels = await asyncio.to_thread(firebase_service.list_carousels, project_id)
-    # Strip html_content from list view — it's large and not needed here
+    # Strip html_content from list view - it's large and not needed here
     for c in carousels:
         c.pop("html_content", None)
     return {"carousels": carousels}

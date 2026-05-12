@@ -1,5 +1,5 @@
 """
-Multilingual Adaptation — DeepL (base translation) + Claude (tone/brand voice),
+Multilingual Adaptation - DeepL (base translation) + Claude (tone/brand voice),
 SSE streaming.
 
 DeepL produces a fast, accurate base translation.
@@ -71,7 +71,7 @@ async def generate(
         tone = brand_core.get("tone") or {}
 
         langs_str = ", ".join(body.target_langs)
-        title = f"Translation — {body.source_lang} → {langs_str}"
+        title = f"Translation - {body.source_lang} → {langs_str}"
         doc = firebase_service.create_pillar1_doc(project_id, "translation", owner_uid, title)
         doc_id = doc["id"]
 
@@ -96,7 +96,7 @@ async def generate(
                                 "label": f"DeepL unavailable, using Claude only", "status": "skipped"})
             else:
                 yield _sse({"type": "research_step", "step": f"deepl_{lang}",
-                            "label": f"DeepL not configured — Claude translating {lang_name}",
+                            "label": f"DeepL not configured - Claude translating {lang_name}",
                             "status": "skipped"})
 
             # ── Step: Claude tone adaptation ──────────────────────────────────

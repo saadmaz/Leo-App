@@ -138,14 +138,14 @@ export function PromptComposer({
   return (
     <div className="border-t border-border bg-background px-4 py-3 space-y-2">
       <div className="mx-auto max-w-3xl space-y-2">
-        {/* Template bar — changes with active channel */}
+        {/* Template bar - changes with active channel */}
         <TemplateBar
           channel={activeChannel}
           brandName={brandName}
           onSelect={handleTemplateSelect}
         />
 
-        {/* Channel chip row — always visible */}
+        {/* Channel chip row - always visible */}
         <ChannelSelector value={activeChannel} onChange={onChannelChange} />
 
         {/* Image attachment previews */}

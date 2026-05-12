@@ -1,4 +1,4 @@
-"""Behavioral Trigger Automation — Claude SSE streaming."""
+"""Behavioral Trigger Automation - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,9 +14,9 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, an email automation specialist who designs high-converting behavioral trigger sequences.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
-  "trigger_name": "Pricing Page Visit — Non-buyer",
+  "trigger_name": "Pricing Page Visit - Non-buyer",
   "trigger_logic": "Send email 1 within 1 hour of trigger event",
   "sequence": [
     {
@@ -53,7 +53,7 @@ async def generate(project: dict, body: BehavioralTriggerRequest, project_id: st
         brand_name = project.get("name", "the brand")
         brand_core = project.get("brandCore") or {}
         tone = (brand_core.get("tone") or {}).get("style", "professional")
-        doc = firebase_service.create_pillar1_doc(project_id, "behavioral_triggers", owner_uid, f"Trigger — {body.trigger_event[:40]}")
+        doc = firebase_service.create_pillar1_doc(project_id, "behavioral_triggers", owner_uid, f"Trigger - {body.trigger_event[:40]}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "designing", "label": f"Designing {body.sequence_length}-email trigger sequence…", "status": "running"})
         user_prompt = f"""Brand: {brand_name}\nBrand tone: {tone}\nProduct: {body.product_name}\nTrigger event: {body.trigger_event}\nAudience: {body.audience_context}\nEmail platform: {body.email_platform}\nSequence length: {body.sequence_length} emails\nConversion goal: {body.conversion_goal}\nTone: {body.tone}\n\nWrite a complete behavioral trigger sequence."""

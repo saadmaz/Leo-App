@@ -62,7 +62,7 @@ export default function PersonalBrandOnboardingPage() {
       }
     } catch (e) {
       console.error('Failed to load next question:', e)
-      setStage('question') // fallback — don't leave user on loading screen
+      setStage('question') // fallback - don't leave user on loading screen
     }
   }, [params.projectId])
 
@@ -83,7 +83,7 @@ export default function PersonalBrandOnboardingPage() {
           return
         }
 
-        // In progress or not started — fetch next question
+        // In progress or not started - fetch next question
         const res: InterviewNextResponse = await api.persona.getNextQuestion(params.projectId)
         setAnsweredCount(res.answeredCount)
         setTotalCount(res.totalCount)

@@ -32,7 +32,7 @@ export function WritingSamplesInput({ onSubmit, loading }: WritingSamplesInputPr
   return (
     <div className="space-y-4 w-full">
       <p className="text-xs text-muted-foreground leading-relaxed">
-        Paste 2–3 pieces of writing that felt authentically like you — posts, emails, messages, anything.
+        Paste 2–3 pieces of writing that felt authentically like you - posts, emails, messages, anything.
         The more real, the better. LEO will use these to learn your voice patterns.
       </p>
       {samples.map((s, i) => (

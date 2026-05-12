@@ -115,7 +115,7 @@ export function BrandVoiceScorer({ projectId, onClose }: BrandVoiceScorerProps) 
                     <span className="text-lg font-normal text-muted-foreground">/100</span>
                   </div>
                   <div className={cn('text-sm font-medium mt-0.5', grade.color)}>
-                    Grade {result.grade} — {grade.label}
+                    Grade {result.grade} - {grade.label}
                   </div>
                 </div>
                 {/* Score ring */}

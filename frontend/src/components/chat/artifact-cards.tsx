@@ -161,7 +161,7 @@ export function parseArtifacts(text: string): { clean: string; artifacts: Artifa
       const data = JSON.parse(body.trim())
       artifacts.push({ type, ...data } as Artifact)
     } catch {
-      // malformed artifact — drop silently
+      // malformed artifact - drop silently
     }
     return '' // remove artifact block from visible text
   }).trim()
@@ -386,7 +386,7 @@ const PLATFORM_ICONS: Record<string, string> = {
 
 function ContentCalendarCard({ artifact }: { artifact: ContentCalendarArtifact }) {
   const copyText = artifact.entries
-    .map((e) => `${e.day} — ${e.platform}${e.time ? ` (${e.time})` : ''}\n${e.content}${e.hashtags?.length ? '\n' + e.hashtags.map((h) => `#${h}`).join(' ') : ''}`)
+    .map((e) => `${e.day} - ${e.platform}${e.time ? ` (${e.time})` : ''}\n${e.content}${e.hashtags?.length ? '\n' + e.hashtags.map((h) => `#${h}`).join(' ') : ''}`)
     .join('\n\n')
 
   return (
@@ -549,7 +549,7 @@ function ImagePromptCard({ artifact }: { artifact: ImagePromptArtifact }) {
       if (msg.includes('503') || msg.includes('RuntimeError')) {
         setErrorMsg('Image generation isn\'t configured for this workspace.')
       } else {
-        setErrorMsg('Image generation failed — please try again.')
+        setErrorMsg('Image generation failed - please try again.')
       }
       setStatus('error')
     }
@@ -730,7 +730,7 @@ function CompetitorLandscapeCard({ artifact }: { artifact: CompetitorLandscapeAr
     .join('\n\n')
 
   return (
-    <Card icon={<BarChart2 className="w-3.5 h-3.5" />} title={`${artifact.brand_name} — Competitor Landscape`} count={artifact.competitors.length} copyText={copyText}>
+    <Card icon={<BarChart2 className="w-3.5 h-3.5" />} title={`${artifact.brand_name} - Competitor Landscape`} count={artifact.competitors.length} copyText={copyText}>
       {/* Competitor selector tabs */}
       <div className="flex gap-1.5 flex-wrap mb-3">
         {artifact.competitors.map((c, i) => (
@@ -839,7 +839,7 @@ function InfluencerListCard({ artifact }: { artifact: InfluencerListArtifact }) 
   return (
     <Card
       icon={<Users className="w-3.5 h-3.5" />}
-      title={`${artifact.platform} Influencers — ${artifact.topic}`}
+      title={`${artifact.platform} Influencers - ${artifact.topic}`}
       count={artifact.influencers.length}
       copyText={copyText}
     >

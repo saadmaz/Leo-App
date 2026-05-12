@@ -8,7 +8,7 @@ import { ChevronDown, ChevronUp, Copy, Check, FileDown, Sparkles } from 'lucide-
 import type { MarketingStrategy, StrategySection } from '@/types'
 
 // ---------------------------------------------------------------------------
-// Section metadata — icon + accent color per heading keyword
+// Section metadata - icon + accent color per heading keyword
 // ---------------------------------------------------------------------------
 
 const SECTION_META: { match: string; icon: string; accent: string; bg: string }[] = [
@@ -36,7 +36,7 @@ function getSectionMeta(heading: string) {
 }
 
 // ---------------------------------------------------------------------------
-// Custom markdown components — clean, well-typed tables + lists
+// Custom markdown components - clean, well-typed tables + lists
 // ---------------------------------------------------------------------------
 
 const mdComponents = {
@@ -64,7 +64,7 @@ const mdComponents = {
     <td className="px-3 py-2 text-foreground/70 align-top">{children}</td>
   ),
 
-  // Headings — strip the ## prefix since the card already has a header
+  // Headings - strip the ## prefix since the card already has a header
   h1: ({ children }: { children?: React.ReactNode }) => (
     <h3 className="text-sm font-bold text-foreground mt-4 mb-1.5 first:mt-0">{children}</h3>
   ),
@@ -105,7 +105,7 @@ const mdComponents = {
     <code className="px-1 py-0.5 rounded bg-muted text-xs font-mono text-foreground/80">{children}</code>
   ),
 
-  // Blockquote — used for callouts
+  // Blockquote - used for callouts
   blockquote: ({ children }: { children?: React.ReactNode }) => (
     <blockquote className="my-3 pl-3 border-l-2 border-primary/40 text-sm text-foreground/70 italic">
       {children}

@@ -124,7 +124,7 @@ export function InterviewQuestionCard({
         </div>
       )}
 
-      {/* Textarea — shown for all questions; labelled "or type your own" when chips exist */}
+      {/* Textarea - shown for all questions; labelled "or type your own" when chips exist */}
       <div className="space-y-2">
         {hasChips && (
           <p className="text-[11px] text-muted-foreground">Or type your own:</p>

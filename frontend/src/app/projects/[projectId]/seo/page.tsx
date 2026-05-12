@@ -45,7 +45,7 @@ export default function SEOPage() {
         <BackButton />
         <Globe className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">SEO Studio</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
       </div>
 
       {/* Tabs */}

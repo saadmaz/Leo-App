@@ -28,7 +28,7 @@ def _parse_json(raw: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# SEO — Blog Post (SSE streaming)
+# SEO - Blog Post (SSE streaming)
 # ---------------------------------------------------------------------------
 
 async def stream_blog_post(
@@ -101,7 +101,7 @@ Requirements:
 - Use the target keywords naturally (don't stuff)
 - Include a clear CTA at the end
 - Use subheadings (##, ###), short paragraphs, and bullet points where helpful
-- Write in the brand voice — no generic filler
+- Write in the brand voice - no generic filler
 - End with a concise conclusion
 
 Write only the post body (no title/meta). Start immediately."""
@@ -124,7 +124,7 @@ Write only the post body (no title/meta). Start immediately."""
 
 
 # ---------------------------------------------------------------------------
-# SEO — Meta Tags
+# SEO - Meta Tags
 # ---------------------------------------------------------------------------
 
 async def generate_meta_tags(
@@ -179,7 +179,7 @@ Return ONLY valid JSON:
 
 
 # ---------------------------------------------------------------------------
-# SEO — Website Copy
+# SEO - Website Copy
 # ---------------------------------------------------------------------------
 
 async def generate_website_copy(
@@ -245,7 +245,7 @@ Make every word earn its place. No filler. On-brand throughout."""
 
 
 # ---------------------------------------------------------------------------
-# Email Studio — Sequence
+# Email Studio - Sequence
 # ---------------------------------------------------------------------------
 
 EMAIL_SEQUENCE_TYPES = {
@@ -295,7 +295,7 @@ Return ONLY valid JSON:
       "send_day": 0,
       "subject": "<subject line, compelling, under 50 chars>",
       "preview_text": "<preview text, under 90 chars>",
-      "body": "<full email body in plain text — warm, human, conversational. 150-300 words>",
+      "body": "<full email body in plain text - warm, human, conversational. 150-300 words>",
       "cta_text": "<CTA button text>"
     }}
   ]
@@ -376,7 +376,7 @@ async def generate_style_guide(
 BRAND CORE DATA:
 {brand_context}
 
-Generate a complete, practical brand style guide. Be specific — extract real values, personality traits, and voice rules from the brand core data above.
+Generate a complete, practical brand style guide. Be specific - extract real values, personality traits, and voice rules from the brand core data above.
 
 Return ONLY valid JSON:
 {{
@@ -392,11 +392,11 @@ Return ONLY valid JSON:
     }},
     {{
       "title": "Writing Do's",
-      "content": "<5-7 specific writing rules to follow — concrete, actionable>"
+      "content": "<5-7 specific writing rules to follow - concrete, actionable>"
     }},
     {{
       "title": "Writing Don'ts",
-      "content": "<5-7 things to never write or say — include examples of bad vs good>"
+      "content": "<5-7 things to never write or say - include examples of bad vs good>"
     }},
     {{
       "title": "Power Words",
@@ -412,7 +412,7 @@ Return ONLY valid JSON:
     }},
     {{
       "title": "Audience Persona",
-      "content": "<who the ideal customer is — values, challenges, what they respond to>"
+      "content": "<who the ideal customer is - values, challenges, what they respond to>"
     }},
     {{
       "title": "Content Pillars",
@@ -433,7 +433,7 @@ Return ONLY valid JSON:
 
 
 # ---------------------------------------------------------------------------
-# Phase 7 — AI Content Planner
+# Phase 7 - AI Content Planner
 # ---------------------------------------------------------------------------
 
 async def generate_content_plan(

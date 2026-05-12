@@ -162,7 +162,7 @@ export default function CalendarPage() {
         <SidebarToggle/><BackButton/>
         <CalendarDays className="w-4 h-4 text-primary"/>
         <span className="text-sm font-semibold">Content Calendar</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         <div className="ml-auto">
           <button onClick={()=>setShowGenerateForm(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
@@ -310,7 +310,7 @@ function EntryChip({entry,onClick}:{entry:CalendarEntry;onClick:(e:React.MouseEv
           // eslint-disable-next-line @next/next/no-img-element
           <img src={entry.media_url} alt="" className="w-4 h-4 rounded object-cover shrink-0"/>
         ) : (
-          <span className="text-[10px] truncate leading-tight flex-1">{entry.content.slice(0,26)||'—'}</span>
+          <span className="text-[10px] truncate leading-tight flex-1">{entry.content.slice(0,26)||'-'}</span>
         )}
         <div className={cn('w-1.5 h-1.5 rounded-full shrink-0',dot)}/>
       </div>
@@ -531,7 +531,7 @@ function ContentFields({
           })}
         </div>
         {!isEdit&&state.platforms.length>1&&(
-          <p className="text-[10px] text-muted-foreground">Creates {state.platforms.length} entries — one per platform.</p>
+          <p className="text-[10px] text-muted-foreground">Creates {state.platforms.length} entries - one per platform.</p>
         )}
       </div>
 
@@ -635,7 +635,7 @@ function ContentFields({
         </>
       )}
 
-      {/* POST — text primary, optional image */}
+      {/* POST - text primary, optional image */}
       {isPost&&(
         <>
           <div className="space-y-1.5">

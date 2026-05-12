@@ -2,7 +2,7 @@
 
 > **"Boardroom-level market insight in minutes."**
 
-A multi-agent AI system that turns scattered internet signals into structured competitive intelligence — rendered as interactive artifacts inside a conversational interface.
+A multi-agent AI system that turns scattered internet signals into structured competitive intelligence - rendered as interactive artifacts inside a conversational interface.
 
 ---
 
@@ -14,7 +14,7 @@ Ask a question like:
 
 > *"Is Vector Agents competitive in the AI SDR market right now?"*
 
-And the system spawns **6 parallel AI agents**, collects live signals from the web, synthesises structured intelligence, and renders **interactive charts, scorecards, and briefs directly inside the chat** — all grounded in real sources with confidence scores.
+And the system spawns **6 parallel AI agents**, collects live signals from the web, synthesises structured intelligence, and renders **interactive charts, scorecards, and briefs directly inside the chat** - all grounded in real sources with confidence scores.
 
 ---
 
@@ -87,7 +87,7 @@ User Query
 |---|---|---|
 | **Market & Trend Agent** | Category growth signals, hiring trends, Google Trends proxies, funding news | `trend_timeline`, `signal_summary` |
 | **Competitive Intelligence Agent** | Competitor mapping, feature launches, positioning shifts | `competitor_matrix`, `feature_comparison` |
-| **Win/Loss Intelligence Agent** | Buyer voice from G2, Reddit, HN — what they love, hate, and switch for | `objection_map`, `buyer_pain_clusters` |
+| **Win/Loss Intelligence Agent** | Buyer voice from G2, Reddit, HN - what they love, hate, and switch for | `objection_map`, `buyer_pain_clusters` |
 | **Pricing & Packaging Agent** | Pricing model detection, seat vs usage vs outcome, willingness-to-pay signals | `pricing_table`, `packaging_comparison` |
 | **Positioning & Messaging Agent** | Ad copy analysis, landing page messaging, whitespace detection | `message_gap_heatmap`, `positioning_summary` |
 | **Adjacent Market Agent** | Converging categories, platform encroachment, emerging substitutes | `threat_map`, `category_overlap` |
@@ -98,7 +98,7 @@ User Query
 
 ## 🖥️ Frontend Interface
 
-A premium AI SaaS interface inspired by Linear, Vercel, Perplexity, and Notion AI — but the entire experience lives inside a single conversation page.
+A premium AI SaaS interface inspired by Linear, Vercel, Perplexity, and Notion AI - but the entire experience lives inside a single conversation page.
 
 ### Layout
 
@@ -137,7 +137,7 @@ A premium AI SaaS interface inspired by Linear, Vercel, Perplexity, and Notion A
 | **Trend Chart** | Recharts `LineChart` showing category momentum; competitor funding events as markers |
 | **Positioning Map** | 2×2 SVG scatter plot (Enterprise↔SMB × Automation↔Augmentation) with draggable dots |
 | **Strategic Brief** | Sections: Executive Summary · Top 3 Opportunities · Top 3 Risks · Recommended Bets |
-| **Source Trail** | Expandable source list per artifact — favicon, title, domain, timestamp, credibility colour |
+| **Source Trail** | Expandable source list per artifact - favicon, title, domain, timestamp, credibility colour |
 | **Confidence Indicator** | Progress bar showing confidence percentage per insight |
 
 ### Design System
@@ -146,10 +146,10 @@ A premium AI SaaS interface inspired by Linear, Vercel, Perplexity, and Notion A
 Background (primary):   #0f0f10  (charcoal black)
 Background (secondary): #16171a  (dark grey)
 Text:                   #f5f5f5  (pearl white)
-Accent — positive:      #00ff9f  (laser green)
-Accent — alert:         #ff2a2a  (laser red)
+Accent - positive:      #00ff9f  (laser green)
+Accent - alert:         #ff2a2a  (laser red)
 
-Typography: Geist or similar — clean, minimal, monospace-adjacent
+Typography: Geist or similar - clean, minimal, monospace-adjacent
 Effects:    Glass panels · subtle gradients · soft shadows
 ```
 
@@ -438,7 +438,7 @@ event: synthesis_complete→ { data: FinalResponse }
 | Estimated cost per query | ~$0.15–$0.40 |
 | Agent parallelism | 6 simultaneous |
 | Cache TTL | 1 hour (keyed by product + question hash) |
-| Architecture | Stateless agents — horizontally scalable to serverless |
+| Architecture | Stateless agents - horizontally scalable to serverless |
 
 Cost estimate is displayed to the user after each query.
 

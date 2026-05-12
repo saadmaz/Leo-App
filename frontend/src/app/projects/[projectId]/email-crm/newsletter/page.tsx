@@ -242,10 +242,10 @@ export default function NewsletterPage() {
   ) : null
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Newsletter Production" subtitle="Pillar 5 — Claude + Loops"
+    <SSEFeaturePage projectId={projectId} title="Newsletter Production" subtitle="Pillar 5 - Claude + Loops"
       icon={<Newspaper className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Produce Newsletter — 15 credits"
+      onSubmit={generate} submitLabel="Produce Newsletter - 15 credits"
       canSubmit={!!newsletterName.trim() && !!topic.trim() && !!audience.trim() && sections.length > 0}
       backPath={`/projects/${projectId}/email-crm`} />
   )

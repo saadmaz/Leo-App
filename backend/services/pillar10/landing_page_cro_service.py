@@ -1,5 +1,5 @@
 """
-Landing Page CRO — Firecrawl reads the page (if URL provided), Claude generates
+Landing Page CRO - Firecrawl reads the page (if URL provided), Claude generates
 copy variants for each section. User implements the winners in VWO / Optimizely / their CMS.
 """
 from __future__ import annotations
@@ -24,14 +24,14 @@ SYSTEM = """\
 You are a conversion rate optimisation (CRO) expert who has optimised landing pages
 for hundreds of SaaS and e-commerce companies.
 
-You generate copy variants that are psychologically grounded — each variant tests
+You generate copy variants that are psychologically grounded - each variant tests
 a different persuasion angle (pain-led, benefit-led, social proof, urgency, curiosity, etc.).
 
-Return ONLY a valid JSON object — no markdown fences.
+Return ONLY a valid JSON object - no markdown fences.
 
 Schema:
 {
-  "page_analysis": "string (brief assessment of the current page — what's working, what's not)",
+  "page_analysis": "string (brief assessment of the current page - what's working, what's not)",
   "cro_opportunities": ["string (top 3-5 opportunities ranked by expected impact)"],
   "sections": [
     {
@@ -41,7 +41,7 @@ Schema:
         {
           "variant_id": "string (A, B, C…)",
           "copy": "string (the exact copy)",
-          "angle": "string (persuasion angle — e.g. 'pain_led', 'benefit_led', 'social_proof', 'urgency', 'curiosity')",
+          "angle": "string (persuasion angle - e.g. 'pain_led', 'benefit_led', 'social_proof', 'urgency', 'curiosity')",
           "rationale": "string (why this variant should convert better)",
           "which_audience_segment": "string (who this variant speaks to best)"
         }
@@ -57,7 +57,7 @@ Schema:
 
 Rules:
 - Each section gets exactly the requested number of variants.
-- Variants must be meaningfully different — not just word swaps.
+- Variants must be meaningfully different - not just word swaps.
 - Rationale must reference a specific psychological principle (loss aversion, social proof, FOMO, etc.).
 - implementation_guide must be actionable without a developer (visual editors).
 """
@@ -95,7 +95,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Landing Page CRO — {body.conversion_goal[:50]}"
+    title = f"Landing Page CRO - {body.conversion_goal[:50]}"
     doc = firebase_service.create_pillar1_doc(project_id, "landing_page_cro", owner_uid, title)
     doc_id = doc["id"]
 
@@ -108,10 +108,10 @@ async def generate(
         yield _sse({"type": "research_step", "step": "scraping", "label": "Reading landing page…", "status": "running"})
         page_content = await _firecrawl_scrape(body.page_url)
         status = "done" if page_content else "done"
-        label = "Page content loaded" if page_content else "Could not read page — using description"
+        label = "Page content loaded" if page_content else "Could not read page - using description"
         yield _sse({"type": "research_step", "step": "scraping", "label": label, "status": status})
     else:
-        yield _sse({"type": "research_step", "step": "scraping", "label": "No URL — using description", "status": "done"})
+        yield _sse({"type": "research_step", "step": "scraping", "label": "No URL - using description", "status": "done"})
 
     yield _sse({"type": "research_step", "step": "generating", "label": "Generating CRO variants…", "status": "running"})
 

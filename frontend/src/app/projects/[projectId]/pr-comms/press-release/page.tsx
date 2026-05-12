@@ -166,7 +166,7 @@ export default function PressReleasePage() {
           {keyFacts.map((f, i) => (
             <div key={i} className="flex gap-2">
               <input value={f} onChange={(e) => updateFact(i, e.target.value)}
-                placeholder={`Fact ${i + 1} — e.g. $12M raised, 3 lead investors, closing date`}
+                placeholder={`Fact ${i + 1} - e.g. $12M raised, 3 lead investors, closing date`}
                 className="flex-1 px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
               {keyFacts.length > 1 && (
                 <button onClick={() => removeFact(i)} className="text-muted-foreground hover:text-destructive">
@@ -180,7 +180,7 @@ export default function PressReleasePage() {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Quote — Speaker Name</label>
+          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Quote - Speaker Name</label>
           <input value={quoteName} onChange={(e) => setQuoteName(e.target.value)} placeholder="Jane Smith"
             className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
         </div>
@@ -221,7 +221,7 @@ export default function PressReleasePage() {
       </div>
 
       <div>
-        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Boilerplate (optional — Claude will write one if omitted)</label>
+        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Boilerplate (optional - Claude will write one if omitted)</label>
         <textarea value={boilerplate} onChange={(e) => setBoilerplate(e.target.value)} rows={2}
           placeholder="About Acme Corp: We build AI-powered logistics software for…"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
@@ -265,9 +265,9 @@ export default function PressReleasePage() {
           <div className="p-4 rounded-lg bg-muted/50 border-l-4 border-primary">
             <div className="flex items-start justify-between gap-2">
               <p className="text-sm italic">"{result.quote.text}"</p>
-              <CopyButton text={`"${result.quote.text}" — ${result.quote.speaker_name}, ${result.quote.speaker_title}`} />
+              <CopyButton text={`"${result.quote.text}" - ${result.quote.speaker_name}, ${result.quote.speaker_title}`} />
             </div>
-            <p className="text-xs text-muted-foreground mt-2">— {result.quote.speaker_name}, {result.quote.speaker_title}</p>
+            <p className="text-xs text-muted-foreground mt-2">- {result.quote.speaker_name}, {result.quote.speaker_title}</p>
           </div>
         )}
 
@@ -316,7 +316,7 @@ export default function PressReleasePage() {
             result.dateline + result.lead_paragraph,
             '',
             ...(result.body_paragraphs || []).map((p) => p + '\n'),
-            result.quote ? `"${result.quote.text}" — ${result.quote.speaker_name}, ${result.quote.speaker_title}\n` : '',
+            result.quote ? `"${result.quote.text}" - ${result.quote.speaker_name}, ${result.quote.speaker_title}\n` : '',
             `About ${result.company_name}: ${result.boilerplate}`,
             '',
             `Media Contact: ${result.media_contact}`,
@@ -335,7 +335,7 @@ export default function PressReleasePage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Press Release Writer"
-      subtitle="Pillar 8 — Claude"
+      subtitle="Pillar 8 - Claude"
       icon={<FileText className="w-4 h-4" />}
       credits={10}
       steps={store.steps}
@@ -344,7 +344,7 @@ export default function PressReleasePage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Write Press Release — 10 credits"
+      submitLabel="Write Press Release - 10 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

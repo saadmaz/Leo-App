@@ -1,5 +1,5 @@
 """
-Apify client — scrapes social media profiles via Apify actors.
+Apify client - scrapes social media profiles via Apify actors.
 
 Supported platforms:
   - Instagram  (apify/instagram-scraper)

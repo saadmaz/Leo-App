@@ -28,7 +28,7 @@ INTERVIEW_MODULES = {
             },
             {
                 "key": "A_target_audience",
-                "prompt": "Who do you want to reach? Describe your ideal audience — their profession, industry, and what stage they're at.",
+                "prompt": "Who do you want to reach? Describe your ideal audience - their profession, industry, and what stage they're at.",
                 "hint": "e.g. 'First-time founders at pre-seed' or 'Marketing managers at B2B SaaS companies'",
                 "chips": [],
             },
@@ -41,7 +41,7 @@ INTERVIEW_MODULES = {
             {
                 "key": "A_not_known_for",
                 "prompt": "What do you NOT want to be known for? What topics or associations feel wrong for you?",
-                "hint": "This is just as important — it defines the edges of your brand.",
+                "hint": "This is just as important - it defines the edges of your brand.",
                 "chips": [],
             },
         ],
@@ -52,7 +52,7 @@ INTERVIEW_MODULES = {
             {
                 "key": "B_origin_story",
                 "prompt": "What is your origin story? How did you get to where you are today? Give me the 3-paragraph version: where you started, the turning point, and where you are now.",
-                "hint": "Don't worry about making it sound impressive — make it sound real.",
+                "hint": "Don't worry about making it sound impressive - make it sound real.",
                 "chips": [],
             },
             {
@@ -64,7 +64,7 @@ INTERVIEW_MODULES = {
             {
                 "key": "B_deep_expertise",
                 "prompt": "What do you know better than most people in your space? What topic could you talk about for an hour without notes?",
-                "hint": "Be specific — 'B2B sales psychology for technical founders' beats 'sales'.",
+                "hint": "Be specific - 'B2B sales psychology for technical founders' beats 'sales'.",
                 "chips": [],
             },
             {
@@ -105,14 +105,14 @@ INTERVIEW_MODULES = {
             },
             {
                 "key": "C_avoided_language",
-                "prompt": "What words or phrases feel completely wrong for you — things you would never say?",
+                "prompt": "What words or phrases feel completely wrong for you - things you would never say?",
                 "hint": "Corporate jargon, buzzwords, phrases that feel hollow or unlike you.",
                 "chips": ["Leverage", "Synergy", "Circle back", "Move the needle", "Low-hanging fruit",
                           "Thought leader", "Disruptive", "Game-changer", "Crush it", "Hustle"],
             },
             {
                 "key": "C_writing_samples",
-                "prompt": "Paste 2-3 pieces of writing that felt authentically like you — posts, emails, messages, anything. The more real the better.",
+                "prompt": "Paste 2-3 pieces of writing that felt authentically like you - posts, emails, messages, anything. The more real the better.",
                 "hint": "LEO will use these to learn your voice patterns and calibrate all future content.",
                 "chips": [],
             },
@@ -145,13 +145,13 @@ INTERVIEW_MODULES = {
             {
                 "key": "D_time_budget",
                 "prompt": "How much time can you realistically spend on personal brand content per week?",
-                "hint": "Be honest — 30 minutes 3x a week is better than an aspirational 3 hours you won't stick to.",
+                "hint": "Be honest - 30 minutes 3x a week is better than an aspirational 3 hours you won't stick to.",
                 "chips": ["Under 1 hour/week", "1-2 hours/week", "3-5 hours/week", "5-10 hours/week", "More than 10 hours/week"],
             },
             {
                 "key": "D_success_metrics",
                 "prompt": "What does success look like for you? In 90 days, and in 12 months?",
-                "hint": "Be as specific as possible — followers, clients, opportunities, or whatever matters most to you.",
+                "hint": "Be as specific as possible - followers, clients, opportunities, or whatever matters most to you.",
                 "chips": [],
             },
         ],
@@ -167,7 +167,7 @@ INTERVIEW_MODULES = {
             },
             {
                 "key": "E_gap_voices",
-                "prompt": "Name 1-2 people who are doing what you want to do — but doing it wrong. What are they missing?",
+                "prompt": "Name 1-2 people who are doing what you want to do - but doing it wrong. What are they missing?",
                 "hint": "The gap they leave is often where your positioning lives.",
                 "chips": [],
             },

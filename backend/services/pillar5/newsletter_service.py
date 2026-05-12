@@ -1,5 +1,5 @@
 """
-Newsletter Production — Claude curates + writes a full edition, optionally pushed to Loops.
+Newsletter Production - Claude curates + writes a full edition, optionally pushed to Loops.
 
 Produces:
   - Complete newsletter edition with all requested sections
@@ -27,7 +27,7 @@ SYSTEM = """\
 You are an expert newsletter editor and copywriter. You produce well-structured, \
 engaging newsletters that readers actually open and forward.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -44,7 +44,7 @@ Schema:
       "word_count": number
     }
   ],
-  "html_body": "string (complete newsletter as clean HTML with inline styles — email-client safe)",
+  "html_body": "string (complete newsletter as clean HTML with inline styles - email-client safe)",
   "plain_text_version": "string (full plain text fallback)",
   "total_word_count": number,
   "estimated_read_time_minutes": number,
@@ -59,7 +59,7 @@ Schema:
 
 Rules:
 - html_body must use inline CSS (no <style> blocks) for email client compatibility.
-- Each section must have complete, publish-ready prose — no lorem ipsum or placeholders.
+- Each section must have complete, publish-ready prose - no lorem ipsum or placeholders.
 - subject_line_options: provide exactly 3 options with different angles.
 - social_snippets: provide Twitter/X and LinkedIn versions of the main story hook.
 - word_count per section: intro 80-150w, main_story 300-500w, quick_hits 150-250w total,
@@ -82,7 +82,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Newsletter — {body.newsletter_name} · {body.edition_topic[:50]}"
+    title = f"Newsletter - {body.newsletter_name} · {body.edition_topic[:50]}"
     doc = firebase_service.create_pillar1_doc(project_id, "newsletter", owner_uid, title)
     doc_id = doc["id"]
 
@@ -134,7 +134,7 @@ async def generate(
         html = payload.get("html_body", "")
         try:
             loops_result = await loops_client.create_campaign(
-                name=f"{body.newsletter_name} — {body.edition_topic[:60]}",
+                name=f"{body.newsletter_name} - {body.edition_topic[:60]}",
                 subject=subject,
                 html_body=html,
             )

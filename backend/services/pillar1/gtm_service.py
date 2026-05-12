@@ -1,5 +1,5 @@
 """
-Go-To-Market (GTM) Strategy service — SerpAPI + Firecrawl + Claude, SSE streaming.
+Go-To-Market (GTM) Strategy service - SerpAPI + Firecrawl + Claude, SSE streaming.
 
 Researches the market for the product, scrapes competitor/industry benchmarks,
 then synthesises a full GTM strategy document.
@@ -66,7 +66,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a CMO-level strategist. You have just completed live market research.
 Produce a comprehensive Go-To-Market strategy for the given product.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "product_name": "...",
   "executive_summary": "3-sentence overview of the GTM approach",
@@ -92,15 +92,15 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
     {"week": "Week 1", "theme": "Awareness", "actions": ["..."], "channels": ["..."]}
   ],
   "success_metrics": {"30_days": [...], "60_days": [...], "90_days": [...]},
-  "competitive_gaps": ["Gap 1 — how we exploit it", "Gap 2 — how we exploit it"],
+  "competitive_gaps": ["Gap 1 - how we exploit it", "Gap 2 - how we exploit it"],
   "budget_guidance": "Recommended spend split with rationale"
 }
 
 RULES:
 1. Every channel recommendation must cite a specific research finding.
-2. Messaging must match the brand's tone from Brand Core — never generic.
+2. Messaging must match the brand's tone from Brand Core - never generic.
 3. Competitive gaps must name actual gaps found in the research (not generic).
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -117,7 +117,7 @@ async def generate(
         brand_name = project.get("name", "the brand")
 
         # Create doc
-        title = f"GTM Strategy — {body.product_name}"
+        title = f"GTM Strategy - {body.product_name}"
         doc = firebase_service.create_pillar1_doc(project_id, "gtm", owner_uid, title)
         doc_id = doc["id"]
 

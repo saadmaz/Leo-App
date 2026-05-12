@@ -1,5 +1,5 @@
 """
-Churn Risk Detection — Claude scores each contact's engagement signals and flags at-risk users.
+Churn Risk Detection - Claude scores each contact's engagement signals and flags at-risk users.
 
 Works with any engagement data the user provides (LEO internal, HubSpot, custom).
 Optionally generates a win-back email for each at-risk contact.
@@ -24,7 +24,7 @@ SYSTEM = """\
 You are a customer success analyst specialising in churn prediction and retention. \
 You interpret behavioural signals and classify churn risk with actionable interventions.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -86,7 +86,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Churn Risk — {len(body.contacts)} contacts · {body.product_name}"
+    title = f"Churn Risk - {len(body.contacts)} contacts · {body.product_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "churn_risk", owner_uid, title)
     doc_id = doc["id"]
 

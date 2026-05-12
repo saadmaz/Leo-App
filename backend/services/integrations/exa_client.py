@@ -1,15 +1,15 @@
 """
-Exa.ai client — neural/semantic search engine built for AI.
+Exa.ai client - neural/semantic search engine built for AI.
 
 All public functions are async. The underlying exa-py SDK is synchronous,
 so every call is wrapped in asyncio.to_thread() to avoid blocking the event loop.
 
 Endpoints exposed:
-  /search        — semantic search (neural, instant, auto, deep)
-  /contents      — clean page text from specific URLs
-  /findSimilar   — pages semantically similar to a given URL
-  /answer        — RAG-style answer with citations
-  /research      — async deep research tasks (start + poll)
+  /search        - semantic search (neural, instant, auto, deep)
+  /contents      - clean page text from specific URLs
+  /findSimilar   - pages semantically similar to a given URL
+  /answer        - RAG-style answer with citations
+  /research      - async deep research tasks (start + poll)
 
 Cost controls:
   - Every billable call increments the project's daily usage counter.
@@ -115,7 +115,7 @@ def _set_cache(project_id: Optional[str], key: str, results: list) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Result normaliser — consistent shape for all callers
+# Result normaliser - consistent shape for all callers
 # ---------------------------------------------------------------------------
 
 def _normalise_result(r) -> dict:
@@ -262,7 +262,7 @@ async def find_similar(
 ) -> list[dict]:
     """
     Find pages semantically similar to a given URL.
-    Ideal for competitor discovery — give it the brand's website and get
+    Ideal for competitor discovery - give it the brand's website and get
     a list of similar companies/brands.
     """
     cache_key = _cache_key(url, {"n": num_results, "exc": exclude_domains, "op": "similar"})

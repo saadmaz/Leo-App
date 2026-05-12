@@ -1,5 +1,5 @@
 """
-Media List Building — Apify scrapes journalist directories, Hunter.io verifies emails,
+Media List Building - Apify scrapes journalist directories, Hunter.io verifies emails,
 Claude enriches and prioritises the list.
 
 Strategy:
@@ -29,7 +29,7 @@ SYSTEM_PLAN = """\
 You are a media relations expert. Given an industry and news angle, generate a list of \
 target publications and journalist archetypes that would likely cover this story.
 
-Return ONLY valid JSON — no markdown.
+Return ONLY valid JSON - no markdown.
 
 Schema:
 {
@@ -49,7 +49,7 @@ SYSTEM_LIST = """\
 You are a media relations strategist. Given research data about publications and journalists, \
 produce a polished, prioritised media list with outreach notes.
 
-Return ONLY valid JSON — no markdown.
+Return ONLY valid JSON - no markdown.
 
 Schema:
 {
@@ -62,12 +62,12 @@ Schema:
       "beat": "string",
       "email": "string or null",
       "linkedin_url": "string or null",
-      "why_target": "string (1 sentence — why they'd cover your story)",
+      "why_target": "string (1 sentence - why they'd cover your story)",
       "personalisation_hook": "string (what to reference in outreach)",
       "tier": "A | B | C"
     }
   ],
-  "outreach_strategy": "string (paragraph — how to work through this list)",
+  "outreach_strategy": "string (paragraph - how to work through this list)",
   "total_contacts": number
 }
 """
@@ -104,7 +104,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Media List — {body.industry} · {body.news_angle[:40]}"
+    title = f"Media List - {body.industry} · {body.news_angle[:40]}"
     doc = firebase_service.create_pillar1_doc(project_id, "media_list", owner_uid, title)
     doc_id = doc["id"]
 
@@ -112,7 +112,7 @@ async def generate(
     brand_context = build_brand_core_context(project.get("brandCore") or {})
     yield _sse({"type": "research_step", "step": "brand", "label": "Brand loaded", "status": "done"})
 
-    # Step 1 — Claude generates target publications & search queries
+    # Step 1 - Claude generates target publications & search queries
     yield _sse({"type": "research_step", "step": "planning", "label": "Identifying target publications…", "status": "running"})
     plan_prompt = (
         f"BRAND CONTEXT:\n{brand_context[:_MAX_BRAND]}\n\n"
@@ -137,7 +137,7 @@ async def generate(
 
     yield _sse({"type": "research_step", "step": "planning", "label": f"Identified {len(plan.get('target_publications', []))} publications", "status": "done"})
 
-    # Step 2 — Hunter.io email verification (if key available)
+    # Step 2 - Hunter.io email verification (if key available)
     hunter_contacts: list[dict] = []
     if body.verify_emails and settings.HUNTER_API_KEY:
         yield _sse({"type": "research_step", "step": "hunter", "label": "Searching Hunter.io for contacts…", "status": "running"})
@@ -168,9 +168,9 @@ async def generate(
                 logger.warning("Hunter search failed: %s", exc)
         yield _sse({"type": "research_step", "step": "hunter", "label": f"Found {len(hunter_contacts)} verified contacts", "status": "done"})
     else:
-        yield _sse({"type": "research_step", "step": "hunter", "label": "Hunter.io not configured — skipping email verification", "status": "done"})
+        yield _sse({"type": "research_step", "step": "hunter", "label": "Hunter.io not configured - skipping email verification", "status": "done"})
 
-    # Step 3 — Claude builds the final prioritised list
+    # Step 3 - Claude builds the final prioritised list
     yield _sse({"type": "research_step", "step": "building", "label": "Building prioritised media list…", "status": "running"})
     list_prompt = (
         f"BRAND CONTEXT:\n{brand_context[:_MAX_BRAND]}\n\n"
@@ -179,7 +179,7 @@ async def generate(
         f"Geography: {body.geography or 'global'}\n"
         f"Target contact count: {body.num_contacts}\n\n"
         f"TARGET PUBLICATIONS (Claude-researched):\n{json.dumps(plan.get('target_publications', []), indent=2)}\n\n"
-        + (f"VERIFIED CONTACTS (Hunter.io):\n{json.dumps(hunter_contacts, indent=2)}\n\n" if hunter_contacts else "No Hunter contacts available — generate plausible journalist personas.\n\n")
+        + (f"VERIFIED CONTACTS (Hunter.io):\n{json.dumps(hunter_contacts, indent=2)}\n\n" if hunter_contacts else "No Hunter contacts available - generate plausible journalist personas.\n\n")
         + "Build a prioritised, annotated media list. Return valid JSON only."
     )
     try:

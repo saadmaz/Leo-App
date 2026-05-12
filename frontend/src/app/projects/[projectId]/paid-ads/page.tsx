@@ -9,7 +9,7 @@ const FEATURES = [
     key: 'ad-brief',
     icon: <FileText className="w-5 h-5" />,
     title: 'Campaign Brief Generator',
-    description: 'Build a comprehensive paid advertising brief — platform strategy, budget allocation, bidding approach, creative specs, and KPIs.',
+    description: 'Build a comprehensive paid advertising brief - platform strategy, budget allocation, bidding approach, creative specs, and KPIs.',
     path: 'ad-brief',
     credits: 15,
     tag: 'Claude',
@@ -18,7 +18,7 @@ const FEATURES = [
     key: 'ad-copy',
     icon: <Copy className="w-5 h-5" />,
     title: 'Ad Copy Generator',
-    description: 'Generate multi-variant platform-specific ad copy with correct character limits — Google Search, Meta Feed, TikTok, LinkedIn, and more.',
+    description: 'Generate multi-variant platform-specific ad copy with correct character limits - Google Search, Meta Feed, TikTok, LinkedIn, and more.',
     path: 'ad-copy',
     credits: 10,
     tag: 'Claude',
@@ -36,7 +36,7 @@ const FEATURES = [
     key: 'attribution',
     icon: <BarChart2 className="w-5 h-5" />,
     title: 'Cross-Channel Attribution',
-    description: 'Connect GA4 or enter channel data manually — Claude interprets attribution, compares models, and recommends budget reallocation.',
+    description: 'Connect GA4 or enter channel data manually - Claude interprets attribution, compares models, and recommends budget reallocation.',
     path: 'attribution',
     credits: 20,
     tag: 'GA4 + Claude',
@@ -53,7 +53,7 @@ export default function PaidAdsHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">Paid Advertising</h1>
-          <p className="text-xs text-muted-foreground">Pillar 4 — Claude + GA4</p>
+          <p className="text-xs text-muted-foreground">Pillar 4 - Claude + GA4</p>
         </div>
       </div>
 

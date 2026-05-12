@@ -1,4 +1,4 @@
-# LEO Backend — Python dependencies
+# LEO Backend - Python dependencies
 # Generated from the active virtual environment. Pin exact versions for reproducible builds.
 
 anthropic==0.84.0

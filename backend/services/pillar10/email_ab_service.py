@@ -1,5 +1,5 @@
 """
-Email A/B Testing — user provides variant results (or Loops.so API fetches them),
+Email A/B Testing - user provides variant results (or Loops.so API fetches them),
 Claude identifies the winner and recommends the next iteration.
 """
 from __future__ import annotations
@@ -24,7 +24,7 @@ You are an email marketing strategist who specialises in A/B test analysis.
 You identify winning variants, explain WHY they won in terms of psychology and
 audience behaviour, and prescribe the next iteration of testing.
 
-Return ONLY a valid JSON object — no markdown fences.
+Return ONLY a valid JSON object - no markdown fences.
 
 Schema:
 {
@@ -105,7 +105,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Email A/B — {body.test_name}"
+    title = f"Email A/B - {body.test_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "email_ab_test", owner_uid, title)
     doc_id = doc["id"]
 
@@ -118,7 +118,7 @@ async def generate(
     if body.fetch_from_loops and body.loops_campaign_id:
         yield _sse({"type": "research_step", "step": "loops", "label": "Fetching from Loops.so…", "status": "running"})
         loops_data = await _fetch_loops_campaign(body.loops_campaign_id)
-        label = "Loops data fetched" if loops_data else "Loops returned no data — using provided results"
+        label = "Loops data fetched" if loops_data else "Loops returned no data - using provided results"
         yield _sse({"type": "research_step", "step": "loops", "label": label, "status": "done"})
     else:
         yield _sse({"type": "research_step", "step": "loops", "label": "Using provided results", "status": "done"})

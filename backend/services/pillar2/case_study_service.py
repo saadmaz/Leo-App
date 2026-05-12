@@ -1,5 +1,5 @@
 """
-Case Study Production — Claude, SSE streaming.
+Case Study Production - Claude, SSE streaming.
 
 Transforms client inputs (challenge, solution, results) into a polished,
 publication-ready case study with headline, narrative, pull quotes, and CTA.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a B2B content strategist and case study writer.
 Transform client success story inputs into a polished, conversion-optimised case study.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "headline": "A compelling, results-focused headline (e.g. 'How Acme Corp 3x'd Revenue in 90 Days')",
   "subheadline": "Supporting context sentence",
@@ -66,10 +66,10 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 }
 
 RULES:
-1. Key stats must be SPECIFIC numbers from the inputs — never invent metrics.
+1. Key stats must be SPECIFIC numbers from the inputs - never invent metrics.
 2. Headline must be results-first (lead with the win, not the client).
 3. Testimonial formatted quote must use the exact text provided.
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -85,7 +85,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"Case Study — {body.client_name}"
+        title = f"Case Study - {body.client_name}"
         doc = firebase_service.create_pillar1_doc(project_id, "case_study", owner_uid, title)
         doc_id = doc["id"]
 

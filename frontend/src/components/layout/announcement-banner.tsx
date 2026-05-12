@@ -67,7 +67,7 @@ export function AnnouncementBanner() {
         const dismissed = getDismissed()
         setBanners(data.filter((b) => !dismissed.includes(b.id)))
       })
-      .catch(() => {/* silently ignore — banners are non-critical */})
+      .catch(() => {/* silently ignore - banners are non-critical */})
   }, [])
 
   const dismiss = (id: string) => {

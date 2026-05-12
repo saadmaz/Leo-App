@@ -40,7 +40,7 @@ class TestValidateUrl:
 
 
 # ---------------------------------------------------------------------------
-# Helpers — shared mock builders
+# Helpers - shared mock builders
 # ---------------------------------------------------------------------------
 
 FAKE_WEBSITE_DATA = {

@@ -56,7 +56,7 @@ async def list_members(project_id: str, user: CurrentUser) -> list[dict]:
         if profile:
             result.append({**profile, "role": role, "joinedAt": joined_str})
         else:
-            # Auth record missing — include uid only so the list still shows
+            # Auth record missing - include uid only so the list still shows
             result.append({"uid": uid, "email": "", "displayName": uid, "role": role, "joinedAt": joined_str})
 
     # Admins first, then editors, then viewers

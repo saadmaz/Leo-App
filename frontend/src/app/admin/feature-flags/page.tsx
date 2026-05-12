@@ -126,7 +126,7 @@ export default function AdminFeatureFlagsPage() {
 }
 
 // ---------------------------------------------------------------------------
-// Flag card — shows toggle, tier gates, user overrides
+// Flag card - shows toggle, tier gates, user overrides
 // ---------------------------------------------------------------------------
 
 function FlagCard({

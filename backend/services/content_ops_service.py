@@ -211,11 +211,11 @@ async def transform_to_all_platforms(
 BRAND CORE:
 {brand_context}
 
-ORIGINAL CONTENT (adapt this — don't just copy):
+ORIGINAL CONTENT (adapt this - don't just copy):
 {content}
 
 Transform this into a platform-native version for each of the following platforms.
-Each version must feel native to that platform — not a copy-paste with hashtags changed.
+Each version must feel native to that platform - not a copy-paste with hashtags changed.
 
 Platforms to adapt for:
 {platforms_spec}

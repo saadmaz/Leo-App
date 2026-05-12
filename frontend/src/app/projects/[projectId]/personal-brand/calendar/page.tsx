@@ -31,7 +31,7 @@ const PLATFORM_COLORS: Record<string, string> = {
 // ---------------------------------------------------------------------------
 
 function formatDate(iso: string | null): string {
-  if (!iso) return '—'
+  if (!iso) return '-'
   const d = new Date(iso)
   return d.toLocaleString(undefined, {
     month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',

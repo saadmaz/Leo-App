@@ -5,13 +5,13 @@ Free tier: 100 validations/month.
 Docs: https://www.zerobounce.net/docs/
 
 Statuses returned:
-  valid       — email exists and can receive mail
-  invalid     — email does not exist
-  catch-all   — domain accepts all email (inconclusive)
-  unknown     — could not determine (timeout, etc.)
-  spamtrap    — known spam trap
-  abuse       — known abuse address
-  do_not_mail — role address (noreply@, info@, etc.) or disposable
+  valid       - email exists and can receive mail
+  invalid     - email does not exist
+  catch-all   - domain accepts all email (inconclusive)
+  unknown     - could not determine (timeout, etc.)
+  spamtrap    - known spam trap
+  abuse       - known abuse address
+  do_not_mail - role address (noreply@, info@, etc.) or disposable
 """
 from __future__ import annotations
 

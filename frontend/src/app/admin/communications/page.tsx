@@ -275,7 +275,7 @@ function BroadcastTab() {
         segment: form.segment,
       })
       setResult(res)
-      toast.success(`Broadcast sent — ${res.sent} delivered`)
+      toast.success(`Broadcast sent - ${res.sent} delivered`)
     } catch {
       toast.error('Broadcast failed')
     } finally {

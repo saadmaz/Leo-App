@@ -1,5 +1,5 @@
 """
-Brand monitoring routes — on-demand monitoring scans and alert management.
+Brand monitoring routes - on-demand monitoring scans and alert management.
 
 POST /projects/{id}/monitor/run          Stream a monitoring scan (SSE)
 GET  /projects/{id}/monitor/alerts       List alerts

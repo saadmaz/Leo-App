@@ -1,5 +1,5 @@
 """
-Competitive Positioning Map service — existing competitor data + SerpAPI + Claude.
+Competitive Positioning Map service - existing competitor data + SerpAPI + Claude.
 
 Builds a 2D positioning map placing competitors on user-defined axes (e.g. Price vs Features),
 drawing from the project's existing competitor profiles and live SerpAPI research.
@@ -45,7 +45,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a competitive intelligence analyst. You map competitors on a 2D positioning grid.
 
 Each competitor gets an X and Y score from 0-10. You must also position the brand itself.
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "x_axis": "Price",
   "y_axis": "Feature Depth",
@@ -67,9 +67,9 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
     "x": 4.5,
     "y": 6.0,
     "quadrant": "Mid-Market Sweet Spot",
-    "positioning_opportunity": "Underserved mid-market — more powerful than budget tools, cheaper than enterprise"
+    "positioning_opportunity": "Underserved mid-market - more powerful than budget tools, cheaper than enterprise"
   },
-  "white_space": "High-value / Low-price quadrant is empty — opportunity to position here",
+  "white_space": "High-value / Low-price quadrant is empty - opportunity to position here",
   "strategic_recommendation": "Own the mid-market by emphasising feature depth at accessible pricing",
   "summary": "2-sentence strategic overview"
 }
@@ -78,7 +78,7 @@ RULES:
 1. X and Y scores must be based on specific evidence (pricing, feature lists, reviews).
 2. The 'evidence' field must cite actual data points, not vague impressions.
 3. Identify the white space (unoccupied quadrant) as a positioning opportunity.
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -94,7 +94,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         brand_name = project.get("name", "the brand")
 
-        title = f"Positioning Map — {body.x_axis} vs {body.y_axis}"
+        title = f"Positioning Map - {body.x_axis} vs {body.y_axis}"
         doc = firebase_service.create_pillar1_doc(project_id, "comp_map", owner_uid, title)
         doc_id = doc["id"]
 

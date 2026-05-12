@@ -75,7 +75,7 @@ def _parse_json_response(raw: str) -> dict:
             except json.JSONDecodeError:
                 pass
 
-    # 4. Nothing worked — log and raise so callers can handle gracefully
+    # 4. Nothing worked - log and raise so callers can handle gracefully
     logger.error("_parse_json_response failed. Raw (first 500 chars): %s", raw[:500])
     raise ValueError(f"Could not parse JSON from Claude response (length={len(raw)})")
 
@@ -115,7 +115,7 @@ Return ONLY valid JSON with this exact structure:
   "off_brand_words": [<words or phrases that conflict with the brand voice>]
 }}
 
-Be specific. Reference actual phrases from the text. Score honestly — 50 is average."""
+Be specific. Reference actual phrases from the text. Score honestly - 50 is average."""
 
     response = await client.messages.create(
         model=settings.LLM_CLASSIFICATION_MODEL,
@@ -481,7 +481,7 @@ COMPETITOR DATA (real scraped metrics):
 Return ONLY a valid JSON object with NO markdown fences, NO explanation text. Match this schema exactly:
 
 {{
-  "executive_summary": "3-5 sentences citing specific competitor names and real data points — who dominates, where our opportunity is, #1 priority",
+  "executive_summary": "3-5 sentences citing specific competitor names and real data points - who dominates, where our opportunity is, #1 priority",
 
   "market_snapshot": {{
     "total_competitors": {num_competitors},
@@ -516,7 +516,7 @@ Return ONLY a valid JSON object with NO markdown fences, NO explanation text. Ma
   "channel_strategy": {{
     "instagram": {{
       "priority": "primary|secondary|deprioritize",
-      "rationale": "<why — cite competitor presence>",
+      "rationale": "<why - cite competitor presence>",
       "recommended_formats": ["Reels", "Stories"],
       "posting_frequency": "<e.g. 5x/week>",
       "content_angles": ["<angle 1>", "<angle 2>"]
@@ -541,7 +541,7 @@ Return ONLY a valid JSON object with NO markdown fences, NO explanation text. Ma
     "themes_to_own": ["<theme where competitors are weak>", "<theme>"],
     "themes_to_attack": ["<competitor theme to create superior content on>", "<theme>"],
     "formats": [
-      {{"format": "Reels", "platform": "Instagram", "rationale": "<why — competitor gap>"}},
+      {{"format": "Reels", "platform": "Instagram", "rationale": "<why - competitor gap>"}},
       {{"format": "Short video", "platform": "TikTok", "rationale": "<why>"}}
     ]
   }},
@@ -582,7 +582,7 @@ Rules:
 - quick_wins must have 3-5 items
 - battlegrounds must have 4-6 items
 - channel_strategy keys must be lowercase platform names (instagram, tiktok, linkedin, youtube, facebook)
-- All strings must be specific — no generic advice like "create better content"
+- All strings must be specific - no generic advice like "create better content"
 - brand_position.strengths and vulnerabilities must be plain strings (not objects)"""
 
     response = await client.messages.create(
@@ -604,7 +604,7 @@ Rules:
         )
 
     # ── 4. Normalize output to match TypeScript types exactly ─────────────────
-    # Fix brand_position.strengths/vulnerabilities — if objects, extract point strings
+    # Fix brand_position.strengths/vulnerabilities - if objects, extract point strings
     bp = result.get("brand_position") or {}
     for field in ("strengths", "vulnerabilities"):
         items = bp.get(field) or []
@@ -614,7 +614,7 @@ Rules:
         ]
     result["brand_position"] = bp
 
-    # Fix competitor_breakdown — inject real follower data from scraped snapshots
+    # Fix competitor_breakdown - inject real follower data from scraped snapshots
     for cb in (result.get("competitor_breakdown") or []):
         cb_name = cb.get("name", "")
         real_followers = comp_followers.get(cb_name, {})
@@ -627,7 +627,7 @@ Rules:
                 cb.setdefault("data_snapshot", {})["top_themes"] = themes[:5]
                 break
 
-    # Fix quick_wins — normalize to {action, why_now, expected_result}
+    # Fix quick_wins - normalize to {action, why_now, expected_result}
     raw_qw = result.get("quick_wins") or []
     fixed_qw = []
     for qw in raw_qw:
@@ -641,7 +641,7 @@ Rules:
             })
     result["quick_wins"] = fixed_qw
 
-    # Fix channel_strategy — if it's a list, convert to dict keyed by platform
+    # Fix channel_strategy - if it's a list, convert to dict keyed by platform
     cs = result.get("channel_strategy")
     if isinstance(cs, list):
         cs_dict: dict = {}
@@ -657,7 +657,7 @@ Rules:
                 }
         result["channel_strategy"] = cs_dict
 
-    # Fix market_snapshot — normalize field names
+    # Fix market_snapshot - normalize field names
     ms = result.get("market_snapshot") or {}
     if ms and "total_competitors" not in ms:
         ms["total_competitors"] = num_competitors
@@ -741,7 +741,7 @@ async def generate_competitor_report(
         for m in real_metrics
     ) or "  No platform data"
 
-    # ── B. Fresh research — 2 parallel searches with timeout ─────────────────
+    # ── B. Fresh research - 2 parallel searches with timeout ─────────────────
     sources: list[str] = []
     research_blocks: list[str] = []
 
@@ -789,7 +789,7 @@ async def generate_competitor_report(
     if existing_news:
         lines = ["=== PREVIOUSLY CAPTURED NEWS ==="]
         for n in existing_news[:5]:
-            lines.append(f"• [{n.get('date', '')[:10]}] {n.get('title', '')} — {n.get('url', '')}")
+            lines.append(f"• [{n.get('date', '')[:10]}] {n.get('title', '')} - {n.get('url', '')}")
             if n.get("url"):
                 sources.append(n["url"])
         existing_news_block = "\n".join(lines)
@@ -841,7 +841,7 @@ Return ONLY a valid JSON object, no markdown. Schema:
   "platform_metrics": [
     {{
       "platform": "<name>",
-      "followers": <integer — use exact scraped number>,
+      "followers": <integer - use exact scraped number>,
       "is_estimated": false,
       "engagement_rate": <float>,
       "posts_per_week": <number or 0>,
@@ -972,7 +972,7 @@ Return ONLY a valid JSON object, no markdown. Schema:
         # Return a minimal but truthful structure using only real scraped data
         return {
             "company_profile": {
-                "description": f"{name} — full analysis could not be generated. Raw data is available below.",
+                "description": f"{name} - full analysis could not be generated. Raw data is available below.",
                 "industry": "", "estimated_size": "Unknown", "size_source": "N/A",
                 "founded_estimate": "Unknown", "hq_location": "Unknown",
                 "funding_stage": "unknown", "funding_amount": "Unverified",
@@ -1077,7 +1077,7 @@ Return ONLY valid JSON:
 
 
 # ---------------------------------------------------------------------------
-# Brand Memory — context builder for LLM injection
+# Brand Memory - context builder for LLM injection
 # ---------------------------------------------------------------------------
 
 def build_memory_context(memory_items: list[dict]) -> str:
@@ -1090,7 +1090,7 @@ def build_memory_context(memory_items: list[dict]) -> str:
     if not memory_items:
         return ""
 
-    lines: list[str] = ["BRAND MEMORY — What LEO has learned from your past corrections:"]
+    lines: list[str] = ["BRAND MEMORY - What LEO has learned from your past corrections:"]
 
     for item in memory_items[:15]:  # cap to control token usage
         ftype = item.get("type", "")
@@ -1102,7 +1102,7 @@ def build_memory_context(memory_items: list[dict]) -> str:
         if ftype == "edit" and original and edited:
             lines.append(f'- CORRECTED: "{original}" → "{edited}"')
         elif ftype == "reject" and original:
-            suffix = f" — {reason}" if reason else ""
+            suffix = f" - {reason}" if reason else ""
             lines.append(f'- REJECTED: "{original}"{suffix}')
         elif ftype == "approve" and original:
             lines.append(f'- APPROVED (keep doing this): "{original}"')
@@ -1258,7 +1258,7 @@ DATA SUMMARY:
 
 Platform breakdown: {lib.get('by_platform', {})}
 
-Generate 3-5 sharp, actionable insights that would genuinely help this brand. Be specific — reference actual numbers from the data.
+Generate 3-5 sharp, actionable insights that would genuinely help this brand. Be specific - reference actual numbers from the data.
 
 Types:
 - "warning": something that needs attention (brand drift, low posting cadence, stale competitor data)
@@ -1292,7 +1292,7 @@ Be honest and data-driven. Don't be generic. If data is sparse, focus on what th
     except Exception:
         return {"insights": []}
 """
-Web-enriched intelligence functions — appended to intelligence_service.py
+Web-enriched intelligence functions - appended to intelligence_service.py
 """
 
 # ---------------------------------------------------------------------------
@@ -1457,7 +1457,7 @@ async def stream_refresh_competitor_intelligence(
         return {"type": "step", "message": message, "icon": icon, "detail": detail, "competitor": competitor}
 
     if not _settings.APIFY_API_KEY:
-        yield _evt("Apify API key not configured — skipping social scraping", "warn")
+        yield _evt("Apify API key not configured - skipping social scraping", "warn")
 
     results = []
     all_scraped_for_batch: list[dict] = []
@@ -1582,7 +1582,7 @@ async def stream_refresh_competitor_intelligence(
             except Exception as exc:
                 yield _evt(f"Threads scrape failed for {name}", "warn", str(exc)[:80], name)
 
-        # Website — Firecrawl
+        # Website - Firecrawl
         if competitor.get("website") and _settings.FIRECRAWL_API_KEY:
             url = competitor["website"]
             if not url.startswith("http"):
@@ -1601,7 +1601,7 @@ async def stream_refresh_competitor_intelligence(
             except Exception as exc:
                 yield _evt(f"Could not read {url}", "warn", str(exc)[:60], name)
 
-        # Web enrichment — Exa + Tavily
+        # Web enrichment - Exa + Tavily
         from backend.config import settings as _s
         if _s.EXA_API_KEY or _s.TAVILY_API_KEY:
             from backend.services.integrations import exa_client, tavily_client
@@ -1635,7 +1635,7 @@ async def stream_refresh_competitor_intelligence(
             except Exception as exc:
                 yield _evt(f"Web enrichment skipped for {name}", "warn", str(exc)[:60], name)
 
-        # Collect for batch analysis — don't call Claude yet
+        # Collect for batch analysis - don't call Claude yet
         if scraped["platforms"]:
             all_scraped_for_batch.append(scraped)
 
@@ -1644,7 +1644,7 @@ async def stream_refresh_competitor_intelligence(
             "platforms_scraped": list(scraped["platforms"].keys()),
         })
 
-    # Batch Claude analysis — ONE call for all competitors instead of N calls
+    # Batch Claude analysis - ONE call for all competitors instead of N calls
     if all_scraped_for_batch:
         yield _evt(f"Analysing {len(all_scraped_for_batch)} competitor(s) with Claude AI…", "brain", "Single batch call")
         try:
@@ -1675,7 +1675,7 @@ async def stream_refresh_competitor_intelligence(
         except Exception:
             pass
 
-    yield _evt(f"All done — {len(results)} competitor(s) analysed", "done")
+    yield _evt(f"All done - {len(results)} competitor(s) analysed", "done")
     yield {"type": "result", "refreshed": results}
 
 
@@ -2068,7 +2068,7 @@ Return ONLY valid JSON:
 IMPORTANT:
 - Only include genuine competitors (same market, similar customers)
 - Relevance score: 0.9+ means direct/primary competitor, 0.6-0.8 means significant, 0.4-0.6 means adjacent
-- Extract real data from the web results — don't fabricate funding amounts you don't see in the sources
+- Extract real data from the web results - don't fabricate funding amounts you don't see in the sources
 - Use "unknown" for fields you cannot determine
 - Order by relevance_score descending"""
 
@@ -2163,7 +2163,7 @@ async def stream_discover_competitors(
             answer[:120] if answer else f"{len(results)} articles indexed",
         )
     except Exception as exc:
-        yield _evt("Web search unavailable — trying other sources", "warn", str(exc)[:80])
+        yield _evt("Web search unavailable - trying other sources", "warn", str(exc)[:80])
 
     # ── 2. Tavily: industry competitor landscape ─────────────────────────────
     if industry or themes:
@@ -2328,7 +2328,7 @@ ADDITIONAL CANDIDATES (with any social links found on their websites):
 {candidate_list[:3000] or "None"}
 
 Extract the 12 most relevant competitors. For each:
-- Use ONLY real data from the research — do not fabricate URLs, handles, or stats
+- Use ONLY real data from the research - do not fabricate URLs, handles, or stats
 - If a social link was found on their website, include it in social_hints
 - Include as many social platforms as you can find evidence for
 
@@ -2337,22 +2337,22 @@ Return ONLY valid JSON:
   "competitors": [
     {{
       "name": "<company name>",
-      "url": "<website URL — from research>",
+      "url": "<website URL - from research>",
       "description": "<1-2 sentence description>",
       "what_they_do": "<their core product/service>",
       "key_advantage": "<their main competitive advantage>",
-      "location": "<city, country — from research or unknown>",
-      "founded": "<year — from research or unknown>",
-      "employee_count": "<e.g. 11-50 — from research or unknown>",
+      "location": "<city, country - from research or unknown>",
+      "founded": "<year - from research or unknown>",
+      "employee_count": "<e.g. 11-50 - from research or unknown>",
       "funding_stage": "<bootstrapped|pre-seed|seed|series-a|series-b|public|unknown>",
-      "funding_amount": "<e.g. $300K — from research only, else unknown>",
+      "funding_amount": "<e.g. $300K - from research only, else unknown>",
       "industry": "<industry>",
       "why_competitor": "<1 sentence: why they directly compete>",
       "relevance_score": <0.0-1.0>,
       "type": "<company|influencer|creator|media>",
       "segments": ["<B2B and/or B2C>"],
       "geography": "<Local|Regional|National|Global>",
-      "estimated_revenue_range": "<<$1M | $1M-$10M | $10M-$50M | $50M+ | unknown — pick one>",
+      "estimated_revenue_range": "<<$1M | $1M-$10M | $10M-$50M | $50M+ | unknown - pick one>",
       "social_hints": {{
         "instagram": "<full URL or @handle if found, else null>",
         "facebook": "<full URL if found, else null>",
@@ -2365,7 +2365,7 @@ Return ONLY valid JSON:
   ]
 }}
 
-Order by relevance_score descending. Only include genuine competitors — no investors, partners, or suppliers."""
+Order by relevance_score descending. Only include genuine competitors - no investors, partners, or suppliers."""
 
     try:
         response = await client.messages.create(
@@ -2384,10 +2384,10 @@ Order by relevance_score descending. Only include genuine competitors — no inv
             _fs.save_search_cache(project_id, _cache_key, competitors, "discovery", ttl_hours=24)
         except Exception:
             pass
-        yield _evt(f"Analysis complete — {len(competitors)} competitors identified", "done")
+        yield _evt(f"Analysis complete - {len(competitors)} competitors identified", "done")
         yield {"type": "result", "competitors": competitors}
     except Exception as exc:
-        yield _evt("Synthesis failed — returning raw candidates", "warn", str(exc)[:80])
+        yield _evt("Synthesis failed - returning raw candidates", "warn", str(exc)[:80])
         fallback = [
             {
                 "name": c["name"], "url": c["url"],
@@ -2524,7 +2524,7 @@ async def stream_add_discovered_competitor(
                 "check", url,
             )
         else:
-            yield _evt("No social links found on website — will rely on search hints", "warn", url)
+            yield _evt("No social links found on website - will rely on search hints", "warn", url)
 
     # ── Step 2: Merge scraped links + discovery hints ────────────────────────
     def _clean_hint(hint: str | None, base_url: str) -> str | None:
@@ -2572,7 +2572,7 @@ async def stream_add_discovered_competitor(
 
     active_platforms = [p for p in ["instagram", "facebook", "tiktok", "linkedin", "youtube"] if merged_competitor.get(p)]
     yield _evt(
-        f"Starting social analysis — {len(active_platforms)} platform(s)" if active_platforms else "Starting analysis (website only)",
+        f"Starting social analysis - {len(active_platforms)} platform(s)" if active_platforms else "Starting analysis (website only)",
         "zap",
         ", ".join(active_platforms) if active_platforms else "website",
     )
@@ -2598,7 +2598,7 @@ async def stream_add_discovered_competitor(
             for p in existing_profiles
         )
         if already_exists:
-            yield _evt(f"{name} already in Profiles — skipping re-classification", "check")
+            yield _evt(f"{name} already in Profiles - skipping re-classification", "check")
         else:
             effective_brand_name = brand_name or brand_core.get("brandName") or brand_core.get("name") or ""
             async for evt in _classify(
@@ -2611,4 +2611,4 @@ async def stream_add_discovered_competitor(
                 yield evt
     except Exception as exc:
         logger.error("Competitor classification failed for %s: %s", name, exc)
-        yield _evt(f"Profile classification failed — {exc}", "warn", str(exc)[:120])
+        yield _evt(f"Profile classification failed - {exc}", "warn", str(exc)[:120])

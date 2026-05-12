@@ -1,12 +1,12 @@
 """
-Generation routes — AI media generation beyond text.
+Generation routes - AI media generation beyond text.
 
 Endpoints:
-  POST /projects/{id}/generate/image         — Imagen 3 image generation
-  POST /projects/{id}/generate/ai-prompt     — Claude generates brand-aligned image prompt
-  GET  /projects/{id}/images                 — List saved images
-  POST /projects/{id}/images                 — Save a generated image
-  DELETE /projects/{id}/images/{image_id}    — Delete a saved image
+  POST /projects/{id}/generate/image         - Imagen 3 image generation
+  POST /projects/{id}/generate/ai-prompt     - Claude generates brand-aligned image prompt
+  GET  /projects/{id}/images                 - List saved images
+  POST /projects/{id}/images                 - Save a generated image
+  DELETE /projects/{id}/images/{image_id}    - Delete a saved image
 """
 from __future__ import annotations
 
@@ -113,7 +113,7 @@ async def generate_ai_prompt(
     system = (
         "You are an expert creative director specialising in brand-consistent visual content. "
         "Generate a single, detailed image generation prompt that is highly visual, specific, "
-        "and consistent with the brand's identity. Output ONLY the prompt text — no explanations, "
+        "and consistent with the brand's identity. Output ONLY the prompt text - no explanations, "
         "no quotes, no preamble."
     )
     user_msg = (

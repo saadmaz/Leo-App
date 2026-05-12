@@ -20,7 +20,7 @@ class ChatRename(BaseModel):
     @field_validator("name")
     @classmethod
     def name_must_not_be_blank(cls, v: str) -> str:
-        """Reject blank or whitespace-only names — they create confusing UI state."""
+        """Reject blank or whitespace-only names - they create confusing UI state."""
         cleaned = v.strip()
         if not cleaned:
             raise ValueError("Chat name cannot be blank.")

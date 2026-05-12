@@ -1,5 +1,5 @@
 """
-On-Page SEO Optimisation — DataForSEO OnPage instant_pages + Claude.
+On-Page SEO Optimisation - DataForSEO OnPage instant_pages + Claude.
 
 Crawls a single URL with DataForSEO OnPage API, then Claude prioritises
 fixes, scores the page, and produces an actionable optimisation report.
@@ -93,7 +93,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"On-Page Audit — {body.url[:60]}"
+        title = f"On-Page Audit - {body.url[:60]}"
         doc = firebase_service.create_pillar1_doc(project_id, "on_page_seo", owner_uid, title)
         doc_id = doc["id"]
 
@@ -113,11 +113,11 @@ async def generate(
             except Exception as exc:
                 logger.warning("DataForSEO OnPage crawl failed: %s", exc)
                 yield _sse({"type": "research_step", "step": "page_crawl",
-                            "label": "Crawl unavailable — Claude-only analysis", "status": "skipped"})
+                            "label": "Crawl unavailable - Claude-only analysis", "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "page_crawl",
-                        "label": "DataForSEO not configured — heuristic analysis", "status": "skipped"})
+                        "label": "DataForSEO not configured - heuristic analysis", "status": "skipped"})
 
         # ── Step 2: Claude optimisation analysis ─────────────────────────────
         yield _sse({"type": "research_step", "step": "seo_analysis",
@@ -126,7 +126,7 @@ async def generate(
         system_prompt = """\
 You are LEO, an expert on-page SEO consultant. Analyse the page data and produce an actionable SEO audit report.
 
-OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a valid JSON object (no markdown fences):
 {
   "url": "https://...",
   "overall_score": 72,
@@ -143,7 +143,7 @@ OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
       "fix": "Exact fix with example if possible"
     }
   ],
-  "strengths": ["What the page is doing well — up to 5 items"],
+  "strengths": ["What the page is doing well - up to 5 items"],
   "priority_fixes": ["Top 3 fixes that will have the most SEO impact, ordered by impact"],
   "quick_wins": ["2-3 changes you can make in under 30 minutes"],
   "optimised_title": "Suggested improved title tag",
@@ -155,7 +155,7 @@ Rules:
 - overall_score: 0-100 (0=terrible, 100=perfect).
 - grade: A (90+), B (75-89), C (60-74), D (45-59), F (<45).
 - severity: critical = must fix now; warning = fix soon; info = nice to have.
-- Return ONLY valid JSON — no prose, no markdown.
+- Return ONLY valid JSON - no prose, no markdown.
 """
 
         brand_ctx = f"Brand: {brand_name}\n"
@@ -168,7 +168,7 @@ Rules:
 {brand_ctx}
 URL being audited: {body.url}
 
-{page_summary if page_summary else "No live crawl data available — analyse based on URL structure and brand context, then recommend general best-practice SEO improvements."}
+{page_summary if page_summary else "No live crawl data available - analyse based on URL structure and brand context, then recommend general best-practice SEO improvements."}
 
 Produce a comprehensive on-page SEO audit.
 """

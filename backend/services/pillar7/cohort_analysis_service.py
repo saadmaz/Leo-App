@@ -1,5 +1,5 @@
 """
-Cohort Analysis — Claude interprets retention / activation / revenue cohort data.
+Cohort Analysis - Claude interprets retention / activation / revenue cohort data.
 
 Input: cohort rows with retention percentages per week/period.
 Output: pattern analysis, lifecycle insights, actionable fixes.
@@ -23,7 +23,7 @@ SYSTEM = """\
 You are a product analytics expert who specialises in cohort analysis and retention science. \
 You find the signal in cohort data that product teams miss.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -31,7 +31,7 @@ Schema:
   "cohort_type": "string",
   "benchmark_comparison": "string (how this compares to industry benchmarks)",
   "retention_curve_shape": "string (e.g. 'steep initial drop then plateau', 'gradual decay', 'resurrection pattern')",
-  "critical_drop_off_period": "string (when the most users are lost — e.g. 'Week 1-2')",
+  "critical_drop_off_period": "string (when the most users are lost - e.g. 'Week 1-2')",
   "cohort_trends": [
     {
       "cohort": "string",
@@ -85,7 +85,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Cohort Analysis — {body.product_name} · {body.cohort_type}"
+    title = f"Cohort Analysis - {body.product_name} · {body.cohort_type}"
     doc = firebase_service.create_pillar1_doc(project_id, "cohort_analysis", owner_uid, title)
     doc_id = doc["id"]
 

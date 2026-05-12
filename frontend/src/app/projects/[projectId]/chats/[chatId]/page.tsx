@@ -249,16 +249,16 @@ export default function ChatPage() {
             useAppStore.getState().updateCarouselSession({
               brandProfile,
               scraping: false,
-              // Don't set currentQuestion yet — BrandProfileCard shows first
+              // Don't set currentQuestion yet - BrandProfileCard shows first
             })
             addMessage({
               id: newId(), role: 'assistant',
-              content: `Brand profile ready. I found your colours, fonts, and content style. Take a look below — then we'll pick your carousel type.`,
+              content: `Brand profile ready. I found your colours, fonts, and content style. Take a look below - then we'll pick your carousel type.`,
             })
           },
           (err) => {
             useAppStore.getState().updateCarouselSession({ scraping: false })
-            addMessage({ id: newId(), role: 'assistant', content: `Brand scan had an issue (${err}), but let's continue — I'll use sensible defaults.` })
+            addMessage({ id: newId(), role: 'assistant', content: `Brand scan had an issue (${err}), but let's continue - I'll use sensible defaults.` })
           },
         )
       } catch (err) {
@@ -310,7 +310,7 @@ export default function ChatPage() {
     const controller = new AbortController()
     setStreamController(controller)
 
-    // Strip previewUrl (blob URL) before sending to the backend — only base64+mediaType needed.
+    // Strip previewUrl (blob URL) before sending to the backend - only base64+mediaType needed.
     const imagePayload = attachments.map(({ base64, mediaType }) => ({ base64, mediaType }))
 
     await api.streamMessage(
@@ -339,7 +339,7 @@ export default function ChatPage() {
             api.chats
               .get(params.projectId, params.chatId)
               .then((chat) => upsertChat(chat))
-              .catch(() => {/* non-critical — the chat just keeps its old name */})
+              .catch(() => {/* non-critical - the chat just keeps its old name */})
           }
         },
 
@@ -354,7 +354,7 @@ export default function ChatPage() {
             finaliseMessage(assistantId, '')
             openUpgradeModal("You've used all your messages for this month. Upgrade to keep chatting.")
           } else {
-            finaliseMessage(assistantId, 'Something went wrong — please try again.')
+            finaliseMessage(assistantId, 'Something went wrong - please try again.')
           }
         },
       },
@@ -495,7 +495,7 @@ export default function ChatPage() {
                   <p className="text-sm text-muted-foreground max-w-xs">
                     {hasBrandCore
                       ? 'Brand Core is active. Ask for captions, campaign briefs, ad copy, or strategy.'
-                      : 'Paste your website or Instagram URL — LEO will build your Brand Core automatically.'}
+                      : 'Paste your website or Instagram URL - LEO will build your Brand Core automatically.'}
                   </p>
                 </div>
 
@@ -556,7 +556,7 @@ export default function ChatPage() {
                           'Build campaign briefs and content calendars',
                           'Analyse and refine your brand voice',
                           'Generate images from prompts (DALL-E 3)',
-                          'Switch channels — Instagram, LinkedIn, TikTok & more',
+                          'Switch channels - Instagram, LinkedIn, TikTok & more',
                         ].map((item) => (
                           <li key={item} className="flex items-start gap-1.5 text-xs text-muted-foreground">
                             <span className="text-primary mt-0.5 shrink-0">✦</span>
@@ -570,7 +570,7 @@ export default function ChatPage() {
               </motion.div>
             )}
 
-            {/* Load earlier button — shown when there are more messages above */}
+            {/* Load earlier button - shown when there are more messages above */}
             {!messagesLoading && hasMoreMessages && messages.length > 0 && (
               <div className="flex justify-center py-2">
                 <button
@@ -605,7 +605,7 @@ export default function ChatPage() {
               </AnimatePresence>
             )}
 
-            {/* Strategy Mode — funnel selector / research / document */}
+            {/* Strategy Mode - funnel selector / research / document */}
             {strategySession && (
               <StrategyMode
                 projectId={params.projectId}
@@ -644,7 +644,7 @@ export default function ChatPage() {
         />
       </div>
 
-      {/* Panels — rendered outside the scroll container */}
+      {/* Panels - rendered outside the scroll container */}
       <BrandCorePanel />
       <IngestionOverlay />
       <BrandVoiceScorerPanel projectId={params.projectId} />

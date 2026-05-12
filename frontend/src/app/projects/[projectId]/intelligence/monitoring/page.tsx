@@ -84,15 +84,15 @@ export default function MonitoringPage() {
           resolve,
         ).catch(reject)
       })
-      toast.success(`Scan complete — ${newAlerts} new alert(s) found.`)
+      toast.success(`Scan complete - ${newAlerts} new alert(s) found.`)
       await loadAlerts()
     } catch (err) {
       console.error(err)
       const msg = err instanceof Error ? err.message : String(err)
       toast.error(
-        msg.includes('401') || msg.includes('403') ? 'Authentication error — please refresh and try again.' :
+        msg.includes('401') || msg.includes('403') ? 'Authentication error - please refresh and try again.' :
         msg.includes('400') ? 'Project setup incomplete. Add your brand name in project settings.' :
-        msg.includes('429') ? 'Too many requests — wait a minute and try again.' :
+        msg.includes('429') ? 'Too many requests - wait a minute and try again.' :
         msg.includes('EXA_API_KEY') || msg.includes('TAVILY_API_KEY') ? 'Search API keys not configured. Check EXA_API_KEY and TAVILY_API_KEY in your backend .env.' :
         `Monitoring scan failed: ${msg}`
       )

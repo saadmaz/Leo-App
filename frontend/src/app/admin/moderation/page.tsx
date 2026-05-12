@@ -142,7 +142,7 @@ export default function AdminModerationPage() {
               {[1, 2, 3].map((i) => <Skeleton key={i} className="h-36 w-full rounded-xl" />)}
             </div>
           ) : pending.length === 0 ? (
-            <Empty icon={<ShieldCheck className="w-8 h-8 text-emerald-500" />} message="No pending flags — queue is clear." />
+            <Empty icon={<ShieldCheck className="w-8 h-8 text-emerald-500" />} message="No pending flags - queue is clear." />
           ) : (
             <div className="space-y-3">
               {pending.map((item) => (

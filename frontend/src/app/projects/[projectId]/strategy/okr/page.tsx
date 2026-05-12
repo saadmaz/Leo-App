@@ -111,7 +111,7 @@ export default function OKRPage() {
               disabled={loading}
               className="w-full py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 disabled:opacity-50 flex items-center justify-center gap-2 transition-colors"
             >
-              {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : 'Generate OKRs — 10 credits'}
+              {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : 'Generate OKRs - 10 credits'}
             </button>
           </div>
 

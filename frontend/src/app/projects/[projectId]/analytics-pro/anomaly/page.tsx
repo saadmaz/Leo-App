@@ -194,7 +194,7 @@ export default function AnomalyDetectionPage() {
             <textarea
               value={businessContext}
               onChange={e => setBusinessContext(e.target.value)}
-              placeholder="Add context that helps explain expected patterns — e.g. 'We ran a paid campaign in week 2', 'Q4 is typically our peak season', 'We migrated our database on Jan 15th'..."
+              placeholder="Add context that helps explain expected patterns - e.g. 'We ran a paid campaign in week 2', 'Q4 is typically our peak season', 'We migrated our database on Jan 15th'..."
               rows={7}
               className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             />
@@ -204,7 +204,7 @@ export default function AnomalyDetectionPage() {
         {error && <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-600 mb-4">{error}</div>}
 
         <Button onClick={handleRun} disabled={isStreaming} className="w-full mb-8">
-          {isStreaming ? 'Analysing...' : 'Detect Anomalies — 10 Credits'}
+          {isStreaming ? 'Analysing...' : 'Detect Anomalies - 10 Credits'}
         </Button>
 
         {/* Steps */}
@@ -266,11 +266,11 @@ export default function AnomalyDetectionPage() {
                         </div>
                         <div>
                           <p className="text-gray-400">Expected Range</p>
-                          <p className="font-semibold">{a.expected_range || '—'}</p>
+                          <p className="font-semibold">{a.expected_range || '-'}</p>
                         </div>
                         <div>
                           <p className="text-gray-400">Deviation</p>
-                          <p className="font-semibold">{a.deviation_pct ? `${a.deviation_pct}%` : '—'}</p>
+                          <p className="font-semibold">{a.deviation_pct ? `${a.deviation_pct}%` : '-'}</p>
                         </div>
                       </div>
 

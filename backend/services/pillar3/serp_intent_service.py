@@ -1,5 +1,5 @@
 """
-SERP Intent Mapping — DataForSEO SERP API + Claude intent classification.
+SERP Intent Mapping - DataForSEO SERP API + Claude intent classification.
 
 Fetches the top-10 organic SERP for a keyword, then uses Claude to classify
 the dominant search intent and recommend the ideal content format.
@@ -61,7 +61,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"SERP Intent — {body.keyword}"
+        title = f"SERP Intent - {body.keyword}"
         doc = firebase_service.create_pillar1_doc(project_id, "serp_intent", owner_uid, title)
         doc_id = doc["id"]
 
@@ -80,11 +80,11 @@ async def generate(
             except Exception as exc:
                 logger.warning("DataForSEO SERP failed: %s", exc)
                 yield _sse({"type": "research_step", "step": "serp_fetch",
-                            "label": "DataForSEO unavailable — Claude-only analysis", "status": "skipped"})
+                            "label": "DataForSEO unavailable - Claude-only analysis", "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "serp_fetch",
-                        "label": "DataForSEO not configured — Claude-only analysis", "status": "skipped"})
+                        "label": "DataForSEO not configured - Claude-only analysis", "status": "skipped"})
 
         # ── Step 2: Claude intent classification ──────────────────────────────
         yield _sse({"type": "research_step", "step": "intent_analysis",
@@ -94,7 +94,7 @@ async def generate(
         if serp_items:
             organic = [i for i in serp_items if i.get("type") == "organic"][:10]
             serp_str = "SERP RESULTS:\n" + "\n".join(
-                f"#{i.get('rank_absolute', idx+1)} [{i.get('type', 'organic')}] {i.get('title', '')} — {i.get('url', '')}"
+                f"#{i.get('rank_absolute', idx+1)} [{i.get('type', 'organic')}] {i.get('title', '')} - {i.get('url', '')}"
                 f"\n   Desc: {(i.get('description') or '')[:120]}"
                 for idx, i in enumerate(organic)
             )
@@ -102,7 +102,7 @@ async def generate(
         system_prompt = """\
 You are LEO, an SEO strategist specialising in search intent analysis.
 
-OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a valid JSON object (no markdown fences):
 {
   "keyword": "the analysed keyword",
   "overall_intent": "Informational | Navigational | Transactional | Commercial",
@@ -148,7 +148,7 @@ Rules:
 {brand_ctx}
 Keyword to analyse: "{body.keyword}"
 
-{serp_str if serp_str else "No live SERP data available — infer intent from keyword semantics and industry knowledge."}
+{serp_str if serp_str else "No live SERP data available - infer intent from keyword semantics and industry knowledge."}
 
 Classify search intent and provide content strategy recommendations.
 """

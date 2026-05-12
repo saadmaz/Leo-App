@@ -127,6 +127,6 @@ export default function VideoScriptPage() {
     <SSEFeaturePage projectId={projectId} title="Video Script" subtitle="Claude scriptwriting"
       icon={<Video className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Write Script — 15 credits" canSubmit={!!topic.trim()} />
+      onSubmit={generate} submitLabel="Write Script - 15 credits" canSubmit={!!topic.trim()} />
   )
 }

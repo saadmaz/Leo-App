@@ -1,5 +1,5 @@
 """
-Press Release Writing — pure Claude, brand-aware.
+Press Release Writing - pure Claude, brand-aware.
 
 Input:  news type, headline topic, key facts, quote info, tone.
 Output: structured press release with headline, dateline, body, quote, boilerplate.
@@ -21,34 +21,34 @@ _MAX_BRAND = 600
 
 SYSTEM = """\
 You are a PR expert who has written press releases for hundreds of technology companies. \
-You write releases that get picked up by journalists — not corporate fluff, but newsworthy, \
+You write releases that get picked up by journalists - not corporate fluff, but newsworthy, \
 punchy, factual prose that editors don't need to rewrite.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
-  "headline": "string (under 100 chars — active voice, newsy, not a marketing tagline)",
-  "subheadline": "string (optional secondary headline — 1 sentence)",
-  "dateline": "string (CITY, Month DD, YYYY —)",
-  "lead_paragraph": "string (the who/what/when/where/why in 2-3 sentences — most important facts first)",
+  "headline": "string (under 100 chars - active voice, newsy, not a marketing tagline)",
+  "subheadline": "string (optional secondary headline - 1 sentence)",
+  "dateline": "string (CITY, Month DD, YYYY -)",
+  "lead_paragraph": "string (the who/what/when/where/why in 2-3 sentences - most important facts first)",
   "body_paragraphs": ["string", "..."],
   "quote": {
-    "text": "string (a genuine-sounding, non-robotic quote — executive insight not marketing speak)",
+    "text": "string (a genuine-sounding, non-robotic quote - executive insight not marketing speak)",
     "speaker_name": "string",
     "speaker_title": "string"
   },
-  "boilerplate": "string (About [Company] — 2-3 sentences)",
+  "boilerplate": "string (About [Company] - 2-3 sentences)",
   "media_contact": "string (placeholder: '[Name], [Title] | pr@[company].com | +1-xxx-xxx-xxxx')",
   "embargo_note": "string or null",
   "seo_keywords": ["string"],
-  "editorial_notes": "string (optional tips for editors — e.g. 'high-res images available on request')"
+  "editorial_notes": "string (optional tips for editors - e.g. 'high-res images available on request')"
 }
 
 Rules:
-- Lead paragraph answers: Who, What, When, Where, Why — in that order.
+- Lead paragraph answers: Who, What, When, Where, Why - in that order.
 - Body paragraphs: context → impact → details → forward look. 3-4 paragraphs.
-- Quote must sound like a real human said it — no clichés like 'excited to announce' or 'thrilled to share'.
+- Quote must sound like a real human said it - no clichés like 'excited to announce' or 'thrilled to share'.
 - Boilerplate ends with website URL as a placeholder: [website].
 - Use AP Style for numbers, dates, and titles.
 """
@@ -69,7 +69,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Press Release — {body.headline_topic[:60]}"
+    title = f"Press Release - {body.headline_topic[:60]}"
     doc = firebase_service.create_pillar1_doc(project_id, "press_release", owner_uid, title)
     doc_id = doc["id"]
 
@@ -90,8 +90,8 @@ async def generate(
         + (f"- Target audience: {body.target_audience}\n" if body.target_audience else "")
         + (f"- Embargo: {body.embargo_date}\n" if body.embargo_date else "")
         + f"\nKEY FACTS:\n{facts_text}\n"
-        + (f"\nQUOTE — from {body.quote_name}, {body.quote_title}: {body.quote_hint}\n" if body.quote_name else "")
-        + (f"\nBOILERPLATE (provided — use as-is):\n{body.boilerplate}\n" if body.boilerplate else "")
+        + (f"\nQUOTE - from {body.quote_name}, {body.quote_title}: {body.quote_hint}\n" if body.quote_name else "")
+        + (f"\nBOILERPLATE (provided - use as-is):\n{body.boilerplate}\n" if body.boilerplate else "")
         + "\nWrite the press release. Return valid JSON only."
     )
 

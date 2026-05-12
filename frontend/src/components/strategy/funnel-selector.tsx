@@ -10,11 +10,11 @@ const FUNNEL_OPTIONS: {
   description: string
   color: string
 }[] = [
-  { type: 'tofu',      emoji: '🔺', label: 'TOFU',      description: 'Top of Funnel — Build Awareness',        color: 'hover:border-blue-500/60 hover:bg-blue-500/5' },
-  { type: 'mofu',      emoji: '🔶', label: 'MOFU',      description: 'Mid Funnel — Nurture & Convert',          color: 'hover:border-amber-500/60 hover:bg-amber-500/5' },
-  { type: 'bofu',      emoji: '🔻', label: 'BOFU',      description: 'Bottom of Funnel — Close Sales',          color: 'hover:border-red-500/60 hover:bg-red-500/5' },
-  { type: 'full',      emoji: '⚡', label: 'FULL',      description: 'Full Funnel — End-to-End Strategy',       color: 'hover:border-primary/60 hover:bg-primary/5' },
-  { type: 'retention', emoji: '🔁', label: 'RETENTION', description: 'Post-Purchase — Loyalty & LTV',           color: 'hover:border-emerald-500/60 hover:bg-emerald-500/5' },
+  { type: 'tofu',      emoji: '🔺', label: 'TOFU',      description: 'Top of Funnel - Build Awareness',        color: 'hover:border-blue-500/60 hover:bg-blue-500/5' },
+  { type: 'mofu',      emoji: '🔶', label: 'MOFU',      description: 'Mid Funnel - Nurture & Convert',          color: 'hover:border-amber-500/60 hover:bg-amber-500/5' },
+  { type: 'bofu',      emoji: '🔻', label: 'BOFU',      description: 'Bottom of Funnel - Close Sales',          color: 'hover:border-red-500/60 hover:bg-red-500/5' },
+  { type: 'full',      emoji: '⚡', label: 'FULL',      description: 'Full Funnel - End-to-End Strategy',       color: 'hover:border-primary/60 hover:bg-primary/5' },
+  { type: 'retention', emoji: '🔁', label: 'RETENTION', description: 'Post-Purchase - Loyalty & LTV',           color: 'hover:border-emerald-500/60 hover:bg-emerald-500/5' },
 ]
 
 interface FunnelSelectorProps {

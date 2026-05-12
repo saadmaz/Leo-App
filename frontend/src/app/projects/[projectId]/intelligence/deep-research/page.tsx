@@ -159,7 +159,7 @@ function ResearchProgress({
                 layer.status === 'running' ? 'text-primary font-medium' :
                 'text-muted-foreground'
               )}>
-                Layer {layer.layer} — {layer.label}
+                Layer {layer.layer} - {layer.label}
               </p>
             </div>
           </div>
@@ -211,21 +211,21 @@ function OverviewTab({ report }: { report: DeepResearchReport }) {
       <div className="grid grid-cols-2 gap-3">
         <div className="p-3 border border-border rounded-lg">
           <p className="text-[10px] text-muted-foreground uppercase tracking-wide mb-1">Target customer</p>
-          <p className="text-xs">{overview.target_customer || '—'}</p>
+          <p className="text-xs">{overview.target_customer || '-'}</p>
         </div>
         <div className="p-3 border border-border rounded-lg">
           <p className="text-[10px] text-muted-foreground uppercase tracking-wide mb-1">Pricing model</p>
-          <p className="text-xs capitalize">{overview.pricing_model || '—'}
+          <p className="text-xs capitalize">{overview.pricing_model || '-'}
             {overview.price_anchor && <span className="text-muted-foreground ml-1">(from {overview.price_anchor})</span>}
           </p>
         </div>
         <div className="p-3 border border-border rounded-lg">
           <p className="text-[10px] text-muted-foreground uppercase tracking-wide mb-1">Brand tone</p>
-          <p className="text-xs capitalize">{overview.tone || '—'}</p>
+          <p className="text-xs capitalize">{overview.tone || '-'}</p>
         </div>
         <div className="p-3 border border-border rounded-lg">
           <p className="text-[10px] text-muted-foreground uppercase tracking-wide mb-1">Value prop</p>
-          <p className="text-xs line-clamp-2">{overview.value_prop || '—'}</p>
+          <p className="text-xs line-clamp-2">{overview.value_prop || '-'}</p>
         </div>
       </div>
 
@@ -263,11 +263,11 @@ function AdsTab({ report }: { report: DeepResearchReport }) {
           <p className="text-[11px] text-muted-foreground">Active ads</p>
         </div>
         <div className="p-3 border border-border rounded-lg text-center">
-          <p className="text-sm font-semibold capitalize">{ads.estimated_ad_budget_signal || '—'}</p>
+          <p className="text-sm font-semibold capitalize">{ads.estimated_ad_budget_signal || '-'}</p>
           <p className="text-[11px] text-muted-foreground">Budget signal</p>
         </div>
         <div className="p-3 border border-border rounded-lg text-center">
-          <p className="text-sm font-semibold">{ads.dominant_cta || '—'}</p>
+          <p className="text-sm font-semibold">{ads.dominant_cta || '-'}</p>
           <p className="text-[11px] text-muted-foreground">Top CTA</p>
         </div>
       </div>
@@ -287,7 +287,7 @@ function AdsTab({ report }: { report: DeepResearchReport }) {
         <div className="p-4 border-2 border-amber-500/30 rounded-lg bg-amber-500/5">
           <div className="flex items-center gap-2 mb-2">
             <Star className="w-3.5 h-3.5 text-amber-500" />
-            <p className="text-xs font-semibold text-amber-600">Longest-running ad — their most proven creative</p>
+            <p className="text-xs font-semibold text-amber-600">Longest-running ad - their most proven creative</p>
             {ads.longest_running_ad.days_active > 0 && (
               <span className="text-[10px] text-muted-foreground ml-auto">Active {ads.longest_running_ad.days_active} days</span>
             )}
@@ -344,8 +344,8 @@ function SocialTab({ report }: { report: DeepResearchReport }) {
               {Object.entries(social.platform_raw).map(([platform, data]) => (
                 <tr key={platform} className="border-b border-border/50">
                   <td className="py-2 capitalize">{platform}</td>
-                  <td className="py-2 text-right">{data.followers?.toLocaleString() || '—'}</td>
-                  <td className="py-2 text-right">{data.post_count || '—'}</td>
+                  <td className="py-2 text-right">{data.followers?.toLocaleString() || '-'}</td>
+                  <td className="py-2 text-right">{data.post_count || '-'}</td>
                 </tr>
               ))}
             </tbody>
@@ -427,12 +427,12 @@ function SeoTab({ report }: { report: DeepResearchReport }) {
       <div className="grid grid-cols-3 gap-3">
         <div className="p-3 border border-border rounded-lg text-center">
           <p className={cn('text-sm font-bold capitalize', strengthColors[seo.seo_strength] || 'text-foreground')}>
-            {seo.seo_strength || '—'}
+            {seo.seo_strength || '-'}
           </p>
           <p className="text-[11px] text-muted-foreground">SEO strength</p>
         </div>
         <div className="p-3 border border-border rounded-lg text-center">
-          <p className="text-sm font-bold">{seo.indexed_pages?.toLocaleString() || '—'}</p>
+          <p className="text-sm font-bold">{seo.indexed_pages?.toLocaleString() || '-'}</p>
           <p className="text-[11px] text-muted-foreground">Indexed pages</p>
         </div>
         <div className="p-3 border border-border rounded-lg text-center">
@@ -534,7 +534,7 @@ function AudienceTab({ report }: { report: DeepResearchReport }) {
         <div className="p-4 border-2 border-emerald-500/30 rounded-lg bg-emerald-500/5">
           <div className="flex items-center gap-2 mb-2">
             <Zap className="w-3.5 h-3.5 text-emerald-500" />
-            <p className="text-xs font-semibold text-emerald-600">The gap — unmet needs their customers have</p>
+            <p className="text-xs font-semibold text-emerald-600">The gap - unmet needs their customers have</p>
           </div>
           <ul className="space-y-1">
             {s.unmet_needs.map((need, i) => (
@@ -818,7 +818,7 @@ export default function DeepResearchPage() {
           }
         },
         async () => {
-          // Stream done — fetch completed reports
+          // Stream done - fetch completed reports
           try {
             const result = await api.deepResearch.listReports(projectId)
             const fullReports: DeepResearchReport[] = []
@@ -897,8 +897,8 @@ export default function DeepResearchPage() {
             <div className="text-center space-y-1.5">
               <h2 className="text-lg font-semibold">7-Layer Competitor Intelligence</h2>
               <p className="text-sm text-muted-foreground">
-                Enter up to 5 competitors. LEO hunts them across every data source simultaneously —
-                ads, social, SEO, reviews, content — and delivers a strategic playbook.
+                Enter up to 5 competitors. LEO hunts them across every data source simultaneously -
+                ads, social, SEO, reviews, content - and delivers a strategic playbook.
               </p>
             </div>
 
@@ -1040,11 +1040,11 @@ export default function DeepResearchPage() {
                           <tr key={r.id} className="border-b border-border/50">
                             <td className="py-2 font-medium">{r.competitor.name}</td>
                             <td className="py-2 text-center">
-                              <span className={cn('font-medium', tConfig.color)}>{r.overview?.threat_level || '—'}</span>
+                              <span className={cn('font-medium', tConfig.color)}>{r.overview?.threat_level || '-'}</span>
                             </td>
-                            <td className="py-2 text-center">{r.paid_ads?.ads_found ?? '—'}</td>
-                            <td className="py-2 text-center capitalize">{r.seo?.seo_strength || '—'}</td>
-                            <td className="py-2 text-center capitalize">{r.sentiment?.overall_sentiment || '—'}</td>
+                            <td className="py-2 text-center">{r.paid_ads?.ads_found ?? '-'}</td>
+                            <td className="py-2 text-center capitalize">{r.seo?.seo_strength || '-'}</td>
+                            <td className="py-2 text-center capitalize">{r.sentiment?.overall_sentiment || '-'}</td>
                             <td className="py-2 text-center">
                               {isMonitored(r.competitor.name)
                                 ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mx-auto" />

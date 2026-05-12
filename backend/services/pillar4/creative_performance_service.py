@@ -1,4 +1,4 @@
-"""Creative Performance Analysis — Claude SSE streaming."""
+"""Creative Performance Analysis - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,7 +14,7 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, a creative performance analyst specialising in paid social and paid search.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "performance_tier": {
     "winners": [{"name": "creative_name", "reason": "why it wins", "scale_recommendation": "Increase budget by X%"}],
@@ -49,7 +49,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 async def generate(project: dict, body: CreativePerformanceRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
-        doc = firebase_service.create_pillar1_doc(project_id, "creative_performance", owner_uid, f"Creative Performance — {body.platform}")
+        doc = firebase_service.create_pillar1_doc(project_id, "creative_performance", owner_uid, f"Creative Performance - {body.platform}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "ranking", "label": f"Ranking {len(body.creatives)} creatives…", "status": "running"})
         user_prompt = f"""Brand: {brand_name}\nPlatform: {body.platform}\nOptimization goal: {body.optimization_goal}\nBudget to reallocate: ${body.budget_to_reallocate or 0}\n\nCreative data:\n{json.dumps(body.creatives, indent=2)}\n\nAnalyse all creatives and provide a complete performance report."""

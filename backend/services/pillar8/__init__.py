@@ -1,1 +1,1 @@
-# Pillar 8 — PR & Communications services
+# Pillar 8 - PR & Communications services

@@ -78,7 +78,7 @@ export default function BudgetPage() {
 
   const resultNode = result ? (
     <div className="space-y-4">
-      <h2 className="font-semibold text-sm">Budget Model — ${Number(result.total_budget).toLocaleString()} / {result.duration_months}mo</h2>
+      <h2 className="font-semibold text-sm">Budget Model - ${Number(result.total_budget).toLocaleString()} / {result.duration_months}mo</h2>
       {result.allocations?.map((a, i) => (
         <div key={i} className="flex items-center justify-between p-3 rounded-lg border border-border text-sm">
           <div>
@@ -99,6 +99,6 @@ export default function BudgetPage() {
     <SSEFeaturePage projectId={projectId} title="Budget Modelling" subtitle="Claude + Meta Ads benchmarks"
       icon={<DollarSign className="w-4 h-4" />} credits={30} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Model Budget — 30 credits" canSubmit={!!totalBudget && channels.length > 0} />
+      onSubmit={generate} submitLabel="Model Budget - 30 credits" canSubmit={!!totalBudget && channels.length > 0} />
   )
 }

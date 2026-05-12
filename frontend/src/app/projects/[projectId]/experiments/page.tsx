@@ -9,7 +9,7 @@ const FEATURES = [
     key: 'ab-test',
     icon: <FlaskConical className="w-5 h-5" />,
     title: 'A/B Test Designer',
-    description: 'Design statistically rigorous experiments — Claude writes hypotheses, generates variants, calculates required sample size, and produces a pre-launch checklist.',
+    description: 'Design statistically rigorous experiments - Claude writes hypotheses, generates variants, calculates required sample size, and produces a pre-launch checklist.',
     path: 'ab-test',
     credits: 10,
     tag: 'Claude',
@@ -27,7 +27,7 @@ const FEATURES = [
     key: 'messaging-resonance',
     icon: <MessageSquare className="w-5 h-5" />,
     title: 'Messaging Resonance',
-    description: 'Run small paid tests on Meta, then LEO reads the results and identifies which message angle resonated most — with transferable learnings for other channels.',
+    description: 'Run small paid tests on Meta, then LEO reads the results and identifies which message angle resonated most - with transferable learnings for other channels.',
     path: 'messaging-resonance',
     credits: 15,
     tag: 'Meta Ads + Claude',
@@ -36,7 +36,7 @@ const FEATURES = [
     key: 'email-ab',
     icon: <Mail className="w-5 h-5" />,
     title: 'Email A/B Analysis',
-    description: 'Paste your Loops or Brevo A/B results — Claude identifies the winner, explains why it worked, and recommends the next iteration to test.',
+    description: 'Paste your Loops or Brevo A/B results - Claude identifies the winner, explains why it worked, and recommends the next iteration to test.',
     path: 'email-ab',
     credits: 10,
     tag: 'Loops + Claude',
@@ -45,7 +45,7 @@ const FEATURES = [
     key: 'experiment-log',
     icon: <ClipboardList className="w-5 h-5" />,
     title: 'Experiment Log',
-    description: 'Track all experiments in one place — hypothesis, variants, status, winner, lift achieved. The source of truth that powers Learning Propagation.',
+    description: 'Track all experiments in one place - hypothesis, variants, status, winner, lift achieved. The source of truth that powers Learning Propagation.',
     path: 'experiment-log',
     credits: 0,
     tag: 'Native DB',
@@ -54,7 +54,7 @@ const FEATURES = [
     key: 'learning-propagation',
     icon: <Zap className="w-5 h-5" />,
     title: 'Learning Propagation',
-    description: 'Claude reads your concluded experiments and generates a synthesised learning report — with a prioritised action plan for applying insights across all your content.',
+    description: 'Claude reads your concluded experiments and generates a synthesised learning report - with a prioritised action plan for applying insights across all your content.',
     path: 'learning-propagation',
     credits: 20,
     tag: 'Claude',
@@ -71,7 +71,7 @@ export default function ExperimentsHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">Experimentation & Optimisation</h1>
-          <p className="text-xs text-muted-foreground">Pillar 10 — Claude + Meta Ads + Loops</p>
+          <p className="text-xs text-muted-foreground">Pillar 10 - Claude + Meta Ads + Loops</p>
         </div>
       </div>
 

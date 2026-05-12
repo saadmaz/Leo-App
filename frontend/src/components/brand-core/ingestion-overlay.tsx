@@ -243,7 +243,7 @@ export function IngestionOverlay() {
               </div>
 
               <div className="p-6 space-y-5">
-                {/* Source selection — hide while running */}
+                {/* Source selection - hide while running */}
                 {!ingestionRunning && !done && (
                   <motion.div
                     initial={{ opacity: 0 }}

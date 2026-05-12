@@ -311,7 +311,7 @@ export default function ExperimentLogPage() {
         <SidebarToggle />
         <div className="flex-1">
           <h1 className="font-semibold">Experiment Log</h1>
-          <p className="text-xs text-muted-foreground">Pillar 10 — Native DB</p>
+          <p className="text-xs text-muted-foreground">Pillar 10 - Native DB</p>
         </div>
         <CreateForm projectId={projectId} onCreated={load} />
       </div>

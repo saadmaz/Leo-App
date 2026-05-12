@@ -63,7 +63,7 @@ export default function StyleGuidePage() {
     setSaving(true)
     try {
       const fullContent = [
-        `# ${activeProject?.name ?? 'Brand'} — Brand Style Guide`,
+        `# ${activeProject?.name ?? 'Brand'} - Brand Style Guide`,
         '',
         guide.summary,
         '',
@@ -88,7 +88,7 @@ export default function StyleGuidePage() {
   function downloadGuide() {
     if (!guide) return
     const lines = [
-      `# ${activeProject?.name ?? 'Brand'} — Brand Style Guide`,
+      `# ${activeProject?.name ?? 'Brand'} - Brand Style Guide`,
       '',
       guide.summary,
       '',
@@ -111,7 +111,7 @@ export default function StyleGuidePage() {
         <BackButton />
         <BookOpen className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Brand Style Guide</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         {guide && (
           <div className="ml-auto flex items-center gap-2">
             <button onClick={saveToLibrary} disabled={saving}

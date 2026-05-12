@@ -1,5 +1,5 @@
 """
-Shared route dependencies — project access control helpers.
+Shared route dependencies - project access control helpers.
 
 All route handlers that need to gate on project membership or role should
 import from here rather than implementing their own version. This was the
@@ -58,13 +58,13 @@ def assert_member(project: dict, uid: str, required_role: str = "viewer") -> Non
     if user_role is None:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Access denied — not a project member.",
+            detail="Access denied - not a project member.",
         )
 
     if _ROLE_RANK.get(user_role, -1) < _ROLE_RANK.get(required_role, 0):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail=f"Insufficient permissions — {required_role} or higher required.",
+            detail=f"Insufficient permissions - {required_role} or higher required.",
         )
 
 
@@ -81,7 +81,7 @@ def assert_admin(project: dict, uid: str) -> None:
 def get_project_as_member(project_id: str, uid: str) -> dict:
     """
     Fetch a project and assert the user is any kind of member.
-    Convenience wrapper — equivalent to:
+    Convenience wrapper - equivalent to:
         project = get_project_or_404(project_id)
         assert_member(project, uid)
         return project

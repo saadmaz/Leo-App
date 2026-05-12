@@ -86,7 +86,7 @@ export default function PodcastPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Episode Title (optional)</label>
         <input value={episodeTitle} onChange={(e) => setEpisodeTitle(e.target.value)}
-          placeholder="e.g. #42 — How AI is Changing Marketing"
+          placeholder="e.g. #42 - How AI is Changing Marketing"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
       </div>
       <div>
@@ -120,7 +120,7 @@ export default function PodcastPage() {
         <div className="p-4 rounded-xl border border-border bg-card">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Timestamps</p>
           {result.timestamps.map((t, i) => (
-            <p key={i} className="text-xs text-muted-foreground font-mono">{t.time} — {t.topic}</p>
+            <p key={i} className="text-xs text-muted-foreground font-mono">{t.time} - {t.topic}</p>
           ))}
         </div>
       )}
@@ -131,7 +131,7 @@ export default function PodcastPage() {
           {result.notable_quotes.map((q, i) => (
             <blockquote key={i} className="border-l-2 border-primary pl-3">
               <p className="text-sm italic">&ldquo;{q.quote}&rdquo;</p>
-              <p className="text-xs text-muted-foreground mt-0.5">— {q.speaker}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">- {q.speaker}</p>
             </blockquote>
           ))}
         </div>
@@ -157,6 +157,6 @@ export default function PodcastPage() {
     <SSEFeaturePage projectId={projectId} title="Podcast Show Notes" subtitle="Whisper + Claude"
       icon={<Mic className="w-4 h-4" />} credits={20} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Show Notes — 20 credits" canSubmit={canSubmit} />
+      onSubmit={generate} submitLabel="Generate Show Notes - 20 credits" canSubmit={canSubmit} />
   )
 }

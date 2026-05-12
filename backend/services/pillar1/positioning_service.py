@@ -1,5 +1,5 @@
 """
-Positioning Workshop service — guided multi-turn Claude conversation, SSE streaming.
+Positioning Workshop service - guided multi-turn Claude conversation, SSE streaming.
 
 Leads the user through 7 structured stages to develop a brand positioning statement.
 Stage advancement is detected via a <stage_complete/> tag in Claude's response.
@@ -45,7 +45,7 @@ WORKSHOP_STAGES = [
         "label": "What problem do you solve?",
         "system_goal": (
             "Ask the user to describe the primary problem they solve for that customer. "
-            "Push for specificity — avoid vague pain points. "
+            "Push for specificity - avoid vague pain points. "
             "When you have a clear, specific problem statement, end your reply with <stage_complete/>"
         ),
     },
@@ -62,7 +62,7 @@ WORKSHOP_STAGES = [
         "stage": 3,
         "label": "What's your proof?",
         "system_goal": (
-            "Ask the user for evidence of their claims — customer results, case studies, "
+            "Ask the user for evidence of their claims - customer results, case studies, "
             "metrics, testimonials, awards. "
             "When you have at least one proof point, end your reply with <stage_complete/>"
         ),

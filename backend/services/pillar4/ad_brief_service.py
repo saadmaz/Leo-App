@@ -1,5 +1,5 @@
 """
-Paid Ad Campaign Brief Generator — Claude-powered.
+Paid Ad Campaign Brief Generator - Claude-powered.
 
 Produces a comprehensive paid advertising brief with:
 - Platform-specific strategy and budget allocation
@@ -30,7 +30,7 @@ You are a senior paid media strategist with deep expertise across Google Ads, Me
 TikTok Ads, and LinkedIn Ads. Your task is to produce a comprehensive, actionable paid \
 advertising campaign brief.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary outside the JSON.
+Return ONLY a valid JSON object - no markdown fences, no commentary outside the JSON.
 
 Schema:
 {
@@ -105,7 +105,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Ad Brief — {body.campaign_name}"
+    title = f"Ad Brief - {body.campaign_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "ad_brief", owner_uid, title)
     doc_id = doc["id"]
 

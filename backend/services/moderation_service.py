@@ -7,7 +7,7 @@ Responsibilities:
   3. Detect anomalous usage (high message volume relative to platform average).
 
 Design:
-  - check_and_flag() is non-blocking — callers use asyncio.create_task() so the
+  - check_and_flag() is non-blocking - callers use asyncio.create_task() so the
     user's chat stream is never delayed by moderation work.
   - Flagging is additive: the user's message is always saved and delivered; the
     admin queue is purely for review, not for real-time blocking (add that later
@@ -106,7 +106,7 @@ def check_and_flag(
     if not hits:
         return
 
-    # Avoid circular import — import at call-time only
+    # Avoid circular import - import at call-time only
     from backend.services import firebase_service
 
     hit_labels = [label for pid, _, label in _INJECTION_PATTERNS if pid in hits]
@@ -124,7 +124,7 @@ def check_and_flag(
         message_id=message_id,
     )
     logger.info(
-        "Flagged message from uid=%s in project=%s — patterns: %s",
+        "Flagged message from uid=%s in project=%s - patterns: %s",
         uid, project_id, hit_labels,
     )
 
@@ -135,7 +135,7 @@ def get_abuse_suspects(users: list[dict], platform_avg_messages: float) -> list[
     return users whose message count is ≥ 5× the average (or ≥ 200 absolute),
     sorted by messagesUsed descending.
 
-    This is a heuristic — not a hard block. The admin can review and act.
+    This is a heuristic - not a hard block. The admin can review and act.
     """
     threshold = max(200, platform_avg_messages * 5)
     suspects = []

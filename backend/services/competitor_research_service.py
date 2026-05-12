@@ -1,16 +1,16 @@
 """
-Competitor Deep Research Service — 7-Layer Intelligence Engine.
+Competitor Deep Research Service - 7-Layer Intelligence Engine.
 
 Runs all 7 layers in parallel per competitor, yields SSE-style events,
 stores raw + parsed data in Firestore, and returns a structured report.
 
-Layer 1  — Website & Messaging (Firecrawl)
-Layer 2  — Paid Ad Intelligence (Apify facebook-ads-scraper)
-Layer 3  — Organic Social Content Audit (Apify — all platforms)
-Layer 4  — SEO & Keyword Intelligence (SerpAPI)
-Layer 5  — Audience Sentiment Analysis (comments + reviews + Reddit)
-Layer 6  — Content Strategy & Topic Gap Map
-Layer 7  — Strategic Positioning & SWOT (Claude synthesis)
+Layer 1  - Website & Messaging (Firecrawl)
+Layer 2  - Paid Ad Intelligence (Apify facebook-ads-scraper)
+Layer 3  - Organic Social Content Audit (Apify - all platforms)
+Layer 4  - SEO & Keyword Intelligence (SerpAPI)
+Layer 5  - Audience Sentiment Analysis (comments + reviews + Reddit)
+Layer 6  - Content Strategy & Topic Gap Map
+Layer 7  - Strategic Positioning & SWOT (Claude synthesis)
 """
 
 import asyncio
@@ -62,7 +62,7 @@ async def _claude_json(prompt: str, system: str = "", max_tokens: int = 800) -> 
 
 
 # ---------------------------------------------------------------------------
-# Layer 1 — Website & Messaging (Firecrawl)
+# Layer 1 - Website & Messaging (Firecrawl)
 # ---------------------------------------------------------------------------
 
 async def _layer1_website(competitor: dict) -> dict:
@@ -73,7 +73,7 @@ async def _layer1_website(competitor: dict) -> dict:
 
     api_key = settings.FIRECRAWL_API_KEY
     if not api_key:
-        logger.warning("FIRECRAWL_API_KEY not set — skipping Layer 1")
+        logger.warning("FIRECRAWL_API_KEY not set - skipping Layer 1")
         return {}
 
     pages = ["", "/about", "/pricing", "/blog", "/features"]
@@ -127,14 +127,14 @@ Website content:
 
 
 # ---------------------------------------------------------------------------
-# Layer 2 — Paid Ad Intelligence (Apify facebook-ads-scraper)
+# Layer 2 - Paid Ad Intelligence (Apify facebook-ads-scraper)
 # ---------------------------------------------------------------------------
 
 async def _layer2_paid_ads(competitor: dict) -> dict:
     """Scrape Meta Ad Library for active ads."""
     api_key = settings.APIFY_API_KEY
     if not api_key:
-        logger.warning("APIFY_API_KEY not set — skipping Layer 2")
+        logger.warning("APIFY_API_KEY not set - skipping Layer 2")
         return {}
 
     name = competitor.get("name", "")
@@ -236,14 +236,14 @@ Ads data:
 
 
 # ---------------------------------------------------------------------------
-# Layer 3 — Organic Social Content Audit (Apify)
+# Layer 3 - Organic Social Content Audit (Apify)
 # ---------------------------------------------------------------------------
 
 async def _layer3_social(competitor: dict) -> dict:
     """Scrape social platforms and analyse content patterns."""
     api_key = settings.APIFY_API_KEY
     if not api_key:
-        logger.warning("APIFY_API_KEY not set — skipping Layer 3")
+        logger.warning("APIFY_API_KEY not set - skipping Layer 3")
         return {}
 
     from backend.services.ingestion.apify_client import (
@@ -326,14 +326,14 @@ Social data:
 
 
 # ---------------------------------------------------------------------------
-# Layer 4 — SEO & Keyword Intelligence (SerpAPI)
+# Layer 4 - SEO & Keyword Intelligence (SerpAPI)
 # ---------------------------------------------------------------------------
 
 async def _layer4_seo(competitor: dict) -> dict:
     """Run SerpAPI queries to map competitor's search footprint."""
     api_key = settings.SERPAPI_API_KEY
     if not api_key:
-        logger.warning("SERPAPI_API_KEY not set — skipping Layer 4")
+        logger.warning("SERPAPI_API_KEY not set - skipping Layer 4")
         return {}
 
     name = competitor.get("name", "")
@@ -423,7 +423,7 @@ Raw signals:
 
 
 # ---------------------------------------------------------------------------
-# Layer 5 — Audience Sentiment Analysis
+# Layer 5 - Audience Sentiment Analysis
 # ---------------------------------------------------------------------------
 
 async def _layer5_sentiment(competitor: dict, layer3: dict) -> dict:
@@ -503,7 +503,7 @@ Review and sentiment data:
 
 
 # ---------------------------------------------------------------------------
-# Layer 6 — Content Strategy & Topic Gap Map
+# Layer 6 - Content Strategy & Topic Gap Map
 # ---------------------------------------------------------------------------
 
 async def _layer6_content_map(competitor: dict, layer1: dict, layer3: dict, layer4: dict) -> dict:
@@ -545,7 +545,7 @@ Content data:
 
 
 # ---------------------------------------------------------------------------
-# Layer 7 — Strategic SWOT Synthesis (Claude)
+# Layer 7 - Strategic SWOT Synthesis (Claude)
 # ---------------------------------------------------------------------------
 
 async def _layer7_swot(
@@ -586,7 +586,7 @@ Return a JSON object:
   "threats_to_us": ["where they are stronger 1", "threat 2"],
   "positioning_summary": "one paragraph where they sit in the market",
   "how_they_win_customers": "their primary acquisition angle",
-  "how_we_beat_them": "our clearest path — be specific not generic",
+  "how_we_beat_them": "our clearest path - be specific not generic",
   "threat_level": "high|medium|low",
   "steal_this": {{
     "tactic": "one specific thing they do that works",
@@ -595,7 +595,7 @@ Return a JSON object:
   }}
 }}"""
 
-    return await _claude_json(synthesis_prompt, max_tokens=1500)  # SWOT synthesis — larger schema
+    return await _claude_json(synthesis_prompt, max_tokens=1500)  # SWOT synthesis - larger schema
 
 
 # ---------------------------------------------------------------------------
@@ -604,7 +604,7 @@ Return a JSON object:
 
 async def discover_competitors(project_id: str) -> list[dict]:
     """
-    DEPRECATED — no longer called by any route.
+    DEPRECATED - no longer called by any route.
     The POST /competitors/discover route now calls intelligence_service.discover_competitors
     (Tavily + Exa + Claude synthesis). This SerpAPI-only version is retained only as a
     fallback reference and will be removed in a future cleanup.
@@ -759,7 +759,7 @@ async def stream_deep_research(
         yield {"type": "layer_done", "layer": 6, "name": name}
 
         # --- Layer 7 ---
-        yield {"type": "layer_started", "layer": 7, "name": name, "message": f"Cross-referencing with your Brand Core — building strategic SWOT..."}
+        yield {"type": "layer_started", "layer": 7, "name": name, "message": f"Cross-referencing with your Brand Core - building strategic SWOT..."}
         layer7 = await _layer7_swot(competitor, layer1, layer2, layer3, layer4, layer5, layer6, brand_core)
         yield {"type": "layer_done", "layer": 7, "name": name}
 

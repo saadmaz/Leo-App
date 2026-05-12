@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 _SYSTEM_PROMPT = """
 You are a personal branding strategist. Your job is to synthesise interview answers
-into a structured Personal Core — the identity intelligence layer that will power
+into a structured Personal Core - the identity intelligence layer that will power
 all future content generation for this person.
 
 You must return ONLY a valid JSON object with no markdown, no code fences, no commentary.
@@ -38,7 +38,7 @@ Key rules:
 - uniqueAngle: the ONE thing that makes this person's perspective different. Be specific.
 - contentPillars: exactly 3-5 pillars. Each must have a specific angle, not just a topic name.
   Bad: "Leadership". Good: "Leadership psychology for introverted founders".
-- voiceSummary: a concrete description of how they write — sentence length, register, what they never say.
+- voiceSummary: a concrete description of how they write - sentence length, register, what they never say.
   This is used directly in every future generation prompt.
 - avoidedLanguage: extract from both C_avoided_language AND C_writing_samples analysis.
 """.strip()
@@ -51,12 +51,12 @@ Here are all the interview answers for {full_name}:
 Based on these answers, generate the Personal Core JSON with exactly this structure:
 
 {{
-  "headline": "string — professional one-liner",
-  "positioningStatement": "string — I help X achieve Y by Z",
-  "uniqueAngle": "string — specific differentiating perspective",
-  "originStory": "string — 3-paragraph narrative: start, turning point, now",
+  "headline": "string - professional one-liner",
+  "positioningStatement": "string - I help X achieve Y by Z",
+  "uniqueAngle": "string - specific differentiating perspective",
+  "originStory": "string - 3-paragraph narrative: start, turning point, now",
   "values": ["string"],
-  "credentialHighlights": ["string — top 3-5 proof points"],
+  "credentialHighlights": ["string - top 3-5 proof points"],
   "expertiseTopics": [
     {{ "topic": "string", "depth": 1-3, "differentiatingAngle": "string" }}
   ],
@@ -70,9 +70,9 @@ Based on these answers, generate the Personal Core JSON with exactly this struct
   }},
   "contentPillars": [
     {{
-      "name": "string — specific angle, not just topic",
+      "name": "string - specific angle, not just topic",
       "description": "string",
-      "contentAngles": ["string — 3 specific sub-angles"],
+      "contentAngles": ["string - 3 specific sub-angles"],
       "percentage": 20
     }}
   ],
@@ -81,8 +81,8 @@ Based on these answers, generate the Personal Core JSON with exactly this struct
     "instagram": {{ "focusLevel": "primary|secondary|passive", "postsPerWeek": 2, "contentTypes": ["carousel", "reels"] }}
   }},
   "brandGoals": ["string"],
-  "goal90Day": "string — specific, measurable",
-  "goal12Month": "string — specific, measurable",
+  "goal90Day": "string - specific, measurable",
+  "goal12Month": "string - specific, measurable",
   "admiredVoices": ["string"],
   "antiVoices": ["string"],
   "nicheTiredTopics": ["string"],
@@ -93,7 +93,7 @@ Based on these answers, generate the Personal Core JSON with exactly this struct
     "signaturePhrases": ["string"],
     "avoidedPhrases": ["string"],
     "punctuationStyle": "string",
-    "writingSamples": ["string — excerpt from their samples if provided"]
+    "writingSamples": ["string - excerpt from their samples if provided"]
   }}
 }}
 
@@ -144,7 +144,7 @@ async def run(project_id: str, full_name: str, answers: dict) -> AsyncIterator[s
         try:
             extracted = json.loads(raw)
         except json.JSONDecodeError as e:
-            logger.error("Personal Core extraction — JSON parse error: %s\nRaw: %s", e, raw[:500])
+            logger.error("Personal Core extraction - JSON parse error: %s\nRaw: %s", e, raw[:500])
             yield _sse("error", {"message": "Failed to parse extracted data. Please try again."})
             return
 

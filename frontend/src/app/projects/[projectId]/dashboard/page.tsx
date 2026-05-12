@@ -137,7 +137,7 @@ export default function DashboardPage() {
         <LayoutDashboard className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Brand Dashboard</span>
         {activeProject && (
-          <span className="text-xs text-muted-foreground">— {activeProject.name}</span>
+          <span className="text-xs text-muted-foreground">- {activeProject.name}</span>
         )}
         <div className="ml-auto flex items-center gap-2">
           <div className="flex items-center border border-border rounded-md overflow-hidden text-xs">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
       {/* Body */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
 
-        {/* Setup checklist — shown until dismissed */}
+        {/* Setup checklist - shown until dismissed */}
         {activeProject && <SetupChecklist project={activeProject} />}
 
         {/* Top stats row */}

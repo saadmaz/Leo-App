@@ -1,5 +1,5 @@
 """
-Forecasting Model — Claude-driven regression-style forecast from historical trends.
+Forecasting Model - Claude-driven regression-style forecast from historical trends.
 
 Input: historical metric time series (monthly/weekly).
 Output: base / optimistic / pessimistic forecast scenarios with confidence intervals.
@@ -22,9 +22,9 @@ _MAX_BRAND = 600
 SYSTEM = """\
 You are a data scientist and growth forecaster. You extrapolate business metrics \
 using trend analysis, seasonality recognition, and growth assumptions. \
-You always provide scenario ranges — never false precision with a single number.
+You always provide scenario ranges - never false precision with a single number.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -61,7 +61,7 @@ Schema:
   ],
   "cross_metric_dependencies": ["string (e.g. 'MRR forecast depends on DAU trend holding')"],
   "assumptions_used": ["string (explicit assumptions baked into the forecast)"],
-  "data_quality_notes": ["string (e.g. 'Only 3 months of data — forecast confidence is low')"],
+  "data_quality_notes": ["string (e.g. 'Only 3 months of data - forecast confidence is low')"],
   "recommended_targets": [
     {
       "metric": "string",
@@ -89,7 +89,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Forecast — {len(body.metrics)} metrics · {body.forecast_periods} {body.period_type}s"
+    title = f"Forecast - {len(body.metrics)} metrics · {body.forecast_periods} {body.period_type}s"
     doc = firebase_service.create_pillar1_doc(project_id, "forecast", owner_uid, title)
     doc_id = doc["id"]
 

@@ -1,11 +1,11 @@
 """
-Campaign routes — CRUD + AI-powered SSE generation.
+Campaign routes - CRUD + AI-powered SSE generation.
 
 Endpoints:
-  GET    /projects/{id}/campaigns            — list campaigns
-  GET    /projects/{id}/campaigns/{cid}      — get campaign
-  DELETE /projects/{id}/campaigns/{cid}      — delete campaign
-  POST   /projects/{id}/campaigns/generate   — generate campaign (SSE stream)
+  GET    /projects/{id}/campaigns            - list campaigns
+  GET    /projects/{id}/campaigns/{cid}      - get campaign
+  DELETE /projects/{id}/campaigns/{cid}      - delete campaign
+  POST   /projects/{id}/campaigns/generate   - generate campaign (SSE stream)
 """
 
 import json

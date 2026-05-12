@@ -1,4 +1,4 @@
-# Leo — Technical Overview
+# Leo - Technical Overview
 ## Everything Built, Every API Used, and Upgrade Recommendations
 
 > Last updated: March 2026
@@ -81,7 +81,7 @@ Scraping   Extraction    Generation
 | **Competitor snapshots** | Scrape social + web presence, Claude analysis of tone/strategy/gaps |
 | **Competitive strategy** | Full strategy plan: battlegrounds, action plan, quick wins |
 | **Competitor deep report** | Per-competitor deep-dive report |
-| **Competitor Profiles** | 5-dimension classification engine (built this session — see §4) |
+| **Competitor Profiles** | 5-dimension classification engine (built this session - see §4) |
 | **Brand monitoring** | Real-time brand mention monitoring via Exa + Tavily |
 | **AI insights** | Proactive 3–5 insights from memory + analytics + competitors |
 | **Hashtag research** | Tiered hashtag strategy (mega/large/medium/niche) with Exa enrichment |
@@ -148,7 +148,7 @@ Scraping   Extraction    Generation
 
 ### 4a. Pre-tool Streaming Status Updates
 
-**Problem:** The chat had no feedback between message send and first token — just silence.
+**Problem:** The chat had no feedback between message send and first token - just silence.
 
 **What was built:**
 - Backend (`stream.py`) now emits 3 SSE status events before calling Claude:
@@ -167,7 +167,7 @@ Scraping   Extraction    Generation
 
 ---
 
-### 4b. Competitor Profiles — 5-Dimension Classification Engine
+### 4b. Competitor Profiles - 5-Dimension Classification Engine
 
 **What was built:** A full end-to-end system to classify any competitor across 5 strategic dimensions using live web data + Claude.
 
@@ -206,9 +206,9 @@ SSE events stream to frontend in real-time
 ```
 
 #### Backend files:
-- `backend/services/competitor_classifier_service.py` — NEW: core classification engine
-- `backend/services/firebase_service.py` — 5 new Firestore CRUD functions
-- `backend/api/routes/intelligence.py` — 5 new endpoints
+- `backend/services/competitor_classifier_service.py` - NEW: core classification engine
+- `backend/services/firebase_service.py` - 5 new Firestore CRUD functions
+- `backend/api/routes/intelligence.py` - 5 new endpoints
 
 #### API endpoints added:
 | Method | Path | Description |
@@ -220,10 +220,10 @@ SSE events stream to frontend in real-time
 | `POST` | `/projects/{id}/competitors/profiles/{profile_id}/refresh` | Re-classify |
 
 #### Frontend files:
-- `frontend/src/types/index.ts` — `CompetitorProfile`, `ClassifyStreamEvent`, dimension union types
-- `frontend/src/lib/api.ts` — `api.competitorProfiles.{list, get, delete, classify, refresh}`
-- `frontend/src/components/layout/sidebar.tsx` — "Competitor Profiles" nav item
-- `frontend/src/app/projects/[projectId]/intelligence/profiles/page.tsx` — NEW premium page
+- `frontend/src/types/index.ts` - `CompetitorProfile`, `ClassifyStreamEvent`, dimension union types
+- `frontend/src/lib/api.ts` - `api.competitorProfiles.{list, get, delete, classify, refresh}`
+- `frontend/src/components/layout/sidebar.tsx` - "Competitor Profiles" nav item
+- `frontend/src/app/projects/[projectId]/intelligence/profiles/page.tsx` - NEW premium page
 
 #### Frontend page features:
 - 3-column responsive card grid
@@ -237,7 +237,7 @@ SSE events stream to frontend in real-time
 
 ---
 
-### 4c. ThinkingIndicator — Premium Tool/Status UI
+### 4c. ThinkingIndicator - Premium Tool/Status UI
 
 **What was built:** `frontend/src/components/chat/thinking-indicator.tsx`
 
@@ -387,7 +387,7 @@ adminAuditLogs/{logId}
 
 ## 7. API Upgrade Recommendations
 
-### 7a. Search & Research — HIGH PRIORITY
+### 7a. Search & Research - HIGH PRIORITY
 
 **Current:** Exa + Tavily with hard daily quotas (100 + 200 searches/day)
 
@@ -401,23 +401,23 @@ adminAuditLogs/{logId}
 
 ---
 
-### 7b. Competitor Intelligence Data — HIGH PRIORITY
+### 7b. Competitor Intelligence Data - HIGH PRIORITY
 
 **Current:** Generic web search via Exa/Tavily for firmographic data (often inaccurate)
 
 | Upgrade | Why | Cost |
 |---|---|---|
-| **Proxycurl API** | Real LinkedIn data: employee count, funding, HQ, founded year, specialities — all live from LinkedIn profiles. Single API call gives you most of Dimension 2 (Size & Revenue) with high confidence | ~$0.01/profile |
-| **Clearbit / Apollo.io API** | Firmographic data: revenue estimates, tech stack, employee count, funding — from a curated B2B database. Much more reliable than inferring from web search | $99–$499/month |
+| **Proxycurl API** | Real LinkedIn data: employee count, funding, HQ, founded year, specialities - all live from LinkedIn profiles. Single API call gives you most of Dimension 2 (Size & Revenue) with high confidence | ~$0.01/profile |
+| **Clearbit / Apollo.io API** | Firmographic data: revenue estimates, tech stack, employee count, funding - from a curated B2B database. Much more reliable than inferring from web search | $99–$499/month |
 | **Crunchbase API** | Funding rounds, investor data, valuation estimates, founding year, HQ | $299/month (basic) |
-| **SimilarWeb API** | Traffic rank, monthly visits, bounce rate, audience demographics — the exact signals described in the 5-dimension spec | Enterprise pricing |
+| **SimilarWeb API** | Traffic rank, monthly visits, bounce rate, audience demographics - the exact signals described in the 5-dimension spec | Enterprise pricing |
 | **G2 API / Trustpilot API** | Review count and rating as a proxy for market penetration (Market Position dimension) | Contact for pricing |
 
-**Recommendation:** Add Proxycurl for LinkedIn data. Even 1 call per competitor profile gives you verified employee count and founding year — two key classification signals that currently come from unreliable web search.
+**Recommendation:** Add Proxycurl for LinkedIn data. Even 1 call per competitor profile gives you verified employee count and founding year - two key classification signals that currently come from unreliable web search.
 
 ---
 
-### 7c. Web Scraping — MEDIUM PRIORITY
+### 7c. Web Scraping - MEDIUM PRIORITY
 
 **Current:** Firecrawl for website crawling
 
@@ -431,7 +431,7 @@ adminAuditLogs/{logId}
 
 ---
 
-### 7d. LLM Strategy — MEDIUM PRIORITY
+### 7d. LLM Strategy - MEDIUM PRIORITY
 
 **Current:** `claude-sonnet-4-6` for everything
 
@@ -439,17 +439,17 @@ adminAuditLogs/{logId}
 |---|---|
 | **Use `claude-haiku-4-5` for status checks & simple tasks** | The 3 pre-tool status SSE events, brand voice scoring, and hashtag research don't need Sonnet. Haiku is ~20x cheaper and 3x faster for simple operations |
 | **Use `claude-opus-4-6` for competitor classification** | The 5-dimension classification is a high-stakes, nuanced task. Opus would produce materially better classifications than Sonnet, especially for Directness and Market Position judgements |
-| **Add structured output / tool_use for classification** | Currently parsing Claude's JSON from free-text response. Use `tool_use` with a schema instead — eliminates JSON parsing errors entirely |
+| **Add structured output / tool_use for classification** | Currently parsing Claude's JSON from free-text response. Use `tool_use` with a schema instead - eliminates JSON parsing errors entirely |
 
 ---
 
-### 7e. Social Data — MEDIUM PRIORITY
+### 7e. Social Data - MEDIUM PRIORITY
 
 **Current:** Apify scraping (fragile, can break when platforms change)
 
 | Upgrade | Why | Cost |
 |---|---|---|
-| **Phyllo API** | Official social media data API (Instagram, YouTube, TikTok, LinkedIn, Twitter). Verified data with OAuth consent — no scraping. Gives you real engagement rates, follower history, content performance | Contact for pricing |
+| **Phyllo API** | Official social media data API (Instagram, YouTube, TikTok, LinkedIn, Twitter). Verified data with OAuth consent - no scraping. Gives you real engagement rates, follower history, content performance | Contact for pricing |
 | **Modash API** | Influencer + brand social data API. Audience demographics, engagement rates, content history across all platforms | $299/month |
 | **Brandwatch API** | Social listening + brand mentions + sentiment at scale | Enterprise |
 
@@ -457,7 +457,7 @@ adminAuditLogs/{logId}
 
 ---
 
-### 7f. Image Generation — LOW PRIORITY
+### 7f. Image Generation - LOW PRIORITY
 
 **Current:** DALL-E 3 + Gemini Imagen 3
 
@@ -469,7 +469,7 @@ adminAuditLogs/{logId}
 
 ---
 
-### 7g. Database & Caching — LOW PRIORITY
+### 7g. Database & Caching - LOW PRIORITY
 
 **Current:** Firestore only. No caching layer.
 
@@ -483,39 +483,39 @@ adminAuditLogs/{logId}
 ## 8. Missing Infrastructure Recommendations
 
 ### Observability
-- **Sentry** — Add error tracking. Currently errors are just `console.error` / Python `logger.error`. Sentry would give you stack traces, user context, and release tracking. Free tier covers most use cases.
-- **PostHog** — Product analytics. Track which features are actually used, funnel drop-offs, LLM cost per user, etc. Self-hostable with a generous cloud free tier.
-- **Langfuse** — LLM observability specifically. Track every Claude call: latency, token count, cost, input/output. Essential for understanding which features are burning the most API budget.
+- **Sentry** - Add error tracking. Currently errors are just `console.error` / Python `logger.error`. Sentry would give you stack traces, user context, and release tracking. Free tier covers most use cases.
+- **PostHog** - Product analytics. Track which features are actually used, funnel drop-offs, LLM cost per user, etc. Self-hostable with a generous cloud free tier.
+- **Langfuse** - LLM observability specifically. Track every Claude call: latency, token count, cost, input/output. Essential for understanding which features are burning the most API budget.
 
 ### Performance
-- **Next.js ISR / React Server Components** — The intelligence and library pages do all data fetching client-side. Moving heavy pages to RSC would improve initial load time significantly.
-- **Streaming for non-chat responses** — The competitor classification already streams. Consider streaming for campaign generation and research reports too (currently they block for 10–20 seconds with no feedback).
+- **Next.js ISR / React Server Components** - The intelligence and library pages do all data fetching client-side. Moving heavy pages to RSC would improve initial load time significantly.
+- **Streaming for non-chat responses** - The competitor classification already streams. Consider streaming for campaign generation and research reports too (currently they block for 10–20 seconds with no feedback).
 
 ### Security
-- **Input validation on all text fields** — Most routes validate length but not content. Consider adding a lightweight abuse filter on the `user_message` field before it reaches Claude.
-- **Webhook signature verification** — The Stripe webhook should verify `stripe-signature` headers. Confirm this is implemented in `stripe_service.py`.
-- **API key rotation strategy** — Document a rotation procedure for the 15+ API keys in `.env`. Consider using a secrets manager (AWS Secrets Manager, Doppler, or Infisical) instead of a flat `.env` file.
+- **Input validation on all text fields** - Most routes validate length but not content. Consider adding a lightweight abuse filter on the `user_message` field before it reaches Claude.
+- **Webhook signature verification** - The Stripe webhook should verify `stripe-signature` headers. Confirm this is implemented in `stripe_service.py`.
+- **API key rotation strategy** - Document a rotation procedure for the 15+ API keys in `.env`. Consider using a secrets manager (AWS Secrets Manager, Doppler, or Infisical) instead of a flat `.env` file.
 
 ### Cost Controls
-- **Per-project LLM spend caps** — Currently rate-limited by message count but not by token spend. A heavy user sending long messages with large contexts could spend disproportionately. Add a monthly token budget per plan tier.
-- **Search quota dashboard** — The `EXA_DAILY_SEARCH_LIMIT` and `TAVILY_DAILY_SEARCH_LIMIT` configs exist but there's no UI for admins to see current usage. Add to the admin dashboard.
-- **Model fallback strategy** — If Anthropic API is down or rate-limited, fall back to `claude-haiku-4-5` or a Groq-hosted model (already have `GROQ_API_KEY` in config but unused) to maintain uptime.
+- **Per-project LLM spend caps** - Currently rate-limited by message count but not by token spend. A heavy user sending long messages with large contexts could spend disproportionately. Add a monthly token budget per plan tier.
+- **Search quota dashboard** - The `EXA_DAILY_SEARCH_LIMIT` and `TAVILY_DAILY_SEARCH_LIMIT` configs exist but there's no UI for admins to see current usage. Add to the admin dashboard.
+- **Model fallback strategy** - If Anthropic API is down or rate-limited, fall back to `claude-haiku-4-5` or a Groq-hosted model (already have `GROQ_API_KEY` in config but unused) to maintain uptime.
 
 ---
 
-## Summary Table — API Spend Priority
+## Summary Table - API Spend Priority
 
 | API | Current Usage | Monthly Estimate | Priority to Optimise |
 |---|---|---|---|
-| Anthropic Claude | Every chat message, all generation | $$$ | High — add Haiku for cheap ops |
-| Firebase Firestore | Every read/write | $$ | Medium — add Redis cache |
-| Exa.ai | Search + research | $ | Low — quota managed |
-| Tavily | Search + news | $ | Low — quota managed |
-| Apify | Brand ingestion | $$ | Medium — replace with Phyllo |
-| Firecrawl | Website crawl | $ | Low — add Jina as fallback |
-| OpenAI DALL-E | Image generation | $ | Low — consider Flux via Replicate |
+| Anthropic Claude | Every chat message, all generation | $$$ | High - add Haiku for cheap ops |
+| Firebase Firestore | Every read/write | $$ | Medium - add Redis cache |
+| Exa.ai | Search + research | $ | Low - quota managed |
+| Tavily | Search + news | $ | Low - quota managed |
+| Apify | Brand ingestion | $$ | Medium - replace with Phyllo |
+| Firecrawl | Website crawl | $ | Low - add Jina as fallback |
+| OpenAI DALL-E | Image generation | $ | Low - consider Flux via Replicate |
 | Stripe | Billing | Fixed | N/A |
-| Cloudflare R2 | Asset storage | $ | Low — cheapest option already |
+| Cloudflare R2 | Asset storage | $ | Low - cheapest option already |
 
 ---
 

@@ -1,4 +1,4 @@
-"""Brand Voice Model — Claude SSE streaming."""
+"""Brand Voice Model - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -17,7 +17,7 @@ _SYSTEM = """\
 You are LEO, an expert brand strategist and linguistics analyst.
 Analyse writing samples to extract a precise brand voice model.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "voice_name": "A memorable 2-word name for this voice (e.g. 'The Confident Challenger')",
   "one_liner": "One sentence that captures the essence of this brand voice",
@@ -35,7 +35,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
   "sentence_style": {
     "avg_sentence_length": "short (under 15 words)",
     "structure": "Active voice, direct, starts with verbs",
-    "use_of_questions": "Frequent — used to engage and challenge",
+    "use_of_questions": "Frequent - used to engage and challenge",
     "use_of_data": "Always cite specifics, not vague claims"
   },
   "content_patterns": {
@@ -60,7 +60,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 async def generate(project: dict, body: BrandVoiceRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
-        doc = firebase_service.create_pillar1_doc(project_id, "brand_voice", owner_uid, f"Brand Voice — {brand_name}")
+        doc = firebase_service.create_pillar1_doc(project_id, "brand_voice", owner_uid, f"Brand Voice - {brand_name}")
         doc_id = doc["id"]
 
         yield _sse({"type": "research_step", "step": "analysing", "label": "Analysing writing samples…", "status": "running"})

@@ -1,5 +1,5 @@
 """
-Budget Modelling service — Claude + optional Meta Ads API benchmarks, SSE streaming.
+Budget Modelling service - Claude + optional Meta Ads API benchmarks, SSE streaming.
 
 Generates a channel budget allocation model with ROAS projections,
 incorporating live Meta Ads benchmark data when available.
@@ -35,7 +35,7 @@ async def _fetch_meta_ads_benchmarks(access_token: str) -> dict:
         return {}
     try:
         async with httpx.AsyncClient(timeout=15) as client:
-            # Ad Insights on the ad account — fetching aggregated benchmarks
+            # Ad Insights on the ad account - fetching aggregated benchmarks
             resp = await client.get(
                 "https://graph.facebook.com/v20.0/me/adaccounts",
                 params={"access_token": access_token, "fields": "name,currency,spend_cap"},
@@ -54,7 +54,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a performance marketing strategist and budget modelling expert.
 Your task is to produce a data-driven budget allocation model.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "total_budget": 10000,
   "currency": "USD",
@@ -88,7 +88,7 @@ RULES:
 1. All ROAS and CPM benchmarks must be realistic for the channels and industry.
 2. Allocations must sum to exactly the total_budget.
 3. Smaller budgets (< $5,000) should lean toward fewer channels with higher concentration.
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -104,7 +104,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         brand_name = project.get("name", "the brand")
 
-        title = f"Budget Model — {body.currency} {body.total_budget:,.0f} / {body.duration_months}mo"
+        title = f"Budget Model - {body.currency} {body.total_budget:,.0f} / {body.duration_months}mo"
         doc = firebase_service.create_pillar1_doc(project_id, "budget", owner_uid, title)
         doc_id = doc["id"]
 
@@ -114,7 +114,7 @@ async def generate(
             yield _sse({"type": "research_step", "step": "meta_ads_fetch", "label": "Fetching Meta Ads benchmarks...", "status": "running"})
             meta_data = await _fetch_meta_ads_benchmarks(settings.META_ACCESS_TOKEN)
             status = "done" if meta_data.get("meta_connected") else "skipped"
-            yield _sse({"type": "research_step", "step": "meta_ads_fetch", "label": "Meta Ads data retrieved" if meta_data.get("meta_connected") else "Meta Ads not connected — using industry benchmarks", "status": status})
+            yield _sse({"type": "research_step", "step": "meta_ads_fetch", "label": "Meta Ads data retrieved" if meta_data.get("meta_connected") else "Meta Ads not connected - using industry benchmarks", "status": status})
         else:
             yield _sse({"type": "research_step", "step": "meta_ads_fetch", "label": "Using industry benchmark data", "status": "skipped"})
 

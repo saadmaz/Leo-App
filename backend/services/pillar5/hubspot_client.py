@@ -1,5 +1,5 @@
 """
-HubSpot CRM API client — free tier, private app access token.
+HubSpot CRM API client - free tier, private app access token.
 
 Docs: https://developers.hubspot.com/docs/api/overview
 

@@ -146,7 +146,7 @@ export default function CampaignsPage() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Left column — campaign list */}
+      {/* Left column - campaign list */}
       <div className="w-80 shrink-0 border-r border-border flex flex-col bg-card">
         <div className="flex items-center justify-between px-5 py-4 border-b border-border shrink-0">
           <div className="flex items-center gap-2">
@@ -239,7 +239,7 @@ export default function CampaignsPage() {
         </div>
       </div>
 
-      {/* Right column — campaign detail */}
+      {/* Right column - campaign detail */}
       <div className="flex-1 overflow-hidden">
         {activeCampaign
           ? <CampaignDetail
@@ -434,7 +434,7 @@ function CampaignDetail({ campaign, projectId, onDelete, onSaved }: {
 }
 
 // ---------------------------------------------------------------------------
-// Content pack view — inline editing + save to library
+// Content pack view - inline editing + save to library
 // ---------------------------------------------------------------------------
 
 function ContentPackView({

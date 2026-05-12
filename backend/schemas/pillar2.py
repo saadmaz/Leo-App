@@ -1,5 +1,5 @@
 """
-Pydantic request/response schemas for Pillar 2 — Content Creation & Management.
+Pydantic request/response schemas for Pillar 2 - Content Creation & Management.
 """
 
 from __future__ import annotations

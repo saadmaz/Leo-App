@@ -7,23 +7,23 @@ routes in admin.py.
 
 Flag schema (Firestore doc):
   {
-    "id":           str   — slug, e.g. "image_generation"
-    "name":         str   — display name
+    "id":           str   - slug, e.g. "image_generation"
+    "name":         str   - display name
     "description":  str
-    "enabled":      bool  — global on/off master switch
+    "enabled":      bool  - global on/off master switch
     "allowedTiers": list[str] | null
-                          — null = all tiers; ["pro","agency"] = paid only
+                          - null = all tiers; ["pro","agency"] = paid only
     "userOverrides": {uid: bool}
-                          — per-user force-enable / force-disable
+                          - per-user force-enable / force-disable
     "createdAt":    str
     "updatedAt":    str
   }
 
 Evaluation order (highest wins):
-  1. userOverrides[uid]  — explicit per-user override
-  2. enabled == False    — globally disabled → False for everyone
-  3. allowedTiers        — if set, user tier must be in the list
-  4. → True              — flag is on for this user
+  1. userOverrides[uid]  - explicit per-user override
+  2. enabled == False    - globally disabled → False for everyone
+  3. allowedTiers        - if set, user tier must be in the list
+  4. → True              - flag is on for this user
 
 Built-in flags (seeded on first call to seed_defaults()):
   chat                  Always-on core chat feature
@@ -41,7 +41,7 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Default flags — seeded into Firestore on first admin portal load
+# Default flags - seeded into Firestore on first admin portal load
 # ---------------------------------------------------------------------------
 
 DEFAULT_FLAGS = [
@@ -91,7 +91,7 @@ DEFAULT_FLAGS = [
 def seed_defaults() -> None:
     """
     Write default flags to Firestore if they don't already exist.
-    Safe to call on every startup — skips docs that already exist.
+    Safe to call on every startup - skips docs that already exist.
     """
     from backend.services import firebase_service
     db = firebase_service.get_db()

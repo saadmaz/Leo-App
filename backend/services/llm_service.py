@@ -1,5 +1,5 @@
 """
-LLM service — wraps the Anthropic SDK for conversational streaming.
+LLM service - wraps the Anthropic SDK for conversational streaming.
 
 Responsibilities:
   - Singleton AsyncAnthropic client (one per process, thread-safe).
@@ -23,7 +23,7 @@ from backend.config import settings
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# Channel presets — platform-specific constraints injected into system prompt
+# Channel presets - platform-specific constraints injected into system prompt
 # ---------------------------------------------------------------------------
 
 CHANNEL_PRESETS: dict[str, dict] = {
@@ -43,7 +43,7 @@ CHANNEL_PRESETS: dict[str, dict] = {
         "label": "LinkedIn",
         "constraints": (
             "CHANNEL: LinkedIn.\n"
-            "- Posts: 150–300 words; first 3 lines shown before 'see more' — hook immediately.\n"
+            "- Posts: 150–300 words; first 3 lines shown before 'see more' - hook immediately.\n"
             "- Tone: professional, insightful, thought-leadership. First-person works well.\n"
             "- Structure: hook → insight → evidence → CTA.\n"
             "- Limit hashtags to 3–5 relevant ones.\n"
@@ -159,7 +159,7 @@ def build_brand_core_context(brand_core: Optional[dict]) -> str:
     If brand_core is None or empty, returns a guidance string that nudges
     the user towards setting one up rather than silently ignoring it.
     """
-    # Personal brand sentinel — delegate to personal core builder
+    # Personal brand sentinel - delegate to personal core builder
     if brand_core and "__personal_core__" in brand_core:
         return build_personal_core_context(brand_core["__personal_core__"])
 
@@ -209,7 +209,7 @@ def build_brand_core_context(brand_core: Optional[dict]) -> str:
     if brand_core.get("competitors"):
         sections.append(f"COMPETITORS: {', '.join(brand_core['competitors'])}.")
 
-    return "\n".join(sections) if sections else "Brand Core is incomplete — treat as a general brand."
+    return "\n".join(sections) if sections else "Brand Core is incomplete - treat as a general brand."
 
 
 def build_personal_core_context(personal_core: Optional[dict]) -> str:
@@ -301,7 +301,7 @@ def build_personal_core_context(personal_core: Optional[dict]) -> str:
 # Keep in sync with frontend/src/components/chat/artifact-cards.tsx.
 ARTIFACT_INSTRUCTIONS = """\
 
-STRUCTURED OUTPUT — ARTIFACTS:
+STRUCTURED OUTPUT - ARTIFACTS:
 When you produce structured content (captions, ad copy, campaign briefs, colour palettes),
 wrap it in an artifact block so the UI can render it as an interactive card.
 
@@ -439,11 +439,11 @@ type="influencer_list"
 
 Rules:
 - Always use an artifact for captions (3+ items), ad copy, campaign briefs, colour palettes, content calendars, video scripts, email content, and image prompts.
-- Place the artifact after a short conversational intro — never instead of it.
+- Place the artifact after a short conversational intro - never instead of it.
 - Put ONLY JSON inside the artifact block. No markdown inside the block.
 - You may include multiple artifacts in one response if appropriate.
 - For everything else (strategy, analysis, explanations), use normal markdown.
-- When the user asks for an image or visual content, output an image_prompt artifact instead of describing the image — the UI will generate it.
+- When the user asks for an image or visual content, output an image_prompt artifact instead of describing the image - the UI will generate it.
 """
 
 
@@ -497,7 +497,7 @@ async def stream_chat(
         project_name:  Used in the system prompt to keep Leo on-brand.
         brand_core:    Brand Core dict from Firestore (may be None).
         history:       Prior messages in [{"role": ..., "content": ...}] format.
-                       Should NOT include the current user_message — it is
+                       Should NOT include the current user_message - it is
                        appended here.
         user_message:  The user's latest message text.
 
@@ -514,7 +514,7 @@ async def stream_chat(
 
     memory_section = f"\n\n{memory_context}" if memory_context else ""
 
-    # Dynamic portion (changes per project/channel/memory — not cached)
+    # Dynamic portion (changes per project/channel/memory - not cached)
     dynamic_text = (
         f"You are LEO, a brand-aware marketing co-pilot for the brand '{project_name}'. "
         "You help marketers create on-brand campaigns, content, copy, and strategy "
@@ -527,7 +527,7 @@ async def stream_chat(
     )
 
     # System prompt as multi-block list so Anthropic can cache ARTIFACT_INSTRUCTIONS.
-    # The static block (artifact format) is marked with cache_control — Claude caches
+    # The static block (artifact format) is marked with cache_control - Claude caches
     # it for 5 minutes, costing only 10% of normal input tokens on cache hits.
     system_prompt = [
         {"type": "text", "text": dynamic_text},
@@ -547,7 +547,7 @@ async def stream_chat(
         for m in context_window
     ]
 
-    # Build the final user turn — plain text, or a multi-part content block
+    # Build the final user turn - plain text, or a multi-part content block
     # when image attachments are present (Anthropic vision API).
     if images:
         user_content: list[dict] = [
@@ -597,7 +597,7 @@ _CONTENT_INTENT_KEYWORDS = frozenset([
 # In-process trend cache: key = "topic||platform", value = (result_str, expiry_epoch)
 import time as _time
 _trend_cache: dict[str, tuple[str, float]] = {}
-_TREND_CACHE_TTL = 1800  # 30 minutes — trends don't change faster than this
+_TREND_CACHE_TTL = 1800  # 30 minutes - trends don't change faster than this
 
 
 async def build_trend_context(

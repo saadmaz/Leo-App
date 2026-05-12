@@ -135,7 +135,7 @@ export default function CrisisCommsPage() {
   const form = (
     <>
       <h2 className="font-semibold text-sm">Crisis Communications</h2>
-      <p className="text-xs text-muted-foreground">Not legal advice — always consult your legal team for high-severity situations.</p>
+      <p className="text-xs text-muted-foreground">Not legal advice - always consult your legal team for high-severity situations.</p>
 
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Crisis Type *</label>
@@ -173,7 +173,7 @@ export default function CrisisCommsPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Crisis Summary *</label>
         <textarea value={crisisSummary} onChange={(e) => setCrisisSummary(e.target.value)} rows={3}
-          placeholder="Describe what happened — be factual and specific. The more detail you provide, the more accurate the response."
+          placeholder="Describe what happened - be factual and specific. The more detail you provide, the more accurate the response."
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
 
@@ -259,7 +259,7 @@ export default function CrisisCommsPage() {
           result.crisis_assessment.severity_confirmed === 'high' ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/20' :
           'border-border bg-card')}>
           <p className="text-xs font-bold uppercase tracking-wide mb-2">
-            Crisis Assessment — <span className="capitalize">{result.crisis_assessment.severity_confirmed}</span> Severity
+            Crisis Assessment - <span className="capitalize">{result.crisis_assessment.severity_confirmed}</span> Severity
           </p>
           <p className="text-xs text-muted-foreground mb-1">{result.crisis_assessment.reputational_risk}</p>
           <p className="text-xs text-muted-foreground mb-2">{result.crisis_assessment.time_sensitivity}</p>
@@ -368,7 +368,7 @@ export default function CrisisCommsPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Crisis Communications"
-      subtitle="Pillar 8 — Claude"
+      subtitle="Pillar 8 - Claude"
       icon={<AlertTriangle className="w-4 h-4" />}
       credits={20}
       steps={store.steps}
@@ -377,7 +377,7 @@ export default function CrisisCommsPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Generate Crisis Playbook — 20 credits"
+      submitLabel="Generate Crisis Playbook - 20 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

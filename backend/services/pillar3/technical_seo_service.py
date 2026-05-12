@@ -1,5 +1,5 @@
 """
-Technical SEO Monitor — DataForSEO OnPage instant_pages + Claude.
+Technical SEO Monitor - DataForSEO OnPage instant_pages + Claude.
 
 Performs a comprehensive technical SEO audit of a URL, covering Core Web Vitals
 signals, crawlability, structured data, canonicalisation, and mobile-friendliness.
@@ -112,7 +112,7 @@ async def generate(
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
 
-        title = f"Technical SEO — {body.url[:60]}"
+        title = f"Technical SEO - {body.url[:60]}"
         doc = firebase_service.create_pillar1_doc(project_id, "technical_seo", owner_uid, title)
         doc_id = doc["id"]
 
@@ -131,16 +131,16 @@ async def generate(
                                 "label": "Technical crawl complete", "status": "done"})
                 else:
                     yield _sse({"type": "research_step", "step": "technical_crawl",
-                                "label": "Page returned no data — Claude heuristic audit", "status": "skipped"})
+                                "label": "Page returned no data - Claude heuristic audit", "status": "skipped"})
                     use_dfs = False
             except Exception as exc:
                 logger.warning("DataForSEO technical crawl failed: %s", exc)
                 yield _sse({"type": "research_step", "step": "technical_crawl",
-                            "label": "Crawl unavailable — heuristic audit", "status": "skipped"})
+                            "label": "Crawl unavailable - heuristic audit", "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "technical_crawl",
-                        "label": "DataForSEO not configured — heuristic audit", "status": "skipped"})
+                        "label": "DataForSEO not configured - heuristic audit", "status": "skipped"})
 
         # ── Step 2: Claude technical analysis ────────────────────────────────
         yield _sse({"type": "research_step", "step": "technical_analysis",
@@ -149,7 +149,7 @@ async def generate(
         system_prompt = """\
 You are LEO, a technical SEO expert. Produce a comprehensive technical SEO audit with prioritised action items.
 
-OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a valid JSON object (no markdown fences):
 {
   "url": "https://...",
   "crawl_score": 78,
@@ -164,7 +164,7 @@ OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
       "severity": "critical | warning | info",
       "description": "Clear description of the technical issue",
       "affected_elements": ["specific element or tag"],
-      "fix": "Exact fix — include code snippet or step-by-step if helpful"
+      "fix": "Exact fix - include code snippet or step-by-step if helpful"
     }
   ],
   "performance_metrics": {
@@ -191,14 +191,14 @@ Rules:
 - crawl_score: 0-100 overall technical health score.
 - Include up to 10 issues, sorted by severity (critical first).
 - fix must be specific and actionable.
-- Return ONLY valid JSON — no prose, no markdown.
+- Return ONLY valid JSON - no prose, no markdown.
 """
 
         user_prompt = f"""\
 Brand: {brand_name}
 URL being audited: {body.url}
 
-{tech_context if tech_context else "No live crawl data available — produce a technical SEO audit based on URL structure, common technical issues, and industry best practices."}
+{tech_context if tech_context else "No live crawl data available - produce a technical SEO audit based on URL structure, common technical issues, and industry best practices."}
 
 Produce a comprehensive technical SEO audit report.
 """

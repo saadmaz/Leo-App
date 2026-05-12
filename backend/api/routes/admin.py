@@ -1,25 +1,25 @@
 """
-Super-admin routes — /admin/*
+Super-admin routes - /admin/*
 
 All endpoints require the `superAdmin: true` Firebase custom claim.
 Never expose these routes publicly; they bypass all per-project ownership checks.
 
 Endpoints:
-  GET  /admin/dashboard                    — platform-wide stats
-  GET  /admin/analytics                    — charts data (signups, usage histogram, top users)
-  GET  /admin/audit-log                    — recent admin actions
-  GET  /admin/users                        — user list with search + tier filter
-  GET  /admin/users/{uid}                  — single user detail
-  PATCH /admin/users/{uid}                 — update tier
-  POST /admin/users/{uid}/reset-usage      — reset monthly message counter
-  POST /admin/users/{uid}/suspend          — disable Firebase Auth account
-  POST /admin/users/{uid}/unsuspend        — re-enable Firebase Auth account
-  POST /admin/users/{uid}/override-limits  — set custom usage limits
-  POST /admin/users/{uid}/grant-admin      — grant superAdmin claim
-  POST /admin/users/{uid}/revoke-admin     — revoke superAdmin claim
-  DELETE /admin/users/{uid}               — permanently delete user
-  GET  /admin/projects                     — all projects across all users
-  DELETE /admin/projects/{project_id}      — deep-delete a project
+  GET  /admin/dashboard                    - platform-wide stats
+  GET  /admin/analytics                    - charts data (signups, usage histogram, top users)
+  GET  /admin/audit-log                    - recent admin actions
+  GET  /admin/users                        - user list with search + tier filter
+  GET  /admin/users/{uid}                  - single user detail
+  PATCH /admin/users/{uid}                 - update tier
+  POST /admin/users/{uid}/reset-usage      - reset monthly message counter
+  POST /admin/users/{uid}/suspend          - disable Firebase Auth account
+  POST /admin/users/{uid}/unsuspend        - re-enable Firebase Auth account
+  POST /admin/users/{uid}/override-limits  - set custom usage limits
+  POST /admin/users/{uid}/grant-admin      - grant superAdmin claim
+  POST /admin/users/{uid}/revoke-admin     - revoke superAdmin claim
+  DELETE /admin/users/{uid}               - permanently delete user
+  GET  /admin/projects                     - all projects across all users
+  DELETE /admin/projects/{project_id}      - deep-delete a project
 """
 
 import logging
@@ -230,7 +230,7 @@ def reset_usage(uid: str, user: SuperAdminUser):
 
 @router.post("/users/{uid}/suspend")
 def suspend_user(uid: str, user: SuperAdminUser):
-    """Disable the Firebase Auth account — user can no longer sign in."""
+    """Disable the Firebase Auth account - user can no longer sign in."""
     if not firebase_service.get_user(uid):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found.")
 
@@ -466,7 +466,7 @@ def remove_user_override(flag_id: str, uid: str, user: SuperAdminUser):
 def system_health(_user: SuperAdminUser):
     """
     Perform live health checks on every external service and return
-    a structured status report. All checks are best-effort — a failed
+    a structured status report. All checks are best-effort - a failed
     check is returned as a degraded status, not a 500.
     """
     from backend.config import settings
@@ -518,7 +518,7 @@ def _check(name: str, fn) -> dict:
 
 def _ping_firebase() -> str:
     db = firebase_service.get_db()
-    # Lightweight read — fetch at most 1 doc
+    # Lightweight read - fetch at most 1 doc
     list(db.collection("users").limit(1).stream())
     return "Firestore reachable"
 
@@ -529,7 +529,7 @@ def _ping_anthropic(settings) -> str:
     import anthropic
     client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
     models = client.models.list(limit=1)
-    return f"API reachable — {len(models.data)} model(s) returned"
+    return f"API reachable - {len(models.data)} model(s) returned"
 
 
 def _ping_gemini(settings) -> str:
@@ -716,7 +716,7 @@ def _safe_user(user: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Moderation — queue
+# Moderation - queue
 # ---------------------------------------------------------------------------
 
 @router.get("/moderation/stats")
@@ -740,7 +740,7 @@ def list_moderation(
 
 @router.post("/moderation/{flag_id}/dismiss")
 def dismiss_flag(flag_id: str, body: ReviewFlagRequest, user: SuperAdminUser):
-    """Mark a flagged item as dismissed — content is acceptable, no action needed."""
+    """Mark a flagged item as dismissed - content is acceptable, no action needed."""
     if not firebase_service.get_flagged_item(flag_id):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Flag not found.")
 
@@ -808,7 +808,7 @@ def manual_flag(
 
 
 # ---------------------------------------------------------------------------
-# Moderation — abuse patterns
+# Moderation - abuse patterns
 # ---------------------------------------------------------------------------
 
 @router.get("/moderation/abuse")

@@ -40,7 +40,7 @@ def _redirect_uri() -> str:
     """Build the absolute redirect URI from FRONTEND_URL (or API_URL if set)."""
     base = getattr(settings, "API_URL", None) or settings.FRONTEND_URL
     base = base.rstrip("/")
-    # The callback lives on the *backend* — use the backend base URL.
+    # The callback lives on the *backend* - use the backend base URL.
     # If API_URL is not set we fall back to constructing from FRONTEND_URL by
     # replacing port 3000 → 8000; this works for local dev.
     if "3000" in base and not getattr(settings, "API_URL", None):
@@ -57,7 +57,7 @@ def _check_threads_configured() -> None:
 
 
 # ---------------------------------------------------------------------------
-# OAuth — connect
+# OAuth - connect
 # ---------------------------------------------------------------------------
 
 @router.get("/auth/threads/connect")
@@ -88,7 +88,7 @@ async def threads_callback(
     error: Optional[str] = Query(None),
 ):
     """
-    OAuth callback — called by Threads after user authorises the app.
+    OAuth callback - called by Threads after user authorises the app.
     Exchanges the code for a long-lived token and stores it in Firestore.
     Redirects the user back to the frontend settings page.
     """
@@ -134,7 +134,7 @@ async def threads_callback(
 
 
 # ---------------------------------------------------------------------------
-# OAuth — status / disconnect
+# OAuth - status / disconnect
 # ---------------------------------------------------------------------------
 
 @router.get("/auth/threads/status")
@@ -237,5 +237,5 @@ async def publish_to_threads(
         logger.error("Threads publish failed for project %s uid %s: %s", project_id, user["uid"], exc)
         raise HTTPException(status_code=502, detail=f"Threads publish failed: {exc}")
 
-    logger.info("Published to Threads for project %s uid %s — id %s", project_id, user["uid"], result.get("id"))
+    logger.info("Published to Threads for project %s uid %s - id %s", project_id, user["uid"], result.get("id"))
     return {"ok": True, "thread_id": result.get("id")}

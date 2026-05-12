@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 // ---------------------------------------------------------------------------
-// Tool config — icon, label, accent colour, detail line
+// Tool config - icon, label, accent colour, detail line
 // ---------------------------------------------------------------------------
 
 type ToolConfig = {
@@ -230,7 +230,7 @@ function StatusIndicator({ message }: StatusIndicatorProps) {
 }
 
 // ---------------------------------------------------------------------------
-// Public export — wraps both, picks the right one
+// Public export - wraps both, picks the right one
 // ---------------------------------------------------------------------------
 
 interface ThinkingIndicatorProps {

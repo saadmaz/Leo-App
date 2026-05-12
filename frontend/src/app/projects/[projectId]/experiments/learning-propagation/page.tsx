@@ -226,7 +226,7 @@ export default function LearningPropagationPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Learning Propagation"
-      subtitle="Pillar 10 — Claude"
+      subtitle="Pillar 10 - Claude"
       icon={<Zap className="w-4 h-4" />}
       credits={20}
       steps={store.steps}
@@ -235,7 +235,7 @@ export default function LearningPropagationPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Generate Propagation Plan — 20 credits"
+      submitLabel="Generate Propagation Plan - 20 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/experiments`}
     />

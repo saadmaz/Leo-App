@@ -1,5 +1,5 @@
 /**
- * Admin API client — talks to /admin/* backend routes.
+ * Admin API client - talks to /admin/* backend routes.
  *
  * All calls are authenticated via Firebase ID token. The token must carry
  * the `superAdmin: true` custom claim, otherwise the backend returns 403.

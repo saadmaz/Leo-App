@@ -241,10 +241,10 @@ export default function EmailSequencePage() {
   ) : null
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Email Sequence Builder" subtitle="Pillar 5 — Claude + Loops"
+    <SSEFeaturePage projectId={projectId} title="Email Sequence Builder" subtitle="Pillar 5 - Claude + Loops"
       icon={<Mail className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Build Sequence — 15 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Build Sequence - 15 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/email-crm`} />
   )
 }

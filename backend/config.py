@@ -59,7 +59,7 @@ class Settings(BaseSettings):
     X_CLIENT_SECRET: Optional[str] = None
 
     # --- PR & Communications ---
-    HUNTER_API_KEY: Optional[str] = None   # Hunter.io — media list building & email verification ($49/mo)
+    HUNTER_API_KEY: Optional[str] = None   # Hunter.io - media list building & email verification ($49/mo)
 
     # --- CRM & Enrichment ---
     APOLLO_API_KEY: Optional[str] = None
@@ -69,17 +69,17 @@ class Settings(BaseSettings):
     GOOGLE_ADS_CUSTOMER_ID: Optional[str] = None
 
     # --- Pillar 4: Paid Advertising ---
-    # GA4 Data API (free) — ads.google.com → Tools → API Centre for Ads keys
+    # GA4 Data API (free) - ads.google.com → Tools → API Centre for Ads keys
     # GA4: Google Cloud Console → Google Analytics Data API
     GA4_PROPERTY_ID: Optional[str] = None               # Numeric property ID (e.g. "123456789")
     GA4_SERVICE_ACCOUNT_KEY: Optional[str] = None       # Full service account JSON as a string
 
     # --- Pillar 5: Email Marketing & CRM ---
-    # Loops.so — loops.so → Settings → API (free tier available)
+    # Loops.so - loops.so → Settings → API (free tier available)
     LOOPS_API_KEY: Optional[str] = None
-    # ZeroBounce — zerobounce.net → Dashboard → API (100 free validations/mo)
+    # ZeroBounce - zerobounce.net → Dashboard → API (100 free validations/mo)
     ZEROBOUNCE_API_KEY: Optional[str] = None
-    # HubSpot — app.hubspot.com → Settings → Integrations → Private Apps (free CRM)
+    # HubSpot - app.hubspot.com → Settings → Integrations → Private Apps (free CRM)
     HUBSPOT_ACCESS_TOKEN: Optional[str] = None
 
     # --- Brand Intelligence ---
@@ -110,17 +110,17 @@ class Settings(BaseSettings):
 
     # --- Firebase ---
     FIREBASE_PROJECT_ID: Optional[str] = None
-    # Absolute path to the service account JSON — set via env var to override.
+    # Absolute path to the service account JSON - set via env var to override.
     FIREBASE_SERVICE_ACCOUNT_PATH: str = _DEFAULT_SA_PATH
     FIREBASE_PRIVATE_KEY: Optional[str] = None
     FIREBASE_CLIENT_EMAIL: Optional[str] = None
 
     # --- LLM Runtime Config ---
-    # Model used for the conversational chat stream (streamed responses) — Claude.
+    # Model used for the conversational chat stream (streamed responses) - Claude.
     LLM_CHAT_MODEL: str = "claude-sonnet-4-6"
-    # Model used for lightweight classification & scoring tasks — Haiku is 5× cheaper.
+    # Model used for lightweight classification & scoring tasks - Haiku is 5× cheaper.
     LLM_CLASSIFICATION_MODEL: str = "claude-haiku-4-5-20251001"
-    # Model used for one-shot brand extraction and campaign generation — Gemini.
+    # Model used for one-shot brand extraction and campaign generation - Gemini.
     LLM_EXTRACTION_MODEL: str = "gemini-2.5-flash"
     # Imagen model used for image generation.
     GEMINI_IMAGE_MODEL: str = "imagen-3.0-generate-001"
@@ -146,7 +146,7 @@ class Settings(BaseSettings):
     EXTRA_FRONTEND_URLS: str = ""
 
     model_config = SettingsConfigDict(
-        # Absolute path — works regardless of launch CWD.
+        # Absolute path - works regardless of launch CWD.
         env_file=_ENV_FILE,
         env_file_encoding="utf-8",
         extra="ignore",

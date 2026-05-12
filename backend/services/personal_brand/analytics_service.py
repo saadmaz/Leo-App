@@ -5,8 +5,8 @@ Computes consistency scores and growth metrics from platform data,
 and generates weekly briefs using Claude.
 
 Collections written:
-  personal_brand_analytics/{auto_id}  — per-platform snapshot
-  personal_weekly_briefs/{project_id} — latest weekly brief
+  personal_brand_analytics/{auto_id}  - per-platform snapshot
+  personal_weekly_briefs/{project_id} - latest weekly brief
 """
 
 import json
@@ -141,7 +141,7 @@ def _scrape_platform(platform: str, personal_core: dict) -> dict:
 
 _BRIEF_SYSTEM = """
 You are a personal brand coach. Write an encouraging, specific, actionable weekly brief.
-Return ONLY a valid JSON object — no markdown, no code fences, no commentary.
+Return ONLY a valid JSON object - no markdown, no code fences, no commentary.
 """.strip()
 
 _BRIEF_PROMPT = """
@@ -155,15 +155,15 @@ RECENT ANALYTICS:
 
 Return this JSON:
 {{
-  "focusThisWeek": "string — one clear priority sentence",
-  "performanceSummary": "string — 2-3 sentence recap of last week",
+  "focusThisWeek": "string - one clear priority sentence",
+  "performanceSummary": "string - 2-3 sentence recap of last week",
   "postIdeas": [
-    "string — specific post idea with hook",
-    "string — specific post idea with hook",
-    "string — specific post idea with hook"
+    "string - specific post idea with hook",
+    "string - specific post idea with hook",
+    "string - specific post idea with hook"
   ],
-  "engagementTip": "string — one tactical tip for this week",
-  "motivationalNote": "string — brief, genuine encouragement (1 sentence)"
+  "engagementTip": "string - one tactical tip for this week",
+  "motivationalNote": "string - brief, genuine encouragement (1 sentence)"
 }}
 """
 
@@ -212,7 +212,7 @@ def generate_weekly_brief(project_id: str, personal_core: dict) -> dict:
         raw = response.content[0].text.strip()
         brief_data = json.loads(raw)
     except Exception as e:
-        logger.warning("Weekly brief generation failed: %s — using placeholder", e)
+        logger.warning("Weekly brief generation failed: %s - using placeholder", e)
         brief_data = {
             "focusThisWeek": "Keep showing up consistently this week.",
             "performanceSummary": "Analytics data is being collected for your connected platforms.",
@@ -222,7 +222,7 @@ def generate_weekly_brief(project_id: str, personal_core: dict) -> dict:
                 "Post your take on a trending topic in your niche",
             ],
             "engagementTip": "Reply to every comment within 2 hours of posting.",
-            "motivationalNote": "Consistency compounds — every post builds your brand.",
+            "motivationalNote": "Consistency compounds - every post builds your brand.",
         }
 
     brief = {

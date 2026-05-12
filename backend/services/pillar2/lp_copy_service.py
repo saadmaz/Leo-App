@@ -1,4 +1,4 @@
-"""Landing Page Copywriting — Claude SSE streaming."""
+"""Landing Page Copywriting - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -16,7 +16,7 @@ def _sse(data: dict) -> str:
 _SYSTEM = """\
 You are LEO, a conversion copywriting expert trained on the top-performing landing pages across SaaS, e-commerce, and professional services.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "framework_used": "AIDA",
   "above_the_fold": {
@@ -55,7 +55,7 @@ async def generate(project: dict, body: LandingPageCopyRequest, project_id: str,
         brand_core = project.get("brandCore") or {}
         tone = (brand_core.get("tone") or {}).get("style", "professional")
 
-        doc = firebase_service.create_pillar1_doc(project_id, "lp_copy", owner_uid, f"LP Copy — {body.product_name}")
+        doc = firebase_service.create_pillar1_doc(project_id, "lp_copy", owner_uid, f"LP Copy - {body.product_name}")
         doc_id = doc["id"]
 
         yield _sse({"type": "research_step", "step": "strategy", "label": f"Applying {body.framework} framework…", "status": "running"})

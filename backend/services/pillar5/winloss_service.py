@@ -1,5 +1,5 @@
 """
-Win/Loss Analysis — Claude synthesises deal outcomes into competitive intelligence.
+Win/Loss Analysis - Claude synthesises deal outcomes into competitive intelligence.
 
 Input: deal records with outcome, competitor chosen, reason given, sales notes, survey responses.
 Output: patterns, competitive positioning gaps, sales process improvements, playbook.
@@ -24,7 +24,7 @@ SYSTEM = """\
 You are a strategic revenue analyst who turns deal outcomes into competitive intelligence \
 and sales process improvements. You find patterns humans miss.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -67,7 +67,7 @@ Schema:
     {
       "objection": "string",
       "frequency": "string",
-      "best_response": "string (2-4 sentences — the winning response)",
+      "best_response": "string (2-4 sentences - the winning response)",
       "supporting_evidence": "string"
     }
   ],
@@ -107,7 +107,7 @@ async def generate(
         return
 
     period_label = body.date_range or f"{len(body.deals)} deals"
-    title = f"Win/Loss Analysis — {body.product_name} · {period_label}"
+    title = f"Win/Loss Analysis - {body.product_name} · {period_label}"
     doc = firebase_service.create_pillar1_doc(project_id, "winloss", owner_uid, title)
     doc_id = doc["id"]
 

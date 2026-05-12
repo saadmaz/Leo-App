@@ -37,7 +37,7 @@ export function ChannelSelector({ value, onChange }: ChannelSelectorProps) {
     <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
       <span className="shrink-0 text-xs text-muted-foreground/60 pr-1">Channel:</span>
 
-      {/* "All" pill — clears selection */}
+      {/* "All" pill - clears selection */}
       <button
         onClick={() => onChange(null)}
         className={cn(

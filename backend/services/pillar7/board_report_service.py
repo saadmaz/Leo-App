@@ -1,5 +1,5 @@
 """
-Board-Ready Reporting — Claude formats a polished executive report.
+Board-Ready Reporting - Claude formats a polished executive report.
 
 Input: key metrics, wins, challenges, priorities.
 Output: structured board/investor update with narrative, KPI table, appendix.
@@ -22,9 +22,9 @@ _MAX_BRAND = 800
 SYSTEM = """\
 You are an expert at writing board-level and investor-level business reports. \
 You synthesise metrics into a clear narrative that confident executives present \
-to boards, investors, or senior leadership — data-driven, concise, forward-looking.
+to boards, investors, or senior leadership - data-driven, concise, forward-looking.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -32,7 +32,7 @@ Schema:
   "report_period": "string",
   "report_type": "string",
   "prepared_date": "string (today's date YYYY-MM-DD)",
-  "executive_summary": "string (3-5 sentence executive summary — lead with the biggest number, acknowledge the key challenge, end with confidence)",
+  "executive_summary": "string (3-5 sentence executive summary - lead with the biggest number, acknowledge the key challenge, end with confidence)",
   "business_narrative": "string (400-600 word narrative: context → performance → wins → challenges → outlook → call to action)",
   "kpi_table": [
     {
@@ -65,13 +65,13 @@ Schema:
   "appendix": [
     {"section": "string", "content": "string"}
   ],
-  "talk_track": "string (what the presenter should verbally emphasise beyond the slides — 2-3 bullets)"
+  "talk_track": "string (what the presenter should verbally emphasise beyond the slides - 2-3 bullets)"
 }
 
 Rules:
 - NEVER use jargon for jargon's sake. Clear > clever.
 - Lead with facts, end with confidence.
-- Challenges must have mitigation plans — boards don't want problems, they want leadership.
+- Challenges must have mitigation plans - boards don't want problems, they want leadership.
 - The business_narrative must flow as readable paragraphs, not bullet points.
 - talk_track is the off-slide context the presenter should add verbally.
 """
@@ -92,7 +92,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Board Report — {body.company_name} · {body.report_period}"
+    title = f"Board Report - {body.company_name} · {body.report_period}"
     doc = firebase_service.create_pillar1_doc(project_id, "board_report", owner_uid, title)
     doc_id = doc["id"]
 

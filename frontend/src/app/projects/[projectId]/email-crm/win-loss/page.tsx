@@ -179,7 +179,7 @@ export default function WinLossPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div>
-        <h2 className="font-semibold text-sm">{result.product_name} — {result.analysis_period}</h2>
+        <h2 className="font-semibold text-sm">{result.product_name} - {result.analysis_period}</h2>
         {result.executive_summary && <p className="text-xs text-muted-foreground mt-1">{result.executive_summary}</p>}
       </div>
 
@@ -361,10 +361,10 @@ export default function WinLossPage() {
   const canSubmit = !!productName.trim() && deals.some((d) => d.deal_id.trim())
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Win/Loss Analysis" subtitle="Pillar 5 — Claude"
+    <SSEFeaturePage projectId={projectId} title="Win/Loss Analysis" subtitle="Pillar 5 - Claude"
       icon={<TrendingDown className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Deals — 15 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Analyse Deals - 15 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/email-crm`} />
   )
 }

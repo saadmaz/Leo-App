@@ -128,7 +128,7 @@ export default function MessagingResonancePage() {
         </div>
         <div>
           <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Audience</label>
-          <input value={audience} onChange={(e) => setAudience(e.target.value)} placeholder="e.g. Lookalike — SaaS founders"
+          <input value={audience} onChange={(e) => setAudience(e.target.value)} placeholder="e.g. Lookalike - SaaS founders"
             className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
         </div>
       </div>
@@ -314,7 +314,7 @@ export default function MessagingResonancePage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Messaging Resonance"
-      subtitle="Pillar 10 — Meta Ads + Claude"
+      subtitle="Pillar 10 - Meta Ads + Claude"
       icon={<MessageSquare className="w-4 h-4" />}
       credits={15}
       steps={store.steps}
@@ -323,7 +323,7 @@ export default function MessagingResonancePage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Analyse Resonance — 15 credits"
+      submitLabel="Analyse Resonance - 15 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/experiments`}
     />

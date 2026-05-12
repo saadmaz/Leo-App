@@ -1,14 +1,14 @@
 /**
- * Zustand application store — single source of truth for all client state.
+ * Zustand application store - single source of truth for all client state.
  *
  * Sections:
- *  - Auth        — current Firebase user
- *  - Projects    — list, active selection, CRUD helpers
- *  - Chats       — list for active project, active selection, CRUD helpers
- *  - Messages    — optimistic message list for the active chat
- *  - Streaming   — in-flight chat stream state and cancellation
- *  - UI          — sidebar open/close, panel visibility
- *  - Ingestion   — brand ingestion progress tracking
+ *  - Auth        - current Firebase user
+ *  - Projects    - list, active selection, CRUD helpers
+ *  - Chats       - list for active project, active selection, CRUD helpers
+ *  - Messages    - optimistic message list for the active chat
+ *  - Streaming   - in-flight chat stream state and cancellation
+ *  - UI          - sidebar open/close, panel visibility
+ *  - Ingestion   - brand ingestion progress tracking
  *
  * Design notes:
  *  - Upsert helpers prevent duplicate entries when re-fetching data.
@@ -77,7 +77,7 @@ interface AppState {
   finaliseMessage: (id: string, content: string) => void
 
   // ---------------------------------------------------------------------------
-  // Streaming — chat SSE state + cancellation
+  // Streaming - chat SSE state + cancellation
   // ---------------------------------------------------------------------------
   isStreaming: boolean
   setIsStreaming: (v: boolean) => void
@@ -197,14 +197,14 @@ interface AppState {
   resetCarouselSession: () => void
 
   // ---------------------------------------------------------------------------
-  // Calendar Cache — keyed by "projectId-YYYY-MM"
+  // Calendar Cache - keyed by "projectId-YYYY-MM"
   // ---------------------------------------------------------------------------
   calendarCache: Record<string, CalendarEntry[]>
   setCalendarCache: (key: string, entries: CalendarEntry[]) => void
   invalidateCalendarCache: (key: string) => void
 
   // ---------------------------------------------------------------------------
-  // Checklist Cache — keyed by projectId; expires after 5 min
+  // Checklist Cache - keyed by projectId; expires after 5 min
   // ---------------------------------------------------------------------------
   checklistCache: Record<string, { items: unknown[]; fetchedAt: number }>
   setChecklistCache: (projectId: string, items: unknown[]) => void

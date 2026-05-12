@@ -309,7 +309,7 @@ export default function PartnershipCommsPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Partnership Communications"
-      subtitle="Pillar 8 — Claude"
+      subtitle="Pillar 8 - Claude"
       icon={<Handshake className="w-4 h-4" />}
       credits={10}
       steps={store.steps}
@@ -318,7 +318,7 @@ export default function PartnershipCommsPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Draft Partnership Comms — 10 credits"
+      submitLabel="Draft Partnership Comms - 10 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

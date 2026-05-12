@@ -1,5 +1,5 @@
 """
-CAC + LTV Tracking — Claude calculates and interprets customer economics.
+CAC + LTV Tracking - Claude calculates and interprets customer economics.
 
 Data sources (in priority order):
 1. Stripe API (if STRIPE_SECRET_KEY configured + pull_from_stripe=True)
@@ -30,9 +30,9 @@ _MAX_BRAND = 600
 
 SYSTEM = """\
 You are a SaaS unit economics expert. You calculate CAC, LTV, payback period, \
-and Net Revenue Retention — then explain exactly what the numbers mean for the business.
+and Net Revenue Retention - then explain exactly what the numbers mean for the business.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -157,7 +157,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"CAC + LTV — {body.product_name} · {body.time_period}"
+    title = f"CAC + LTV - {body.product_name} · {body.time_period}"
     doc = firebase_service.create_pillar1_doc(project_id, "cac_ltv", owner_uid, title)
     doc_id = doc["id"]
 

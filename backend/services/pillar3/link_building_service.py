@@ -1,4 +1,4 @@
-"""Link Building Outreach — Claude SSE streaming."""
+"""Link Building Outreach - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -16,7 +16,7 @@ def _sse(data: dict) -> str:
 _SYSTEM = """\
 You are LEO, an expert link building strategist and outreach specialist.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "strategy": {
     "approach": "outreach_style",
@@ -54,7 +54,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 async def generate(project: dict, body: LinkBuildingRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
-        doc = firebase_service.create_pillar1_doc(project_id, "link_building", owner_uid, f"Link Building — {body.outreach_style}")
+        doc = firebase_service.create_pillar1_doc(project_id, "link_building", owner_uid, f"Link Building - {body.outreach_style}")
         doc_id = doc["id"]
 
         yield _sse({"type": "research_step", "step": "strategy", "label": "Building outreach strategy…", "status": "running"})

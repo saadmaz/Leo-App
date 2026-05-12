@@ -9,7 +9,7 @@ const FEATURES = [
     key: 'unified-dashboard',
     icon: <LayoutDashboard className="w-5 h-5" />,
     title: 'Unified Dashboard',
-    description: 'Aggregate GA4, Meta Ads, and manual channel data into one cross-channel executive view — with Claude narrative and budget shift recommendations.',
+    description: 'Aggregate GA4, Meta Ads, and manual channel data into one cross-channel executive view - with Claude narrative and budget shift recommendations.',
     path: 'unified-dashboard',
     credits: 15,
     tag: 'Claude + GA4 + Meta',
@@ -18,7 +18,7 @@ const FEATURES = [
     key: 'cohort',
     icon: <Users className="w-5 h-5" />,
     title: 'Cohort Analysis',
-    description: 'Paste retention or activation cohort data — Claude identifies the critical drop-off period, diagnoses root causes, and prescribes quick wins.',
+    description: 'Paste retention or activation cohort data - Claude identifies the critical drop-off period, diagnoses root causes, and prescribes quick wins.',
     path: 'cohort',
     credits: 20,
     tag: 'Claude',
@@ -27,7 +27,7 @@ const FEATURES = [
     key: 'funnel',
     icon: <TrendingUp className="w-5 h-5" />,
     title: 'Funnel Conversion Analysis',
-    description: 'Enter funnel step counts — Claude calculates conversion rates, finds the biggest leak, and produces a prioritised CRO fix list with expected impact.',
+    description: 'Enter funnel step counts - Claude calculates conversion rates, finds the biggest leak, and produces a prioritised CRO fix list with expected impact.',
     path: 'funnel',
     credits: 15,
     tag: 'Claude',
@@ -36,7 +36,7 @@ const FEATURES = [
     key: 'anomaly',
     icon: <AlertTriangle className="w-5 h-5" />,
     title: 'Anomaly Detection',
-    description: 'Paste time-series metric data — LEO runs statistical threshold analysis (IQR + Z-score), then Claude interprets each anomaly with urgency ratings.',
+    description: 'Paste time-series metric data - LEO runs statistical threshold analysis (IQR + Z-score), then Claude interprets each anomaly with urgency ratings.',
     path: 'anomaly',
     credits: 10,
     tag: 'Claude + Statistics',
@@ -45,7 +45,7 @@ const FEATURES = [
     key: 'forecast',
     icon: <BarChart2 className="w-5 h-5" />,
     title: 'Forecasting Model',
-    description: 'Provide historical monthly/weekly data — Claude projects base, optimistic, and pessimistic scenarios with confidence ratings and target recommendations.',
+    description: 'Provide historical monthly/weekly data - Claude projects base, optimistic, and pessimistic scenarios with confidence ratings and target recommendations.',
     path: 'forecast',
     credits: 15,
     tag: 'Claude',
@@ -63,7 +63,7 @@ const FEATURES = [
     key: 'board-report',
     icon: <FileText className="w-5 h-5" />,
     title: 'Board-Ready Reporting',
-    description: 'Enter your metrics, wins, challenges, and priorities — Claude writes a polished board update or investor memo with narrative, KPI table, and talk track.',
+    description: 'Enter your metrics, wins, challenges, and priorities - Claude writes a polished board update or investor memo with narrative, KPI table, and talk track.',
     path: 'board-report',
     credits: 25,
     tag: 'Claude',
@@ -88,7 +88,7 @@ export default function AnalyticsProHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">Analytics & Reporting</h1>
-          <p className="text-xs text-muted-foreground">Pillar 7 — Claude · GA4 · Stripe · HubSpot · Meta</p>
+          <p className="text-xs text-muted-foreground">Pillar 7 - Claude · GA4 · Stripe · HubSpot · Meta</p>
         </div>
       </div>
 

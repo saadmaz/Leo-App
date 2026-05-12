@@ -52,7 +52,7 @@ export function NotificationBell({ projectId }: { projectId: string }) {
       const data = await api.analytics.getActivity(projectId)
       setEvents(data)
     } catch {
-      // silently fail — notification bell is non-critical
+      // silently fail - notification bell is non-critical
     }
   }, [projectId])
 

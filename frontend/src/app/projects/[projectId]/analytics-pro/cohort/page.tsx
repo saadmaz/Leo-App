@@ -111,13 +111,13 @@ export default function CohortAnalysisPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Business Context (optional)</label>
         <textarea value={businessContext} onChange={(e) => setBusinessContext(e.target.value)} rows={2}
-          placeholder="e.g. We launched a new onboarding flow in February — check if week 2 retention improved"
+          placeholder="e.g. We launched a new onboarding flow in February - check if week 2 retention improved"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
 
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Cohorts — retention % per period</label>
+          <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Cohorts - retention % per period</label>
           {cohorts.length < 24 && (
             <button onClick={addCohort} className="flex items-center gap-1 text-xs text-primary hover:text-primary/80"><Plus className="w-3 h-3" /> Add cohort</button>
           )}
@@ -248,10 +248,10 @@ export default function CohortAnalysisPage() {
   const canSubmit = !!productName.trim() && cohorts.some((c) => c.initial_users)
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Cohort Analysis" subtitle="Pillar 7 — Claude"
+    <SSEFeaturePage projectId={projectId} title="Cohort Analysis" subtitle="Pillar 7 - Claude"
       icon={<Users className="w-4 h-4" />} credits={20} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Cohorts — 20 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Analyse Cohorts - 20 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/analytics-pro`} />
   )
 }

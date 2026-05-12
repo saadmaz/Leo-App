@@ -177,6 +177,6 @@ export default function OnPageSeoPage() {
     <SSEFeaturePage projectId={projectId} title="On-Page SEO Audit" subtitle="DataForSEO + Claude"
       icon={<FileSearch className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Run Audit — 15 credits" canSubmit={!!url.trim()} />
+      onSubmit={generate} submitLabel="Run Audit - 15 credits" canSubmit={!!url.trim()} />
   )
 }

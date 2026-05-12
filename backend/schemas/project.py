@@ -6,7 +6,7 @@ class ProjectCreate(BaseModel):
     name: str
     description: Optional[str] = ""
     projectType: Optional[str] = "business"   # "business" | "personal"
-    # Social links — website + instagram are mandatory in the UI but optional at schema level
+    # Social links - website + instagram are mandatory in the UI but optional at schema level
     websiteUrl: Optional[str] = None
     instagramUrl: Optional[str] = None
     facebookUrl: Optional[str] = None
@@ -27,7 +27,7 @@ class ProjectCreate(BaseModel):
 class ProjectUpdate(BaseModel):
     name: Optional[str] = None
     description: Optional[str] = None
-    # Social links — all editable post-creation from Project Settings
+    # Social links - all editable post-creation from Project Settings
     websiteUrl: Optional[str] = None
     instagramUrl: Optional[str] = None
     facebookUrl: Optional[str] = None

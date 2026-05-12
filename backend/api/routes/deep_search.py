@@ -1,8 +1,8 @@
 """
-Deep Search routes — multi-source web intelligence.
+Deep Search routes - multi-source web intelligence.
 
-POST /projects/{project_id}/deep-search          — run a search (SSE stream)
-GET  /projects/{project_id}/deep-search/history  — list saved results
+POST /projects/{project_id}/deep-search          - run a search (SSE stream)
+GET  /projects/{project_id}/deep-search/history  - list saved results
 """
 from __future__ import annotations
 

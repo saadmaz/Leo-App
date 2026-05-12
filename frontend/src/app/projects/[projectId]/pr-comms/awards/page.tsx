@@ -188,7 +188,7 @@ export default function AwardsPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-sm">{result.award_name} — {result.company_name}</h2>
+        <h2 className="font-semibold text-sm">{result.award_name} - {result.company_name}</h2>
         <span className="text-xs text-muted-foreground">{result.word_count} words</span>
       </div>
 
@@ -250,7 +250,7 @@ export default function AwardsPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Award Submissions"
-      subtitle="Pillar 8 — Firecrawl + Claude"
+      subtitle="Pillar 8 - Firecrawl + Claude"
       icon={<Trophy className="w-4 h-4" />}
       credits={15}
       steps={store.steps}
@@ -259,7 +259,7 @@ export default function AwardsPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Draft Award Submission — 15 credits"
+      submitLabel="Draft Award Submission - 15 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

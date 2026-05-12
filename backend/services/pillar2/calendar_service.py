@@ -1,4 +1,4 @@
-"""Content Calendar Management — Claude SSE streaming."""
+"""Content Calendar Management - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -16,7 +16,7 @@ def _sse(data: dict) -> str:
 _SYSTEM = """\
 You are LEO, a content strategist who builds data-driven editorial calendars.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "planning_horizon": "90 days",
   "strategy_summary": "2-3 sentence overview of the content strategy",

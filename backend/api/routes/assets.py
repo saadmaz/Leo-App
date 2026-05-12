@@ -1,5 +1,5 @@
 """
-Assets route — handles project asset uploads (logo, etc.).
+Assets route - handles project asset uploads (logo, etc.).
 
 Logos are stored as base64 data URLs directly in Firestore, consistent with
 how generated images are handled throughout the codebase. If Cloudflare R2
@@ -108,7 +108,7 @@ async def upload_logo(
             if public_base:
                 logo_url = f"{public_base.rstrip('/')}/{object_key}"
             else:
-                logger.warning("CLOUDFLARE_R2_PUBLIC_URL not set — falling back to base64 for project %s", project_id)
+                logger.warning("CLOUDFLARE_R2_PUBLIC_URL not set - falling back to base64 for project %s", project_id)
         except Exception as exc:
             logger.error("R2 upload failed for project %s (%s), falling back to base64: %s", project_id, type(exc).__name__, exc, exc_info=True)
 
@@ -184,12 +184,12 @@ async def upload_media(
             if public_base:
                 media_url = f"{public_base.rstrip('/')}/{object_key}"
             else:
-                logger.warning("CLOUDFLARE_R2_PUBLIC_URL not set — falling back to base64 for project %s", project_id)
+                logger.warning("CLOUDFLARE_R2_PUBLIC_URL not set - falling back to base64 for project %s", project_id)
         except Exception as exc:
             logger.error("R2 upload failed for project %s: %s", project_id, exc, exc_info=True)
 
     if media_url is None:
-        # Videos must not fall back to base64 — they would exceed Firestore's 1 MB document limit.
+        # Videos must not fall back to base64 - they would exceed Firestore's 1 MB document limit.
         if content_type.startswith("video/"):
             raise HTTPException(
                 status_code=422,

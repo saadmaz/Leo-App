@@ -1,14 +1,14 @@
 """
-Tavily client — AI-powered search built specifically for AI agents.
+Tavily client - AI-powered search built specifically for AI agents.
 
 Handles: search + scrape + filter + extract in a single call.
 One-call search returns LLM-ready, relevance-scored content.
 
 Endpoints exposed:
-  search   — general/news search (basic/advanced depth)
-  extract  — clean content from specific URLs
-  crawl    — graph-based website traversal
-  research — multi-step async research with structured output
+  search   - general/news search (basic/advanced depth)
+  extract  - clean content from specific URLs
+  crawl    - graph-based website traversal
+  research - multi-step async research with structured output
 
 All functions are async. tavily-python SDK is synchronous,
 wrapped in asyncio.to_thread().
@@ -308,7 +308,7 @@ async def crawl_site(
     project_id: Optional[str] = None,
 ) -> list[dict]:
     """
-    Graph-based website crawl — discovers and returns all pages up to max_depth.
+    Graph-based website crawl - discovers and returns all pages up to max_depth.
     Ideal for comprehensive competitor site ingestion.
     Returns list of { url, raw_content }
     """

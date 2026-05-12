@@ -1,5 +1,5 @@
 """
-Competitor Classifier Service — 5-Dimension Intelligence Engine.
+Competitor Classifier Service - 5-Dimension Intelligence Engine.
 
 For each competitor it:
   1. Gathers raw data from public sources (Exa / Tavily web search)
@@ -8,11 +8,11 @@ For each competitor it:
   4. Streams SSE progress events so the frontend stays live
 
 The 5 dimensions classified:
-  1. Geographic Scope      — Local / Regional / National / Global
-  2. Size & Revenue        — Micro / SMB / Mid-Market / Enterprise
-  3. Directness            — Direct / Indirect / Substitute
-  4. Market Position       — Market Leader / Challenger / Niche Player / New Entrant
-  5. Customer Segment      — Budget/Premium, B2B/B2C, Verticals, Demographics
+  1. Geographic Scope      - Local / Regional / National / Global
+  2. Size & Revenue        - Micro / SMB / Mid-Market / Enterprise
+  3. Directness            - Direct / Indirect / Substitute
+  4. Market Position       - Market Leader / Challenger / Niche Player / New Entrant
+  5. Customer Segment      - Budget/Premium, B2B/B2C, Verticals, Demographics
 """
 
 import asyncio
@@ -30,13 +30,13 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 _MAX_SEARCH_RESULTS = 6
-# Classification is a structured JSON task — Haiku is sufficient and 5× cheaper.
+# Classification is a structured JSON task - Haiku is sufficient and 5× cheaper.
 _CLAUDE_MODEL = settings.LLM_CLASSIFICATION_MODEL
 
 CLASSIFICATION_PROMPT = """\
 You are a competitive intelligence analyst. Based on the data gathered below about a competitor,
-classify them across exactly 5 dimensions. Output ONLY a valid JSON object — no markdown, no
-explanation, no preamble — matching this exact schema:
+classify them across exactly 5 dimensions. Output ONLY a valid JSON object - no markdown, no
+explanation, no preamble - matching this exact schema:
 
 {
   "geographic_scope": "Local" | "Regional" | "National" | "Global",
@@ -166,7 +166,7 @@ async def _get_news(name: str, project_id: Optional[str]) -> str:
         parts = []
         for r in results[:4]:
             date = r.get("published_date", "")[:10]
-            parts.append(f"• [{date}] {r.get('title', '')} — {r.get('url', '')}")
+            parts.append(f"• [{date}] {r.get('title', '')} - {r.get('url', '')}")
         return "\n".join(parts) or "No recent news found."
     except Exception:
         pass
@@ -177,7 +177,7 @@ async def _get_news(name: str, project_id: Optional[str]) -> str:
         )
         parts = []
         for r in resp.get("results", [])[:4]:
-            parts.append(f"• {r.get('title', '')} — {r.get('url', '')}")
+            parts.append(f"• {r.get('title', '')} - {r.get('url', '')}")
         return "\n".join(parts) or "No recent news found."
     except Exception:
         return "News search unavailable."
@@ -308,13 +308,13 @@ async def classify_competitor(
 
         response = await client.messages.create(
             model=_CLAUDE_MODEL,
-            max_tokens=1500,  # complex JSON but bounded schema — 1500 is sufficient
+            max_tokens=1500,  # complex JSON but bounded schema - 1500 is sufficient
             messages=[{"role": "user", "content": prompt}],
         )
 
         raw_text = response.content[0].text.strip()
 
-        # Robust JSON extraction — handles fences, prose before/after, truncation
+        # Robust JSON extraction - handles fences, prose before/after, truncation
         def _extract_json(text: str) -> dict:
             import re as _re
             # Strip markdown code fences

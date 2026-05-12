@@ -143,7 +143,7 @@ function UserRow({ user }: { user: AdminUser }) {
     ? new Date(user.createdAt).toLocaleDateString('en-US', {
         month: 'short', day: 'numeric', year: 'numeric',
       })
-    : '—'
+    : '-'
 
   return (
     <Link
@@ -165,7 +165,7 @@ function UserRow({ user }: { user: AdminUser }) {
       <span className="text-sm text-muted-foreground tabular-nums">
         {user.credits?.balance != null
           ? user.credits.balance.toLocaleString()
-          : '—'}
+          : '-'}
       </span>
 
       {/* Messages used */}

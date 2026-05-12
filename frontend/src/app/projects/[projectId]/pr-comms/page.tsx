@@ -45,7 +45,7 @@ const FEATURES = [
     key: 'crisis-comms',
     icon: <AlertTriangle className="w-5 h-5" />,
     title: 'Crisis Communications',
-    description: 'Generate a complete crisis playbook — holding statement, stakeholder communications, internal FAQ, action checklist, and media Q&A.',
+    description: 'Generate a complete crisis playbook - holding statement, stakeholder communications, internal FAQ, action checklist, and media Q&A.',
     path: 'crisis-comms',
     credits: 20,
     tag: 'Claude',
@@ -72,7 +72,7 @@ const FEATURES = [
     key: 'partnership-comms',
     icon: <Handshake className="w-5 h-5" />,
     title: 'Partnership Communications',
-    description: 'Draft partnership outreach emails, proposals, joint press releases, or internal announcements — with follow-up sequences and objection handling.',
+    description: 'Draft partnership outreach emails, proposals, joint press releases, or internal announcements - with follow-up sequences and objection handling.',
     path: 'partnership-comms',
     credits: 10,
     tag: 'Claude',
@@ -89,7 +89,7 @@ export default function PRCommsHubPage() {
         <SidebarToggle />
         <div>
           <h1 className="font-semibold">PR & Communications</h1>
-          <p className="text-xs text-muted-foreground">Pillar 8 — Claude + Hunter.io + Firecrawl</p>
+          <p className="text-xs text-muted-foreground">Pillar 8 - Claude + Hunter.io + Firecrawl</p>
         </div>
       </div>
 

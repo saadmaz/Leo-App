@@ -144,6 +144,6 @@ export default function QualityPage() {
     <SSEFeaturePage projectId={projectId} title="Content Quality Score" subtitle="6-dimension analysis"
       icon={<CheckCircle className="w-4 h-4" />} credits={10} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Score Content — 10 credits" canSubmit={!!content.trim()} />
+      onSubmit={generate} submitLabel="Score Content - 10 credits" canSubmit={!!content.trim()} />
   )
 }

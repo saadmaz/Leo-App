@@ -216,7 +216,7 @@ export default function ForecastPage() {
             <textarea
               value={growthAssumptions}
               onChange={e => setGrowthAssumptions(e.target.value)}
-              placeholder="Add context to improve accuracy — e.g. 'We're launching a new pricing tier in Q3', 'Seasonality: Q4 is typically 40% higher', 'New sales headcount added in month 7'..."
+              placeholder="Add context to improve accuracy - e.g. 'We're launching a new pricing tier in Q3', 'Seasonality: Q4 is typically 40% higher', 'New sales headcount added in month 7'..."
               rows={8}
               className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             />
@@ -226,7 +226,7 @@ export default function ForecastPage() {
         {error && <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-600 mb-4">{error}</div>}
 
         <Button onClick={handleRun} disabled={isStreaming} className="w-full mb-8">
-          {isStreaming ? 'Forecasting...' : 'Generate Forecast — 15 Credits'}
+          {isStreaming ? 'Forecasting...' : 'Generate Forecast - 15 Credits'}
         </Button>
 
         {steps.length > 0 && (
@@ -301,7 +301,7 @@ export default function ForecastPage() {
                             {scenarios.includes('optimistic') && (
                               <td className="text-right py-2 px-3 text-green-600">{f.unit === '$' ? '$' : ''}{(p.optimistic || 0).toLocaleString()}</td>
                             )}
-                            <td className="text-right py-2 pl-3 text-gray-400">{p.confidence_pct ? `${p.confidence_pct}%` : '—'}</td>
+                            <td className="text-right py-2 pl-3 text-gray-400">{p.confidence_pct ? `${p.confidence_pct}%` : '-'}</td>
                           </tr>
                         ))}
                       </tbody>

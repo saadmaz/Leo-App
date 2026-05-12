@@ -1,5 +1,5 @@
 /**
- * Zustand store for Pillar 2 — Content Creation & Management.
+ * Zustand store for Pillar 2 - Content Creation & Management.
  * Mirrors the pillar1-store pattern but isolated to avoid state collisions.
  */
 

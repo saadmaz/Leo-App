@@ -21,7 +21,7 @@ export default function ErrorPage({
       </div>
       <h1 className="text-xl font-semibold mb-2">Something went wrong</h1>
       <p className="text-sm text-muted-foreground mb-8 max-w-xs">
-        An unexpected error occurred. Your data is safe — try reloading the page.
+        An unexpected error occurred. Your data is safe - try reloading the page.
       </p>
       <div className="flex gap-3">
         <button

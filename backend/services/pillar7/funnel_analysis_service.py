@@ -1,5 +1,5 @@
 """
-Funnel Conversion Analysis — Claude explains conversion drops at every funnel step.
+Funnel Conversion Analysis - Claude explains conversion drops at every funnel step.
 
 Input: funnel steps with user counts.
 Output: conversion rates, drop-off diagnosis, fix recommendations.
@@ -23,7 +23,7 @@ SYSTEM = """\
 You are a conversion rate optimisation (CRO) expert. You diagnose exactly where \
 and why funnels leak, and prescribe targeted fixes with expected impact.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -87,7 +87,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Funnel Analysis — {body.funnel_name}"
+    title = f"Funnel Analysis - {body.funnel_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "funnel_analysis", owner_uid, title)
     doc_id = doc["id"]
 

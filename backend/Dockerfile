@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# LEO Backend — Production Dockerfile
+# LEO Backend - Production Dockerfile
 # Base: Python 3.12 slim for a small image footprint.
 # ---------------------------------------------------------------------------
 

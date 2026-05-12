@@ -120,7 +120,7 @@ function ProjectCard({
         </div>
       </div>
 
-      {/* Quick actions — stop propagation so they don't trigger card click */}
+      {/* Quick actions - stop propagation so they don't trigger card click */}
       <div className="px-4 pb-4 flex items-center gap-1.5">
         <button
           onClick={(e) => { e.stopPropagation(); onOpenChat() }}
@@ -265,7 +265,7 @@ export default function ProjectsPage() {
               </div>
             )}
 
-            {/* No projects — onboarding */}
+            {/* No projects - onboarding */}
             {!loading && projects.length === 0 && (
               <OnboardingCard />
             )}
@@ -285,7 +285,7 @@ export default function ProjectsPage() {
               </div>
             )}
 
-            {/* Tips section — shown when has projects */}
+            {/* Tips section - shown when has projects */}
             {!loading && projects.length > 0 && (
               <div className="bg-muted/30 border border-border rounded-2xl p-5">
                 <div className="flex items-center gap-2 mb-3">

@@ -13,7 +13,7 @@ interface TransformModalProps {
   onSaved: () => void
 }
 
-// Backend returns lowercase keys — map both cases
+// Backend returns lowercase keys - map both cases
 const PLATFORM_LABELS: Record<string, string> = {
   instagram: 'Instagram',
   facebook: 'Facebook',
@@ -97,7 +97,7 @@ export function TransformModal({ item, projectId, onClose, onSaved }: TransformM
           {/* Action */}
           <div className="flex items-center gap-3">
             <p className="text-xs text-muted-foreground flex-1">
-              Adapt this content for all major platforms simultaneously — each version optimised for that platform&apos;s format and audience expectations.
+              Adapt this content for all major platforms simultaneously - each version optimised for that platform&apos;s format and audience expectations.
             </p>
             <button
               onClick={handleTransform}

@@ -1,4 +1,4 @@
-"""International SEO — Claude SSE streaming."""
+"""International SEO - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -16,7 +16,7 @@ def _sse(data: dict) -> str:
 _SYSTEM = """\
 You are LEO, an international SEO specialist with expertise in hreflang, technical implementation, and market-specific keyword strategy.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "expansion_strategy": "Overall international SEO approach and rationale",
   "recommended_structure": {
@@ -55,7 +55,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 
 async def generate(project: dict, body: InternationalSeoRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
-        doc = firebase_service.create_pillar1_doc(project_id, "international_seo", owner_uid, f"International SEO — {body.domain}")
+        doc = firebase_service.create_pillar1_doc(project_id, "international_seo", owner_uid, f"International SEO - {body.domain}")
         doc_id = doc["id"]
 
         yield _sse({"type": "research_step", "step": "market_analysis", "label": f"Analysing {len(body.target_markets)} target markets…", "status": "running"})

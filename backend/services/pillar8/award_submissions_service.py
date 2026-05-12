@@ -1,5 +1,5 @@
 """
-Award Submissions — Firecrawl reads award criteria, Claude drafts the submission.
+Award Submissions - Firecrawl reads award criteria, Claude drafts the submission.
 
 Input:  award name/URL, company, achievements, category.
 Output: structured submission text aligned to the specific award criteria.
@@ -24,21 +24,21 @@ _MAX_AWARD_CONTENT = 3000
 
 SYSTEM = """\
 You are an award submission expert who helps companies win industry recognition. \
-You write compelling, evidence-based submissions that judges remember — specific, \
+You write compelling, evidence-based submissions that judges remember - specific, \
 achievement-focused, humble yet confident.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
   "submission_title": "string (the title of the entry)",
-  "executive_summary": "string (100-150 words — the elevator pitch of why this entry should win)",
-  "main_submission": "string (the full submission text — structured by the award criteria if known, or by Impact → Approach → Results → Future if not)",
+  "executive_summary": "string (100-150 words - the elevator pitch of why this entry should win)",
+  "main_submission": "string (the full submission text - structured by the award criteria if known, or by Impact → Approach → Results → Future if not)",
   "key_achievements_highlighted": [
     {"achievement": "string", "metric": "string or null", "impact": "string"}
   ],
   "judge_takeaways": ["string (3-5 bullet points a judge should remember)"],
-  "supporting_evidence_suggestions": ["string (types of evidence to attach — e.g. 'case study PDF', 'customer testimonial')"],
+  "supporting_evidence_suggestions": ["string (types of evidence to attach - e.g. 'case study PDF', 'customer testimonial')"],
   "word_count": number,
   "criteria_addressed": ["string (which criteria this submission explicitly addresses)"],
   "submission_tips": ["string"]
@@ -46,7 +46,7 @@ Schema:
 
 Rules:
 - Lead with impact, not backstory.
-- Use specific numbers wherever possible — judges trust data.
+- Use specific numbers wherever possible - judges trust data.
 - Address each known criterion explicitly.
 - Avoid superlatives without evidence ('world-class', 'industry-leading' without proof).
 - End the main submission with a forward-looking statement about continued impact.
@@ -90,7 +90,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Award Submission — {body.award_name}"
+    title = f"Award Submission - {body.award_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "award_submission", owner_uid, title)
     doc_id = doc["id"]
 
@@ -106,9 +106,9 @@ async def generate(
         if award_criteria_text:
             yield _sse({"type": "research_step", "step": "scraping", "label": "Award criteria loaded", "status": "done"})
         else:
-            yield _sse({"type": "research_step", "step": "scraping", "label": "Could not read award page — proceeding without criteria", "status": "done"})
+            yield _sse({"type": "research_step", "step": "scraping", "label": "Could not read award page - proceeding without criteria", "status": "done"})
     else:
-        yield _sse({"type": "research_step", "step": "scraping", "label": "No award URL provided — using general best practices", "status": "done"})
+        yield _sse({"type": "research_step", "step": "scraping", "label": "No award URL provided - using general best practices", "status": "done"})
 
     yield _sse({"type": "research_step", "step": "writing", "label": "Drafting award submission…", "status": "running"})
 

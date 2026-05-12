@@ -1,5 +1,5 @@
 """
-Visual Brief Generation — Claude, SSE streaming.
+Visual Brief Generation - Claude, SSE streaming.
 
 Generates a structured creative brief for designers (social posts, blog covers,
 ad creatives, email banners, thumbnails) grounded in Brand Core.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a creative director and brand designer.
 Produce a detailed visual brief that a designer can hand to a tool like Canva, Figma, or Midjourney.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "content_type": "social_post",
   "platform": "Instagram",
@@ -67,7 +67,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 RULES:
 1. Colour palette must be hex codes that actually go well together.
 2. Midjourney prompt must be specific, evocative, and under 200 words.
-3. Return ONLY valid JSON — no prose, no markdown fences.
+3. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -84,7 +84,7 @@ async def generate(
         visual = brand_core.get("visual") or {}
         tone = brand_core.get("tone") or {}
 
-        title = f"Visual Brief — {body.content_type}"
+        title = f"Visual Brief - {body.content_type}"
         doc = firebase_service.create_pillar1_doc(project_id, "visual_brief", owner_uid, title)
         doc_id = doc["id"]
 

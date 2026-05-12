@@ -179,6 +179,6 @@ export default function FreshnessPage() {
     <SSEFeaturePage projectId={projectId} title="Content Freshness Check" subtitle="DataForSEO + Claude"
       icon={<RefreshCw className="w-4 h-4" />} credits={10} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Check Freshness — 10 credits" canSubmit={!!url.trim() && !!keyword.trim()} />
+      onSubmit={generate} submitLabel="Check Freshness - 10 credits" canSubmit={!!url.trim() && !!keyword.trim()} />
   )
 }

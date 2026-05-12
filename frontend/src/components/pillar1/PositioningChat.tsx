@@ -57,7 +57,7 @@ export function PositioningChat({
           ))}
         </div>
         <p className="text-xs text-muted-foreground">
-          Stage {currentStage + 1}/7 — <span className="text-foreground font-medium">{STAGE_LABELS[Math.min(currentStage, 6)]}</span>
+          Stage {currentStage + 1}/7 - <span className="text-foreground font-medium">{STAGE_LABELS[Math.min(currentStage, 6)]}</span>
         </p>
       </div>
 

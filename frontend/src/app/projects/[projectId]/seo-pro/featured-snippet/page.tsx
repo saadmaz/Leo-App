@@ -68,7 +68,7 @@ export default function FeaturedSnippetPage() {
         </select>
       </div>
       <div>
-        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Your Existing Content (optional — paste to get a rewrite)</label>
+        <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Your Existing Content (optional - paste to get a rewrite)</label>
         <textarea value={yourContent} onChange={(e) => setYourContent(e.target.value)} rows={4}
           placeholder="Paste your current content section to get an optimised rewrite..."
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
@@ -78,7 +78,7 @@ export default function FeaturedSnippetPage() {
 
   const resultNode = result ? (
     <div className="space-y-4">
-      <h2 className="font-semibold text-sm">Featured Snippet — &ldquo;{result.keyword}&rdquo;</h2>
+      <h2 className="font-semibold text-sm">Featured Snippet - &ldquo;{result.keyword}&rdquo;</h2>
 
       {/* Snippet status */}
       <div className="p-4 rounded-xl border border-border bg-card">
@@ -86,7 +86,7 @@ export default function FeaturedSnippetPage() {
           <div className="flex items-center gap-2">
             <div className={cn('w-2 h-2 rounded-full', result.has_snippet ? 'bg-yellow-500' : 'bg-green-500')} />
             <p className="text-sm font-medium">
-              {result.has_snippet ? `Snippet owned by ${result.current_snippet_owner}` : 'No snippet — opportunity open'}
+              {result.has_snippet ? `Snippet owned by ${result.current_snippet_owner}` : 'No snippet - opportunity open'}
             </p>
           </div>
           {result.opportunity_assessment && (
@@ -159,6 +159,6 @@ export default function FeaturedSnippetPage() {
     <SSEFeaturePage projectId={projectId} title="Featured Snippet Optimizer" subtitle="DataForSEO + Claude"
       icon={<Star className="w-4 h-4" />} credits={10} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Optimize for Snippet — 10 credits" canSubmit={!!keyword.trim()} />
+      onSubmit={generate} submitLabel="Optimize for Snippet - 10 credits" canSubmit={!!keyword.trim()} />
   )
 }

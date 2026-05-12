@@ -200,7 +200,7 @@ export default function PersonalBrandAnalyticsPage() {
         if (snaps.status === 'fulfilled') setSnapshots(snaps.value ?? [])
         if (weeklyBrief.status === 'fulfilled' && weeklyBrief.value) setBrief(weeklyBrief.value)
       } catch {
-        // Non-critical — page shows empty state
+        // Non-critical - page shows empty state
       } finally {
         setLoading(false)
         setRefreshing(false)

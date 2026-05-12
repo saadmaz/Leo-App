@@ -59,7 +59,7 @@ export default function MarketSizePage() {
 
   const resultNode = result ? (
     <div className="space-y-4">
-      <h2 className="font-semibold text-sm">Market Analysis — {result.geography}</h2>
+      <h2 className="font-semibold text-sm">Market Analysis - {result.geography}</h2>
       {(['tam', 'sam', 'som'] as const).map((key) => {
         const tier = result[key]
         return (
@@ -80,6 +80,6 @@ export default function MarketSizePage() {
     <SSEFeaturePage projectId={projectId} title="Market Sizing" subtitle="SerpAPI × 3 + Claude"
       icon={<BarChart3 className="w-4 h-4" />} credits={40} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Analyse Market — 40 credits" canSubmit={!!market.trim()} />
+      onSubmit={generate} submitLabel="Analyse Market - 40 credits" canSubmit={!!market.trim()} />
   )
 }

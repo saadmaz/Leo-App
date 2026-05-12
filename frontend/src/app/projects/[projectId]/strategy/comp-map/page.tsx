@@ -67,7 +67,7 @@ export default function CompMapPage() {
 
   const resultNode = result ? (
     <div className="space-y-4">
-      <h2 className="font-semibold text-sm">Positioning Map — {result.x_axis} vs {result.y_axis}</h2>
+      <h2 className="font-semibold text-sm">Positioning Map - {result.x_axis} vs {result.y_axis}</h2>
       {result.white_space && (
         <div className="p-3 rounded-lg bg-primary/10 text-primary text-sm">{result.white_space}</div>
       )}
@@ -93,6 +93,6 @@ export default function CompMapPage() {
     <SSEFeaturePage projectId={projectId} title="Positioning Map" subtitle="SerpAPI + Claude"
       icon={<Map className="w-4 h-4" />} credits={35} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Map — 35 credits" canSubmit={competitors.trim().length > 0} />
+      onSubmit={generate} submitLabel="Generate Map - 35 credits" canSubmit={competitors.trim().length > 0} />
   )
 }

@@ -97,13 +97,13 @@ export default function AdminDashboardPage() {
                   color="bg-muted-foreground/40"
                 />
                 <TierRow
-                  label="Pro — $49/mo"
+                  label="Pro - $49/mo"
                   count={stats?.usersByTier.pro ?? 0}
                   total={stats?.totalUsers ?? 1}
                   color="bg-primary"
                 />
                 <TierRow
-                  label="Agency — $149/mo"
+                  label="Agency - $149/mo"
                   count={stats?.usersByTier.agency ?? 0}
                   total={stats?.totalUsers ?? 1}
                   color="bg-violet-500"
@@ -179,7 +179,7 @@ function StatCard({
         {loading ? (
           <Skeleton className="h-8 w-24" />
         ) : (
-          <p className="text-2xl font-bold">{value ?? '—'}</p>
+          <p className="text-2xl font-bold">{value ?? '-'}</p>
         )}
         {sub && !loading && (
           <p className="text-xs text-muted-foreground mt-1">{sub}</p>

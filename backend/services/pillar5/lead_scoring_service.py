@@ -1,5 +1,5 @@
 """
-Lead Scoring — Claude scores each lead against the ICP and behavioural signals.
+Lead Scoring - Claude scores each lead against the ICP and behavioural signals.
 
 Optionally writes scores back to HubSpot contact properties if HUBSPOT_ACCESS_TOKEN is set.
 """
@@ -23,7 +23,7 @@ SYSTEM = """\
 You are a revenue operations specialist expert at building and running lead scoring models. \
 You score leads against the Ideal Customer Profile and intent signals.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -48,7 +48,7 @@ Schema:
       "score_rationale": "string (2-3 sentences: why this score)",
       "top_positive_signals": ["string"],
       "top_negative_signals": ["string"],
-      "recommended_action": "string (Sales Dev, AE, Nurture, or Disqualify — with specifics)",
+      "recommended_action": "string (Sales Dev, AE, Nurture, or Disqualify - with specifics)",
       "next_step": "string (concrete immediate next step)",
       "hubspot_lifecycle_recommendation": "string (lead|marketingqualifiedlead|salesqualifiedlead|opportunity|customer)"
     }
@@ -67,9 +67,9 @@ Rules:
 - icp_fit_score is purely firmographic/demographic (job title, company size, industry).
 - behavioural_score is engagement depth (pages, content, emails).
 - intent_score is purchase-intent signals (demo request, trial, pricing page visit).
-- If a signal is missing, score that dimension at 50 (neutral) — do not penalise.
+- If a signal is missing, score that dimension at 50 (neutral) - do not penalise.
 - recommended_action must specify the exact outreach type (e.g. 'SDR cold call within 24h',
-  'Enrol in nurture sequence: Trial Activation', 'Disqualify — company too small for ROI').
+  'Enrol in nurture sequence: Trial Activation', 'Disqualify - company too small for ROI').
 """
 
 
@@ -88,7 +88,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Lead Scoring — {len(body.leads)} leads · {body.product_name}"
+    title = f"Lead Scoring - {len(body.leads)} leads · {body.product_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "lead_scoring", owner_uid, title)
     doc_id = doc["id"]
 

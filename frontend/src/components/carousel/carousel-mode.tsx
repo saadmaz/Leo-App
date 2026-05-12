@@ -99,7 +99,7 @@ export function CarouselMode({ projectId, onLeoMessage }: CarouselModeProps) {
           htmlContent: html,
           slideCount: slides,
         })
-        onLeoMessage(`Your carousel is ready — "${title}" (${slides} slides). Use the action bar below to edit or export.`)
+        onLeoMessage(`Your carousel is ready - "${title}" (${slides} slides). Use the action bar below to edit or export.`)
       },
       (err) => {
         setGenerationStatus(null)

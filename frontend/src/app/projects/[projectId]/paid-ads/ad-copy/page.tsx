@@ -186,7 +186,7 @@ export default function AdCopyPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Product Description *</label>
         <textarea value={productDescription} onChange={(e) => setProductDescription(e.target.value)}
-          rows={2} placeholder="Describe your product — what it does, key benefits, how it's different"
+          rows={2} placeholder="Describe your product - what it does, key benefits, how it's different"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
 
@@ -260,7 +260,7 @@ export default function AdCopyPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-sm">{result.product_name} — {result.platform.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}</h2>
+        <h2 className="font-semibold text-sm">{result.product_name} - {result.platform.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())}</h2>
         <span className="text-xs text-muted-foreground">{result.variants?.length} variants</span>
       </div>
 
@@ -403,7 +403,7 @@ export default function AdCopyPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Ad Copy Generator"
-      subtitle="Pillar 4 — Claude"
+      subtitle="Pillar 4 - Claude"
       icon={<Copy className="w-4 h-4" />}
       credits={10}
       steps={store.steps}
@@ -412,7 +412,7 @@ export default function AdCopyPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Generate Ad Copy — 10 credits"
+      submitLabel="Generate Ad Copy - 10 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/paid-ads`}
     />

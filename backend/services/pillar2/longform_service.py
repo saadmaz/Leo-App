@@ -1,4 +1,4 @@
-"""Long-Form Content Generation — Claude SSE streaming."""
+"""Long-Form Content Generation - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -17,7 +17,7 @@ _SYSTEM = """\
 You are LEO, an expert content strategist and writer with deep knowledge across B2B and B2C industries.
 Write high-quality long-form content that is research-backed, on-brand, and structured for maximum engagement.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "content_type": "blog_post",
   "title": "Final title",
@@ -41,7 +41,7 @@ async def generate(project: dict, body: LongFormRequest, project_id: str, owner_
         brand_core = project.get("brandCore") or {}
         tone = brand_core.get("tone") or {}
 
-        title = f"{body.content_type.replace('_',' ').title()} — {body.title[:40]}"
+        title = f"{body.content_type.replace('_',' ').title()} - {body.title[:40]}"
         doc = firebase_service.create_pillar1_doc(project_id, "longform", owner_uid, title)
         doc_id = doc["id"]
 

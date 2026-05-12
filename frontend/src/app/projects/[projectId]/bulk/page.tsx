@@ -158,7 +158,7 @@ export default function BulkGeneratePage() {
         <BackButton />
         <Zap className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Bulk Content Generator</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         <div className="ml-auto">
           <button
             onClick={() => setHashtagPanelOpen(true)}
@@ -334,7 +334,7 @@ export default function BulkGeneratePage() {
                     </div>
 
                     {edits[currentIdx] !== undefined && edits[currentIdx] !== current.content && (
-                      <p className="text-[10px] text-primary/60 italic">Edited — will save with your changes</p>
+                      <p className="text-[10px] text-primary/60 italic">Edited - will save with your changes</p>
                     )}
 
                     {current.hashtags.length > 0 && (

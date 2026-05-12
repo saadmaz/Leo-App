@@ -1,5 +1,5 @@
 """
-ICP (Ideal Customer Profile) Builder service — Apollo.io + Claude, SSE streaming.
+ICP (Ideal Customer Profile) Builder service - Apollo.io + Claude, SSE streaming.
 
 Searches Apollo for companies and decision-makers matching the brand's target,
 then synthesises detailed ICP segments with firmographic and psychographic data.
@@ -30,7 +30,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a B2B and B2C customer intelligence expert.
 Your task is to define precise Ideal Customer Profiles (ICPs) based on Brand Core data and enrichment signals.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "segments": [
     {
@@ -56,15 +56,15 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
     }
   ],
   "go_to_market_priority": "Segment 1 > Segment 2 with rationale",
-  "outreach_angle": "Lead with ROI proof — this ICP responds to numbers over features",
+  "outreach_angle": "Lead with ROI proof - this ICP responds to numbers over features",
   "summary": "2-3 sentence ICP strategy overview"
 }
 
 RULES:
-1. Each segment must be distinct — no overlapping customer definitions.
+1. Each segment must be distinct - no overlapping customer definitions.
 2. Pain points must be specific to the segment, not generic.
 3. Buying signals must be detectable (LinkedIn activity, funding news, hiring patterns).
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -80,7 +80,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         brand_name = project.get("name", "the brand")
 
-        title = f"ICP Builder — {brand_name}"
+        title = f"ICP Builder - {brand_name}"
         doc = firebase_service.create_pillar1_doc(project_id, "icp", owner_uid, title)
         doc_id = doc["id"]
 
@@ -111,7 +111,7 @@ async def generate(
                 )
             yield _sse({"type": "research_step", "step": "apollo_search", "label": f"Found {len(apollo_people)} decision-makers", "status": "done"})
         else:
-            yield _sse({"type": "research_step", "step": "apollo_search", "label": "Apollo not configured — generating ICP from Brand Core", "status": "skipped"})
+            yield _sse({"type": "research_step", "step": "apollo_search", "label": "Apollo not configured - generating ICP from Brand Core", "status": "skipped"})
 
         # ── Step 3: Claude ICP synthesis ─────────────────────────────────────
         yield _sse({"type": "research_step", "step": "claude_synthesis", "label": "Synthesising ICP segments...", "status": "running"})

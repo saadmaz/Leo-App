@@ -37,7 +37,7 @@ function buildCommands(
   },
 ): Command[] {
   return [
-    // Navigation — project pages
+    // Navigation - project pages
     {
       id: 'dashboard',
       label: 'Dashboard',

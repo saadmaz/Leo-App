@@ -1,5 +1,5 @@
 """
-Featured Snippet Optimisation — DataForSEO SERP + Claude.
+Featured Snippet Optimisation - DataForSEO SERP + Claude.
 
 Detects if a featured snippet exists for the target keyword, analyses its
 structure, and produces Claude-rewritten content optimised to win position zero.
@@ -59,7 +59,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"Featured Snippet — {body.keyword}"
+        title = f"Featured Snippet - {body.keyword}"
         doc = firebase_service.create_pillar1_doc(project_id, "featured_snippet", owner_uid, title)
         doc_id = doc["id"]
 
@@ -91,21 +91,21 @@ async def generate(
 
                 if organic_items:
                     serp_context += "TOP ORGANIC RESULTS:\n" + "\n".join(
-                        f"#{i.get('rank_absolute', idx+1)} {i.get('title', '')} — {i.get('domain', '')}"
+                        f"#{i.get('rank_absolute', idx+1)} {i.get('title', '')} - {i.get('domain', '')}"
                         for idx, i in enumerate(organic_items)
                     )
 
-                status_label = f"Snippet found (owned by {snippet_owner})" if has_snippet else "No featured snippet — opportunity open"
+                status_label = f"Snippet found (owned by {snippet_owner})" if has_snippet else "No featured snippet - opportunity open"
                 yield _sse({"type": "research_step", "step": "serp_fetch",
                             "label": status_label, "status": "done"})
             except Exception as exc:
                 logger.warning("DataForSEO SERP failed: %s", exc)
                 yield _sse({"type": "research_step", "step": "serp_fetch",
-                            "label": "SERP unavailable — Claude-only optimisation", "status": "skipped"})
+                            "label": "SERP unavailable - Claude-only optimisation", "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "serp_fetch",
-                        "label": "DataForSEO not configured — generating optimised content", "status": "skipped"})
+                        "label": "DataForSEO not configured - generating optimised content", "status": "skipped"})
 
         # ── Step 2: Claude optimisation ───────────────────────────────────────
         yield _sse({"type": "research_step", "step": "snippet_optimise",
@@ -114,15 +114,15 @@ async def generate(
         system_prompt = """\
 You are LEO, a featured snippet optimisation expert. Your goal is to help brands win the position zero featured snippet on Google.
 
-OUTPUT FORMAT — respond with ONLY a valid JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a valid JSON object (no markdown fences):
 {
   "keyword": "the target keyword",
   "has_snippet": false,
   "current_snippet_owner": "domain.com or null",
   "snippet_type": "paragraph | list | table | video | null",
-  "opportunity_assessment": "How winnable is this snippet — Low / Medium / High",
+  "opportunity_assessment": "How winnable is this snippet - Low / Medium / High",
   "optimised_heading": "The exact H2/H3 heading to use that matches the search query",
-  "optimised_answer": "The ideal paragraph (40-60 words) written to win the featured snippet — direct answer, factual, no fluff",
+  "optimised_answer": "The ideal paragraph (40-60 words) written to win the featured snippet - direct answer, factual, no fluff",
   "optimised_list": ["If it's a list snippet: bullet point 1", "bullet point 2", "bullet point 3"],
   "schema_markup_suggestion": "The @type of structured data to add (FAQPage | HowTo | Article | null)",
   "content_tips": [
@@ -137,7 +137,7 @@ Rules:
 - optimised_answer: must be 40-60 words, written as a direct answer starting with the keyword.
 - If snippet_type is list, populate optimised_list with 4-7 steps/items.
 - schema_markup_suggestion: only suggest if highly relevant.
-- Return ONLY valid JSON — no prose, no markdown.
+- Return ONLY valid JSON - no prose, no markdown.
 """
 
         brand_ctx = f"Brand: {brand_name}\n"
@@ -148,9 +148,9 @@ Rules:
 {brand_ctx}
 Target keyword: "{body.keyword}"
 
-{serp_context if serp_context else "No live SERP data — optimise based on keyword intent and best practices."}
+{serp_context if serp_context else "No live SERP data - optimise based on keyword intent and best practices."}
 
-{"Existing content to rewrite:\n" + body.your_content[:1000] if body.your_content else "No existing content provided — generate ideal snippet content from scratch."}
+{"Existing content to rewrite:\n" + body.your_content[:1000] if body.your_content else "No existing content provided - generate ideal snippet content from scratch."}
 
 Produce a featured snippet optimisation plan.
 """

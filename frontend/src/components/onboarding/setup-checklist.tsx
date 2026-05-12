@@ -109,7 +109,7 @@ export function SetupChecklist({ project }: { project: Project }) {
       setLoading(false)
       fetchAndBuild() // silent background refresh
     } else {
-      // No cache or stale — fetch with loading state
+      // No cache or stale - fetch with loading state
       setLoading(true)
       fetchAndBuild().finally(() => setLoading(false))
     }

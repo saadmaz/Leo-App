@@ -115,13 +115,13 @@ function OverallBanner({ overall, checkCount }: { overall: string; checkCount: n
       bg: 'bg-amber-500/10 border-amber-500/30',
       text: 'text-amber-700 dark:text-amber-400',
       icon: <Activity className="w-5 h-5" />,
-      label: 'Partial outage — some services degraded',
+      label: 'Partial outage - some services degraded',
     },
     down: {
       bg: 'bg-destructive/10 border-destructive/30',
       text: 'text-destructive',
       icon: <XCircle className="w-5 h-5" />,
-      label: 'Major outage — multiple services down',
+      label: 'Major outage - multiple services down',
     },
   }[overall] ?? {
     bg: 'bg-muted border-border',

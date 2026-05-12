@@ -1,5 +1,5 @@
 """
-Cross-Channel Attribution — GA4 Data API + Claude interpretation.
+Cross-Channel Attribution - GA4 Data API + Claude interpretation.
 
 Two modes:
   1. GA4-connected:  Pull channel metrics automatically from GA4 Data API
@@ -34,7 +34,7 @@ SYSTEM_PROMPT = """\
 You are a data-driven performance marketing analyst. You interpret cross-channel \
 attribution data and turn numbers into clear, prioritised recommendations.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -161,7 +161,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Attribution Report — {body.date_range_days}d · {body.conversion_goal}"
+    title = f"Attribution Report - {body.date_range_days}d · {body.conversion_goal}"
     doc = firebase_service.create_pillar1_doc(project_id, "attribution", owner_uid, title)
     doc_id = doc["id"]
 
@@ -181,11 +181,11 @@ async def generate(
             )
             data_source = "GA4"
             yield _sse({"type": "research_step", "step": "ga4_pull",
-                        "label": f"GA4 data fetched — {len(channel_metrics)} channels", "status": "done"})
+                        "label": f"GA4 data fetched - {len(channel_metrics)} channels", "status": "done"})
         except Exception as exc:
             logger.warning("GA4 pull failed, falling back to manual: %s", exc)
             yield _sse({"type": "research_step", "step": "ga4_pull",
-                        "label": f"GA4 pull failed — using manual data ({exc})", "status": "done"})
+                        "label": f"GA4 pull failed - using manual data ({exc})", "status": "done"})
 
     if not channel_metrics:
         yield _sse({

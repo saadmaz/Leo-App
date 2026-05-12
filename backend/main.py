@@ -22,13 +22,13 @@ from backend.middleware.rate_limit import limiter
 from backend.middleware.request_id import RequestIdFilter, RequestIdMiddleware
 
 # ---------------------------------------------------------------------------
-# Logging — include request ID in every log line.
-# Format: "2024-01-01 12:00:00 [req_id=abc123] INFO backend.foo — message"
+# Logging - include request ID in every log line.
+# Format: "2024-01-01 12:00:00 [req_id=abc123] INFO backend.foo - message"
 # Outside a request context, req_id shows as '-'.
 # ---------------------------------------------------------------------------
 _log_handler = logging.StreamHandler()
 _log_handler.setFormatter(logging.Formatter(
-    fmt="%(asctime)s [req_id=%(request_id)s] %(levelname)s %(name)s — %(message)s",
+    fmt="%(asctime)s [req_id=%(request_id)s] %(levelname)s %(name)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 ))
 # Filter must be on the handler (not the logger) so it runs for records
@@ -40,7 +40,7 @@ logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Lifespan — runs once on startup and once on shutdown.
+# Lifespan - runs once on startup and once on shutdown.
 # Replaces the deprecated @app.on_event("startup") pattern.
 # ---------------------------------------------------------------------------
 
@@ -50,68 +50,68 @@ async def lifespan(app: FastAPI):
     try:
         firebase_service.initialize()
     except Exception as exc:
-        # Log but don't crash — the /health endpoint must stay reachable
+        # Log but don't crash - the /health endpoint must stay reachable
         # even if Firebase credentials are missing or misconfigured.
         logger.error("Firebase initialisation failed: %s", exc, exc_info=True)
 
     if not settings.ANTHROPIC_API_KEY:
-        logger.warning("ANTHROPIC_API_KEY is not set — chat and ingestion will not work.")
+        logger.warning("ANTHROPIC_API_KEY is not set - chat and ingestion will not work.")
     else:
         logger.info("Anthropic API key loaded (model: %s).", settings.LLM_CHAT_MODEL)
 
     if not settings.OPENAI_API_KEY:
-        logger.warning("OPENAI_API_KEY is not set — image generation will return 503.")
+        logger.warning("OPENAI_API_KEY is not set - image generation will return 503.")
     else:
-        logger.info("OpenAI API key loaded — image generation enabled.")
+        logger.info("OpenAI API key loaded - image generation enabled.")
 
     if not settings.EXA_API_KEY:
-        logger.warning("EXA_API_KEY is not set — semantic search and research features disabled.")
+        logger.warning("EXA_API_KEY is not set - semantic search and research features disabled.")
     else:
-        logger.info("Exa API key loaded — semantic search, competitor discovery, research enabled.")
+        logger.info("Exa API key loaded - semantic search, competitor discovery, research enabled.")
 
     if not settings.TAVILY_API_KEY:
-        logger.warning("TAVILY_API_KEY is not set — real-time web search and news monitoring disabled.")
+        logger.warning("TAVILY_API_KEY is not set - real-time web search and news monitoring disabled.")
     else:
-        logger.info("Tavily API key loaded — web search, news monitoring, content enrichment enabled.")
+        logger.info("Tavily API key loaded - web search, news monitoring, content enrichment enabled.")
 
     if not settings.SERPAPI_API_KEY:
-        logger.warning("SERPAPI_API_KEY is not set — SEO layer 4 and competitor discovery degraded.")
+        logger.warning("SERPAPI_API_KEY is not set - SEO layer 4 and competitor discovery degraded.")
     else:
-        logger.info("SerpAPI key loaded — SEO intelligence and competitor discovery enabled.")
+        logger.info("SerpAPI key loaded - SEO intelligence and competitor discovery enabled.")
 
     if not settings.APIFY_API_KEY:
-        logger.warning("APIFY_API_KEY is not set — social scraping (Instagram/TikTok/YouTube/Meta Ads) disabled.")
+        logger.warning("APIFY_API_KEY is not set - social scraping (Instagram/TikTok/YouTube/Meta Ads) disabled.")
     else:
         from backend.services.ingestion.apify_client import (
             INSTAGRAM_ACTOR, TIKTOK_ACTOR, YOUTUBE_ACTOR,
             FACEBOOK_ACTOR, LINKEDIN_ACTOR, THREADS_ACTOR,
         )
         logger.info(
-            "Apify API key loaded — actor IDs in use: instagram=%s tiktok=%s youtube=%s "
+            "Apify API key loaded - actor IDs in use: instagram=%s tiktok=%s youtube=%s "
             "facebook=%s linkedin=%s threads=%s",
             INSTAGRAM_ACTOR, TIKTOK_ACTOR, YOUTUBE_ACTOR,
             FACEBOOK_ACTOR, LINKEDIN_ACTOR, THREADS_ACTOR,
         )
 
     if not settings.FIRECRAWL_API_KEY:
-        logger.warning("FIRECRAWL_API_KEY is not set — website scraping during competitor discovery disabled.")
+        logger.warning("FIRECRAWL_API_KEY is not set - website scraping during competitor discovery disabled.")
     else:
-        logger.info("Firecrawl API key loaded — website scraping enabled.")
+        logger.info("Firecrawl API key loaded - website scraping enabled.")
 
     if not settings.LOGO_DEV_API_KEY:
-        logger.warning("LOGO_DEV_API_KEY is not set — competitor logo images will not be fetched.")
+        logger.warning("LOGO_DEV_API_KEY is not set - competitor logo images will not be fetched.")
     else:
-        logger.info("Logo.dev API key loaded — competitor logo fetching enabled.")
+        logger.info("Logo.dev API key loaded - competitor logo fetching enabled.")
 
     if not settings.BRANDFETCH_API_KEY:
-        logger.warning("BRANDFETCH_API_KEY is not set — Carousel Studio brand logo/colour extraction disabled.")
+        logger.warning("BRANDFETCH_API_KEY is not set - Carousel Studio brand logo/colour extraction disabled.")
     else:
-        logger.info("Brandfetch API key loaded — carousel brand scraping enabled.")
+        logger.info("Brandfetch API key loaded - carousel brand scraping enabled.")
 
     if not settings.BRAND_DEV_API_KEY:
-        logger.warning("BRAND_DEV_API_KEY is not set — Carousel Studio font detection disabled.")
+        logger.warning("BRAND_DEV_API_KEY is not set - Carousel Studio font detection disabled.")
     else:
-        logger.info("Brand.dev API key loaded — carousel typography detection enabled.")
+        logger.info("Brand.dev API key loaded - carousel typography detection enabled.")
 
     yield  # server is running
 
@@ -124,13 +124,13 @@ async def lifespan(app: FastAPI):
 # ---------------------------------------------------------------------------
 
 app = FastAPI(
-    title="LEO — Brand Marketing Co-pilot",
+    title="LEO - Brand Marketing Co-pilot",
     description="API for LEO: brand ingestion, conversational chat, and campaign generation.",
     version="0.1.0",
     lifespan=lifespan,
 )
 
-# Rate limiting — 60 req/min global, 10/min on AI routes (set per-route).
+# Rate limiting - 60 req/min global, 10/min on AI routes (set per-route).
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -166,7 +166,7 @@ app.add_middleware(
 app.add_middleware(RequestIdMiddleware)
 
 # ---------------------------------------------------------------------------
-# Routes — each router is scoped to its own prefix/tag set
+# Routes - each router is scoped to its own prefix/tag set
 # ---------------------------------------------------------------------------
 
 app.include_router(projects.router)
@@ -205,7 +205,7 @@ app.include_router(personal_brand.router)
 
 @app.get("/", tags=["health"])
 def root():
-    """Liveness probe — returns service identity."""
+    """Liveness probe - returns service identity."""
     return {"status": "online", "service": "LEO API", "version": "0.1.0"}
 
 

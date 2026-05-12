@@ -1,5 +1,5 @@
 """
-Credits system — usage-based token economy for LEO.
+Credits system - usage-based token economy for LEO.
 
 Each action deducts credits from the user's balance.
 Free users get 100 credits/day (resets at midnight UTC).
@@ -133,7 +133,7 @@ def _next_reset_ts(period: str) -> int:
         )
         return int(tomorrow.timestamp())
     else:
-        # Monthly — 30 days from now
+        # Monthly - 30 days from now
         return int(time.time()) + 30 * 24 * 3600
 
 

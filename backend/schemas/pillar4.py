@@ -1,5 +1,5 @@
 """
-Pillar 4 — Paid Advertising request schemas.
+Pillar 4 - Paid Advertising request schemas.
 """
 from __future__ import annotations
 
@@ -76,7 +76,7 @@ class AudienceBuildingRequest(BaseModel):
     audience_type: str = Field("custom", description="custom | lookalike | interest | retargeting | crm_upload")
     crm_data_summary: Optional[str] = Field(None, max_length=500, description="Summary of your CRM data (size, industry breakdown, job titles, etc.)")
     existing_audience_size: Optional[int] = Field(None, description="Size of your seed audience for lookalike")
-    budget: Optional[str] = Field(None, description="e.g. '$5,000/month' — used to size audience appropriately")
+    budget: Optional[str] = Field(None, description="e.g. '$5,000/month' - used to size audience appropriately")
 
 
 class BidStrategyRequest(BaseModel):

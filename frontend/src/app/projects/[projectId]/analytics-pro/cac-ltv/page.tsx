@@ -196,7 +196,7 @@ export default function CacLtvPage() {
         {error && <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-600 mb-4">{error}</div>}
 
         <Button onClick={handleRun} disabled={isStreaming} className="w-full mb-8">
-          {isStreaming ? 'Calculating...' : 'Calculate CAC + LTV — 20 Credits'}
+          {isStreaming ? 'Calculating...' : 'Calculate CAC + LTV - 20 Credits'}
         </Button>
 
         {steps.length > 0 && (
@@ -225,12 +225,12 @@ export default function CacLtvPage() {
               </div>
               <div className={`rounded-xl border p-4 text-center ${health ? health.bg : 'bg-white border-gray-200'}`}>
                 <p className={`text-xs mb-1 ${health ? health.text : 'text-gray-500'}`}>LTV:CAC Ratio</p>
-                <p className={`text-2xl font-bold ${health ? health.text : 'text-gray-900'}`}>{result.ltv_cac_ratio || '—'}x</p>
+                <p className={`text-2xl font-bold ${health ? health.text : 'text-gray-900'}`}>{result.ltv_cac_ratio || '-'}x</p>
                 <p className={`text-xs mt-0.5 ${health ? health.text : 'text-gray-400'}`}>{health?.label}</p>
               </div>
               <div className="bg-white rounded-xl border border-gray-200 p-4 text-center">
                 <p className="text-xs text-gray-500 mb-1">Payback Period</p>
-                <p className="text-2xl font-bold text-gray-900">{result.payback_period_months || '—'}</p>
+                <p className="text-2xl font-bold text-gray-900">{result.payback_period_months || '-'}</p>
                 <p className="text-xs text-gray-400">months</p>
               </div>
             </div>
@@ -266,7 +266,7 @@ export default function CacLtvPage() {
                           <td className="text-right py-2 px-3 font-semibold text-gray-800">${(c.cac || 0).toLocaleString()}</td>
                           <td className="text-right py-2 pl-3">
                             <span className={`text-xs px-2 py-0.5 rounded-full ${c.efficiency === 'efficient' ? 'bg-green-100 text-green-600' : c.efficiency === 'moderate' ? 'bg-yellow-100 text-yellow-600' : 'bg-red-100 text-red-600'}`}>
-                              {c.efficiency || '—'}
+                              {c.efficiency || '-'}
                             </span>
                           </td>
                         </tr>

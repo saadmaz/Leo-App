@@ -2,12 +2,12 @@
 Phase 5 Content Studio routes.
 
 Endpoints:
-  POST /projects/{id}/seo/blog-post        — stream a full blog post (SSE)
-  POST /projects/{id}/seo/meta-tags        — generate meta tags
-  POST /projects/{id}/seo/website-copy     — generate website copy sections
-  POST /projects/{id}/emails/sequence      — generate email sequence
-  POST /projects/{id}/emails/single        — generate a single email
-  POST /projects/{id}/brand/style-guide    — generate brand style guide
+  POST /projects/{id}/seo/blog-post        - stream a full blog post (SSE)
+  POST /projects/{id}/seo/meta-tags        - generate meta tags
+  POST /projects/{id}/seo/website-copy     - generate website copy sections
+  POST /projects/{id}/emails/sequence      - generate email sequence
+  POST /projects/{id}/emails/single        - generate a single email
+  POST /projects/{id}/brand/style-guide    - generate brand style guide
 """
 
 import asyncio
@@ -62,7 +62,7 @@ class SingleEmailRequest(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# SEO — Blog Post (SSE)
+# SEO - Blog Post (SSE)
 # ---------------------------------------------------------------------------
 
 @router.post("/seo/blog-post")
@@ -95,7 +95,7 @@ async def generate_blog_post(
 
 
 # ---------------------------------------------------------------------------
-# SEO — Meta Tags
+# SEO - Meta Tags
 # ---------------------------------------------------------------------------
 
 @router.post("/seo/meta-tags")
@@ -123,7 +123,7 @@ async def generate_meta_tags(
 
 
 # ---------------------------------------------------------------------------
-# SEO — Website Copy
+# SEO - Website Copy
 # ---------------------------------------------------------------------------
 
 @router.post("/seo/website-copy")
@@ -151,7 +151,7 @@ async def generate_website_copy(
 
 
 # ---------------------------------------------------------------------------
-# Email Studio — Sequence
+# Email Studio - Sequence
 # ---------------------------------------------------------------------------
 
 @router.post("/emails/sequence")
@@ -180,7 +180,7 @@ async def generate_email_sequence(
 
 
 # ---------------------------------------------------------------------------
-# Email Studio — Single Email
+# Email Studio - Single Email
 # ---------------------------------------------------------------------------
 
 @router.post("/emails/single")

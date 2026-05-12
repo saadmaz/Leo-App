@@ -52,7 +52,7 @@ export default function ReviewPage() {
     setItems((prev) => prev.filter((i) => i.id !== itemId))
     if (decision === 'approved') toast.success('Approved ✓')
     else if (decision === 'rejected') toast.success('Rejected')
-    else toast.success('Changes requested — sent back to draft')
+    else toast.success('Changes requested - sent back to draft')
   }
 
   return (
@@ -62,7 +62,7 @@ export default function ReviewPage() {
         <BackButton />
         <ClipboardCheck className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Review Queue</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         <div className="ml-auto flex items-center gap-3">
           {!loading && (
             <span className={cn(
@@ -86,7 +86,7 @@ export default function ReviewPage() {
         ) : items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-60 gap-3 text-center">
             <ClipboardCheck className="w-10 h-10 text-green-500/40" />
-            <p className="text-sm font-medium text-green-600">All clear — nothing awaiting review</p>
+            <p className="text-sm font-medium text-green-600">All clear - nothing awaiting review</p>
             <p className="text-xs text-muted-foreground">Submit content from the Library to start the review workflow.</p>
           </div>
         ) : (
@@ -145,7 +145,7 @@ function ReviewCard({ item, projectId, onDecision }: {
       const data = await api.contentPredict.predict(projectId, item.content, item.platform ?? 'Instagram')
       setPrediction(data)
       setShowPrediction(true)
-    } catch { toast.error('Prediction failed — Brand Core required') }
+    } catch { toast.error('Prediction failed - Brand Core required') }
     finally { setPredicting(false) }
   }
 

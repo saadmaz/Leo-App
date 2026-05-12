@@ -1,9 +1,9 @@
 """
-Credits routes — balance retrieval and admin top-up.
+Credits routes - balance retrieval and admin top-up.
 
-GET  /credits/balance           — current balance for logged-in user
-GET  /credits/history           — recent credit transactions for logged-in user
-POST /credits/topup             — admin: add credits to any user
+GET  /credits/balance           - current balance for logged-in user
+GET  /credits/history           - recent credit transactions for logged-in user
+POST /credits/topup             - admin: add credits to any user
 """
 from __future__ import annotations
 

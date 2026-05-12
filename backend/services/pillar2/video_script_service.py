@@ -1,5 +1,5 @@
 """
-Video Script Writing — Claude, SSE streaming.
+Video Script Writing - Claude, SSE streaming.
 
 Generates a full video script with timestamps, sections, B-roll suggestions,
 and a CTA, tailored to the target platform and duration.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a professional video scriptwriter who understands platform algorithms,
 audience retention, and brand storytelling.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "title": "Video title",
   "platform": "YouTube",
@@ -55,9 +55,9 @@ PLATFORM RULES:
 - LinkedIn: Professional tone, insight-led, end with a question for engagement
 
 RULES:
-1. Script must be word-for-word — ready for a teleprompter.
+1. Script must be word-for-word - ready for a teleprompter.
 2. B-roll must be specific and achievable (no "generic stock footage").
-3. Return ONLY valid JSON — no prose, no markdown fences.
+3. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -74,7 +74,7 @@ async def generate(
         tone = brand_core.get("tone") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"Video Script — {body.topic[:40]}"
+        title = f"Video Script - {body.topic[:40]}"
         doc = firebase_service.create_pillar1_doc(project_id, "video_script", owner_uid, title)
         doc_id = doc["id"]
 

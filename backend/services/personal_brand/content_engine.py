@@ -73,7 +73,7 @@ def _build_voice_context(personal_core: dict, voice_profile: dict | None) -> str
 def _voice_accuracy_score(output: str, voice_profile: dict | None) -> int:
     """
     Heuristic voice accuracy score (0-100).
-    A real implementation would call Claude to score — this is a fast approximation
+    A real implementation would call Claude to score - this is a fast approximation
     that checks for signature phrase usage and avoided phrase violations.
     """
     if not voice_profile:
@@ -113,9 +113,9 @@ def _voice_accuracy_score(output: str, voice_profile: dict | None) -> int:
 
 _POST_SYSTEM = """
 You are a personal brand content writer. You write posts that sound exactly like
-the specific person described — not like generic AI content. Every post must reflect
+the specific person described - not like generic AI content. Every post must reflect
 their unique voice, positioning, and content pillars.
-Return ONLY the post text — no commentary, no labels, no quotation marks around the post.
+Return ONLY the post text - no commentary, no labels, no quotation marks around the post.
 """.strip()
 
 _POST_PROMPT = """
@@ -128,7 +128,7 @@ PLATFORM REQUIREMENTS:
 {platform_requirements}
 
 INSTRUCTIONS:
-- Sound exactly like this person — use their natural voice, not corporate AI language
+- Sound exactly like this person - use their natural voice, not corporate AI language
 - The post must reflect their unique angle and positioning
 - Include a hook in the first line that stops the scroll
 - End with something that invites engagement (question, reflection, or soft CTA)
@@ -138,7 +138,7 @@ INSTRUCTIONS:
 """
 
 _PLATFORM_REQUIREMENTS = {
-    "linkedin": "Length: 150-300 words. Use line breaks every 1-2 sentences. Professional but human. No hashtags in the body — max 3 at the end if needed.",
+    "linkedin": "Length: 150-300 words. Use line breaks every 1-2 sentences. Professional but human. No hashtags in the body - max 3 at the end if needed.",
     "instagram": "Length: 100-200 words. Conversational, warm. Use emojis naturally (2-4 max). End with 3-5 relevant hashtags.",
     "twitter": "Length: under 280 characters for a single tweet, OR a thread of 4-6 tweets each under 280 chars. Label threads as '1/', '2/' etc.",
     "tiktok": "Write a spoken script (not a caption). Length: 150-200 words for a 60-90 second video. Conversational, punchy, hook in first 3 seconds.",
@@ -215,9 +215,9 @@ async def generate_post(
 
 _STORY_SYSTEM = """
 You are a personal brand storyteller. You transform raw experiences into
-compelling posts that feel authentic — not polished into oblivion. The story
+compelling posts that feel authentic - not polished into oblivion. The story
 must sound like the specific person, not like a template.
-Return ONLY the post text — no commentary, no labels.
+Return ONLY the post text - no commentary, no labels.
 """.strip()
 
 _STORY_PROMPT = """
@@ -230,14 +230,14 @@ PLATFORM: {platform}
 {platform_requirements}
 
 Transform this experience into a {platform} post using the story arc:
-1. Hook — what happened (make them stop scrolling)
-2. The situation — enough context to feel the moment
-3. The turn — the insight, mistake, or realisation
-4. The takeaway — what others can learn
-5. Soft close — question or reflection, not a hard sell
+1. Hook - what happened (make them stop scrolling)
+2. The situation - enough context to feel the moment
+3. The turn - the insight, mistake, or realisation
+4. The takeaway - what others can learn
+5. Soft close - question or reflection, not a hard sell
 
 Rules:
-- Keep the vulnerability real — don't sand it down
+- Keep the vulnerability real - don't sand it down
 - Sound like this person, not a life coach
 - Do NOT moralize or over-explain the lesson
 - Do NOT use phrases like "At the end of the day", "This is why I...", "Let that sink in"
@@ -306,7 +306,7 @@ async def story_to_post(
 
 _OPINION_PROBE_SYSTEM = """
 You are an editorial coach helping someone articulate a strong opinion for a post.
-Ask exactly 3 probing questions — short, sharp, no fluff.
+Ask exactly 3 probing questions - short, sharp, no fluff.
 Return ONLY a JSON array of 3 question strings.
 """.strip()
 
@@ -316,7 +316,7 @@ This person wants to write a post about this take: "{take}"
 Their voice context:
 {voice_context}
 
-Generate 3 probing questions that will draw out the full argument — the evidence,
+Generate 3 probing questions that will draw out the full argument - the evidence,
 the nuance, and the counterargument they've already considered.
 Return: ["question1", "question2", "question3"]
 """
@@ -324,7 +324,7 @@ Return: ["question1", "question2", "question3"]
 _OPINION_POST_SYSTEM = """
 You are a personal brand content writer. Turn a rough opinion + supporting answers
 into a sharp, publishable post. Sound exactly like the person described.
-Return ONLY the post text — no commentary, no labels.
+Return ONLY the post text - no commentary, no labels.
 """.strip()
 
 _OPINION_POST_PROMPT = """
@@ -341,14 +341,14 @@ SUPPORTING ANSWERS:
 
 Write a post with:
 1. A polarising or surprising hook (first line stops the scroll)
-2. The argument — clear, specific, backed by the person's experience
+2. The argument - clear, specific, backed by the person's experience
 3. The "why most people get this wrong" angle
-4. A clear, opinionated close — not a question, a statement
+4. A clear, opinionated close - not a question, a statement
 
 Rules:
 - This should feel like a genuine opinion, not clickbait
 - Use the person's actual voice and positioning
-- Keep it tight — no padding, no filler
+- Keep it tight - no padding, no filler
 """
 
 
@@ -450,7 +450,7 @@ async def opinion_extractor(
 _BIO_SYSTEM = """
 You are a personal branding copywriter. Write platform-optimised bios and headlines
 that are specific, human, and reflect exactly this person's positioning.
-Return ONLY a valid JSON object — no markdown, no code fences.
+Return ONLY a valid JSON object - no markdown, no code fences.
 """.strip()
 
 _BIO_PROMPT = """
@@ -461,26 +461,26 @@ Write bios and headlines for this person across the following platforms.
 Each version must be adapted for that platform's culture and character limits.
 
 LinkedIn:
-- Headline: max 220 chars — specific role + value + differentiator (not just job title)
-- About (first 3 lines): max 300 chars — these are shown before "see more"
-- Full About: 200-300 words — story-driven, first person, ends with CTA
+- Headline: max 220 chars - specific role + value + differentiator (not just job title)
+- About (first 3 lines): max 300 chars - these are shown before "see more"
+- Full About: 200-300 words - story-driven, first person, ends with CTA
 
 Instagram:
-- Bio: max 150 chars — punchy, personality, what you do, who you help
+- Bio: max 150 chars - punchy, personality, what you do, who you help
 - Link in bio label: short CTA (max 30 chars)
 
 Twitter/X:
-- Bio: max 160 chars — voice-forward, opinion-signalling, not just a job description
+- Bio: max 160 chars - voice-forward, opinion-signalling, not just a job description
 
 TikTok:
-- Bio: max 80 chars — casual, relatable, hooks potential followers
+- Bio: max 80 chars - casual, relatable, hooks potential followers
 
 Return this JSON:
 {{
   "linkedin": {{
     "headline": "string",
-    "aboutPreview": "string — first 3 lines before see more",
-    "aboutFull": "string — complete about section"
+    "aboutPreview": "string - first 3 lines before see more",
+    "aboutFull": "string - complete about section"
   }},
   "instagram": {{
     "bio": "string",
@@ -556,9 +556,9 @@ async def bio_writer(
 
 _REFORMAT_SYSTEM = """
 You are a platform-native content strategist. Take one piece of content and reformat
-it for multiple platforms simultaneously — preserving the core idea and the person's
+it for multiple platforms simultaneously - preserving the core idea and the person's
 voice while making each version feel native to its platform.
-Return ONLY a valid JSON object — no markdown, no code fences.
+Return ONLY a valid JSON object - no markdown, no code fences.
 """.strip()
 
 _REFORMAT_PROMPT = """
@@ -576,8 +576,8 @@ Platform requirements:
 Return this JSON:
 {{
   "platform_name": {{
-    "content": "string — the reformatted post",
-    "notes": "string — one sentence on what changed and why"
+    "content": "string - the reformatted post",
+    "notes": "string - one sentence on what changed and why"
   }}
 }}
 
@@ -662,7 +662,7 @@ async def reformat_content(
 def approve_output(project_id: str, content: str, platform: str, edited: bool) -> dict:
     """
     Save an approved/edited output to the voice profile for future calibration.
-    Synchronous — called via asyncio.to_thread in the route.
+    Synchronous - called via asyncio.to_thread in the route.
     """
     from backend.services import firebase_service
     db = firebase_service.get_db()
@@ -692,9 +692,9 @@ def approve_output(project_id: str, content: str, platform: str, edited: bool) -
 
 _ARTICLE_SYSTEM = """
 You are a ghostwriter specialising in thought leadership content for personal brands.
-You write long-form articles that feel like genuine expertise — specific, opinionated,
+You write long-form articles that feel like genuine expertise - specific, opinionated,
 and unmistakably written by the person described.
-Return ONLY the article text — no commentary, no labels, no titles in markdown.
+Return ONLY the article text - no commentary, no labels, no titles in markdown.
 """.strip()
 
 _ARTICLE_PROMPT = """
@@ -707,18 +707,18 @@ TARGET LENGTH: {length}
 {outline_section}
 
 Write a full {platform} {format_label} with this structure:
-1. Opening hook — a specific claim, observation, or question that earns the read (2-3 sentences max)
-2. Context — why this matters now, for the specific audience
-3. Core argument — 3-5 sections, each with a clear subpoint supported by the person's direct experience or expertise
-4. Counterargument acknowledgment — steel-man the opposing view, then address it
-5. Close — a clear, opinionated summary and a single CTA (not "follow me", something of genuine value)
+1. Opening hook - a specific claim, observation, or question that earns the read (2-3 sentences max)
+2. Context - why this matters now, for the specific audience
+3. Core argument - 3-5 sections, each with a clear subpoint supported by the person's direct experience or expertise
+4. Counterargument acknowledgment - steel-man the opposing view, then address it
+5. Close - a clear, opinionated summary and a single CTA (not "follow me", something of genuine value)
 
 Writing rules:
-- Write in the first person — this is their direct voice
+- Write in the first person - this is their direct voice
 - Use specific examples from their field, not generic placeholders
-- Every section earns its place — no padding, no "in conclusion"
+- Every section earns its place - no padding, no "in conclusion"
 - Do NOT use these phrases: "In today's fast-paced world", "Game-changing", "Dive deep", "Let's explore", "At the end of the day"
-- Subheadings are allowed — short and declarative, not questions
+- Subheadings are allowed - short and declarative, not questions
 - Write to be read, not to impress
 """
 

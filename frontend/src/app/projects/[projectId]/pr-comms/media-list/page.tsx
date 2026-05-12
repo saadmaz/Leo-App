@@ -112,7 +112,7 @@ export default function MediaListPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">News Angle *</label>
         <textarea value={newsAngle} onChange={(e) => setNewsAngle(e.target.value)} rows={2}
-          placeholder="e.g. Series A announcement — AI logistics platform that cuts delivery costs by 30%"
+          placeholder="e.g. Series A announcement - AI logistics platform that cuts delivery costs by 30%"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
 
@@ -165,7 +165,7 @@ export default function MediaListPage() {
   const resultNode = result ? (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-sm">{result.industry} — {result.total_contacts} contacts</h2>
+        <h2 className="font-semibold text-sm">{result.industry} - {result.total_contacts} contacts</h2>
         <div className="flex gap-1.5">
           {(['A', 'B', 'C'] as const).map((t) => {
             const count = result.media_list?.filter((c) => c.tier === t).length || 0
@@ -221,7 +221,7 @@ export default function MediaListPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="Media List Builder"
-      subtitle="Pillar 8 — Hunter.io + Claude"
+      subtitle="Pillar 8 - Hunter.io + Claude"
       icon={<Users className="w-4 h-4" />}
       credits={20}
       steps={store.steps}
@@ -230,7 +230,7 @@ export default function MediaListPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Build Media List — 20 credits"
+      submitLabel="Build Media List - 20 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/pr-comms`}
     />

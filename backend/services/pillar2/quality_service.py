@@ -1,5 +1,5 @@
 """
-Content Quality Scoring — Claude, SSE streaming.
+Content Quality Scoring - Claude, SSE streaming.
 
 Scores content across multiple dimensions (clarity, brand voice, SEO,
 engagement, platform fit) and returns actionable improvement suggestions.
@@ -28,7 +28,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a senior content strategist and brand editor.
 Analyse the provided content and score it across 6 dimensions.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "overall_score": 78,
   "grade": "B+",
@@ -89,7 +89,7 @@ RULES:
 1. Scores must be integers between 0 and 100.
 2. Feedback must reference specific words or phrases from the content.
 3. Improvements must be actionable, not generic ("Add a hook" not "Improve the intro").
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -105,7 +105,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         tone = brand_core.get("tone") or {}
 
-        title = f"Quality Score — {body.platform} {body.content_type}"
+        title = f"Quality Score - {body.platform} {body.content_type}"
         doc = firebase_service.create_pillar1_doc(project_id, "quality_score", owner_uid, title)
         doc_id = doc["id"]
 

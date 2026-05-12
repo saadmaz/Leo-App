@@ -1,5 +1,5 @@
 """
-Retargeting Sequence Builder — Claude-powered.
+Retargeting Sequence Builder - Claude-powered.
 
 Builds a full retargeting funnel with:
 - TOFU / MOFU / BOFU segmentation
@@ -9,11 +9,11 @@ Builds a full retargeting funnel with:
 - Win-back and loyalty sequences
 
 Audience segments supported:
-  website_visitors   — Visited site but didn't convert
-  cart_abandoners    — Added to cart but didn't purchase
-  past_buyers        — Previous customers (upsell / loyalty)
-  video_viewers      — Watched 25%+ of a brand video
-  lead_nurture       — Leads who haven't converted (free trial, demo request, etc.)
+  website_visitors   - Visited site but didn't convert
+  cart_abandoners    - Added to cart but didn't purchase
+  past_buyers        - Previous customers (upsell / loyalty)
+  video_viewers      - Watched 25%+ of a brand video
+  lead_nurture       - Leads who haven't converted (free trial, demo request, etc.)
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ SYSTEM_PROMPT = """\
 You are an expert performance marketer specialising in paid retargeting and lifecycle \
 advertising. You build sequences that feel personal, not creepy.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -98,7 +98,7 @@ async def generate(
         return
 
     segment_label = body.audience_segment.replace("_", " ").title()
-    title = f"Retargeting Sequence — {segment_label} · {body.product_name}"
+    title = f"Retargeting Sequence - {segment_label} · {body.product_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "retargeting_sequence", owner_uid, title)
     doc_id = doc["id"]
 

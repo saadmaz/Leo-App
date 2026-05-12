@@ -54,7 +54,7 @@ export default function AdminAnalyticsPage() {
       {/* Signups chart */}
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-semibold">New Signups — Last 30 Days</CardTitle>
+          <CardTitle className="text-sm font-semibold">New Signups - Last 30 Days</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (

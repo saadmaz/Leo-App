@@ -251,7 +251,7 @@ export default function BoardReportPage() {
           <textarea
             value={narrativeContext}
             onChange={e => setNarrativeContext(e.target.value)}
-            placeholder="Add any context that should shape the narrative — e.g. 'We're preparing for a Series B raise in Q3', 'Board has flagged burn rate as primary concern', 'Competitor X just raised $50M'..."
+            placeholder="Add any context that should shape the narrative - e.g. 'We're preparing for a Series B raise in Q3', 'Board has flagged burn rate as primary concern', 'Competitor X just raised $50M'..."
             rows={4}
             className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           />
@@ -260,7 +260,7 @@ export default function BoardReportPage() {
         {error && <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 text-sm text-red-600 mb-4">{error}</div>}
 
         <Button onClick={handleRun} disabled={isStreaming} className="w-full mb-8">
-          {isStreaming ? 'Generating Report...' : 'Generate Board Report — 25 Credits'}
+          {isStreaming ? 'Generating Report...' : 'Generate Board Report - 25 Credits'}
         </Button>
 
         {steps.length > 0 && (
@@ -327,13 +327,13 @@ export default function BoardReportPage() {
                         <tr key={i} className="border-b border-gray-100 last:border-0">
                           <td className="py-2 pr-4 font-medium text-gray-800">{k.metric}</td>
                           <td className="text-right py-2 px-3 text-gray-700">{k.value}</td>
-                          <td className="text-right py-2 px-3 text-gray-600">{k.vs_prior || '—'}</td>
+                          <td className="text-right py-2 px-3 text-gray-600">{k.vs_prior || '-'}</td>
                           <td className="text-right py-2 px-3">
                             <span className={`text-xs px-2 py-0.5 rounded-full ${STATUS_STYLES[k.status] || 'bg-gray-100 text-gray-600'}`}>
                               {(k.status || '').replace(/_/g, ' ')}
                             </span>
                           </td>
-                          <td className="text-left py-2 pl-3 text-xs text-gray-500 max-w-[200px]">{k.commentary || '—'}</td>
+                          <td className="text-left py-2 pl-3 text-xs text-gray-500 max-w-[200px]">{k.commentary || '-'}</td>
                         </tr>
                       ))}
                     </tbody>

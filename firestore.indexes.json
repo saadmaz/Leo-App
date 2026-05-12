@@ -1,7 +1,7 @@
 {
   "indexes": [
     {
-      "_comment": "projects — list chats by updatedAt descending. Used by firebase_service.list_chats().",
+      "_comment": "projects - list chats by updatedAt descending. Used by firebase_service.list_chats().",
       "collectionGroup": "chats",
       "queryScope": "COLLECTION",
       "fields": [
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "_comment": "projects — list messages in chronological order. Used by firebase_service.list_messages().",
+      "_comment": "projects - list messages in chronological order. Used by firebase_service.list_messages().",
       "collectionGroup": "messages",
       "queryScope": "COLLECTION",
       "fields": [
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "_comment": "projects — list messages newest-first (pagination use case).",
+      "_comment": "projects - list messages newest-first (pagination use case).",
       "collectionGroup": "messages",
       "queryScope": "COLLECTION",
       "fields": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "_comment": "pillar1_docs — list by type newest-first. Used by list_pillar1_docs().",
+      "_comment": "pillar1_docs - list by type newest-first. Used by list_pillar1_docs().",
       "collectionGroup": "pillar1_docs",
       "queryScope": "COLLECTION",
       "fields": [
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "_comment": "pillar1_docs — list by status newest-first (e.g. show all complete docs).",
+      "_comment": "pillar1_docs - list by status newest-first (e.g. show all complete docs).",
       "collectionGroup": "pillar1_docs",
       "queryScope": "COLLECTION",
       "fields": [

@@ -1,5 +1,5 @@
 """
-Subject Line Optimiser — Claude generates variants with predicted open-rate scores.
+Subject Line Optimiser - Claude generates variants with predicted open-rate scores.
 
 Produces:
   - N subject line variants across different psychological angles
@@ -26,7 +26,7 @@ SYSTEM = """\
 You are a world-class email marketing specialist with deep expertise in inbox psychology, \
 deliverability, and open-rate optimisation.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -81,7 +81,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Subject Lines — {body.email_topic[:60]}"
+    title = f"Subject Lines - {body.email_topic[:60]}"
     doc = firebase_service.create_pillar1_doc(project_id, "subject_lines", owner_uid, title)
     doc_id = doc["id"]
 

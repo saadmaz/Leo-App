@@ -144,7 +144,7 @@ export default function PlannerPage() {
         <BackButton />
         <CalendarRange className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">AI Content Planner</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
         {plan.length > 0 && (
           <div className="ml-auto flex items-center gap-2">
             <span className="text-xs text-muted-foreground">{selectedIds.size}/{plan.length} selected</span>

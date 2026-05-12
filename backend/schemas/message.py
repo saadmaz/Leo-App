@@ -1,7 +1,7 @@
 from pydantic import BaseModel, field_validator
 from typing import List, Literal, Optional
 
-# Hard cap on user message length — prevents prompt-stuffing and runaway costs.
+# Hard cap on user message length - prevents prompt-stuffing and runaway costs.
 _MAX_MESSAGE_LENGTH = 32_000
 # Cap on channel key to prevent injection via that field.
 _MAX_CHANNEL_LENGTH = 64

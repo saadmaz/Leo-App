@@ -1,5 +1,5 @@
 """
-Content Gap Analysis — DataForSEO (keyword data) + Claude (interpretation), SSE streaming.
+Content Gap Analysis - DataForSEO (keyword data) + Claude (interpretation), SSE streaming.
 
 Finds keywords your competitors rank for that you don't, then uses Claude to
 prioritise opportunities and suggest content angles.
@@ -64,7 +64,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         messaging = brand_core.get("messaging") or {}
 
-        title = f"Content Gap — {body.domain}"
+        title = f"Content Gap - {body.domain}"
         doc = firebase_service.create_pillar1_doc(project_id, "content_gap", owner_uid, title)
         doc_id = doc["id"]
 
@@ -85,12 +85,12 @@ async def generate(
             except Exception as exc:
                 logger.warning("DataForSEO failed for %s: %s", body.domain, exc)
                 yield _sse({"type": "research_step", "step": "your_keywords",
-                            "label": "DataForSEO unavailable — using Claude analysis only",
+                            "label": "DataForSEO unavailable - using Claude analysis only",
                             "status": "skipped"})
                 use_dfs = False
         else:
             yield _sse({"type": "research_step", "step": "your_keywords",
-                        "label": "DataForSEO not configured — Claude-only analysis", "status": "skipped"})
+                        "label": "DataForSEO not configured - Claude-only analysis", "status": "skipped"})
 
         # ── Step 2: Competitor keywords ───────────────────────────────────────
         for comp_domain in body.competitor_domains[:3]:
@@ -141,7 +141,7 @@ async def generate(
 You are LEO, an SEO strategist and content planner.
 Analyse keyword data to identify content gaps and opportunities.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "domain": "your-site.com",
   "summary": "2-3 sentence executive summary of the content gap landscape",
@@ -163,8 +163,8 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 
 RULES:
 1. Rank gaps by opportunity_score (10 = highest priority).
-2. Content angle must be specific — a real title idea, not generic advice.
-3. Return ONLY valid JSON — no prose, no markdown fences.
+2. Content angle must be specific - a real title idea, not generic advice.
+3. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
         brand_ctx = f"Brand: {brand_name}\n"
@@ -178,7 +178,7 @@ RULES:
 {your_kw_str}
 {comp_kw_str}
 
-{"No keyword data was available — analyse based on domain, brand context, and industry best practices." if not your_keywords and not competitor_keywords else "Identify the top content gaps and opportunities."}
+{"No keyword data was available - analyse based on domain, brand context, and industry best practices." if not your_keywords and not competitor_keywords else "Identify the top content gaps and opportunities."}
 """
 
         client = anthropic.AsyncAnthropic(api_key=settings.ANTHROPIC_API_KEY)

@@ -133,7 +133,7 @@ export default function ICPPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Build ICP — 40 credits"
+      submitLabel="Build ICP - 40 credits"
       canSubmit={true}
     />
   )

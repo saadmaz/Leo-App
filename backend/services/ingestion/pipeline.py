@@ -1,5 +1,5 @@
 """
-Brand ingestion pipeline — orchestrates scraping → extraction → Firestore save.
+Brand ingestion pipeline - orchestrates scraping → extraction → Firestore save.
 
 Yields SSE-compatible event dicts that the ingestion route can stream directly
 to the client. The frontend's animated progress overlay reads these events to
@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Event constructors — keep consistent shape across all yield sites
+# Event constructors - keep consistent shape across all yield sites
 # ---------------------------------------------------------------------------
 
 def _step(label: str, status: str = "running", detail: str = "") -> dict:
@@ -119,7 +119,7 @@ async def run(
     current_progress = 0
 
     # -----------------------------------------------------------------------
-    # Step 1 — Website
+    # Step 1 - Website
     # -----------------------------------------------------------------------
     if website_url:
         yield _step("Scraping website…", "running")
@@ -140,7 +140,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 2 — Instagram
+    # Step 2 - Instagram
     # -----------------------------------------------------------------------
     if instagram_handle:
         yield _step(f"Scraping Instagram @{instagram_handle}…", "running")
@@ -162,7 +162,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 3 — Facebook
+    # Step 3 - Facebook
     # -----------------------------------------------------------------------
     if facebook_url:
         yield _step("Scraping Facebook page…", "running")
@@ -183,7 +183,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 4 — TikTok
+    # Step 4 - TikTok
     # -----------------------------------------------------------------------
     if tiktok_url:
         yield _step("Scraping TikTok profile…", "running")
@@ -204,7 +204,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 5 — LinkedIn
+    # Step 5 - LinkedIn
     # -----------------------------------------------------------------------
     if linkedin_url:
         yield _step("Scraping LinkedIn company…", "running")
@@ -225,7 +225,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 6 — X / Twitter
+    # Step 6 - X / Twitter
     # -----------------------------------------------------------------------
     if x_url:
         yield _step("Scraping X/Twitter profile…", "running")
@@ -246,7 +246,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 7 — YouTube
+    # Step 7 - YouTube
     # -----------------------------------------------------------------------
     if youtube_url:
         yield _step("Scraping YouTube channel…", "running")
@@ -267,7 +267,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 8 — Threads
+    # Step 8 - Threads
     # -----------------------------------------------------------------------
     if threads_url:
         yield _step("Scraping Threads profile…", "running")
@@ -288,7 +288,7 @@ async def run(
         yield _progress(current_progress)
 
     # -----------------------------------------------------------------------
-    # Step 9 — Web enrichment via Exa (competitor discovery + similar brands)
+    # Step 9 - Web enrichment via Exa (competitor discovery + similar brands)
     # Runs only when website_url is available and EXA_API_KEY is configured.
     # Non-blocking: failures are logged and skipped, never fatal.
     # -----------------------------------------------------------------------
@@ -330,7 +330,7 @@ async def run(
             yield _step("Web enrichment skipped", "skipped", str(exc)[:80])
 
     # -----------------------------------------------------------------------
-    # Guard — bail if no data was collected
+    # Guard - bail if no data was collected
     # -----------------------------------------------------------------------
     if not scraped_data:
         firebase_service.update_project(project_id, {"ingestionStatus": "error"})
@@ -341,11 +341,11 @@ async def run(
         return
 
     # -----------------------------------------------------------------------
-    # Step N+1 — Brand Core extraction via Claude
+    # Step N+1 - Brand Core extraction via Claude
     # -----------------------------------------------------------------------
     if not settings.ANTHROPIC_API_KEY:
         firebase_service.update_project(project_id, {"ingestionStatus": "error"})
-        yield _error("ANTHROPIC_API_KEY is not set — cannot extract Brand Core.")
+        yield _error("ANTHROPIC_API_KEY is not set - cannot extract Brand Core.")
         return
 
     yield _step("Analysing brand tone & voice…", "running")
@@ -370,7 +370,7 @@ async def run(
         return
 
     # -----------------------------------------------------------------------
-    # Final — Persist to Firestore
+    # Final - Persist to Firestore
     # -----------------------------------------------------------------------
     try:
         firebase_service.update_project(project_id, {

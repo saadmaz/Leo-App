@@ -1,4 +1,4 @@
-"""Negative Keyword Management — Claude SSE streaming."""
+"""Negative Keyword Management - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,7 +14,7 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, a Google Ads specialist with deep expertise in search term analysis and negative keyword strategy.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "waste_identified": "Total estimated wasted spend from poor search terms",
   "negative_keywords": {
@@ -32,7 +32,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
   "from_search_terms_report": [
     {
       "search_term": "free crm software",
-      "issue": "Non-buyer intent — 'free' seekers won't convert at our price point",
+      "issue": "Non-buyer intent - 'free' seekers won't convert at our price point",
       "recommended_negative": "[free crm]",
       "match_type": "exact",
       "estimated_savings": "$240/month"
@@ -49,10 +49,10 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 
 async def generate(project: dict, body: NegativeKeywordsRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
-        doc = firebase_service.create_pillar1_doc(project_id, "negative_keywords", owner_uid, f"Negative Keywords — {body.campaign_name}")
+        doc = firebase_service.create_pillar1_doc(project_id, "negative_keywords", owner_uid, f"Negative Keywords - {body.campaign_name}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "analysing", "label": "Analysing search terms…", "status": "running"})
-        user_prompt = f"""Campaign: {body.campaign_name}\nPlatform: {body.platform}\nType: {body.campaign_type}\nProduct: {body.product_name}\nDescription: {body.product_description}\nIndustry: {body.industry or 'Not specified'}\nExisting negatives: {', '.join(body.existing_negatives) if body.existing_negatives else 'None'}\n\nSearch terms report:\n{body.search_terms_report or 'Not provided — generate proactive negatives based on industry'}\n\nGenerate comprehensive negative keyword recommendations."""
+        user_prompt = f"""Campaign: {body.campaign_name}\nPlatform: {body.platform}\nType: {body.campaign_type}\nProduct: {body.product_name}\nDescription: {body.product_description}\nIndustry: {body.industry or 'Not specified'}\nExisting negatives: {', '.join(body.existing_negatives) if body.existing_negatives else 'None'}\n\nSearch terms report:\n{body.search_terms_report or 'Not provided - generate proactive negatives based on industry'}\n\nGenerate comprehensive negative keyword recommendations."""
         client = anthropic.AsyncAnthropic(api_key=settings.ANTHROPIC_API_KEY)
         assembled: list[str] = []
         async with client.messages.stream(model=settings.LLM_CHAT_MODEL, max_tokens=2500, system=_SYSTEM, messages=[{"role": "user", "content": user_prompt}]) as stream:

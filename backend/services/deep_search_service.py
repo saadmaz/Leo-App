@@ -1,9 +1,9 @@
 """
-Deep Search — multi-source web intelligence.
+Deep Search - multi-source web intelligence.
 
 Sources:
-  • SerpAPI  — Google SERP results, PAA boxes, related queries
-  • Firecrawl — Full-page structured content extraction
+  • SerpAPI  - Google SERP results, PAA boxes, related queries
+  • Firecrawl - Full-page structured content extraction
 
 Designed to be streamed (generator pattern) so results arrive
 incrementally in the frontend.
@@ -31,7 +31,7 @@ def search_serpapi(query: str, num_results: int = 10) -> dict:
     """
     api_key = settings.SERPAPI_API_KEY
     if not api_key:
-        logger.warning("SERPAPI_API_KEY not configured — skipping SerpAPI search")
+        logger.warning("SERPAPI_API_KEY not configured - skipping SerpAPI search")
         return {}
 
     params = {
@@ -89,7 +89,7 @@ def scrape_firecrawl(url: str) -> dict:
     """
     api_key = settings.FIRECRAWL_API_KEY
     if not api_key:
-        logger.warning("FIRECRAWL_API_KEY not configured — skipping Firecrawl scrape")
+        logger.warning("FIRECRAWL_API_KEY not configured - skipping Firecrawl scrape")
         return {}
 
     try:
@@ -131,7 +131,7 @@ def scrape_firecrawl(url: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Combined deep search (generator — yields SSE-style dicts)
+# Combined deep search (generator - yields SSE-style dicts)
 # ---------------------------------------------------------------------------
 
 def deep_search(

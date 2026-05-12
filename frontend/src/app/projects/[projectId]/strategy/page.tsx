@@ -106,7 +106,7 @@ export default function StrategyHubPage() {
         const res = await api.pillar1.listDocs(projectId, dt)
         setLatestDocs((prev) => ({ ...prev, [dt]: res.docs[0] ?? null }))
       } catch {
-        // ignore — just show "never run"
+        // ignore - just show "never run"
       }
     })
   }, [projectId])

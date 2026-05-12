@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * React Error Boundary — catches unhandled render errors and shows a
+ * React Error Boundary - catches unhandled render errors and shows a
  * fallback UI instead of a blank/crashed screen.
  *
  * React error boundaries must be class components (there is no hook

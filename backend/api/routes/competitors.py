@@ -1,15 +1,15 @@
 """
 Competitor Deep Research routes.
 
-POST /projects/{id}/competitors/discover               — Auto-discover competitors
-POST /projects/{id}/competitors/research               — Run 7-layer deep dive (SSE)
-GET  /projects/{id}/competitors/reports                — List all reports
-GET  /projects/{id}/competitors/reports/{report_id}    — Get single report
-POST /projects/{id}/competitors/monitor                — Set up weekly monitoring
-GET  /projects/{id}/competitors/monitors               — List active monitors
-DELETE /projects/{id}/competitors/monitors/{id}        — Deactivate monitor
-POST /projects/{id}/competitors/monitors/{id}/run      — Manual monitor run
-GET  /projects/{id}/competitors/monitors/{id}/alerts   — Get monitor alerts
+POST /projects/{id}/competitors/discover               - Auto-discover competitors
+POST /projects/{id}/competitors/research               - Run 7-layer deep dive (SSE)
+GET  /projects/{id}/competitors/reports                - List all reports
+GET  /projects/{id}/competitors/reports/{report_id}    - Get single report
+POST /projects/{id}/competitors/monitor                - Set up weekly monitoring
+GET  /projects/{id}/competitors/monitors               - List active monitors
+DELETE /projects/{id}/competitors/monitors/{id}        - Deactivate monitor
+POST /projects/{id}/competitors/monitors/{id}/run      - Manual monitor run
+GET  /projects/{id}/competitors/monitors/{id}/alerts   - Get monitor alerts
 """
 
 import json

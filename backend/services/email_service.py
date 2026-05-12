@@ -1,5 +1,5 @@
 """
-Email service — wraps the Resend SDK for transactional and broadcast emails.
+Email service - wraps the Resend SDK for transactional and broadcast emails.
 
 Resend docs: https://resend.com/docs/send-with-python
 
@@ -13,7 +13,7 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-# Sender address — use your verified Resend domain
+# Sender address - use your verified Resend domain
 _DEFAULT_FROM = "LEO <noreply@leoapp.ai>"
 
 
@@ -64,7 +64,7 @@ def send_broadcast(
                 errors.append(f"{address}: {exc}")
                 logger.warning("Failed to send email to %s: %s", address, exc)
 
-    logger.info("Broadcast complete — sent: %d, failed: %d", sent, failed)
+    logger.info("Broadcast complete - sent: %d, failed: %d", sent, failed)
     return {"sent": sent, "failed": failed, "errors": errors[:20]}  # cap error list
 
 
@@ -82,7 +82,7 @@ def send_single(
         "subject": subject,
         "html": html_body,
     })
-    logger.info("Sent email to %s — subject: %s", to, subject)
+    logger.info("Sent email to %s - subject: %s", to, subject)
 
 
 def build_announcement_html(title: str, body: str, cta_url: str = "") -> str:

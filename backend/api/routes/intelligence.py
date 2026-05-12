@@ -1,21 +1,21 @@
 """
-Intelligence routes — Phase 1 + Competitor Profiles.
+Intelligence routes - Phase 1 + Competitor Profiles.
 
 Endpoints:
-  POST /projects/{id}/brand-voice/score               — Score text against Brand Core
-  POST /projects/{id}/content/predict                 — Predict content performance
-  POST /projects/{id}/intelligence/refresh            — Scrape + analyse competitors (SSE)
-  GET  /projects/{id}/intelligence                    — Get stored competitor snapshots
-  POST /projects/{id}/memory/feedback                 — Record user feedback on AI output
-  GET  /projects/{id}/memory                          — Get brand memory summary
-  POST /projects/{id}/drift/check                     — Check for brand voice drift
+  POST /projects/{id}/brand-voice/score               - Score text against Brand Core
+  POST /projects/{id}/content/predict                 - Predict content performance
+  POST /projects/{id}/intelligence/refresh            - Scrape + analyse competitors (SSE)
+  GET  /projects/{id}/intelligence                    - Get stored competitor snapshots
+  POST /projects/{id}/memory/feedback                 - Record user feedback on AI output
+  GET  /projects/{id}/memory                          - Get brand memory summary
+  POST /projects/{id}/drift/check                     - Check for brand voice drift
 
   # Competitor Profiles (5-dimension classification)
-  POST /projects/{id}/competitors/profiles/classify           — Classify competitor (SSE)
-  GET  /projects/{id}/competitors/profiles                    — List all profiles
-  GET  /projects/{id}/competitors/profiles/{profile_id}       — Get single profile
-  DELETE /projects/{id}/competitors/profiles/{profile_id}     — Delete profile
-  POST /projects/{id}/competitors/profiles/{profile_id}/refresh — Re-classify
+  POST /projects/{id}/competitors/profiles/classify           - Classify competitor (SSE)
+  GET  /projects/{id}/competitors/profiles                    - List all profiles
+  GET  /projects/{id}/competitors/profiles/{profile_id}       - Get single profile
+  DELETE /projects/{id}/competitors/profiles/{profile_id}     - Delete profile
+  POST /projects/{id}/competitors/profiles/{profile_id}/refresh - Re-classify
 """
 
 import asyncio
@@ -429,7 +429,7 @@ async def get_insights(
 
 
 # ---------------------------------------------------------------------------
-# Competitor Profiles — 5-Dimension Classification
+# Competitor Profiles - 5-Dimension Classification
 # ---------------------------------------------------------------------------
 
 class ClassifyCompetitorRequest(BaseModel):

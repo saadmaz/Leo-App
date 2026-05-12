@@ -134,9 +134,9 @@ export default function KeywordResearchPage() {
                 <p className="text-xs font-medium">{kw.keyword}</p>
                 <p className="text-xs text-muted-foreground mt-0.5">{kw.content_idea}</p>
               </div>
-              <p className="text-xs font-mono text-right">{kw.search_volume?.toLocaleString() ?? '—'}</p>
+              <p className="text-xs font-mono text-right">{kw.search_volume?.toLocaleString() ?? '-'}</p>
               <DifficultyBar score={kw.difficulty} />
-              <p className="text-xs font-mono">{kw.cpc ? `$${kw.cpc.toFixed(2)}` : '—'}</p>
+              <p className="text-xs font-mono">{kw.cpc ? `$${kw.cpc.toFixed(2)}` : '-'}</p>
               <span className={cn('text-[10px] px-1.5 py-0.5 rounded-full font-medium whitespace-nowrap',
                 INTENT_COLORS[kw.intent] ?? 'bg-muted text-muted-foreground')}>
                 {kw.intent}
@@ -168,6 +168,6 @@ export default function KeywordResearchPage() {
     <SSEFeaturePage projectId={projectId} title="Keyword Research" subtitle="DataForSEO + Claude"
       icon={<Search className="w-4 h-4" />} credits={10} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Research Keywords — 10 credits" canSubmit={!!seeds.trim()} />
+      onSubmit={generate} submitLabel="Research Keywords - 10 credits" canSubmit={!!seeds.trim()} />
   )
 }

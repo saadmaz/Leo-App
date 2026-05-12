@@ -1,5 +1,5 @@
 """
-Crisis Communications — conversational urgent mode, pure Claude.
+Crisis Communications - conversational urgent mode, pure Claude.
 
 Input:  crisis type, summary, severity, affected stakeholders.
 Output: crisis response playbook with statements for each stakeholder group,
@@ -27,18 +27,18 @@ that protect the brand while doing right by stakeholders.
 
 URGENT MODE: Prioritise speed, clarity, and accuracy. No fluff.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
   "crisis_assessment": {
     "severity_confirmed": "low|medium|high|critical",
     "reputational_risk": "string (1-2 sentences)",
-    "legal_risk_note": "string (general note — not legal advice)",
+    "legal_risk_note": "string (general note - not legal advice)",
     "time_sensitivity": "string (how quickly to act)",
     "do_not_say": ["string (phrases to avoid)"]
   },
-  "holding_statement": "string (a brief statement buyable for up to 24h while you gather facts — max 50 words)",
+  "holding_statement": "string (a brief statement buyable for up to 24h while you gather facts - max 50 words)",
   "stakeholder_statements": [
     {
       "stakeholder": "string (e.g. 'customers', 'media', 'employees', 'investors')",
@@ -57,13 +57,13 @@ Schema:
   "media_q_and_a": [
     {"question": "string (likely journalist question)", "answer": "string (recommended response)"}
   ],
-  "recovery_roadmap": "string (narrative on how to rebuild trust post-crisis — 2-3 paragraphs)"
+  "recovery_roadmap": "string (narrative on how to rebuild trust post-crisis - 2-3 paragraphs)"
 }
 
 Rules:
 - Holding statement MUST acknowledge the situation without admitting liability.
-- Never advise the company to 'no comment' — silence amplifies suspicion.
-- Statements must match the channel — press releases are formal, social is brief.
+- Never advise the company to 'no comment' - silence amplifies suspicion.
+- Statements must match the channel - press releases are formal, social is brief.
 - action_checklist should have 8-12 items prioritised clearly.
 - media_q_and_a should anticipate the 5 hardest questions journalists will ask.
 """
@@ -84,7 +84,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Crisis Comms — {body.crisis_type.replace('_', ' ').title()} [{body.severity.upper()}]"
+    title = f"Crisis Comms - {body.crisis_type.replace('_', ' ').title()} [{body.severity.upper()}]"
     doc = firebase_service.create_pillar1_doc(project_id, "crisis_comms", owner_uid, title)
     doc_id = doc["id"]
 

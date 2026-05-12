@@ -1,4 +1,4 @@
-# LEO — Deployment Guide
+# LEO - Deployment Guide
 
 This guide covers deploying LEO to production:
 - **Backend** → [Railway](https://railway.app) (Docker, FastAPI)
@@ -53,8 +53,8 @@ service cloud.firestore {
 
 ### Create products
 1. Stripe Dashboard → Products → **Add Product**
-2. Create **LEO Pro** — $29/month recurring → copy the Price ID (`price_...`)
-3. Create **LEO Agency** — $99/month recurring → copy the Price ID (`price_...`)
+2. Create **LEO Pro** - $29/month recurring → copy the Price ID (`price_...`)
+3. Create **LEO Agency** - $99/month recurring → copy the Price ID (`price_...`)
 4. Add both Price IDs to your backend env vars:
    ```
    STRIPE_PRO_PRICE_ID=price_...
@@ -99,7 +99,7 @@ In Railway → your service → Variables, add:
 | `LOG_LEVEL` | `INFO` |
 
 ### Verify
-Once deployed, visit `https://your-leo-api.up.railway.app/health` — should return `{"status":"ok"}`.
+Once deployed, visit `https://your-leo-api.up.railway.app/health` - should return `{"status":"ok"}`.
 
 > **Note on `FIREBASE_PRIVATE_KEY`**: The key from the JSON file contains literal `\n` newlines. In Railway, paste the full key including `-----BEGIN RSA PRIVATE KEY-----` header/footer. Railway preserves newlines in multi-line values.
 

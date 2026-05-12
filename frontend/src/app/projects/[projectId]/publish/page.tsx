@@ -126,7 +126,7 @@ export default function PublishPage() {
         <Send className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Publishing Queue</span>
         {activeProject && (
-          <span className="text-xs text-muted-foreground">— {activeProject.name}</span>
+          <span className="text-xs text-muted-foreground">- {activeProject.name}</span>
         )}
         <div className="ml-auto flex items-center gap-3">
           <span className="text-xs text-muted-foreground">

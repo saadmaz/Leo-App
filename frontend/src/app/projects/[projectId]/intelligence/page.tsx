@@ -251,11 +251,11 @@ export default function IntelligencePage() {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err)
       const userMsg = msg.includes('400')
-        ? 'Run competitor analysis first — add at least one competitor and click Analyse.'
+        ? 'Run competitor analysis first - add at least one competitor and click Analyse.'
         : (msg.includes('500') || msg.includes('parse') || msg.includes('JSON'))
-        ? 'The AI returned an unexpected response. Click Try Again — it usually succeeds on the second attempt.'
+        ? 'The AI returned an unexpected response. Click Try Again - it usually succeeds on the second attempt.'
         : (msg.includes('fetch') || msg.includes('network') || msg.includes('timeout') || msg.includes('Failed'))
-        ? 'Request timed out — the strategy takes 20-40 seconds. Please try again.'
+        ? 'Request timed out - the strategy takes 20-40 seconds. Please try again.'
         : 'Strategy generation failed. Please try again.'
       setStrategyError(userMsg)
       toast.error(userMsg)
@@ -274,7 +274,7 @@ export default function IntelligencePage() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err)
       const userMsg = (msg.includes('fetch') || msg.includes('network') || msg.includes('timeout') || msg.includes('Failed'))
-        ? 'Report timed out — takes 15–30 seconds. Please try again.'
+        ? 'Report timed out - takes 15–30 seconds. Please try again.'
         : 'Could not generate report. Try again.'
       toast.error(userMsg)
       console.error(err)
@@ -286,7 +286,7 @@ export default function IntelligencePage() {
   async function addDiscoveredCompetitor(c: DiscoveredCompetitor) {
     const name = c.name || (() => { try { return new URL(c.url).hostname.replace('www.', '') } catch { return c.url } })()
 
-    // Mark as saving — card stays visible in the discovery panel
+    // Mark as saving - card stays visible in the discovery panel
     setSavingNames(prev => { const s = new Set(prev); s.add(c.name); return s })
     setRefreshing(true)
     setShowAddForm(false)
@@ -624,7 +624,7 @@ function LiveLogPanel({ log, active }: { log: LogEntry[]; active: boolean }) {
           <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
         </div>
-        <span className="text-[10px] font-mono text-muted-foreground ml-1">leo — intelligence engine</span>
+        <span className="text-[10px] font-mono text-muted-foreground ml-1">leo - intelligence engine</span>
         {active && (
           <div className="ml-auto flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -672,7 +672,7 @@ function LiveLogPanel({ log, active }: { log: LogEntry[]; active: boolean }) {
 }
 
 // ---------------------------------------------------------------------------
-// Discovered Banner — filterable rich cards with per-card Save button
+// Discovered Banner - filterable rich cards with per-card Save button
 // ---------------------------------------------------------------------------
 
 const RELEVANCE_LABEL = (score: number) => {
@@ -718,7 +718,7 @@ function DiscoveredBanner({
             {savedCount > 0 && <span className="ml-2 text-emerald-400 text-xs font-normal">· {savedCount} saved</span>}
           </p>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Sourced from Tavily · Exa · Claude AI — cached 24h
+            Sourced from Tavily · Exa · Claude AI - cached 24h
           </p>
         </div>
         <button onClick={onDismiss} className="text-muted-foreground hover:text-foreground p-1">
@@ -1012,7 +1012,7 @@ function CompetitorCard({ snapshot, onOpenReport }: { snapshot: CompetitorSnapsh
       {expanded && (
         <div className="border-t border-border/60 px-5 pt-4 pb-5 space-y-4">
 
-          {/* Market position — redesigned as intelligence brief */}
+          {/* Market position - redesigned as intelligence brief */}
           {web_analysis?.market_position && (
             <div className="relative rounded-xl overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/8 to-violet-500/5 rounded-xl" />
@@ -1167,7 +1167,7 @@ function StrategyPanel({
       <div className="flex flex-col items-center justify-center h-64 gap-3">
         <Loader2 className="w-7 h-7 animate-spin text-violet-400" />
         <p className="text-sm text-muted-foreground">Generating strategy plan…</p>
-        <p className="text-xs text-muted-foreground/60">Analysing competitor data + running AI — takes 20–40 seconds</p>
+        <p className="text-xs text-muted-foreground/60">Analysing competitor data + running AI - takes 20–40 seconds</p>
       </div>
     )
   }
@@ -1343,7 +1343,7 @@ function StrategyPanel({
         <div className="rounded-2xl border border-amber-500/25 bg-amber-500/5 p-5">
           <div className="flex items-center gap-2 mb-3">
             <Zap className="w-4 h-4 text-amber-500" />
-            <h3 className="text-sm font-semibold text-amber-500">Quick Wins — Do This Week</h3>
+            <h3 className="text-sm font-semibold text-amber-500">Quick Wins - Do This Week</h3>
           </div>
           <div className="space-y-3">
             {strategy.quick_wins.map((win, i) => {
@@ -1556,7 +1556,7 @@ function StrategyPanel({
                   <div key={i} className="flex items-start gap-2">
                     <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-muted border border-border shrink-0 capitalize">{f.format}</span>
                     <div className="min-w-0">
-                      <span className="text-[10px] text-muted-foreground capitalize mr-1">{f.platform} —</span>
+                      <span className="text-[10px] text-muted-foreground capitalize mr-1">{f.platform} -</span>
                       <span className="text-xs text-foreground/80">{f.rationale}</span>
                     </div>
                   </div>

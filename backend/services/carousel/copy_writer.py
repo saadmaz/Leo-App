@@ -1,5 +1,5 @@
 """
-Carousel Studio — Copy Writer
+Carousel Studio - Copy Writer
 
 Calls Claude to generate structured slide JSON using brand profile + intake answers.
 Returns a list of slide dicts conforming to the CarouselSlide schema.
@@ -23,60 +23,60 @@ logger = logging.getLogger(__name__)
 
 CAROUSEL_ARCHITECTURES: dict[str, str] = {
     "educational": (
-        "Slide 1: Hook — a compelling 'nobody tells you' opening\n"
-        "Slide 2: Why it matters — problem/context\n"
-        "Slide 3: Overview — 'Here's what you'll learn'\n"
+        "Slide 1: Hook - a compelling 'nobody tells you' opening\n"
+        "Slide 2: Why it matters - problem/context\n"
+        "Slide 3: Overview - 'Here's what you'll learn'\n"
         "Slides 4-N: One lesson per slide, numbered steps\n"
-        "Second-to-last: Summary — key takeaways\n"
-        "Last: CTA — follow for more / save this post"
+        "Second-to-last: Summary - key takeaways\n"
+        "Last: CTA - follow for more / save this post"
     ),
     "stats": (
         "Slide 1: The most shocking stat, large and centred\n"
         "Slides 2-N: One stat per slide with context label\n"
         "Second-to-last: 'What this means for you'\n"
-        "Last: CTA — link in bio / comment for resource"
+        "Last: CTA - link in bio / comment for resource"
     ),
     "product": (
-        "Slide 1: Product hero — bold name, one-line promise\n"
+        "Slide 1: Product hero - bold name, one-line promise\n"
         "Slide 2: The problem it solves\n"
         "Slide 3: Product in action\n"
         "Slides 4-5: Top features (feature list)\n"
         "Slide 6: Social proof / early results\n"
-        "Last: CTA — get it now / link in bio"
+        "Last: CTA - get it now / link in bio"
     ),
     "story": (
-        "Slide 1: The inciting moment — hook with stakes\n"
+        "Slide 1: The inciting moment - hook with stakes\n"
         "Slides 2-4: The journey (before/during/after)\n"
         "Slide 5: The turning point\n"
         "Slides 6-N: The lessons learned\n"
-        "Last: CTA — follow the journey / share your story"
+        "Last: CTA - follow the journey / share your story"
     ),
     "tips": (
-        "Slide 1: 'N tips to [goal]' — hook with number\n"
+        "Slide 1: 'N tips to [goal]' - hook with number\n"
         "Slides 2-N: One tip per slide (tip number + title + description)\n"
         "Second-to-last: Bonus tip or recap\n"
-        "Last: CTA — save this / follow for more"
+        "Last: CTA - save this / follow for more"
     ),
     "viral_hook": (
         "Slide 1: Controversial or counterintuitive statement\n"
-        "Slide 2: 'Here's why...' — set up the tension\n"
+        "Slide 2: 'Here's why...' - set up the tension\n"
         "Slides 3-5: Evidence and proof\n"
         "Slide 6: The nuance / hot take\n"
-        "Last: CTA — comment your opinion / share this"
+        "Last: CTA - comment your opinion / share this"
     ),
     "social_proof": (
         "Slide 1: Result or transformation headline\n"
         "Slides 2-4: Individual testimonials (quote box)\n"
         "Slide 5: Stats from real users\n"
         "Slide 6: Behind the scenes / process\n"
-        "Last: CTA — join / get started / DM us"
+        "Last: CTA - join / get started / DM us"
     ),
     "lead_magnet": (
-        "Slide 1: Freebie hook — 'Free [X] inside — save this'\n"
+        "Slide 1: Freebie hook - 'Free [X] inside - save this'\n"
         "Slides 2-4: Preview of value\n"
         "Slide 5: Who it's for\n"
         "Slide 6: Urgency / scarcity if applicable\n"
-        "Last: CTA — link in bio / DM 'FREE' to get it"
+        "Last: CTA - link in bio / DM 'FREE' to get it"
     ),
 }
 
@@ -135,7 +135,7 @@ async def generate_slides(
     if not heading_font or heading_font == "Plus Jakarta Sans":
         heading_font, body_font = _choose_font_fallback(brand_profile.get("tone", ""))
 
-    system_prompt = """You are LEO's Instagram Carousel Copywriter. You write carousel copy that stops scrolls, drives saves, and grows accounts. You MUST return ONLY valid JSON — no markdown fences, no explanation text, nothing before or after the JSON."""
+    system_prompt = """You are LEO's Instagram Carousel Copywriter. You write carousel copy that stops scrolls, drives saves, and grows accounts. You MUST return ONLY valid JSON - no markdown fences, no explanation text, nothing before or after the JSON."""
 
     user_prompt = f"""BRAND INTELLIGENCE:
 Brand name: {brand_profile.get("domain", "the brand")}
@@ -164,8 +164,8 @@ RULES:
 1. Slide 1 headline MUST stop the scroll. Use: '[Number] [things] that [result]', 'The truth about [topic]', 'Stop [doing X]. Do this instead.', or a shocking stat format.
 2. Every headline: 8 words maximum. Hard limit.
 3. Body copy: maximum 2 sentences per slide.
-4. Write in the brand's tone — NOT generic AI voice.
-5. Final slide CTA must be specific: not 'Follow us' — 'Save this and try tip 1 today.'
+4. Write in the brand's tone - NOT generic AI voice.
+5. Final slide CTA must be specific: not 'Follow us' - 'Save this and try tip 1 today.'
 6. Tag labels are UPPERCASE, 1–3 words.
 7. Background choices: LIGHT_BG (white/light), DARK_BG (dark), GRADIENT (brand gradient). Mix them for visual variety. Hero and CTA often use DARK_BG or GRADIENT.
 8. Component types: stat_block, feature_list, numbered_steps, quote_box, cta_centred, none.
@@ -227,7 +227,7 @@ async def edit_slide(
     Apply a targeted edit to a single slide. Returns the updated slide dict.
     """
     prompt = f"""You are editing a single Instagram carousel slide. Apply ONLY the requested change.
-Return ONLY the updated slide JSON — no explanation, no markdown.
+Return ONLY the updated slide JSON - no explanation, no markdown.
 
 BRAND TONE: {brand_profile.get("tone", "professional")}
 AVOID WORDS: {", ".join(brand_profile.get("avoid_words", []))}

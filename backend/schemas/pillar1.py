@@ -1,5 +1,5 @@
 """
-Pydantic request/response schemas for Pillar 1 — Strategy & Planning features.
+Pydantic request/response schemas for Pillar 1 - Strategy & Planning features.
 """
 
 from __future__ import annotations

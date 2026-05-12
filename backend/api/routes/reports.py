@@ -1,9 +1,9 @@
 """
-Reports routes — Phase 10.
+Reports routes - Phase 10.
 
 Endpoints:
-  GET  /projects/{id}/reports/digest        — AI-generated weekly digest
-  POST /projects/{id}/reports/score-content — Batch brand voice score for library items
+  GET  /projects/{id}/reports/digest        - AI-generated weekly digest
+  POST /projects/{id}/reports/score-content - Batch brand voice score for library items
 """
 
 import logging
@@ -82,7 +82,7 @@ Generate a professional weekly digest report with these exact sections (use mark
 ## Content Health Score
 Give an overall content health score out of 10 with a one-line justification.
 
-Keep the tone {tone} and focused on actionable insights. Be direct — no filler text."""
+Keep the tone {tone} and focused on actionable insights. Be direct - no filler text."""
 
     client = get_client()
     response = await client.messages.create(

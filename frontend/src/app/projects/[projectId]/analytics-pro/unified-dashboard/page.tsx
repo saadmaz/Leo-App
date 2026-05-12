@@ -183,7 +183,7 @@ export default function UnifiedDashboardPage() {
               <p className="text-xs">{ch.sessions_or_reach?.toLocaleString()}</p>
               <p className="text-xs">{ch.conversions?.toLocaleString()}</p>
               <p className="text-xs">${ch.revenue?.toLocaleString()}</p>
-              <p className="text-xs">{ch.roas ? `${ch.roas.toFixed(1)}x` : '—'}</p>
+              <p className="text-xs">{ch.roas ? `${ch.roas.toFixed(1)}x` : '-'}</p>
               <span className={cn('text-[10px] px-1.5 py-0.5 rounded-full font-medium capitalize', PERF_STYLES[ch.performance_rating] ?? 'bg-muted text-muted-foreground')}>
                 {ch.performance_rating}
               </span>
@@ -229,10 +229,10 @@ export default function UnifiedDashboardPage() {
   ) : null
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Unified Dashboard" subtitle="Pillar 7 — Claude + GA4 + Meta"
+    <SSEFeaturePage projectId={projectId} title="Unified Dashboard" subtitle="Pillar 7 - Claude + GA4 + Meta"
       icon={<LayoutDashboard className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Dashboard — 15 credits" canSubmit={true}
+      onSubmit={generate} submitLabel="Generate Dashboard - 15 credits" canSubmit={true}
       backPath={`/projects/${projectId}/analytics-pro`} />
   )
 }

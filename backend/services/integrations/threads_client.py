@@ -1,5 +1,5 @@
 """
-Threads API client — Meta Threads Graph API v1.0
+Threads API client - Meta Threads Graph API v1.0
 
 Covers:
   - OAuth: authorization URL generation, code → long-lived token exchange
@@ -12,7 +12,7 @@ Base URL: https://graph.threads.net/v1.0/
 Token lifecycle:
   - Short-lived token (1h) from OAuth code exchange
   - Exchange for long-lived token (60 days) via /access_token endpoint
-  - Store long-lived token per user in Firestore — refresh before expiry
+  - Store long-lived token per user in Firestore - refresh before expiry
 """
 
 from __future__ import annotations
@@ -337,7 +337,7 @@ async def scrape_public_profile(username: str) -> dict:
     """
     Scrape a public Threads profile via oEmbed (no auth needed).
     Returns normalised dict with source_type='threads' for brand extractor.
-    Limited — only gets the embed preview. Use Apify for full post history.
+    Limited - only gets the embed preview. Use Apify for full post history.
     """
     try:
         async with httpx.AsyncClient(timeout=15) as client:

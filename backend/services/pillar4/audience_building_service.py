@@ -1,4 +1,4 @@
-"""Audience Building — Claude SSE streaming."""
+"""Audience Building - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -14,7 +14,7 @@ def _sse(d: dict) -> str: return f"data: {json.dumps(d)}\n\n"
 _SYSTEM = """\
 You are LEO, a paid media specialist expert in audience strategy for Meta, Google, LinkedIn, and TikTok.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "audience_strategy": "Overall approach and rationale",
   "primary_audience": {
@@ -48,7 +48,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 async def generate(project: dict, body: AudienceBuildingRequest, project_id: str, owner_uid: str) -> AsyncGenerator[str, None]:
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
-        doc = firebase_service.create_pillar1_doc(project_id, "audience_building", owner_uid, f"Audience — {body.platform} — {body.audience_type}")
+        doc = firebase_service.create_pillar1_doc(project_id, "audience_building", owner_uid, f"Audience - {body.platform} - {body.audience_type}")
         doc_id = doc["id"]
         yield _sse({"type": "research_step", "step": "building", "label": "Building audience strategy…", "status": "running"})
         user_prompt = f"""Brand: {brand_name}\nProduct: {body.product_name}\nPlatform: {body.platform}\nAudience type: {body.audience_type}\nTarget: {body.target_description}\nCRM summary: {body.crm_data_summary or 'Not provided'}\nSeed size: {body.existing_audience_size or 'Unknown'}\nBudget: {body.budget or 'Not specified'}\n\nBuild a complete audience strategy."""

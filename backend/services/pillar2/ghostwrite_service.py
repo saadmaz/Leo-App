@@ -1,4 +1,4 @@
-"""Thought Leadership Ghostwriting — Claude SSE streaming."""
+"""Thought Leadership Ghostwriting - Claude SSE streaming."""
 from __future__ import annotations
 import json
 import logging
@@ -15,15 +15,15 @@ def _sse(data: dict) -> str:
 
 _SYSTEM = """\
 You are LEO, an expert ghostwriter who captures the authentic voice of executives and thought leaders.
-Your job is to write content that sounds genuinely like the person — not corporate, not generic.
+Your job is to write content that sounds genuinely like the person - not corporate, not generic.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "content_type": "linkedin_post",
   "executive": "Name",
   "primary_content": "The full ready-to-publish content",
   "hook": "The opening hook extracted",
-  "voice_notes": "How you captured their voice — what specific techniques you used",
+  "voice_notes": "How you captured their voice - what specific techniques you used",
   "alternative_opening": "An alternative first paragraph with a different hook angle",
   "suggested_hashtags": ["hashtag1"],
   "best_time_to_post": "Tuesday morning 8-10am",
@@ -36,7 +36,7 @@ async def generate(project: dict, body: GhostwriteRequest, project_id: str, owne
     async def _stream() -> AsyncGenerator[str, None]:
         brand_name = project.get("name", "the brand")
 
-        title = f"Ghostwrite — {body.executive_name} — {body.content_type}"
+        title = f"Ghostwrite - {body.executive_name} - {body.content_type}"
         doc = firebase_service.create_pillar1_doc(project_id, "ghostwrite", owner_uid, title)
         doc_id = doc["id"]
 
@@ -56,7 +56,7 @@ Target word count: {body.word_count}
 Tone: {body.tone}
 
 Voice sample (if provided):
-{body.executive_voice_sample or 'No sample provided — infer a personal, first-person, authentic professional voice'}
+{body.executive_voice_sample or 'No sample provided - infer a personal, first-person, authentic professional voice'}
 
 Write content that sounds like this specific person wrote it themselves.
 """

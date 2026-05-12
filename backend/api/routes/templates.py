@@ -2,11 +2,11 @@
 Phase 6 Content Templates routes.
 
 Endpoints:
-  GET    /projects/{id}/templates              — list templates
-  POST   /projects/{id}/templates              — create template
-  GET    /projects/{id}/templates/{tid}        — get template
-  PATCH  /projects/{id}/templates/{tid}        — update template
-  DELETE /projects/{id}/templates/{tid}        — delete template
+  GET    /projects/{id}/templates              - list templates
+  POST   /projects/{id}/templates              - create template
+  GET    /projects/{id}/templates/{tid}        - get template
+  PATCH  /projects/{id}/templates/{tid}        - update template
+  DELETE /projects/{id}/templates/{tid}        - delete template
 """
 
 import asyncio
@@ -31,7 +31,7 @@ class TemplateCreate(BaseModel):
     category: str = Field(..., max_length=50)
     platform: Optional[str] = Field(None, max_length=64)
     description: Optional[str] = Field(None, max_length=300)
-    # The template body — use {placeholder} syntax for variable fields
+    # The template body - use {placeholder} syntax for variable fields
     body: str = Field(..., min_length=5, max_length=5000)
     # Extracted list of placeholder names e.g. ["brand_name", "product"]
     placeholders: list[str] = Field(default_factory=list)

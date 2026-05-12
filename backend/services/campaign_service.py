@@ -1,5 +1,5 @@
 """
-Campaign generation service — drives Claude to produce a full campaign brief
+Campaign generation service - drives Claude to produce a full campaign brief
 and per-channel content packs from the project's Brand Core.
 
 Yields SSE-compatible event dicts matching the ingestion pipeline format:
@@ -27,7 +27,7 @@ CAMPAIGN_SYSTEM = """\
 You are an expert marketing strategist and copywriter. Using the Brand Core
 provided, produce a complete campaign package in a single JSON response.
 
-Return ONLY a valid JSON object — no markdown fences, no explanation.
+Return ONLY a valid JSON object - no markdown fences, no explanation.
 
 Schema:
 {
@@ -94,7 +94,7 @@ def _parse_json(raw: str) -> dict:
     try:
         return json.loads(clean.strip())
     except json.JSONDecodeError as exc:
-        logger.error("Campaign generation JSON parse failed — %s\nRaw (first 500): %s", exc, raw[:500])
+        logger.error("Campaign generation JSON parse failed - %s\nRaw (first 500): %s", exc, raw[:500])
         raise ValueError(f"Could not parse campaign JSON: {exc}") from exc
 
 
@@ -116,11 +116,11 @@ async def generate_campaign(
     Async generator that calls Claude to produce a campaign brief + content packs.
 
     Steps emitted:
-      10% — Preparing brand context
-      25% — Generating campaign brief
-      60% — Generating channel content
-      90% — Saving to Firestore
-     100% — Done
+      10% - Preparing brand context
+      25% - Generating campaign brief
+      60% - Generating channel content
+      90% - Saving to Firestore
+     100% - Done
     """
     if not settings.GEMINI_API_KEY:
         yield _error("GEMINI_API_KEY is not set.")

@@ -34,8 +34,8 @@ async def get_current_super_admin(
     has the `superAdmin: true` custom claim.
 
     Raises:
-        HTTP 401 — invalid or expired token
-        HTTP 403 — valid token but not a super admin
+        HTTP 401 - invalid or expired token
+        HTTP 403 - valid token but not a super admin
     """
     token = credentials.credentials
     try:
@@ -57,5 +57,5 @@ async def get_current_super_admin(
     return decoded
 
 
-# Convenient type alias — use in route signatures like `user: SuperAdminUser`
+# Convenient type alias - use in route signatures like `user: SuperAdminUser`
 SuperAdminUser = Annotated[dict, Depends(get_current_super_admin)]

@@ -1,5 +1,5 @@
 """
-Partnership Communications — pure Claude copywriting.
+Partnership Communications - pure Claude copywriting.
 
 Input:  comms type (outreach/proposal/announcement/joint PR), companies, value prop.
 Output: the appropriate communication with messaging framework.
@@ -22,15 +22,15 @@ _MAX_BRAND = 500
 SYSTEM = """\
 You are a business development and partnership communications expert. \
 You write partnership communications that open doors, advance deals, and craft \
-compelling joint narratives — clear about value, respectful of the partner's business.
+compelling joint narratives - clear about value, respectful of the partner's business.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
   "comms_type": "string",
   "document_title": "string",
-  "primary_document": "string (the main communication — email, proposal section, or press release body)",
+  "primary_document": "string (the main communication - email, proposal section, or press release body)",
   "subject_line": "string or null (email subject if comms_type is outreach or proposal)",
   "value_proposition_summary": {
     "for_us": "string (what we get)",
@@ -52,7 +52,7 @@ Schema:
 }
 
 Rules:
-- primary_document must be complete and ready to send/use — not a template.
+- primary_document must be complete and ready to send/use - not a template.
 - For initial_outreach: lead with what's in it for them, keep under 200 words.
 - For proposal: structure as executive summary → value prop → terms → next steps.
 - For joint_press_release: balance both companies equally; quote one exec from each.
@@ -77,7 +77,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Partnership Comms — {body.your_company} × {body.partner_company} ({body.comms_type.replace('_', ' ').title()})"
+    title = f"Partnership Comms - {body.your_company} × {body.partner_company} ({body.comms_type.replace('_', ' ').title()})"
     doc = firebase_service.create_pillar1_doc(project_id, "partnership_comms", owner_uid, title)
     doc_id = doc["id"]
 

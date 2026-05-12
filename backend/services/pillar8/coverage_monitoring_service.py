@@ -1,5 +1,5 @@
 """
-Coverage Monitoring — SerpAPI searches news, Apify scrapes Reddit,
+Coverage Monitoring - SerpAPI searches news, Apify scrapes Reddit,
 Claude synthesises sentiment and key themes.
 
 Reuses patterns from the existing Reputation Monitoring pillar.
@@ -26,11 +26,11 @@ SYSTEM_SYNTHESIS = """\
 You are a PR analyst reviewing media coverage and social mentions for a brand.
 Synthesise the raw mentions into a structured coverage report.
 
-Return ONLY valid JSON — no markdown fences.
+Return ONLY valid JSON - no markdown fences.
 
 Schema:
 {
-  "coverage_summary": "string (3-4 sentence narrative — overall sentiment, volume, key themes)",
+  "coverage_summary": "string (3-4 sentence narrative - overall sentiment, volume, key themes)",
   "sentiment_breakdown": {
     "positive": number (percentage),
     "neutral": number (percentage),
@@ -167,7 +167,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Coverage Monitor — {body.brand_name} · {body.days_back}d"
+    title = f"Coverage Monitor - {body.brand_name} · {body.days_back}d"
     doc = firebase_service.create_pillar1_doc(project_id, "coverage_monitoring", owner_uid, title)
     doc_id = doc["id"]
 

@@ -132,7 +132,7 @@ function VoiceScorerTab({ projectId }: { projectId: string }) {
       <div>
         <h2 className="text-base font-semibold mb-1">Brand Voice Scorer</h2>
         <p className="text-sm text-muted-foreground">
-          Paste any content — caption, email, ad copy — and get an instant score against your Brand Core.
+          Paste any content - caption, email, ad copy - and get an instant score against your Brand Core.
         </p>
       </div>
 
@@ -170,7 +170,7 @@ function VoiceScorerTab({ projectId }: { projectId: string }) {
                   <span className="text-lg font-normal text-muted-foreground">/100</span>
                 </div>
                 <div className={cn('text-sm font-medium mt-0.5', grade.color)}>
-                  Grade {result.grade} — {grade.label}
+                  Grade {result.grade} - {grade.label}
                 </div>
               </div>
               <div className="relative w-16 h-16">

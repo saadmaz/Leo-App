@@ -38,7 +38,7 @@ export default function EmailsPage() {
         <BackButton />
         <Mail className="w-4 h-4 text-primary" />
         <span className="text-sm font-semibold">Email Studio</span>
-        {activeProject && <span className="text-xs text-muted-foreground">— {activeProject.name}</span>}
+        {activeProject && <span className="text-xs text-muted-foreground">- {activeProject.name}</span>}
       </div>
 
       <div className="flex gap-1 px-4 py-2 border-b border-border shrink-0">
@@ -147,7 +147,7 @@ function SequenceTab({ projectId }: { projectId: string }) {
         <div>
           <label className="block text-xs font-medium mb-1">Product / Service *</label>
           <input value={product} onChange={(e) => setProduct(e.target.value)}
-            placeholder="e.g. LEO — AI marketing co-pilot for growing brands"
+            placeholder="e.g. LEO - AI marketing co-pilot for growing brands"
             className="w-full text-sm bg-background border border-border rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary" />
         </div>
         <button onClick={handleGenerate} disabled={loading || !goal.trim() || !product.trim()}

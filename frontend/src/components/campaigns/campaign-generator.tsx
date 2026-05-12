@@ -181,7 +181,7 @@ export function CampaignGenerator() {
               </div>
 
               <div className="flex-1 overflow-y-auto p-6 space-y-5">
-                {/* Form — hidden while running */}
+                {/* Form - hidden while running */}
                 {!running && !done && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                     <Field label="Campaign name *" value={name} onChange={setName} placeholder="Summer product launch" />

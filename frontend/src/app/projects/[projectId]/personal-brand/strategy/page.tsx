@@ -354,7 +354,7 @@ function ProfileAuditTab() {
       <div className="text-center max-w-xs">
         <h3 className="text-base font-semibold text-foreground">Profile Optimisation Audit</h3>
         <p className="text-sm text-muted-foreground mt-1">
-          LEO audits every connected profile — headline, bio, about section — and gives specific rewrite suggestions.
+          LEO audits every connected profile - headline, bio, about section - and gives specific rewrite suggestions.
         </p>
       </div>
       <button

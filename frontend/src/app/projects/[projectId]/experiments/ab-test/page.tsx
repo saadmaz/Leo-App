@@ -133,7 +133,7 @@ export default function ABTestDesignPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">What to Test *</label>
         <textarea value={whatToTest} onChange={(e) => setWhatToTest(e.target.value)} rows={2}
-          placeholder="e.g. Homepage hero headline — testing pain-led vs benefit-led vs curiosity-driven copy"
+          placeholder="e.g. Homepage hero headline - testing pain-led vs benefit-led vs curiosity-driven copy"
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
       </div>
 
@@ -336,7 +336,7 @@ export default function ABTestDesignPage() {
     <SSEFeaturePage
       projectId={projectId}
       title="A/B Test Designer"
-      subtitle="Pillar 10 — Claude"
+      subtitle="Pillar 10 - Claude"
       icon={<FlaskConical className="w-4 h-4" />}
       credits={10}
       steps={store.steps}
@@ -345,7 +345,7 @@ export default function ABTestDesignPage() {
       form={form}
       result={resultNode}
       onSubmit={generate}
-      submitLabel="Design A/B Test — 10 credits"
+      submitLabel="Design A/B Test - 10 credits"
       canSubmit={canSubmit}
       backPath={`/projects/${projectId}/experiments`}
     />

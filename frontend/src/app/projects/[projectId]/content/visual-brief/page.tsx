@@ -81,7 +81,7 @@ export default function VisualBriefPage() {
 
   const resultNode = result ? (
     <div className="space-y-4">
-      <h2 className="font-semibold text-sm">Visual Brief — {result.content_type?.replace('_', ' ')}</h2>
+      <h2 className="font-semibold text-sm">Visual Brief - {result.content_type?.replace('_', ' ')}</h2>
 
       {/* Concept & Mood */}
       <div className="p-4 rounded-xl border border-border bg-card space-y-2">
@@ -154,6 +154,6 @@ export default function VisualBriefPage() {
     <SSEFeaturePage projectId={projectId} title="Visual Brief" subtitle="Claude creative direction"
       icon={<ImageIcon className="w-4 h-4" />} credits={5} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Generate Brief — 5 credits" canSubmit={!!description.trim()} />
+      onSubmit={generate} submitLabel="Generate Brief - 5 credits" canSubmit={!!description.trim()} />
   )
 }

@@ -1,5 +1,5 @@
 """
-Social Proof Harvesting — Scrape mentions + surface best UGC for marketing.
+Social Proof Harvesting - Scrape mentions + surface best UGC for marketing.
 
 Flow:
 1. Search for brand mentions via Tavily (web search) across target platforms
@@ -30,7 +30,7 @@ SYSTEM = """\
 You are a social proof strategist and UGC (user-generated content) analyst. \
 You mine social mentions for the highest-converting customer proof points.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -46,7 +46,7 @@ Schema:
       "rank": number,
       "author": "string or 'Anonymous'",
       "platform": "string",
-      "quote": "string (the best extractable quote — verbatim or cleaned up)",
+      "quote": "string (the best extractable quote - verbatim or cleaned up)",
       "why_it_works": "string (1 sentence: what makes this compelling for marketing)",
       "best_use": "string (e.g. 'Hero section quote', 'Pricing page', 'Email footer', 'Case study intro')",
       "permission_needed": boolean
@@ -75,16 +75,16 @@ Schema:
       "response_recommendation": "string"
     }
   ],
-  "social_proof_gaps": ["string (types of proof you're missing — e.g. 'No video testimonials found', 'No enterprise customer mentions')"],
+  "social_proof_gaps": ["string (types of proof you're missing - e.g. 'No video testimonials found', 'No enterprise customer mentions')"],
   "quick_wins": ["string (immediate action to capture more or better social proof)"]
 }
 
 Rules:
-- Only surface genuine, specific quotes — avoid generic praise ('great product!').
+- Only surface genuine, specific quotes - avoid generic praise ('great product!').
 - Mark permission_needed=true for anything that would be repurposed in paid ads.
 - Identify case_study_leads from mentions that include specific outcomes/numbers.
 - If content is thin, note it honestly in harvest_summary and focus on gaps + quick wins.
-- Negative patterns are valuable — surface them constructively.
+- Negative patterns are valuable - surface them constructively.
 """
 
 
@@ -103,7 +103,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Social Proof Harvest — {body.brand_name}"
+    title = f"Social Proof Harvest - {body.brand_name}"
     doc = firebase_service.create_pillar1_doc(project_id, "social_proof", owner_uid, title)
     doc_id = doc["id"]
 
@@ -136,7 +136,7 @@ async def generate(
                     "label": f"Found {len(search_snippets)} mention snippets", "status": "done"})
     else:
         yield _sse({"type": "research_step", "step": "search",
-                    "label": "No Tavily key — using manual mentions only", "status": "done"})
+                    "label": "No Tavily key - using manual mentions only", "status": "done"})
 
     # Combine search snippets + raw mentions
     all_content_parts: list[str] = []

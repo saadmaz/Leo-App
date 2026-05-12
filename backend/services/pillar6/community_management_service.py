@@ -1,5 +1,5 @@
 """
-Community Management — Claude drafts brand-aligned replies to social comments.
+Community Management - Claude drafts brand-aligned replies to social comments.
 
 Flow:
 1. Optionally pull live comments from Ayrshare POST /post/comments (requires AYRSHARE_API_KEY)
@@ -31,7 +31,7 @@ SYSTEM = """\
 You are a social media community manager expert at crafting replies that feel human, \
 on-brand, and drive positive engagement.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -46,7 +46,7 @@ Schema:
       "sentiment": "positive | neutral | negative | question | complaint | spam",
       "priority": "high | medium | low",
       "action_type": "reply | escalate | delete | ignore",
-      "suggested_reply": "string (the actual reply text — platform-appropriate length)",
+      "suggested_reply": "string (the actual reply text - platform-appropriate length)",
       "reply_rationale": "string (1 sentence: why this reply angle)",
       "follow_up_action": "string or null (e.g. 'DM to resolve billing issue', 'Tag support team')"
     }
@@ -58,8 +58,8 @@ Schema:
 
 Rules:
 - Replies must feel human, not robotic or corporate.
-- Match the brand tone provided — do NOT invent a tone.
-- Complaints: acknowledge, empathise, offer to help — never argue or dismiss.
+- Match the brand tone provided - do NOT invent a tone.
+- Complaints: acknowledge, empathise, offer to help - never argue or dismiss.
 - Questions: answer directly if you have the info, otherwise offer to DM.
 - Spam/irrelevant: recommend 'delete' or 'ignore' action_type, no reply text needed.
 - Keep reply length appropriate to platform: Twitter ≤280 chars, Instagram/LinkedIn ≤500 chars.
@@ -106,7 +106,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = "Community Management — Reply Drafts"
+    title = "Community Management - Reply Drafts"
     doc = firebase_service.create_pillar1_doc(project_id, "community_management", owner_uid, title)
     doc_id = doc["id"]
 
@@ -137,7 +137,7 @@ async def generate(
                     "label": f"Fetched {len(all_comments)} comments", "status": "done"})
     elif body.ayrshare_post_ids:
         yield _sse({"type": "research_step", "step": "fetch",
-                    "label": "AYRSHARE_API_KEY not set — skipping live pull", "status": "done"})
+                    "label": "AYRSHARE_API_KEY not set - skipping live pull", "status": "done"})
 
     # 2. Manual comments
     if body.manual_comments:

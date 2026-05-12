@@ -1,8 +1,8 @@
 """
-Risk Flagging service — existing monitoring + SerpAPI news scan + Claude Haiku sentiment.
+Risk Flagging service - existing monitoring + SerpAPI news scan + Claude Haiku sentiment.
 
 Composes three signal sources:
-1. Re-runs the brand monitor (Tavily + Exa — already built)
+1. Re-runs the brand monitor (Tavily + Exa - already built)
 2. SerpAPI news search for market/regulatory risk signals
 3. Claude Haiku trend classification on existing monitor alerts
 """
@@ -88,7 +88,7 @@ Return ONLY a JSON array of risk objects (no markdown fences):
 Categories: "competitor_aggression" | "market_signal" | "sentiment_decline" | "regulatory"
 Severities: "low" | "medium" | "high" | "critical"
 
-Return ONLY valid JSON array — no prose, no markdown fences.
+Return ONLY valid JSON array - no prose, no markdown fences.
 """
 
 
@@ -105,7 +105,7 @@ async def generate(
         brand_name = project.get("name", "the brand")
         competitors_from_core = brand_core.get("competitors") or []
 
-        title = f"Risk Scan — {brand_name}"
+        title = f"Risk Scan - {brand_name}"
         doc = firebase_service.create_pillar1_doc(project_id, "risk_flag", owner_uid, title)
         doc_id = doc["id"]
 
@@ -125,7 +125,7 @@ async def generate(
             })
         yield _sse({"type": "research_step", "step": "brand_monitor", "label": f"Found {len(brand_results)} brand signals", "status": "done"})
 
-        # ── Step 2: SerpAPI news — market/regulatory risks ───────────────────
+        # ── Step 2: SerpAPI news - market/regulatory risks ───────────────────
         yield _sse({"type": "research_step", "step": "serp_news_scan", "label": "Scanning for market & regulatory risks...", "status": "running"})
 
         themes = brand_core.get("themes") or []
@@ -166,7 +166,7 @@ SIGNALS DETECTED:
 {signals_text}
 
 Classify these signals into risk alerts. Assign a unique UUID to each risk_id.
-Only include signals that represent a genuine risk — skip routine news with no risk implication.
+Only include signals that represent a genuine risk - skip routine news with no risk implication.
 """
 
         client = anthropic.AsyncAnthropic(api_key=settings.ANTHROPIC_API_KEY)

@@ -1,5 +1,5 @@
 """
-Research service — async deep market research using Exa /research API.
+Research service - async deep market research using Exa /research API.
 
 Creates research tasks that run for 5-60 seconds, returning structured
 markdown reports with citations. Results are persisted to Firestore so
@@ -101,7 +101,7 @@ async def start_research_report(
             })
             logger.info("Exa research task %s started for report %s", task_id, report_id)
         except Exception as exc:
-            logger.error("Exa research start failed: %s — falling back to Tavily", exc)
+            logger.error("Exa research start failed: %s - falling back to Tavily", exc)
             # Fall back to synchronous Tavily research
             asyncio.create_task(_run_tavily_research(project_id, report_id, query, brand_core))
     elif settings.TAVILY_API_KEY:

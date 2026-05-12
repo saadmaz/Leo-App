@@ -146,7 +146,7 @@ export default function SocialProofPage() {
       <div>
         <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Paste Raw Mentions (optional)</label>
         <textarea value={rawMentions} onChange={(e) => setRawMentions(e.target.value)} rows={4}
-          placeholder={"One mention per line — paste comments, tweets, or reviews you've already collected\ne.g. \"@YourBrand saved us 5 hours a week. Worth every penny. — @customer\""}
+          placeholder={"One mention per line - paste comments, tweets, or reviews you've already collected\ne.g. \"@YourBrand saved us 5 hours a week. Worth every penny. - @customer\""}
           className="mt-1 w-full px-3 py-2 text-sm bg-background border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-primary resize-none" />
         <p className="text-[10px] text-muted-foreground mt-1">Claude will also search the web via Tavily if TAVILY_API_KEY is configured.</p>
       </div>
@@ -202,7 +202,7 @@ export default function SocialProofPage() {
                 </div>
               </div>
               <p className="text-sm font-medium italic">"{t.quote}"</p>
-              {t.author !== 'Anonymous' && <p className="text-[10px] text-muted-foreground">— {t.author}</p>}
+              {t.author !== 'Anonymous' && <p className="text-[10px] text-muted-foreground">- {t.author}</p>}
               <p className="text-[10px] text-muted-foreground">{t.why_it_works}</p>
             </div>
           ))}
@@ -279,10 +279,10 @@ export default function SocialProofPage() {
   const canSubmit = !!brandName.trim() && keywords.some((k) => k.trim()) && platforms.length > 0
 
   return (
-    <SSEFeaturePage projectId={projectId} title="Social Proof Harvesting" subtitle="Pillar 6 — Claude + Tavily"
+    <SSEFeaturePage projectId={projectId} title="Social Proof Harvesting" subtitle="Pillar 6 - Claude + Tavily"
       icon={<Star className="w-4 h-4" />} credits={15} steps={store.steps}
       isStreaming={store.isStreaming} streamText={store.streamText} form={form} result={resultNode}
-      onSubmit={generate} submitLabel="Harvest Social Proof — 15 credits" canSubmit={canSubmit}
+      onSubmit={generate} submitLabel="Harvest Social Proof - 15 credits" canSubmit={canSubmit}
       backPath={`/projects/${projectId}/social`} />
   )
 }

@@ -1,5 +1,5 @@
 """
-Persona Generation service — Apollo.io enrichment + Claude synthesis, SSE streaming.
+Persona Generation service - Apollo.io enrichment + Claude synthesis, SSE streaming.
 
 Builds detailed buyer personas for named segments using Apollo company data
 and Claude narrative synthesis.
@@ -29,7 +29,7 @@ _SYSTEM_PROMPT = """\
 You are LEO, a buyer persona specialist. You create vivid, actionable persona profiles
 that marketers can use to write copy, design campaigns, and choose channels.
 
-OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
+OUTPUT FORMAT - respond with ONLY a JSON object (no markdown fences):
 {
   "personas": [
     {
@@ -54,7 +54,7 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
         "trusted_sources": ["Lenny's Newsletter", "SaaStr", "Indie Hackers"]
       },
       "buying_trigger": "Sees a case study from a similar company with a clear ROI number",
-      "messaging_angle": "Lead with time savings + specific ROI — skip the fluff",
+      "messaging_angle": "Lead with time savings + specific ROI - skip the fluff",
       "apollo_enrichment": {}
     }
   ],
@@ -62,10 +62,10 @@ OUTPUT FORMAT — respond with ONLY a JSON object (no markdown fences):
 }
 
 RULES:
-1. Each persona must be a vivid, named character — not a demographic table.
+1. Each persona must be a vivid, named character - not a demographic table.
 2. 'a_day_in_their_life' must be a mini-narrative (3+ sentences).
 3. Messaging angles must be actionable for copywriters.
-4. Return ONLY valid JSON — no prose, no markdown fences.
+4. Return ONLY valid JSON - no prose, no markdown fences.
 """
 
 
@@ -81,7 +81,7 @@ async def generate(
         brand_core = project.get("brandCore") or {}
         brand_name = project.get("name", "the brand")
 
-        title = f"Personas — {', '.join(body.segment_names[:2])}"
+        title = f"Personas - {', '.join(body.segment_names[:2])}"
         doc = firebase_service.create_pillar1_doc(project_id, "persona", owner_uid, title)
         doc_id = doc["id"]
 
@@ -110,7 +110,7 @@ async def generate(
 
             yield _sse({"type": "research_step", "step": "apollo_enrich", "label": f"Apollo returned {len(enrichments)} enrichment records", "status": "done"})
         else:
-            yield _sse({"type": "research_step", "step": "apollo_enrich", "label": "Apollo not configured — generating from Brand Core", "status": "skipped"})
+            yield _sse({"type": "research_step", "step": "apollo_enrich", "label": "Apollo not configured - generating from Brand Core", "status": "skipped"})
 
         # ── Step 2: Claude synthesis ─────────────────────────────────────────
         yield _sse({"type": "research_step", "step": "claude_synthesis", "label": "Writing persona profiles...", "status": "running"})

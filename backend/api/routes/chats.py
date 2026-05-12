@@ -1,7 +1,7 @@
 """
 Chat CRUD + message listing routes.
 
-Auth is delegated to backend.api.deps — no inline membership checks here.
+Auth is delegated to backend.api.deps - no inline membership checks here.
 """
 
 from fastapi import APIRouter, HTTPException, Query, status
@@ -65,7 +65,7 @@ async def list_messages(
     user: CurrentUser,
     before: Optional[str] = Query(
         default=None,
-        description="ISO 8601 createdAt timestamp — return only messages older than this (pagination cursor).",
+        description="ISO 8601 createdAt timestamp - return only messages older than this (pagination cursor).",
     ),
 ):
     """

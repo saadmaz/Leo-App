@@ -1,5 +1,5 @@
 """
-Anomaly Detection — Statistical threshold checking + Claude interpretation.
+Anomaly Detection - Statistical threshold checking + Claude interpretation.
 
 Input: time-series metric data (daily/weekly values).
 Output: anomalies flagged, root cause hypotheses, severity ratings, recommended actions.
@@ -26,7 +26,7 @@ SYSTEM = """\
 You are a data analyst specialised in anomaly detection and metric forensics. \
 You explain statistical anomalies in business terms and prescribe clear responses.
 
-Return ONLY a valid JSON object — no markdown fences, no commentary.
+Return ONLY a valid JSON object - no markdown fences, no commentary.
 
 Schema:
 {
@@ -117,7 +117,7 @@ async def generate(
         yield _sse({"type": "error", "message": "ANTHROPIC_API_KEY is not configured."})
         return
 
-    title = f"Anomaly Detection — {len(body.metrics)} metrics"
+    title = f"Anomaly Detection - {len(body.metrics)} metrics"
     doc = firebase_service.create_pillar1_doc(project_id, "anomaly_detection", owner_uid, title)
     doc_id = doc["id"]
 

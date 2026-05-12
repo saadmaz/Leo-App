@@ -97,7 +97,7 @@ def _google_search(full_name: str) -> list[dict]:
 def _mock_google_results(full_name: str) -> list[dict]:
     return [
         {
-            "title": f"{full_name} — LinkedIn",
+            "title": f"{full_name} - LinkedIn",
             "url": "https://linkedin.com",
             "snippet": f"View {full_name}'s professional profile on LinkedIn.",
             "position": 1,
@@ -169,7 +169,7 @@ def _social_mentions(full_name: str) -> list[dict]:
 
 _SENTIMENT_SYSTEM = """
 You are a sentiment analysis assistant. Classify each mention as positive, neutral, or negative.
-Return ONLY a JSON array — no markdown, no code fences.
+Return ONLY a JSON array - no markdown, no code fences.
 """.strip()
 
 _SENTIMENT_PROMPT = """
@@ -196,7 +196,7 @@ def _tag_sentiment(full_name: str, mentions: list[dict]) -> list[dict]:
             return mentions
 
         mentions_text = "\n".join(
-            f"{i}. [{m.get('platform', 'web')}] {m.get('title', '')} — {m.get('snippet', '')}"
+            f"{i}. [{m.get('platform', 'web')}] {m.get('title', '')} - {m.get('snippet', '')}"
             for i, m in enumerate(mentions)
         )
 
