@@ -2951,3 +2951,120 @@ def list_experiments(
         query = query.where("status", "==", status)
     query = query.order_by("created_at", direction=firestore.Query.DESCENDING).limit(limit)
     return [snap.to_dict() for snap in query.stream()]
+
+
+# ---------------------------------------------------------------------------
+# Brand Knowledge Base
+# ---------------------------------------------------------------------------
+
+def save_knowledge_doc(project_id: str, doc_id: str, data: dict) -> None:
+    db = get_db()
+    db.collection("projects").document(project_id).collection("knowledgeDocs").document(doc_id).set(data)
+
+
+def save_knowledge_chunk(project_id: str, doc_id: str, chunk_index: str, data: dict) -> None:
+    db = get_db()
+    (
+        db.collection("projects").document(project_id)
+        .collection("knowledgeDocs").document(doc_id)
+        .collection("chunks").document(chunk_index)
+        .set(data)
+    )
+
+
+def list_knowledge_docs(project_id: str) -> list[dict]:
+    db = get_db()
+    snaps = (
+        db.collection("projects").document(project_id)
+        .collection("knowledgeDocs")
+        .order_by("createdAt", direction=firestore.Query.DESCENDING)
+        .stream()
+    )
+    return [{"id": s.id, **s.to_dict()} for s in snaps]
+
+
+def list_knowledge_chunks(project_id: str) -> list[dict]:
+    """Return all chunks across all knowledge docs for a project (used for retrieval)."""
+    db = get_db()
+    docs_ref = db.collection("projects").document(project_id).collection("knowledgeDocs").stream()
+    chunks: list[dict] = []
+    for doc_snap in docs_ref:
+        chunk_snaps = (
+            db.collection("projects").document(project_id)
+            .collection("knowledgeDocs").document(doc_snap.id)
+            .collection("chunks").stream()
+        )
+        for cs in chunk_snaps:
+            chunks.append(cs.to_dict())
+    return chunks
+
+
+def publish_community_template(template_id: str, project_id: str, template_data: dict) -> None:
+    """Write a template to the global community collection."""
+    db = get_db()
+    db.collection("communityTemplates").document(template_id).set({
+        **template_data,
+        "projectId": project_id,
+        "usageCount": 0,
+        "publishedAt": _utcnow(),
+    })
+
+
+def unpublish_community_template(template_id: str) -> None:
+    db = get_db()
+    db.collection("communityTemplates").document(template_id).delete()
+
+
+def get_community_template(template_id: str) -> Optional[dict]:
+    db = get_db()
+    doc = db.collection("communityTemplates").document(template_id).get()
+    if not doc.exists:
+        return None
+    return {"id": doc.id, **doc.to_dict()}
+
+
+def list_community_templates(category: Optional[str] = None, limit: int = 50) -> list[dict]:
+    db = get_db()
+    query = db.collection("communityTemplates")
+    if category:
+        query = query.where("category", "==", category)
+    query = query.order_by("usageCount", direction=firestore.Query.DESCENDING).limit(limit)
+    return [{"id": s.id, **s.to_dict()} for s in query.stream()]
+
+
+def increment_community_template_uses(template_id: str) -> None:
+    db = get_db()
+    ref = db.collection("communityTemplates").document(template_id)
+    ref.update({"usageCount": firestore.Increment(1)})
+
+
+def save_brand_audit(project_id: str, audit: dict) -> str:
+    db = get_db()
+    audit_with_ts = {**audit, "createdAt": _utcnow()}
+    ref = db.collection("projects").document(project_id).collection("brandAudits").document()
+    ref.set(audit_with_ts)
+    return ref.id
+
+
+def list_brand_audits(project_id: str, limit: int = 10) -> list[dict]:
+    db = get_db()
+    snaps = (
+        db.collection("projects").document(project_id)
+        .collection("brandAudits")
+        .order_by("createdAt", direction=firestore.Query.DESCENDING)
+        .limit(limit)
+        .stream()
+    )
+    return [{"id": s.id, **s.to_dict()} for s in snaps]
+
+
+def delete_knowledge_doc(project_id: str, doc_id: str) -> None:
+    db = get_db()
+    doc_ref = (
+        db.collection("projects").document(project_id)
+        .collection("knowledgeDocs").document(doc_id)
+    )
+    # Delete all chunks first
+    for chunk_snap in doc_ref.collection("chunks").stream():
+        chunk_snap.reference.delete()
+    doc_ref.delete()

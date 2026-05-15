@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Copy, Check, Instagram, Megaphone, FileText, Palette, CalendarDays, Video, Mail, ImageIcon, Loader2, Download, ExternalLink, BookmarkPlus, BookmarkCheck, Globe, Users, TrendingUp, BarChart2 } from 'lucide-react'
+import { Copy, Check, Instagram, Megaphone, FileText, Palette, CalendarDays, Video, Mail, ImageIcon, Loader2, Download, ExternalLink, BookmarkPlus, BookmarkCheck, Globe, Users, TrendingUp, BarChart2, Map, Search, ShieldCheck, CheckCircle2, XCircle, Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 import { api } from '@/lib/api'
@@ -12,7 +12,7 @@ import { useAppStore } from '@/stores/app-store'
 // Types
 // ---------------------------------------------------------------------------
 
-export type ArtifactType = 'captions' | 'ad_copy' | 'campaign_brief' | 'colour_palette' | 'content_calendar' | 'video_script' | 'email_content' | 'image_prompt' | 'research_report' | 'competitor_landscape' | 'influencer_list'
+export type ArtifactType = 'captions' | 'ad_copy' | 'campaign_brief' | 'colour_palette' | 'content_calendar' | 'video_script' | 'email_content' | 'image_prompt' | 'research_report' | 'competitor_landscape' | 'influencer_list' | 'strategy_brief' | 'seo_brief' | 'brand_audit_result'
 
 export interface CaptionsArtifact {
   type: 'captions'
@@ -135,6 +135,55 @@ export interface InfluencerListArtifact {
   influencers: InfluencerEntry[]
 }
 
+export interface StrategyBriefSection {
+  title: string
+  content: string
+}
+
+export interface StrategyBriefArtifact {
+  type: 'strategy_brief'
+  title: string
+  summary: string
+  sections: StrategyBriefSection[]
+  key_actions?: string[]
+  timeline?: string
+  success_metrics?: string[]
+}
+
+export interface SeoBriefKeyword {
+  keyword: string
+  intent: string
+  difficulty?: string
+  opportunity?: string
+}
+
+export interface SeoBriefArtifact {
+  type: 'seo_brief'
+  topic: string
+  target_keywords: SeoBriefKeyword[]
+  title_suggestions?: string[]
+  meta_description?: string
+  outline?: string[]
+  quick_wins?: string[]
+}
+
+export interface BrandAuditResultItem {
+  label: string
+  score: number
+  grade: 'A' | 'B' | 'C' | 'D' | 'F'
+  summary?: string
+  top_issue?: string
+}
+
+export interface BrandAuditResultArtifact {
+  type: 'brand_audit_result'
+  average_score: number
+  overall_grade: 'A' | 'B' | 'C' | 'D' | 'F'
+  summary: string
+  items: BrandAuditResultItem[]
+  top_recommendations?: string[]
+}
+
 export type Artifact =
   | CaptionsArtifact
   | AdCopyArtifact
@@ -147,6 +196,9 @@ export type Artifact =
   | ResearchReportArtifact
   | CompetitorLandscapeArtifact
   | InfluencerListArtifact
+  | StrategyBriefArtifact
+  | SeoBriefArtifact
+  | BrandAuditResultArtifact
 
 // ---------------------------------------------------------------------------
 // Parser
@@ -192,6 +244,9 @@ export function ArtifactCard({ artifact }: { artifact: Artifact }) {
       {artifact.type === 'research_report' && <ResearchReportCard artifact={artifact} />}
       {artifact.type === 'competitor_landscape' && <CompetitorLandscapeCard artifact={artifact} />}
       {artifact.type === 'influencer_list' && <InfluencerListCard artifact={artifact} />}
+      {artifact.type === 'strategy_brief' && <StrategyBriefCard artifact={artifact} />}
+      {artifact.type === 'seo_brief' && <SeoBriefCard artifact={artifact} />}
+      {artifact.type === 'brand_audit_result' && <BrandAuditResultCard artifact={artifact} />}
     </motion.div>
   )
 }
@@ -875,6 +930,232 @@ function InfluencerListCard({ artifact }: { artifact: InfluencerListArtifact }) 
             )}
           </div>
         ))}
+      </div>
+    </Card>
+  )
+}
+
+
+// ---------------------------------------------------------------------------
+// Strategy Brief card
+// ---------------------------------------------------------------------------
+
+function StrategyBriefCard({ artifact }: { artifact: StrategyBriefArtifact }) {
+  const [expandedSection, setExpandedSection] = useState<number | null>(0)
+  const copyText = [
+    `# ${artifact.title}`,
+    artifact.summary,
+    ...artifact.sections.map((s) => `## ${s.title}\n${s.content}`),
+    artifact.key_actions?.length ? `## Key Actions\n${artifact.key_actions.map((a) => `- ${a}`).join('\n')}` : '',
+    artifact.success_metrics?.length ? `## Success Metrics\n${artifact.success_metrics.map((m) => `- ${m}`).join('\n')}` : '',
+  ].filter(Boolean).join('\n\n')
+
+  return (
+    <Card icon={<Map className="w-3.5 h-3.5" />} title={artifact.title} copyText={copyText}
+      saveProps={{ platform: 'strategy', type: 'strategy_brief', content: copyText }}>
+      <div className="space-y-3">
+        <div className="rounded-lg border border-border bg-muted/20 p-3">
+          <p className="text-sm leading-relaxed">{artifact.summary}</p>
+          {artifact.timeline && (
+            <p className="mt-2 text-xs text-muted-foreground">Timeline: {artifact.timeline}</p>
+          )}
+        </div>
+        {artifact.sections.map((section, i) => (
+          <div key={i} className="rounded-lg border border-border bg-background overflow-hidden">
+            <button
+              onClick={() => setExpandedSection(expandedSection === i ? null : i)}
+              className="w-full flex items-center justify-between px-3 py-2.5 text-left hover:bg-muted/30 transition-colors"
+            >
+              <span className="text-xs font-semibold">{section.title}</span>
+              <span className="text-muted-foreground text-xs">{expandedSection === i ? '▲' : '▼'}</span>
+            </button>
+            {expandedSection === i && (
+              <div className="px-3 pb-3">
+                <p className="text-xs leading-relaxed text-muted-foreground whitespace-pre-line">{section.content}</p>
+              </div>
+            )}
+          </div>
+        ))}
+        {artifact.key_actions && artifact.key_actions.length > 0 && (
+          <div className="rounded-lg border border-violet-200 bg-violet-50 dark:bg-violet-950/20 p-3">
+            <p className="text-xs font-semibold text-violet-700 dark:text-violet-400 mb-2 flex items-center gap-1.5">
+              <Lightbulb className="w-3 h-3" />Key Actions
+            </p>
+            <ul className="space-y-1">
+              {artifact.key_actions.map((a, i) => (
+                <li key={i} className="text-xs text-muted-foreground flex items-start gap-1.5">
+                  <span className="text-violet-500 mt-0.5">→</span>{a}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {artifact.success_metrics && artifact.success_metrics.length > 0 && (
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground mb-1.5">Success Metrics</p>
+            <div className="flex flex-wrap gap-1.5">
+              {artifact.success_metrics.map((m, i) => (
+                <span key={i} className="px-2 py-0.5 rounded-full bg-muted text-xs">{m}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </Card>
+  )
+}
+
+
+// ---------------------------------------------------------------------------
+// SEO Brief card
+// ---------------------------------------------------------------------------
+
+function SeoBriefCard({ artifact }: { artifact: SeoBriefArtifact }) {
+  const copyText = [
+    `SEO Brief: ${artifact.topic}`,
+    `\nTarget Keywords:\n${artifact.target_keywords.map((k) => `- ${k.keyword} (${k.intent}${k.difficulty ? ', ' + k.difficulty : ''})`).join('\n')}`,
+    artifact.title_suggestions?.length ? `\nTitle Suggestions:\n${artifact.title_suggestions.map((t) => `- ${t}`).join('\n')}` : '',
+    artifact.meta_description ? `\nMeta Description: ${artifact.meta_description}` : '',
+    artifact.outline?.length ? `\nContent Outline:\n${artifact.outline.map((o) => `- ${o}`).join('\n')}` : '',
+    artifact.quick_wins?.length ? `\nQuick Wins:\n${artifact.quick_wins.map((w) => `- ${w}`).join('\n')}` : '',
+  ].filter(Boolean).join('\n')
+
+  return (
+    <Card icon={<Search className="w-3.5 h-3.5" />} title={`SEO Brief: ${artifact.topic}`}
+      count={artifact.target_keywords.length} copyText={copyText}
+      saveProps={{ platform: 'seo', type: 'seo_brief', content: copyText }}>
+      <div className="space-y-3">
+        <div>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Target Keywords</p>
+          <div className="space-y-1.5">
+            {artifact.target_keywords.map((kw, i) => (
+              <div key={i} className="flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2">
+                <span className="text-sm font-medium">{kw.keyword}</span>
+                <div className="flex items-center gap-2">
+                  {kw.difficulty && (
+                    <span className={cn('text-xs px-1.5 py-0.5 rounded-full',
+                      kw.difficulty === 'low' ? 'bg-emerald-100 text-emerald-700' :
+                      kw.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+                    )}>{kw.difficulty}</span>
+                  )}
+                  <span className="text-xs text-muted-foreground">{kw.intent}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {artifact.title_suggestions && artifact.title_suggestions.length > 0 && (
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1.5">Title Options</p>
+            <div className="space-y-1">
+              {artifact.title_suggestions.map((t, i) => (
+                <div key={i} className="group flex items-start justify-between gap-2 text-xs p-2 rounded-lg hover:bg-muted/30 transition-colors">
+                  <span>{t}</span>
+                  <CopyButton text={t} />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {artifact.meta_description && (
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Meta Description</p>
+            <div className="group relative rounded-lg border border-border bg-background p-2.5">
+              <p className="text-xs leading-relaxed pr-6">{artifact.meta_description}</p>
+              <div className="absolute top-2 right-2"><CopyButton text={artifact.meta_description} /></div>
+            </div>
+            <p className="mt-1 text-right text-xs text-muted-foreground">{artifact.meta_description.length} chars</p>
+          </div>
+        )}
+        {artifact.quick_wins && artifact.quick_wins.length > 0 && (
+          <div className="rounded-lg border border-emerald-200 bg-emerald-50 dark:bg-emerald-950/20 p-3">
+            <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mb-1.5">Quick Wins</p>
+            <ul className="space-y-1">
+              {artifact.quick_wins.map((w, i) => (
+                <li key={i} className="text-xs flex items-start gap-1.5 text-muted-foreground">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-500 mt-0.5 shrink-0" />{w}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </Card>
+  )
+}
+
+
+// ---------------------------------------------------------------------------
+// Brand Audit Result card (inline from chat)
+// ---------------------------------------------------------------------------
+
+const GRADE_SCORE_BG: Record<string, string> = {
+  A: 'bg-emerald-500', B: 'bg-green-500', C: 'bg-yellow-500', D: 'bg-orange-500', F: 'bg-red-500',
+}
+const GRADE_TEXT_COLOR: Record<string, string> = {
+  A: 'text-emerald-600', B: 'text-green-600', C: 'text-yellow-600', D: 'text-orange-600', F: 'text-red-600',
+}
+
+function BrandAuditResultCard({ artifact }: { artifact: BrandAuditResultArtifact }) {
+  return (
+    <Card icon={<ShieldCheck className="w-3.5 h-3.5" />} title="Brand Voice Audit">
+      <div className="space-y-3">
+        {/* Overview */}
+        <div className="flex items-center gap-4 rounded-lg border border-border bg-muted/20 p-3">
+          <div className={cn(
+            'w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0',
+            GRADE_SCORE_BG[artifact.overall_grade] ?? 'bg-muted'
+          )}>
+            {artifact.overall_grade}
+          </div>
+          <div className="flex-1">
+            <p className={cn('text-sm font-semibold', GRADE_TEXT_COLOR[artifact.overall_grade])}>
+              {artifact.average_score}/100 average
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">{artifact.summary}</p>
+          </div>
+        </div>
+
+        {/* Per-item heatmap */}
+        <div className="space-y-1.5">
+          {artifact.items.map((item, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className={cn(
+                'w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0',
+                GRADE_SCORE_BG[item.grade] ?? 'bg-muted'
+              )}>
+                {item.grade}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium truncate">{item.label}</p>
+                {item.top_issue && (
+                  <p className="text-xs text-muted-foreground line-clamp-1">{item.top_issue}</p>
+                )}
+              </div>
+              <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden shrink-0">
+                <div
+                  className={cn('h-full rounded-full', GRADE_SCORE_BG[item.grade] ?? 'bg-primary')}
+                  style={{ width: `${item.score}%` }}
+                />
+              </div>
+              <span className="text-xs text-muted-foreground w-8 text-right shrink-0">{item.score}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Recommendations */}
+        {artifact.top_recommendations && artifact.top_recommendations.length > 0 && (
+          <div className="rounded-lg border border-border p-3">
+            <p className="text-xs font-semibold mb-1.5">Top Recommendations</p>
+            <ul className="space-y-1">
+              {artifact.top_recommendations.map((r, i) => (
+                <li key={i} className="text-xs flex items-start gap-1.5 text-muted-foreground">
+                  <Lightbulb className="w-3 h-3 text-amber-500 mt-0.5 shrink-0" />{r}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </Card>
   )

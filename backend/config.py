@@ -138,6 +138,11 @@ class Settings(BaseSettings):
     # How many messages are fetched when rendering a chat history page.
     MESSAGES_LOAD_LIMIT: int = 50
 
+    # --- Observability ---
+    SENTRY_DSN: Optional[str] = None
+    SENTRY_TRACES_SAMPLE_RATE: float = 0.1   # 10% of requests traced in production
+    POSTHOG_API_KEY: Optional[str] = None    # server-side event capture (optional)
+
     # --- App Config ---
     ENVIRONMENT: str = "development"
     LOG_LEVEL: str = "INFO"

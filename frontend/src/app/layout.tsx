@@ -2,11 +2,13 @@ export const dynamic = 'force-dynamic'
 
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { Suspense } from 'react'
 import './globals.css'
 import { Toaster } from 'sonner'
 import ThemeProvider from '@/components/providers/theme-provider'
 import { AuthProvider } from '@/components/providers/auth-provider'
 import { ErrorBoundary } from '@/components/providers/error-boundary'
+import { PostHogProvider } from '@/components/providers/posthog-provider'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -59,7 +61,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <ErrorBoundary>
             <AuthProvider>
-              {children}
+              <Suspense fallback={null}>
+                <PostHogProvider>
+                  {children}
+                </PostHogProvider>
+              </Suspense>
             </AuthProvider>
           </ErrorBoundary>
           <Toaster position="bottom-right" richColors closeButton />

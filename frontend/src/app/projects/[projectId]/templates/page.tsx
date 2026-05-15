@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import {
   LayoutTemplate, Plus, Trash2, Copy, Check, Search,
-  Loader2, X, Pencil,
+  Loader2, X, Pencil, Share2, Globe,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -131,6 +131,7 @@ export default function TemplatesPage() {
               <TemplateCard
                 key={template.id}
                 template={template}
+                projectId={params.projectId}
                 onEdit={() => { setEditTarget(template); setShowCreate(true) }}
                 onDelete={() => handleDelete(template.id)}
               />
@@ -164,19 +165,35 @@ export default function TemplatesPage() {
 // TemplateCard
 // ---------------------------------------------------------------------------
 
-function TemplateCard({ template, onEdit, onDelete }: {
+function TemplateCard({ template, onEdit, onDelete, projectId }: {
   template: ContentTemplate
   onEdit: () => void
   onDelete: () => void
+  projectId: string
 }) {
   const [copied, setCopied] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [shared, setShared] = useState(!!(template as ContentTemplate & { isShared?: boolean }).isShared)
+  const [sharing, setSharing] = useState(false)
 
   function copy() {
     navigator.clipboard.writeText(template.body)
     setCopied(true)
     toast.success('Template copied!')
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  async function toggleShare() {
+    setSharing(true)
+    try {
+      await api.templateCommunity.share(projectId, template.id, !shared)
+      setShared(!shared)
+      toast.success(shared ? 'Removed from community gallery' : 'Shared to community gallery!')
+    } catch {
+      toast.error('Failed to update sharing')
+    } finally {
+      setSharing(false)
+    }
   }
 
   return (
@@ -229,6 +246,18 @@ function TemplateCard({ template, onEdit, onDelete }: {
         <button onClick={onEdit}
           className="flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors">
           <Pencil className="w-3 h-3" /> Edit
+        </button>
+        <button
+          onClick={toggleShare}
+          disabled={sharing}
+          title={shared ? 'Remove from community' : 'Share to community gallery'}
+          className={cn(
+            'flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs border border-border transition-colors',
+            shared ? 'text-violet-600 border-violet-200 bg-violet-50' : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+          )}
+        >
+          {sharing ? <Loader2 className="w-3 h-3 animate-spin" /> : shared ? <Globe className="w-3 h-3" /> : <Share2 className="w-3 h-3" />}
+          {shared ? 'Shared' : 'Share'}
         </button>
         {confirmDelete ? (
           <div className="ml-auto flex items-center gap-1.5">

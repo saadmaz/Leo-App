@@ -437,8 +437,40 @@ type="influencer_list"
   ]
 }
 
+type="strategy_brief"
+{
+  "title": "...",
+  "summary": "...",
+  "sections": [{ "title": "...", "content": "..." }],
+  "key_actions": ["..."],
+  "timeline": "...",
+  "success_metrics": ["..."]
+}
+
+type="seo_brief"
+{
+  "topic": "...",
+  "target_keywords": [{ "keyword": "...", "intent": "informational|transactional|navigational", "difficulty": "low|medium|high", "opportunity": "..." }],
+  "title_suggestions": ["..."],
+  "meta_description": "...",
+  "outline": ["..."],
+  "quick_wins": ["..."]
+}
+
+type="brand_audit_result"
+{
+  "average_score": 72,
+  "overall_grade": "B",
+  "summary": "...",
+  "items": [{ "label": "...", "score": 80, "grade": "B", "summary": "...", "top_issue": "..." }],
+  "top_recommendations": ["..."]
+}
+
 Rules:
 - Always use an artifact for captions (3+ items), ad copy, campaign briefs, colour palettes, content calendars, video scripts, email content, and image prompts.
+- Use strategy_brief when generating a marketing strategy, GTM plan, or strategic recommendation.
+- Use seo_brief when providing SEO keyword research or content optimization guidance.
+- Use brand_audit_result when scoring content against brand voice inline in chat.
 - Place the artifact after a short conversational intro - never instead of it.
 - Put ONLY JSON inside the artifact block. No markdown inside the block.
 - You may include multiple artifacts in one response if appropriate.
@@ -484,6 +516,7 @@ async def stream_chat(
     images: Optional[list] = None,
     model: Optional[str] = None,
     memory_context: Optional[str] = None,
+    knowledge_context: Optional[str] = None,
 ) -> AsyncGenerator[str, None]:
     """
     Stream a Claude response as SSE-formatted text chunks.
@@ -513,6 +546,7 @@ async def stream_chat(
         channel_section = f"\n\nCHANNEL CONSTRAINTS:\n{preset['constraints']}"
 
     memory_section = f"\n\n{memory_context}" if memory_context else ""
+    knowledge_section = f"\n\n{knowledge_context}" if knowledge_context else ""
 
     # Dynamic portion (changes per project/channel/memory - not cached)
     dynamic_text = (
@@ -522,6 +556,7 @@ async def stream_chat(
         "and actionable.\n\n"
         "BRAND CORE:\n"
         + build_brand_core_context(brand_core)
+        + knowledge_section
         + memory_section
         + channel_section
     )
@@ -659,6 +694,7 @@ async def stream_chat_with_tools(
     model: Optional[str] = None,
     memory_context: Optional[str] = None,
     project_id: Optional[str] = None,
+    knowledge_context: Optional[str] = None,
 ) -> AsyncGenerator[str, None]:
     """
     Agentic streaming chat that can invoke web search tools mid-conversation.
@@ -700,6 +736,7 @@ async def stream_chat_with_tools(
 
     memory_section = f"\n\n{memory_context}" if memory_context else ""
     trend_section = f"\n\n{trend_context}" if trend_context else ""
+    knowledge_section = f"\n\n{knowledge_context}" if knowledge_context else ""
 
     dynamic_text = (
         f"You are LEO, a brand-aware marketing co-pilot for the brand '{project_name}'. "
@@ -711,6 +748,7 @@ async def stream_chat_with_tools(
         "Always cite your sources.\n\n"
         "BRAND CORE:\n"
         + build_brand_core_context(brand_core)
+        + knowledge_section
         + memory_section
         + trend_section
         + channel_section

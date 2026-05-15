@@ -28,7 +28,7 @@ from pydantic import BaseModel, Field
 
 from backend.api.deps import get_project_as_member, get_project_as_editor
 from backend.middleware.auth import CurrentUser
-from backend.services import firebase_service, intelligence_service
+from backend.services import firebase_service, intelligence_service, cache_service
 from backend.services.credits_service import check_and_deduct
 
 logger = logging.getLogger(__name__)
@@ -306,6 +306,8 @@ async def record_feedback(
     feedback_data["userId"] = user["uid"]
 
     await asyncio.to_thread(firebase_service.save_memory_feedback, project_id, feedback_data)
+    # Bust the memory cache so the next chat picks up the new feedback immediately.
+    cache_service.delete(f"memory:{project_id}")
     return {"saved": True}
 
 

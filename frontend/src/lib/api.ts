@@ -2844,4 +2844,95 @@ export const api = {
     deleteExperiment: (projectId: string, experimentId: string) =>
       del(`/projects/${projectId}/strategy/pillar10/experiment-log/${experimentId}`),
   },
+
+  // ---------------------------------------------------------------------------
+  // Template Community
+  // ---------------------------------------------------------------------------
+  templateCommunity: {
+    list: (category?: string) =>
+      get<{ templates: unknown[]; count: number }>(`/templates/community${category ? `?category=${category}` : ''}`),
+
+    copyToProject: (templateId: string, projectId: string) =>
+      post<unknown>(`/templates/community/${templateId}/copy?project_id=${projectId}`, {}),
+
+    share: (projectId: string, templateId: string, share: boolean) =>
+      post<unknown>(`/projects/${projectId}/templates/${templateId}/share`, { share }),
+  },
+
+  // ---------------------------------------------------------------------------
+  // Brand Knowledge Base
+  // ---------------------------------------------------------------------------
+  knowledge: {
+    list: (projectId: string) =>
+      get<{ documents: { id: string; title: string; source: string; contentType: string; chunkCount: number; charCount: number; createdAt: string }[] }>(
+        `/projects/${projectId}/knowledge`
+      ),
+
+    upload: async (projectId: string, file: File, title?: string): Promise<{ id: string; title: string; chunkCount: number; charCount: number; createdAt: string }> => {
+      await auth.authStateReady()
+      const user = auth.currentUser
+      const token = user ? await user.getIdToken() : null
+      const form = new FormData()
+      form.append('file', file)
+      if (title) form.append('title', title)
+      const res = await fetch(`${API}/projects/${projectId}/knowledge/upload`, {
+        method: 'POST',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: form,
+      })
+      if (!res.ok) throw new Error(await extractErrorMessage(res))
+      return res.json()
+    },
+
+    ingestUrl: (projectId: string, url: string, title?: string) =>
+      post<{ id: string; title: string; chunkCount: number; charCount: number; createdAt: string }>(
+        `/projects/${projectId}/knowledge/url`,
+        { url, title }
+      ),
+
+    delete: (projectId: string, docId: string) =>
+      del(`/projects/${projectId}/knowledge/${docId}`),
+  },
+
+  // ---------------------------------------------------------------------------
+  // Brand Audit
+  // ---------------------------------------------------------------------------
+  brandAudit: {
+    run: (
+      projectId: string,
+      items: { id?: string; label?: string; content: string }[],
+    ) =>
+      post<{
+        itemCount: number
+        scoredCount: number
+        averageScore: number | null
+        gradeCounts: Record<string, number>
+        results: {
+          id: string | null
+          label: string
+          content: string
+          score: number | null
+          grade: string | null
+          summary?: string
+          strengths?: string[]
+          issues?: string[]
+          suggestions?: string[]
+          error?: string
+        }[]
+      }>(`/projects/${projectId}/brand-audit`, { items }),
+
+    history: (projectId: string) =>
+      get<{ audits: unknown[] }>(`/projects/${projectId}/brand-audit/history`),
+  },
+
+  // ---------------------------------------------------------------------------
+  // Competitor Digest
+  // ---------------------------------------------------------------------------
+  competitorDigest: {
+    send: (projectId: string) =>
+      post<{ sent: boolean; email?: string }>(`/projects/${projectId}/competitors/digest`, {}),
+
+    preview: (projectId: string) =>
+      get<{ html: string; subject: string }>(`/projects/${projectId}/competitors/digest/preview`),
+  },
 }

@@ -10,6 +10,7 @@ import { ProjectWizard } from '@/components/onboarding/project-wizard'
 import { CampaignGenerator } from '@/components/campaigns/campaign-generator'
 import { CampaignPanel } from '@/components/campaigns/campaign-panel'
 import { ProjectSettingsPanel } from '@/components/projects/project-settings-panel'
+import { identifyUser, resetUser } from '@/components/providers/posthog-provider'
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const setUser = useAppStore((s) => s.setUser)
@@ -29,9 +30,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         })
         // Load billing status once on sign-in
         api.billing.status().then(setBillingStatus).catch(() => {})
+        // Link PostHog session to this account
+        identifyUser(firebaseUser.uid, {
+          email: firebaseUser.email,
+          name: firebaseUser.displayName,
+        })
       } else {
         setUser(null)
         setBillingStatus(null)
+        resetUser()
       }
     })
     return unsubscribe

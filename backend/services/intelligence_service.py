@@ -1080,42 +1080,80 @@ Return ONLY valid JSON:
 # Brand Memory - context builder for LLM injection
 # ---------------------------------------------------------------------------
 
-def build_memory_context(memory_items: list[dict]) -> str:
+def build_memory_context(memory_items: list[dict], max_items: int = 20) -> str:
     """
     Convert brand memory feedback items into a system-prompt section.
     Called by llm_service.stream_chat() when building the system prompt.
+
+    Smarter selection strategy (v2):
+    - Instructions are the most durable signal — always include them first (up to 5)
+    - Rejections next — prevent repeating bad patterns (up to 5)
+    - Edits next — show preference refinements (up to 5)
+    - Approvals last — positive reinforcement (up to 5)
+    - Deduplicate by content to avoid bloating the prompt with near-identical items
+    - Cap total at max_items to control token spend
 
     Returns an empty string if there are no useful memory items.
     """
     if not memory_items:
         return ""
 
-    lines: list[str] = ["BRAND MEMORY - What LEO has learned from your past corrections:"]
+    # Bucket by type (items are already sorted newest-first by the Firestore query)
+    buckets: dict[str, list[dict]] = {"instruction": [], "reject": [], "edit": [], "approve": []}
+    for item in memory_items:
+        t = item.get("type", "")
+        if t in buckets:
+            buckets[t].append(item)
 
-    for item in memory_items[:15]:  # cap to control token usage
-        ftype = item.get("type", "")
-        original = (item.get("original") or "")[:100]
-        edited = (item.get("edited") or "")[:100]
-        reason = item.get("reason", "")
-        instruction = item.get("instruction", "")
+    # Deduplicate within each bucket by truncated content fingerprint
+    def _dedup(items: list[dict], key: str, limit: int) -> list[dict]:
+        seen: set[str] = set()
+        out: list[dict] = []
+        for item in items:
+            fp = (item.get(key) or "")[:60].strip().lower()
+            if fp and fp not in seen:
+                seen.add(fp)
+                out.append(item)
+                if len(out) >= limit:
+                    break
+        return out
 
-        if ftype == "edit" and original and edited:
-            lines.append(f'- CORRECTED: "{original}" → "{edited}"')
+    selected: list[tuple[str, dict]] = []
+    for t, key, limit in [
+        ("instruction", "instruction", 5),
+        ("reject",      "original",    5),
+        ("edit",        "original",    5),
+        ("approve",     "original",    4),
+    ]:
+        for item in _dedup(buckets[t], key, limit):
+            selected.append((t, item))
+
+    if not selected:
+        return ""
+
+    lines: list[str] = ["BRAND MEMORY — what Leo has learned from your past feedback:"]
+
+    for ftype, item in selected[:max_items]:
+        original = (item.get("original") or "")[:120]
+        edited = (item.get("edited") or "")[:120]
+        reason = (item.get("reason") or "")[:80]
+        instruction = (item.get("instruction") or "")[:150]
+
+        if ftype == "instruction" and instruction:
+            lines.append(f'- RULE: {instruction}')
+        elif ftype == "edit" and original and edited:
+            suffix = f" (because: {reason})" if reason else ""
+            lines.append(f'- CORRECTED: "{original}" → "{edited}"{suffix}')
         elif ftype == "reject" and original:
-            suffix = f" - {reason}" if reason else ""
-            lines.append(f'- REJECTED: "{original}"{suffix}')
+            suffix = f" — {reason}" if reason else ""
+            lines.append(f'- AVOID: "{original}"{suffix}')
         elif ftype == "approve" and original:
-            lines.append(f'- APPROVED (keep doing this): "{original}"')
-        elif ftype == "instruction" and instruction:
-            lines.append(f'- ALWAYS: {instruction}')
+            lines.append(f'- KEEP DOING: "{original}"')
 
     if len(lines) == 1:
         return ""
 
-    lines.append(
-        "Apply these learnings. Never repeat rejected patterns. "
-        "Reinforce approved ones."
-    )
+    lines.append("Apply all rules above. Never repeat avoided patterns. Reinforce approved ones.")
     return "\n".join(lines)
 
 

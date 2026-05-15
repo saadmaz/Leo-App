@@ -23,6 +23,8 @@ from backend.middleware.rate_limit import limiter
 from backend.schemas.message import MessageCreate
 from backend.services import billing_service, firebase_service, llm_service, moderation_service, intelligence_service
 from backend.services.credits_service import check_and_deduct
+from backend.services import cache_service
+from backend.services.knowledge_service import retrieve_relevant_chunks
 
 logger = logging.getLogger(__name__)
 
@@ -93,9 +95,19 @@ async def send_message(
     # stream_chat() appends it separately as the final user turn.
     history = all_messages[:-1]
 
-    # Load brand memory (last 15 items) to inject learnings into system prompt.
-    memory_items = firebase_service.get_memory_feedback(project_id, limit=15)
-    memory_context = intelligence_service.build_memory_context(memory_items)
+    # Load brand memory — cached per project for 5 min to avoid Firestore reads per message.
+    _mem_cache_key = f"memory:{project_id}"
+    memory_context = cache_service.get(_mem_cache_key)
+    if memory_context is None:
+        memory_items = firebase_service.get_memory_feedback(project_id, limit=40)
+        memory_context = intelligence_service.build_memory_context(memory_items)
+        cache_service.set(_mem_cache_key, memory_context, ttl=cache_service.TTL_BRAND_CONTEXT)
+
+    # Retrieve relevant knowledge base chunks for this message (keyword overlap ranking).
+    import asyncio as _asyncio
+    knowledge_context = await _asyncio.to_thread(
+        retrieve_relevant_chunks, project_id, body.content, top_k=4
+    )
 
     async def event_stream():
         assembled_parts: list[str] = []
@@ -147,6 +159,7 @@ async def send_message(
                 images=images,
                 model=project.get("contentModel") or None,
                 memory_context=memory_context or None,
+                knowledge_context=knowledge_context or None,
             )
             if _use_tools:
                 _kwargs["project_id"] = project_id

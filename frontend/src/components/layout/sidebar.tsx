@@ -437,11 +437,13 @@ export function Sidebar() {
 
               {/* Brand */}
               <NavGroup label="Brand" storageKey="nav_brand_v2" color="text-muted-foreground/60">
-                <NavItem icon={<BookOpen className="w-3.5 h-3.5" />}      label="Style Guide"   onClick={() => nav(`/projects/${activeProject.id}/style-guide`)} />
-                <NavItem icon={<LayoutTemplate className="w-3.5 h-3.5" />} label="Templates"    onClick={() => nav(`/projects/${activeProject.id}/templates`)} />
-                <NavItem icon={<Globe className="w-3.5 h-3.5" />}          label="SEO Studio"   onClick={() => nav(`/projects/${activeProject.id}/seo`)} />
-                <NavItem icon={<Mail className="w-3.5 h-3.5" />}           label="Email Studio" onClick={() => nav(`/projects/${activeProject.id}/emails`)} />
-                <NavItem icon={<Users className="w-3.5 h-3.5" />}          label="Team"         onClick={() => nav(`/projects/${activeProject.id}/team`)} />
+                <NavItem icon={<BookOpen className="w-3.5 h-3.5" />}      label="Style Guide"      onClick={() => nav(`/projects/${activeProject.id}/style-guide`)} />
+                <NavItem icon={<LayoutTemplate className="w-3.5 h-3.5" />} label="Templates"       onClick={() => nav(`/projects/${activeProject.id}/templates`)} />
+                <NavItem icon={<Shield className="w-3.5 h-3.5" />}         label="Brand Audit"     onClick={() => nav(`/projects/${activeProject.id}/brand-audit`)} />
+                <NavItem icon={<FileText className="w-3.5 h-3.5" />}       label="Knowledge Base"  onClick={() => nav(`/projects/${activeProject.id}/knowledge`)} />
+                <NavItem icon={<Globe className="w-3.5 h-3.5" />}          label="SEO Studio"      onClick={() => nav(`/projects/${activeProject.id}/seo`)} />
+                <NavItem icon={<Mail className="w-3.5 h-3.5" />}           label="Email Studio"    onClick={() => nav(`/projects/${activeProject.id}/emails`)} />
+                <NavItem icon={<Users className="w-3.5 h-3.5" />}          label="Team"            onClick={() => nav(`/projects/${activeProject.id}/team`)} />
               </NavGroup>
 
             </div>

@@ -111,3 +111,86 @@ async def delete_template(
 ):
     get_project_as_editor(project_id, user["uid"])
     await asyncio.to_thread(firebase_service.delete_template, project_id, template_id)
+
+
+# ---------------------------------------------------------------------------
+# Community sharing
+# ---------------------------------------------------------------------------
+
+class ShareTemplateRequest(BaseModel):
+    share: bool = True    # True = share, False = un-share
+
+
+@router.post("/templates/{template_id}/share")
+async def toggle_template_share(
+    project_id: str,
+    template_id: str,
+    body: ShareTemplateRequest,
+    user: CurrentUser,
+):
+    """Share (or un-share) a template to the community gallery."""
+    get_project_as_editor(project_id, user["uid"])
+    template = await asyncio.to_thread(firebase_service.get_template, project_id, template_id)
+    if not template:
+        raise HTTPException(status_code=404, detail="Template not found.")
+
+    updates: dict = {"isShared": body.share}
+    if body.share:
+        # Record the sharer's display name so the gallery can attribute it.
+        user_doc = await asyncio.to_thread(firebase_service.get_user, user["uid"]) or {}
+        updates["sharedBy"] = user_doc.get("displayName") or user.get("email", "Anonymous")
+        updates["sharedAt"] = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()
+        # Publish into the global community collection
+        await asyncio.to_thread(
+            firebase_service.publish_community_template,
+            template_id=template_id,
+            project_id=project_id,
+            template_data={**template, **updates},
+        )
+    else:
+        await asyncio.to_thread(firebase_service.unpublish_community_template, template_id)
+
+    updated = await asyncio.to_thread(
+        firebase_service.update_template, project_id, template_id, updates
+    )
+    return updated
+
+
+router_community = APIRouter(prefix="/templates/community", tags=["templates"])
+
+
+@router_community.get("")
+async def list_community_templates(
+    user: CurrentUser,
+    category: Optional[str] = Query(None),
+    limit: int = Query(50, le=100),
+):
+    """Browse the public community template gallery (no project scope required)."""
+    templates = await asyncio.to_thread(firebase_service.list_community_templates, category, limit)
+    return {"templates": templates, "count": len(templates)}
+
+
+@router_community.post("/{template_id}/copy")
+async def copy_community_template(
+    template_id: str,
+    project_id: str,
+    user: CurrentUser,
+):
+    """Copy a community template into the caller's project."""
+    source = await asyncio.to_thread(firebase_service.get_community_template, template_id)
+    if not source:
+        raise HTTPException(status_code=404, detail="Community template not found.")
+
+    # Strip sharing metadata before copying
+    copy_data = {
+        k: v for k, v in source.items()
+        if k not in ("id", "isShared", "sharedBy", "sharedAt", "projectId", "usageCount")
+    }
+    copy_data["name"] = copy_data.get("name", "Copied template") + " (copy)"
+    copy_data["copiedFrom"] = template_id
+
+    # Increment the community template usage counter
+    await asyncio.to_thread(firebase_service.increment_community_template_uses, template_id)
+
+    item = await asyncio.to_thread(firebase_service.save_template, project_id, copy_data)
+    return item

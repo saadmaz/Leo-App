@@ -8,6 +8,35 @@ from contextlib import asynccontextmanager
 # regardless of the working directory from which the server is launched.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+# ---------------------------------------------------------------------------
+# Sentry - initialise before anything else so every error is captured,
+# including those that happen during module import and startup.
+# ---------------------------------------------------------------------------
+def _init_sentry() -> None:
+    from backend.config import settings
+    if not settings.SENTRY_DSN:
+        return
+    try:
+        import sentry_sdk
+        from sentry_sdk.integrations.fastapi import FastApiIntegration
+        from sentry_sdk.integrations.logging import LoggingIntegration
+        sentry_sdk.init(
+            dsn=settings.SENTRY_DSN,
+            environment=settings.ENVIRONMENT,
+            traces_sample_rate=settings.SENTRY_TRACES_SAMPLE_RATE,
+            integrations=[
+                FastApiIntegration(transaction_style="endpoint"),
+                LoggingIntegration(level=logging.WARNING, event_level=logging.ERROR),
+            ],
+            # Strip PII from breadcrumbs
+            send_default_pii=False,
+        )
+        logging.getLogger(__name__).info("Sentry initialised (environment: %s)", settings.ENVIRONMENT)
+    except Exception as exc:
+        logging.getLogger(__name__).warning("Sentry initialisation failed: %s", exc)
+
+_init_sentry()
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -17,7 +46,7 @@ from slowapi.errors import RateLimitExceeded
 
 from backend.config import settings
 from backend.services import firebase_service
-from backend.api.routes import projects, chats, stream, ingestion, brand_core, billing, assets, campaigns, generate, members, admin, announcements, intelligence, content_ops, content_studio, templates, planner, analytics, reports, monitoring, seo, posts, credits, deep_search, strategy, carousel, threads, competitors, personal_brand
+from backend.api.routes import projects, chats, stream, ingestion, brand_core, billing, assets, campaigns, generate, members, admin, announcements, intelligence, content_ops, content_studio, templates, planner, analytics, reports, monitoring, seo, posts, credits, deep_search, strategy, carousel, threads, competitors, personal_brand, knowledge, brand_audit, competitor_digest
 from backend.middleware.rate_limit import limiter
 from backend.middleware.request_id import RequestIdFilter, RequestIdMiddleware
 
@@ -198,6 +227,10 @@ app.include_router(carousel.router)
 app.include_router(threads.router)
 app.include_router(competitors.router)
 app.include_router(personal_brand.router)
+app.include_router(knowledge.router)
+app.include_router(brand_audit.router)
+app.include_router(competitor_digest.router)
+app.include_router(templates.router_community)
 
 # ---------------------------------------------------------------------------
 # Health endpoints
@@ -242,7 +275,18 @@ def debug_config():
         "LLM_CLASSIFICATION_MODEL": settings.LLM_CLASSIFICATION_MODEL,
         "LLM_EXTRACTION_MODEL": settings.LLM_EXTRACTION_MODEL,
         "ENVIRONMENT": settings.ENVIRONMENT,
+        "SENTRY_DSN": _status(settings.SENTRY_DSN),
     }
+
+
+@app.get("/debug/cache", tags=["health"])
+def debug_cache():
+    """Shows in-process cache statistics (dev only)."""
+    if settings.ENVIRONMENT == "production":
+        from fastapi import HTTPException as _HTTPException
+        raise _HTTPException(status_code=404, detail="Not found")
+    from backend.services import cache_service
+    return cache_service.stats()
 
 
 if __name__ == "__main__":
