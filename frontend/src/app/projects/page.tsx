@@ -221,7 +221,7 @@ export default function ProjectsPage() {
         {/* Top bar */}
         <div className="flex items-center gap-2 px-4 py-3 border-b border-border shrink-0">
           <SidebarToggle />
-          <Image src="/Leo-agent.png" alt="LEO" width={24} height={24} className="rounded-md" />
+          <Image src="/Leo.png" alt="LEO" width={24} height={24} className="rounded-md" />
           <span className="font-bold text-sm">LEO</span>
         </div>
 

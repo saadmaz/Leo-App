@@ -36,7 +36,7 @@ export function OnboardingCard() {
     >
       {/* Header */}
       <div className="text-center mb-8">
-        <Image src="/Leo-agent.png" alt="LEO" width={72} height={72} className="mx-auto mb-4 rounded-2xl" />
+        <Image src="/Leo.png" alt="LEO" width={72} height={72} className="mx-auto mb-4 rounded-2xl" />
         <h1 className="text-2xl font-bold">Welcome to LEO</h1>
         <p className="mt-1.5 text-sm text-muted-foreground max-w-xs mx-auto">
           Your brand-aware AI marketing co-pilot. Get started in under 2 minutes.

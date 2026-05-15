@@ -31,7 +31,7 @@ export function IntakeSummary({ qaList, userPhotoURL, userDisplayName }: IntakeS
             {/* LEO question */}
             <div className="flex items-start gap-2.5">
               <div className="w-6 h-6 rounded-md bg-primary/10 border border-border flex items-center justify-center shrink-0 mt-0.5">
-                <Image src="/Leo-agent.png" alt="LEO" width={14} height={14} className="rounded" />
+                <Image src="/Leo.png" alt="LEO" width={14} height={14} className="rounded" />
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed pt-0.5">{qa.questionText}</p>
             </div>

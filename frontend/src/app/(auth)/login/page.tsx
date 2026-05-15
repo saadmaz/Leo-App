@@ -35,7 +35,7 @@ export default function LoginPage() {
     <div className="w-full max-w-sm">
       {/* Logo */}
       <div className="mb-8 text-center">
-        <Image src="/Leo-agent.png" alt="LEO" width={72} height={72} className="mx-auto mb-3 rounded-2xl" />
+        <Image src="/Leo.png" alt="LEO" width={72} height={72} className="mx-auto mb-3 rounded-2xl" />
         <h1 className="text-3xl font-bold tracking-tight">LEO</h1>
         <p className="mt-1 text-sm text-muted-foreground">Your Brand. One Chat. Every Channel.</p>
       </div>

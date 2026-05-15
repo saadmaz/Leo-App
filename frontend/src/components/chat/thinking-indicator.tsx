@@ -154,7 +154,7 @@ function ToolIndicator({ tool, query }: ToolIndicatorProps) {
       {/* Leo avatar + tool icon overlay */}
       <div className="relative shrink-0 mt-0.5">
         <div className="w-8 h-8 rounded-xl bg-primary/5 border border-border/50 flex items-center justify-center overflow-hidden">
-          <Image src="/Leo-agent.png" alt="LEO" width={20} height={20} className="rounded-md opacity-90" />
+          <Image src="/Leo.png" alt="LEO" width={20} height={20} className="rounded-md opacity-90" />
         </div>
         <div className={cn(
           'absolute -bottom-1 -right-1 w-4.5 h-4.5 rounded-full border-2 border-background flex items-center justify-center',
@@ -209,7 +209,7 @@ function StatusIndicator({ message }: StatusIndicatorProps) {
       {/* Spinning ring avatar */}
       <div className="relative shrink-0">
         <div className="w-8 h-8 rounded-xl bg-primary/5 border border-border/50 flex items-center justify-center overflow-hidden">
-          <Image src="/Leo-agent.png" alt="LEO" width={20} height={20} className="rounded-md opacity-90" />
+          <Image src="/Leo.png" alt="LEO" width={20} height={20} className="rounded-md opacity-90" />
         </div>
         {/* Orbit ring */}
         <motion.div

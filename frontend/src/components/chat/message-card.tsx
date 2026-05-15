@@ -149,7 +149,7 @@ export function MessageCard({ message, isLast, onRegenerate, projectId }: Messag
       <div className="flex gap-4 max-w-3xl mx-auto">
         {/* Avatar */}
         <div className="w-8 h-8 shrink-0 rounded-xl bg-primary/5 border border-border/50 flex items-center justify-center mt-0.5 overflow-hidden">
-          <Image src="/Leo-agent.png" alt="LEO" width={20} height={20} className="rounded-md" />
+          <Image src="/Leo.png" alt="LEO" width={20} height={20} className="rounded-md" />
         </div>
 
         {/* Content */}
