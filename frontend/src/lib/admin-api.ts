@@ -392,13 +392,19 @@ export interface BroadcastResult {
   errors: string[]
 }
 
+export interface ApiKeyUsage {
+  used: number
+  total: number
+  label: string
+}
+
 export interface ApiKeyStatus {
   id: string
   name: string
   category: string
   configured: boolean
   maskedKey: string | null
-  note: string | null
+  usage: ApiKeyUsage | null
 }
 
 // ---------------------------------------------------------------------------
